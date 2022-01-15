@@ -9,14 +9,9 @@ import {
   ApolloProvider,
 } from "@apollo/client";
 
-const GRAPHQL_API_URL =
-  process.env.NODE_ENV === 'production'
-    ? 'https://imli-shop.herokuapp.com/graphql'
-    : 'http://localhost:4000/graphql';
-
 
 const client = new ApolloClient({
-  uri: GRAPHQL_API_URL,
+  uri: process.env.REACT_APP_GRAPHQL_LINK,
   cache: new InMemoryCache(),
 });
 

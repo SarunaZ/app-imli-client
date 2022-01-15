@@ -17,7 +17,7 @@ const Authentication = ({children}: Props) => {
 
   const [isLoggedIn, setIsLoggedIn] = useState<boolean>(isLoggedInCookie);
   const [username, setUsername] = useState<string>("");
-  const [submitLoginFetch] = useFetch('http://localhost:4000/api/login');
+  const [submitLoginFetch] = useFetch(process.env.REACT_APP_LOGIN_LINK || '');
 
   const login = ({ username, password }: UserLoginData) => {
     const data = { username, password };
