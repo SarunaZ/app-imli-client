@@ -1,0 +1,15 @@
+@import '../../Styles/variables.module.scss';
+
+.box {
+  background: var(--lightGrey);
+  box-sizing: border-box;
+  margin-bottom: var(--regular);
+  padding: var(--regular);
+  width: auto;
+
+  span,
+  p,
+  a {
+    color: var(--black);
+  }
+}

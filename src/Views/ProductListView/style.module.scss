@@ -1,0 +1,79 @@
+.productListTitle {
+    font-size: 1.8rem;
+
+  @media(min-width: 931px) {
+    font-size: 2.4rem;
+  }
+}
+
+.inputForm {
+  & button {
+    border: none;
+  }
+}
+
+.placeholder {
+  display: none;
+}
+
+.productListWrapper {
+  display: flex;
+  height: 100%;
+  flex-direction: column;
+  max-width: 500px;
+  margin: auto;
+}
+
+.productList {
+  padding: 0;
+}
+
+.productListItemWrapper {
+  list-style: none;
+}
+
+.productListItem {
+  align-items: center;
+  display: flex;
+  justify-content: space-between;
+}
+
+.productListItemTitle {
+  font-size: 2rem;
+}
+
+.productListItemDelete {
+  border: none;
+  cursor: pointer;
+  
+  svg {
+    height: 25px;
+  }
+}
+
+.productListDropdown {
+  height: 65px;
+  font-size: 2rem;
+  padding: 15px;
+  border: 1px solid;
+}
+
+.inputForm {
+  display: flex;
+  flex-direction: column;
+}
+
+.formInput {
+  background: #f0f0f0;
+  border: none;
+  font-size: 2rem;
+  padding: 15px;
+  margin-bottom: 15px
+}
+
+.formButton {
+  background-color: #b39ddb;
+  font-size: 2rem;
+  font-weight: 700;
+  padding: 15px
+}
