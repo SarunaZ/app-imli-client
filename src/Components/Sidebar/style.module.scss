@@ -1,8 +1,25 @@
 .sidebarWrapper {
   background-color: #4e1d4e;
+  min-width: 250px;
+  position: fixed;
+  left: -250px;
+  height: 100%;
+  transition: left 150ms ease-in-out;
+
+  @media(min-width: 931px) {
+    position: static;
+  }
+
+  &.active {
+    left: 0;
+  }
+}
+
+.siderbar {
   display: flex;
   flex-direction: column;
-  min-width: 250px;
+  height: 100%;
+  position: relative;
 }
 
 .sidebarFooter {
@@ -57,4 +74,26 @@
   display: flex;
   flex-direction: column;
   margin-top: 15px;
+
+  a {
+    margin: 0 -15px;
+    padding: 15px
+  }
+}
+
+.sidebarToggle {
+  position: absolute;
+  right: -37px;
+  top: 25px;
+  border: none;
+  background-color: transparent;
+  transition: transform 150ms ease-in-out;
+
+  &.active {
+    transform: rotate(180deg)
+  }
+
+  @media(min-width: 931px) {
+    display: none;
+  }
 }
