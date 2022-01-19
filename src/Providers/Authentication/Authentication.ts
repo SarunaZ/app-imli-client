@@ -8,11 +8,15 @@ export interface UserLoginData {
 interface State {
   logout: () => void;
   isLoggedIn: boolean | null | string;
+  isLoading: boolean;
+  username: string;
   login: (userData: UserLoginData) => void;
 }
 
 const defaultState: State = {
+  username: '',
   isLoggedIn: false,
+  isLoading: false,
   login: () => {},
   logout: () => {},
 }

@@ -1,6 +1,6 @@
 import { useRef, useState } from "react";
 interface State {
-  isLoading?: boolean;
+  isLoading: boolean;
   error?: {[variables: string]: any} | string | Error | null | unknown;
   data?: {[variables: string]: any} | null;
 }

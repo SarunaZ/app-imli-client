@@ -1,0 +1,43 @@
+.loginWrapper {
+  color: white;
+  margin: auto;
+  max-width: 550px;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.loginContent {
+  background: #4e1d4e;
+  padding: 25px;
+}
+
+.loginPageTitle {
+  color: white;
+  font-size: 2.4rem;
+  margin-top: 0;
+  padding: 0;
+}
+
+.loginForm {
+  display: flex;
+  flex-direction: column;
+}
+
+.loginLabel {
+  display: flex;
+  flex-direction: column;
+  font-size: 2rem;
+  margin-bottom: 15px;
+
+  &:last-of-type {
+    margin-bottom: 0;
+  }
+}
+
+.loginInput {
+  margin-top: 5px;
+  height: 50px;
+  padding: 0 15px;
+}

@@ -7,6 +7,7 @@ import {MEAL_ATTACH_TO_PRODUCT_MUTATION, PRODUCT_NAME_MUTATION} from "Schema/mut
 import MealDropdown from './MealDropdown';
 import { IngredientsInput } from 'Views/MealView/types';
 import style from './style.module.scss';
+import Button from 'Components/Button';
 
 const ProductListView = () => {
   const productInputRef = useRef<HTMLInputElement>(null);
@@ -64,17 +65,18 @@ const ProductListView = () => {
         >
           <label htmlFor="productName">Product</label>
           <input
+            required
             className={style.formInput}
             ref={productInputRef}
             name="productName"
             type="text"
           />
-          <button
+          <Button
             type="submit"
-            className={style.formButton}
+            isLoading={productQData.loading}
           >
-            Add
-          </button>
+            <span>Add</span>
+          </Button>
         </form>
       </section>
     </>

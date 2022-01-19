@@ -1,6 +1,6 @@
-/* Asset from https://codepen.io/mandelid/pen/vwKoe */
+@import '../../Styles/variables.module.scss';
 
-.LoadingSpinner {
+.loadingSpinner {
   animation: spin 1s ease-in-out infinite;
   border: 3px solid var(--white);
   border-radius: 50%;

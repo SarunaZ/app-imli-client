@@ -1,12 +1,12 @@
-import {useState} from "react";
+import { AuthenticationProvider } from "Providers/Authentication/Authentication";
+import { useContext } from "react";
 
-interface Props {}
-interface State {}
-const Dashboard = ({}: Props) => {
-  const [state, setState] = useState<State>({});
+const Dashboard = () => {
+  const { username } = useContext(AuthenticationProvider);
+  
   return (
     <h1>
-      Hello Everybody
+      Hello, {username}
     </h1>
   );
 };

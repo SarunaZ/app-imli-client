@@ -22,14 +22,10 @@ const SidebarItem = ({ icon, title, links = [] }: Props) => {
   return (
     <div className={style.sidebarItem}>
       <div 
-        role="button"
-        onClick={handleToggle}
         className={style.sidebarItemTitle}
-        tabIndex={0}
-        onKeyDown={undefined}
       >
         <h3>{title}</h3>
-        <button className={style.sidebarItemToggle}>
+        <button onClick={handleToggle} className={style.sidebarItemToggle}>
           {icon}
         </button>
       </div>
