@@ -9,12 +9,12 @@ interface State {
   logout: () => void;
   isLoggedIn: boolean | null | string;
   isLoading: boolean;
-  username: string;
+  username?: string;
   login: (userData: UserLoginData) => void;
 }
 
 const defaultState: State = {
-  username: '',
+  username: undefined,
   isLoggedIn: false,
   isLoading: false,
   login: () => {},

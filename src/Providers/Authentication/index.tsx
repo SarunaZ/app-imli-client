@@ -15,8 +15,8 @@ interface Auth {
 }
 
 const Authentication = ({children}: Props) => {
-  const Auth = getCookieData('auth') || '';
-  const decoded = jwt_decode<Auth>(Auth);
+  const Auth = getCookieData('auth') || undefined;
+  const decodedAuth = Auth ? jwt_decode<Auth>(Auth) : undefined;
   
   const isLoggedInCookie =
     Auth
@@ -25,7 +25,7 @@ const Authentication = ({children}: Props) => {
 
   // const [isLoading, setIsLoading] = useState<boolean>(false);
   const [isLoggedIn, setIsLoggedIn] = useState<boolean>(isLoggedInCookie);
-  const [username, setUsername] = useState<string>(decoded.username);
+  const [username, setUsername] = useState<string|undefined>(decodedAuth?.username);
   const [submitLoginFetch, { isLoading }] = 
     useFetch(process.env.REACT_APP_LOGIN_LINK || '');
 
@@ -38,8 +38,10 @@ const Authentication = ({children}: Props) => {
       body: JSON.stringify(data),
       onSuccess: (res: any) => {
         if (res.user) {
+          const resDecode = jwt_decode<Auth>(res.user);
           setCookies('auth', `${res.user}`, 14);
           setIsLoggedIn(true);
+          setUsername(resDecode.username)
         }
       }
     }
