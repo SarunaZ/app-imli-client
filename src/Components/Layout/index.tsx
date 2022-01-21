@@ -1,7 +1,8 @@
 import Sidebar from 'Components/Sidebar';
+import { RouteComponentProps, withRouter } from 'react-router-dom';
 import style from './style.module.scss';
 
-interface Props {
+interface Props extends RouteComponentProps<any> {
   children: React.ReactChild;
 }
 
@@ -14,4 +15,4 @@ const Layout = ({children}: Props) => (
   </div>
 )
 
-export default Layout;
+export default withRouter(Layout);

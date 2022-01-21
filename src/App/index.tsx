@@ -15,11 +15,7 @@ const App = () => (
         <Router>
           <Authentication>
             <Suspense
-              fallback={
-                <div className='LoaderWrapper'>
-                  <Loader />
-                </div>
-              }>
+              fallback={<Loader />}>
               <Switch>
                 {authRouteMap.map(routeProp => {
                   return <AuthRoute key={routeProp.id} {...routeProp} />

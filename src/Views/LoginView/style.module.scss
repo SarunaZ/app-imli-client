@@ -11,6 +11,11 @@
 .loginContent {
   background: #4e1d4e;
   padding: 25px;
+  margin: 0 25px;
+
+  @media(min-width: 931px) {
+    margin: 0;  
+  }
 }
 
 .loginPageTitle {

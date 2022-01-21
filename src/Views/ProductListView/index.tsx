@@ -63,7 +63,12 @@ const ProductListView = () => {
           onSubmit={submitProduct}
           className={style.inputForm}
         >
-          <label htmlFor="productName">Product</label>
+          <label 
+            className={style.formLabel}
+            htmlFor="productName"
+            >
+              Product
+            </label>
           <input
             required
             className={style.formInput}
