@@ -31,6 +31,7 @@
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
+    "eslint:fix": "eslint src/**/*.tsx  --fix",
     "generate": "graphql-codegen"
   },
   "browserslist": {
@@ -43,11 +44,22 @@
       "since 2010"
     ]
   },
+  "eslintConfig": {
+    "extends": [
+      "react-app"
+    ]
+  },
   "devDependencies": {
     "@graphql-codegen/cli": "2.0.1",
     "@types/eslint": "7.2.6",
     "@types/react-beautiful-dnd": "^13.1.2",
     "@types/react-router-dom": "5.3.2",
-    "eslint": "^7.32.0"
+    "@typescript-eslint/eslint-plugin": "^5.10.0",
+    "@typescript-eslint/parser": "^5.10.0",
+    "eslint": "7.32.0",
+    "eslint-config-standard": "^16.0.3",
+    "eslint-plugin-import": "^2.25.4",
+    "eslint-plugin-node": "^11.1.0",
+    "eslint-plugin-promise": "^6.0.0"
   }
 }
