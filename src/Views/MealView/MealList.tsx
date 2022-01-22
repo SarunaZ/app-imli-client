@@ -1,56 +1,64 @@
-import React from 'react';
-import Loader from "../../Components/Loader";
-import {useMutation} from "@apollo/client";
-import {MEAL_DELETE, PRODUCT_DELETE} from "../../Schema/mutations";
+import { SyntheticEvent, useRef } from 'react';
+import Loader from 'Components/Loader';
+import { useMutation, useQuery } from '@apollo/client';
+import { MEAL_NAME_MUTATION } from 'Schema/mutations';
+import style from './style.module.scss';
+import { MEAL_LIST_DATA } from 'Schema/queries';
+import MealListItem from './MealListItem';
+import IngredientField from './IngredientField';
+import { IngredientsInput } from './types';
 
-interface Props {
-  isLoading: boolean;
-  onDelete: () => void;
-  data?: {
-    id: string;
-    name: string;
-    ingredients: {
-      name: string
-    }[]
-  }[];
+interface Meal {
+  id: string;
+  name: string;
+  ingredients: {
+    name: string
+  }[]
 }
 
-const MealList = ({ isLoading, data, onDelete }: Props) => {
-  const [deleteProductM, deleteProductData] = useMutation(MEAL_DELETE);
+const MealList = () => {
+  const { loading, error, data, refetch } = useQuery(MEAL_LIST_DATA);
+  const mealInputRef = useRef<HTMLInputElement>(null);
+  const ingredientInputRef = useRef<IngredientsInput[]>();
+  const [addMealQ, addMealQData] = useMutation(MEAL_NAME_MUTATION);
 
-  if (isLoading) {
-    return <Loader/>
+  if (loading) {
+    return <Loader/>;
   }
 
-  if (!isLoading && !data?.length) {
+  if (!loading && !data?.length) {
     return <p>No data found</p>;
   }
 
-  const deleteProduct = (id: string) => {
-    deleteProductM({
+  const setInputData = (data: IngredientsInput[]) => {
+    ingredientInputRef.current = data;
+  };
+
+  const submitProduct = (e: SyntheticEvent<HTMLFormElement>) => {
+    e.preventDefault();
+
+    addMealQ({
       variables: {
-        id
+        name: mealInputRef.current?.value,
+        ingredients: ingredientInputRef.current
       }
     })
-      .then(() => onDelete());
-    }
-
+      .then(() => refetch());
+  };
 
   return (
-    <ul>
-      {data?.map(meal => (
-        <React.Fragment key={meal.id}>
-          <li>{meal.name}</li>
-          {meal?.ingredients.map(ingredient => (
-            <ol key={ingredient.name}>{ingredient.name}</ol>
-          ))}
-          <button type="button" onClick={() => deleteProduct(meal.id)}>X</button>
-        </React.Fragment>
-      ))}
-    </ul>
-
-  )
-
+    <>
+      <ul className={style.mealList}>
+        {data?.map((meal: Meal) => <MealListItem data={meal} onDelete={refetch} />)}
+      </ul>
+      <form onSubmit={submitProduct}>
+        <label htmlFor="mealName">Meal name</label>
+        <input ref={mealInputRef} name="productName" type="text"/>
+        <IngredientField inputData={setInputData} />
+        <button type="submit">Submit</button>
+      </form>
+    </>
+  );
 };
 
 export default MealList;

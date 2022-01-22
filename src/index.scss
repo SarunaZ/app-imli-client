@@ -1,3 +1,4 @@
+@import 'Styles/variables.module.scss';
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400&display=swap');
 
 * {
@@ -21,10 +22,11 @@ body {
 }
 
 h2 {
-  font-size: var(--fs-x-large);
+  font-size: var(--fs-large);
   padding: 0 var(--regular);
   
   @media (min-width: 600px) {
+    font-size: var(--fs-x-large);
     padding: 0;
   }
 }
@@ -41,4 +43,10 @@ p {
 
 a {
   font-size: var(--fs-regular)
+}
+
+button {
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
 }

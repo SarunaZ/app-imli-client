@@ -1,7 +1,7 @@
-import { AuthenticationProvider } from "Providers/Authentication/Authentication";
-import { useContext } from "react";
-import { Route, RouteProps, Redirect } from "react-router-dom";
-import { ROUTE_ROOT } from "./constants";
+import { AuthenticationProvider } from 'Providers/Authentication/Authentication';
+import { useContext } from 'react';
+import { Route, RouteProps, Redirect } from 'react-router-dom';
+import { ROUTE_ROOT } from './constants';
 
 interface Props extends RouteProps {
   redirect?: string;
@@ -9,13 +9,13 @@ interface Props extends RouteProps {
 
 export const PublicRoute = ({
   redirect,
-   ...rest
- }: Props) => {
+  ...rest
+}: Props) => {
   const { isLoggedIn } = useContext(AuthenticationProvider);
 
   if (isLoggedIn) {
-    return <Redirect to={ROUTE_ROOT} />
+    return <Redirect to={ROUTE_ROOT} />;
   }
 
-  return <Route {...rest} />
+  return <Route {...rest} />;
 };

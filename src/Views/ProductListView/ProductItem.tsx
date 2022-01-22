@@ -1,5 +1,5 @@
-import Box from "Components/Box";
-import { Draggable } from "react-beautiful-dnd"
+import Box from 'Components/Box';
+import { Draggable } from 'react-beautiful-dnd';
 import style from './style.module.scss';
 import { ReactComponent as Delete } from 'Images/icons/delete.svg';
 
@@ -11,7 +11,6 @@ interface Props {
 }
 
 const ProductItem = ({ id, name, onDelete, index }: Props) => {
-
   return (
     <Draggable key={id} draggableId={id} index={index}>
       {(provided) => (
@@ -24,9 +23,9 @@ const ProductItem = ({ id, name, onDelete, index }: Props) => {
           <Box className={style.productListItem}>
             <span className={style.productListItemTitle}>{name}</span>
             <button
-              className={style.productListItemDelete}
               type="button"
-              onClick={() => onDelete(id)}  
+              className={style.productListItemDelete}
+              onClick={() => onDelete(id)}
             >
               <Delete />
             </button>
@@ -35,8 +34,7 @@ const ProductItem = ({ id, name, onDelete, index }: Props) => {
 
       )}
     </Draggable>
-  )
-
+  );
 };
 
 export default ProductItem;

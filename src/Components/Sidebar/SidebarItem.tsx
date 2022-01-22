@@ -17,11 +17,11 @@ const SidebarItem = ({ icon, title, links = [] }: Props) => {
   const [isShowItems, setShowItems] = useState<boolean>(false);
   const handleToggle = () => {
     setShowItems(prevValue => !prevValue);
-  }
+  };
 
   return (
     <div className={style.sidebarItem}>
-      <div 
+      <div
         className={style.sidebarItemTitle}
       >
         <h3>{title}</h3>
@@ -32,7 +32,7 @@ const SidebarItem = ({ icon, title, links = [] }: Props) => {
       {isShowItems && (
         <div className={style.sidebarLinkList}>
           {links.map((link) => (
-            <Link 
+            <Link
               key={link.name}
               to={link.pathname}
               className={style.sidebarLink}
@@ -44,6 +44,6 @@ const SidebarItem = ({ icon, title, links = [] }: Props) => {
       )}
     </div>
   );
-}
+};
 
 export default SidebarItem;

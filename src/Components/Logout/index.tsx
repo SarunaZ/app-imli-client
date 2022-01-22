@@ -6,7 +6,7 @@ const Logout = () => {
   const { logout } = useContext(AuthenticationProvider);
 
   return (
-    <button 
+    <button
       className={style.logout}
       onClick={logout}
     >

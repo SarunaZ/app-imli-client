@@ -6,22 +6,22 @@ import { useState } from 'react';
 import { ReactComponent as RightArrow } from 'Images/icons/arrow-right.svg';
 
 const Sidebar = () => {
-  const [isSidebarShow, setSidebarShow] = useState<boolean>(false);
+  const [isSidebarShow, setSidebarShow] = useState < boolean >(false);
   const toggleSiderbar = () => setSidebarShow(prev => !prev);
   const sidebarClasses = classnames(style.sidebarWrapper, {
-    [style.active]: isSidebarShow  
+    [style.active]: isSidebarShow
   });
   const siderbarToggleClasses = classnames(style.sidebarToggle, {
-    [style.active]: isSidebarShow  
+    [style.active]: isSidebarShow
   });
-  
+
   return (
     <aside className={sidebarClasses}>
       <div className={style.siderbar}>
         <SidebarContent />
         <SidebarFooter />
-        <button 
-          className={siderbarToggleClasses} 
+        <button
+          className={siderbarToggleClasses}
           onClick={toggleSiderbar}
         >
           <RightArrow height="25px" />
@@ -29,7 +29,6 @@ const Sidebar = () => {
       </div>
     </aside>
   );
-} 
-
+};
 
 export default Sidebar;

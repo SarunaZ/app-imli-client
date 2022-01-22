@@ -6,13 +6,13 @@ interface Props extends RouteComponentProps<any> {
   children: React.ReactChild;
 }
 
-const Layout = ({children}: Props) => (
+const Layout = ({ children }: Props) => (
   <div className={style.layout}>
     <Sidebar />
     <div className={style.mainContent}>
       {children}
     </div>
   </div>
-)
+);
 
 export default withRouter(Layout);

@@ -7,7 +7,7 @@ interface Props {
   isPrimary?: boolean;
   isHollow?: boolean;
   children?: React.ReactChild;
-  type?: "button" | "submit" | "reset";
+  type?: 'button' | 'submit' | 'reset';
   onClick?: () => void;
 }
 
@@ -22,9 +22,9 @@ const Button = (
   }: Props) => {
   const buttonClasses = classnames(style.button, {
     [style.primary]: isPrimary && !isHollow,
-    [style.hollow]: isHollow,
+    [style.hollow]: isHollow
   });
-  
+
   const loaderClasses = classnames(style.loader, {
     [style.active]: isLoading
   });

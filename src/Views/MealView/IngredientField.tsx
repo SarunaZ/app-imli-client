@@ -1,6 +1,6 @@
-import React, {SyntheticEvent, useState} from 'react';
-import IngredientInput from "./IngredientInput";
-import {IngredientsInput} from "./types";
+import React, { SyntheticEvent, useState } from 'react';
+import IngredientInput from './IngredientInput';
+import { IngredientsInput } from './types';
 
 interface Props {
   inputData: (data: IngredientsInput[]) => void;
@@ -17,8 +17,7 @@ const IngredientField = ({ inputData }: Props) => {
 
   const handleAddInput = () => {
     setInputState(prev => [...prev, defaultInputValue]);
-    console.log(inputState, 'state')
-  }
+  };
 
   const handleRemoveInput = (index: number) => {
     if (inputState.length === 1) {
@@ -29,10 +28,6 @@ const IngredientField = ({ inputData }: Props) => {
       return index !== arrIndex;
     });
 
-    const testArr = ['text1', 'text2', 'text3', 'text4'];
-    console.log(testArr.splice(1, 2))
-    const inputStateCopy = inputState.splice(index, 1);
-    console.log(newInputState)
     setInputState(newInputState);
     inputData(inputState);
   };
@@ -42,7 +37,7 @@ const IngredientField = ({ inputData }: Props) => {
     shallowCopyOfState[index] = { name: inputValue };
     setInputState(shallowCopyOfState);
     inputData(inputState);
-  }
+  };
 
   return (
     <>

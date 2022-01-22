@@ -1,8 +1,8 @@
-import Layout from "Components/Layout";
-import { AuthenticationProvider } from "Providers/Authentication/Authentication";
-import { useContext } from "react";
-import {Route, RouteProps, Redirect} from "react-router-dom";
-import {ROUTE_LOGIN_PAGE} from "./constants";
+import Layout from 'Components/Layout';
+import { AuthenticationProvider } from 'Providers/Authentication/Authentication';
+import { useContext } from 'react';
+import { Route, RouteProps, Redirect } from 'react-router-dom';
+import { ROUTE_LOGIN_PAGE } from './constants';
 
 interface Props extends RouteProps {
   isPublic?: boolean;
@@ -12,8 +12,8 @@ interface Props extends RouteProps {
 export const AuthRoute = ({
   isPublic,
   redirect,
-   ...rest
- }: Props) => {
+  ...rest
+}: Props) => {
   const { isLoggedIn } = useContext(AuthenticationProvider);
 
   if (isLoggedIn) {
@@ -21,8 +21,8 @@ export const AuthRoute = ({
       <Layout>
         <Route {...rest} />
       </Layout>
-    )
+    );
   }
 
-  return <Redirect to={ROUTE_LOGIN_PAGE} />
+  return <Redirect to={ROUTE_LOGIN_PAGE} />;
 };

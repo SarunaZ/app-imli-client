@@ -8,17 +8,17 @@ interface Props {
 }
 
 const Box = (
-  { 
+  {
     isLoading = false,
     children,
-    className = '',
+    className = ''
   }: Props, ref: any) => (
   <>
     <div
       className={
         className
-        ? `${style.box} ${className}` 
-        : style.box
+          ? `${style.box} ${className}`
+          : style.box
       }
     >
       {isLoading && <Loader />}

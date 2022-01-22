@@ -6,17 +6,10 @@ export const PRODUCT_LIST_DATA = gql`
         id
         name
       }
-      meals {
-        id
-        name
-        ingredients {
-            name
-        }
-      }
     }
 `;
 
-export const MEAL_LIST = gql`
+export const MEAL_LIST_DATA = gql`
   query mealList {
       meals {
         id
