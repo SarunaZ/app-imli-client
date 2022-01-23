@@ -1,16 +1,29 @@
 import Box from 'Components/Box';
 import { Draggable } from 'react-beautiful-dnd';
 import style from './style.module.scss';
-import { ReactComponent as Delete } from 'Images/icons/delete.svg';
+import { useMutation } from '@apollo/client';
+import { PRODUCT_DELETE } from 'Schema/mutations';
+import DeleteButton from 'Components/DeleteButton';
 
 interface Props {
   id: string;
   name?: string | null;
   index: number;
-  onDelete: (id: string) => void;
+  onChange: () => void;
 }
 
-const ProductItem = ({ id, name, onDelete, index }: Props) => {
+const ProductItem = ({ id, name, onChange, index }: Props) => {
+  const [deleteProductM, deleteProductData] = useMutation(PRODUCT_DELETE);
+
+  const deleteProduct = (id: string) => {
+    deleteProductM({
+      variables: {
+        id
+      }
+    })
+    .then(onChange);
+  };
+
   return (
     <Draggable key={id} draggableId={id} index={index}>
       {(provided) => (
@@ -22,16 +35,12 @@ const ProductItem = ({ id, name, onDelete, index }: Props) => {
         >
           <Box className={style.productListItem}>
             <span className={style.productListItemTitle}>{name}</span>
-            <button
-              type="button"
-              className={style.productListItemDelete}
-              onClick={() => onDelete(id)}
-            >
-              <Delete />
-            </button>
+            <DeleteButton
+              onClick={() => deleteProduct(id)}
+              isLoading={deleteProductData.loading}
+            />
           </Box>
         </li>
-
       )}
     </Draggable>
   );

@@ -5,7 +5,8 @@
   left: -250px;
   height: 100%;
   transition: left 150ms ease-in-out;
-
+  z-index: 100;
+  
   @media(min-width: 931px) {
     position: static;
   }

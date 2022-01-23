@@ -10,11 +10,52 @@
   padding: 0;
 }
 
+.mealListItemHeader {
+  display: flex;
+  justify-content: space-between;
+}
+
 .mealListItemTitle {
   font-size: var(--fs-medium-rare);
   margin: 0 0 15px;
+  text-transform: capitalize;
 }
 
-.mealListItemButton {
-  border: none;
+.mealListItemIngredients {
+  padding-left: 25px;
+  font-size: var(--fs-regular);
+}
+
+.mealListItemIngredientsItem {
+  margin-bottom: 5px;
+
+  &:last-of-type {
+    margin-bottom: 0;
+  }
+}
+
+.mealListAddButton {
+  bottom: 25px;
+  position: absolute;
+  right: 25px;
+
+  @media(min-width: --mq-mobile-standard) {
+    bottom: 50px;
+    right: 50px;
+  }
+}
+
+.mealListAddIcon {
+  height: 50px;
+  width: auto;
+
+  path {
+    fill: var(--secondary);
+  }
+}
+
+.addMealModalWrapper {
+  display: flex;
+  flex-direction: column;
+  min-width: 450px;
 }

@@ -2,10 +2,12 @@ import { SyntheticEvent } from 'react';
 import { IngredientsInput } from 'Views/MealView/types';
 import Loader from 'Components/Loader';
 import style from './style.module.scss';
+import { useMutation } from '@apollo/client';
+import { MEAL_ATTACH_TO_PRODUCT_MUTATION } from 'Schema/mutations';
 
 interface Props {
   isLoading?: boolean;
-  onChange: (ingredients: IngredientsInput[] | undefined) => void;
+  onChange: () => void;
   data?: {
     id: string;
     name: string;
@@ -13,17 +15,22 @@ interface Props {
   }[];
 }
 
-const ProductList = ({ isLoading, data, onChange }: Props) => {
+const MealDropdown = ({ isLoading, data, onChange }: Props) => {
+    const [attachMealToProductM, attachMealToProductMData] =
+    useMutation(MEAL_ATTACH_TO_PRODUCT_MUTATION);
+
   if (isLoading) {
-    return <Loader/>;
+    return <Loader/>
   }
 
   if (!isLoading && !data?.length) {
     return <p>No meals found</p>;
   }
 
-  const handleMealChange = (data?: IngredientsInput[]) => {
-    const normalizeData = data?.map(item => {
+  const handleOnChange = (event: SyntheticEvent<HTMLSelectElement>) => {
+    const mealId = event.currentTarget.value;
+    const ingredientList = data?.find(meal => meal.id === mealId)?.ingredients;
+    const normalizeData = ingredientList?.map(item => {
       return {
         name: item.name
       };
@@ -34,22 +41,13 @@ const ProductList = ({ isLoading, data, onChange }: Props) => {
         ingredients: normalizeData
       }
     })
-      .then(() => refetch());
-  };
-
-  const handleOnChage = (event: SyntheticEvent<HTMLSelectElement>) => {
-    const mealId = event.currentTarget.value;
-    const ingredientList = data?.find(meal => meal.id === mealId)?.ingredients;
-
-    if (ingredientList) {
-      onChange(ingredientList);
-    }
+    .then(onChange);
   };
 
   return (
     <select
       className={style.productListDropdown}
-      onChange={handleOnChage}
+      onChange={handleOnChange}
       defaultValue=""
     >
       <option value="" disabled>Choose your meal</option>
@@ -62,4 +60,4 @@ const ProductList = ({ isLoading, data, onChange }: Props) => {
   );
 };
 
-export default ProductList;
+export default MealDropdown;

@@ -1,10 +1,5 @@
 import { Helmet } from 'react-helmet-async';
-import { SyntheticEvent, useRef } from 'react';
-import { useMutation, useQuery } from '@apollo/client';
-import { MEAL_NAME_MUTATION } from 'Schema/mutations';
 import MealList from './MealList';
-import IngredientField from './IngredientField';
-import { IngredientsInput } from './types';
 import style from './style.module.scss';
 
 const ProductListView = () => {

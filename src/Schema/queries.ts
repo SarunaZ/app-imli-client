@@ -6,6 +6,13 @@ export const PRODUCT_LIST_DATA = gql`
         id
         name
       }
+      meals {
+        id
+        name
+        ingredients {
+            name
+        }
+      }
     }
 `;
 

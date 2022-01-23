@@ -1,9 +1,8 @@
-import React from 'react';
 import { useMutation } from '@apollo/client';
 import { MEAL_DELETE } from '../../Schema/mutations';
 import Box from 'Components/Box';
 import style from './style.module.scss';
-import { ReactComponent as Delete } from 'Images/icons/delete.svg';
+import DeleteButton from 'Components/DeleteButton';
 
 interface Props {
   onDelete: () => void;
@@ -17,7 +16,7 @@ interface Props {
 }
 
 const MealListItem = ({ data, onDelete }: Props) => {
-  const [deleteProductM] = useMutation(MEAL_DELETE);
+  const [deleteProductM, deleteProductMData] = useMutation(MEAL_DELETE);
   const deleteProduct = (id?: string) => {
     if (id) {
       deleteProductM({
@@ -25,30 +24,32 @@ const MealListItem = ({ data, onDelete }: Props) => {
           id
         }
       })
-        .then(() => onDelete());
+      .then(onDelete);
     }
   };
 
   return (
-    <React.Fragment key={data?.id}>
-      <Box>
-        <li className={style.mealListItem}>
+    <Box>
+      <li className={style.mealListItem}>
+        <div className={style.mealListItemHeader}>
           <p className={style.mealListItemTitle}>{data?.name}</p>
-          <ol>
-          {data?.ingredients.map(ingredient => (
-            <li>{ingredient.name}</li>
-          ))}
-          </ol>
-          <button
-            type="button"
-            className={style.mealListItemButton}
+          <DeleteButton
             onClick={() => deleteProduct(data?.id)}
+            isLoading={deleteProductMData.loading}
+          />
+        </div>
+        <ol className={style.mealListItemIngredients}>
+        {data?.ingredients.map(ingredient => (
+          <li 
+            key={data?.id + ingredient.name}
+            className={style.mealListItemIngredientsItem}
           >
-          <Delete />
-        </button>
-        </li>
-      </Box>
-    </React.Fragment>
+            {ingredient.name}
+          </li>
+        ))}
+        </ol>
+      </li>
+    </Box>
   );
 };
 
