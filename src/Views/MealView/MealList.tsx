@@ -18,14 +18,11 @@ interface Meal {
 const MealList = () => {
   const { loading, error, data, refetch } = useQuery(MEAL_LIST_DATA);
   const [isShowAddModal, setShowAddModal] = useState<boolean>(false);
-  
+
   if (loading) {
-    return <Loader/>;
+    return <Loader />;
   }
-  
-  if (!loading && !data?.meals.length) {
-    return <p>No data found</p>;
-  }
+
 
   const toggleAddModal = () => {
     setShowAddModal(prev => !prev);
@@ -33,6 +30,9 @@ const MealList = () => {
 
   return (
     <>
+      {!loading && !data?.meals.length && (
+        <p>No data found</p>
+      )}
       <ul className={style.mealList}>
         {data?.meals.map((meal: Meal, index: number) => (
           <MealListItem
@@ -42,13 +42,13 @@ const MealList = () => {
           />
         ))}
       </ul>
-      <AddMealModal 
+      <AddMealModal
         onClose={toggleAddModal}
         isOpen={isShowAddModal}
         title="Add new meals"
-        onChange={refetch} 
+        onChange={refetch}
       />
-      <button 
+      <button
         className={style.mealListAddButton}
         onClick={toggleAddModal}
       >
