@@ -35,9 +35,9 @@
 }
 
 .mealListAddButton {
-  bottom: 25px;
-  position: absolute;
-  right: 25px;
+  bottom: 15px;
+  position: fixed;
+  right: 15px;
 
   @media(min-width: --mq-mobile-standard) {
     bottom: 50px;
