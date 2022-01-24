@@ -1,4 +1,4 @@
-import Layout from 'Components/Layout';
+import withLayout from 'HOC/withLayout';
 import { AuthenticationProvider } from 'Providers/Authentication/Authentication';
 import { useContext } from 'react';
 import { Route, RouteProps, Redirect } from 'react-router-dom';
@@ -9,7 +9,7 @@ interface Props extends RouteProps {
   redirect?: string;
 }
 
-export const AuthRoute = ({
+const AuthRoute = ({
   isPublic,
   redirect,
   ...rest
@@ -18,11 +18,11 @@ export const AuthRoute = ({
 
   if (isLoggedIn) {
     return (
-      <Layout>
-        <Route {...rest} />
-      </Layout>
+      <Route {...rest} />
     );
   }
 
   return <Redirect to={ROUTE_LOGIN_PAGE} />;
 };
+
+export default withLayout(AuthRoute);

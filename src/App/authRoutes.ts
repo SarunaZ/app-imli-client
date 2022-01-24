@@ -3,12 +3,10 @@
  */
 import { lazy } from 'react';
 import { RouteProps } from "react-router";
-import { AuthRoute } from './AuthRoute';
 import { 
   ROUTE_PRODUCT_LIST_PAGE, 
   ROUTE_MEAL_PAGE, 
   ROUTE_ROOT, 
-  ROUTE_LOGIN_PAGE 
 } from './constants';
 
 interface RouteParams extends RouteProps {

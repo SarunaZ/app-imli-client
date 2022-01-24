@@ -1,12 +1,13 @@
-import { useRef, useState } from "react";
+import { useState } from "react";
 interface State {
   isLoading: boolean;
-  error?: {[variables: string]: any} | string | Error | null | unknown;
-  data?: {[variables: string]: any} | null;
+  error?: { [variables: string]: any } | string | Error | null | unknown;
+  data?: { [variables: string]: any } | null;
 }
 
 const DEFAULT_OPTIONS = {
-  headers: { "Content-Type": "application/json" },
+  method: 'POST',
+  headers: { 'Content-Type': 'application/json' },
 }
 
 interface FetchOptions {
@@ -36,30 +37,30 @@ const useFetch = (url: string): UseFetchTuple => {
     error: undefined,
     data: undefined
   });
-  
+
   const fetchInit = async (options?: FetchOptions) => {
-    setState({...state, isLoading: true});
+    setState({ ...state, isLoading: true });
 
     try {
-      const response = await fetch(url, {...DEFAULT_OPTIONS, ...options});
+      const response = await fetch(url, { ...DEFAULT_OPTIONS, ...options });
       const resultData = await response.json();
-      setState({...state, data: resultData})
-      setState({...state, isLoading: false})
-      
+      setState({ ...state, data: resultData })
+      setState({ ...state, isLoading: false })
+
       if (options?.onSuccess) {
         options.onSuccess(resultData);
       }
 
       return resultData;
     }
-    catch(error) {
-      setState({...state, error})
-      setState({...state, isLoading: false})
+    catch (error) {
+      setState({ ...state, error })
+      setState({ ...state, isLoading: false })
       return error;
     }
   }
-  
-  return [fetchInit, state];  
+
+  return [fetchInit, state];
 }
 
 export default useFetch;

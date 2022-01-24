@@ -20,21 +20,18 @@ const Authentication = ({ children }: Props) => {
 
   const isLoggedInCookie =
     Auth
-      ? Boolean(jwt.verify(Auth, process.env.REACT_APP_AUTH_SECRET || ''))
+      ? Boolean(jwt.verify(Auth, process.env.REACT_APP_AUTH_SECRET!))
       : false;
 
-  // const [isLoading, setIsLoading] = useState<boolean>(false);
   const [isLoggedIn, setIsLoggedIn] = useState<boolean>(isLoggedInCookie);
   const [username, setUsername] = useState<string|undefined>(decodedAuth?.username);
   const [submitLoginFetch, { isLoading }] =
-    useFetch(process.env.REACT_APP_LOGIN_LINK || '');
+    useFetch(process.env.REACT_APP_LOGIN_LINK!);
 
   const login = ({ username, password }: UserLoginData) => {
     const data = { username, password };
 
     const requestParameters = {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(data),
       onSuccess: (res: any) => {
         if (res.user) {
