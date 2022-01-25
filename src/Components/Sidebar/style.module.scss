@@ -43,10 +43,6 @@
     font-size: 1.4rem;
     padding-bottom: 5px;
     text-decoration: none;
-
-    &:last-of-type {
-      padding-bottom: 0
-    }
   }
 
   svg {
@@ -104,4 +100,8 @@
   @media(min-width: 931px) {
     display: none;
   }
+}
+
+.activeLink {
+  background-color: var(--primary);
 }

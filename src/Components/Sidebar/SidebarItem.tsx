@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 import style from './style.module.scss';
 
 interface Links {
@@ -32,13 +32,14 @@ const SidebarItem = ({ icon, title, links = [] }: Props) => {
       {isShowItems && (
         <div className={style.sidebarLinkList}>
           {links.map((link) => (
-            <Link
+            <NavLink
+              activeClassName={style.activeLink}
               key={link.name}
               to={link.pathname}
               className={style.sidebarLink}
               >
               {link.name}
-            </Link>
+            </NavLink>
           ))}
         </div>
       )}
