@@ -70,11 +70,11 @@
   }
 }
 
-
 .indredientFieldsrapper {
   max-height: calc(100vh - 390px);
   overflow: auto;
   margin-top: 5px;
+  min-height: 170px;
   
   @media(min-width: 931px) {
     max-height: 450px;
@@ -94,6 +94,7 @@
   align-items: center;
   display: flex;
   gap: 15px;
+  margin-top: auto;
 }
 
 .indredientFieldButtonSubmit {
