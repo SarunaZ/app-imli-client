@@ -6,7 +6,7 @@ import { DragDropContext, Droppable, DropResult } from 'react-beautiful-dnd';
 import { Product } from 'Schema/types';
 import style from './style.module.scss';
 import ProductAddForm from './ProductAddForm';
-import { useRef } from 'react';
+import { useEffect, useRef } from 'react';
 
 interface Props {
   data: Product[];
@@ -17,11 +17,23 @@ interface Props {
 
 const ProductList = ({ data, isLoading, error, onChange }: Props) => {
   const listRef = useRef<HTMLUListElement>(null);
-  const [updateProductListM, updateProductListMData] =
+  const [updateProductListM] =
     useMutation(PRODUCTS_LIST_ORDER_UPDATE_MUTATION);
 
+  useEffect(() => {
+    listRef.current?.scroll({
+      top: listRef?.current?.scrollHeight!,
+      behavior: 'smooth'
+    })
+  }, [data?.length])
+
   if (isLoading) {
-    return <Loader />;
+    return (
+      <>
+        <ProductAddForm onChange={onChange} />
+        <Loader />
+      </>
+      );
   }
 
   if (!isLoading && !data?.length) {
@@ -55,20 +67,6 @@ const ProductList = ({ data, isLoading, error, onChange }: Props) => {
     }
   };
 
-  const handleProductAdd = () => {
-    onChange();
-
-    //TODO: Find better solution for scrolling into view
-    // This is not the right way to do it, but im sleep deprived
-    setTimeout(() => {
-      !isLoading && listRef.current?.scroll({
-        top: listRef?.current?.scrollHeight!,
-        behavior: 'smooth'
-      })
-    }, 250);
-
-  }
-
   return (
     <>
       <ul ref={listRef} className={style.productList}>
@@ -93,7 +91,7 @@ const ProductList = ({ data, isLoading, error, onChange }: Props) => {
           </Droppable>
         </DragDropContext>
       </ul>
-      <ProductAddForm onChange={handleProductAdd} />
+      <ProductAddForm onChange={onChange} />
     </>
   );
 };

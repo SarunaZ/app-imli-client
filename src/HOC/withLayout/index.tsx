@@ -7,7 +7,7 @@ import style from './style.module.scss';
 export default function withLayout<P>(Component: React.ComponentType<P & RouteComponentProps<any>>) {
   const WithLayoutComponent = (props: P & RouteComponentProps<any>) => {
     return (
-      <div className={style.layout}>
+      <>
         <Sidebar />
         <Suspense
           fallback={<Loader />}>
@@ -15,7 +15,7 @@ export default function withLayout<P>(Component: React.ComponentType<P & RouteCo
             <Component {...props} />
           </div>
         </Suspense>
-      </div>
+      </>
     )
   }
 

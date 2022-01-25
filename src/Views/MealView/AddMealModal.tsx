@@ -1,11 +1,11 @@
 import { useMutation } from "@apollo/client";
-import Button from "Components/Button";
 import withModal, { ModalProps } from "HOC/withModal";
 import { SyntheticEvent, useRef, useState } from "react";
 import { MEAL_NAME_MUTATION } from "Schema/mutations";
-import IngredientField from "./IngredientField";
+import IngredientContainer from "./IngredientContainer";
 import { IngredientsInput } from "./types";
 import style from './style.module.scss';
+import Input from "Components/Input";
 
 interface Props extends ModalProps {
   onChange: () => void;
@@ -46,15 +46,16 @@ const AddMealModal = ({ onChange }: Props) => {
 
   return (
     <form className={style.addMealModalWrapper} onSubmit={submitProduct}>
-      <label htmlFor="mealName">Meal name</label>
-      <input 
+      <Input 
         required
         ref={mealInputRef}
+        label="Meal name"
         name="productName"
-        type="text"
       />
-      <IngredientField inputData={setInputData} />
-      <Button type="submit" isLoading={addMealQData.loading}>Submit</Button>
+      <IngredientContainer 
+        isLoading={addMealQData.loading} 
+        inputData={setInputData}
+      />
     </form>
   )
 }

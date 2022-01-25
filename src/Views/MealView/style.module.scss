@@ -59,3 +59,48 @@
   flex-direction: column;
   min-width: 350px;
 }
+
+.ingredientFormInputWrapper {
+  align-items: center;
+  display: flex;
+  gap: 15px;
+
+  input {
+    flex: 1;
+  }
+}
+
+
+.indredientFieldsrapper {
+  max-height: calc(100vh - 390px);
+  overflow: auto;
+  margin-top: 5px;
+  
+  @media(min-width: 931px) {
+    max-height: 450px;
+  }
+}
+
+.ingredientFormButton {
+  height: 55px;
+  width: 55px;
+}
+
+.indredientFieldLabel {
+  font-size: var(--fs-medium-rare);
+}
+
+.indredientFieldButtonWrapper {
+  align-items: center;
+  display: flex;
+  gap: 15px;
+}
+
+.indredientFieldButtonSubmit {
+  flex: 1;
+}
+
+.indredientFieldAddButton {
+  height: 55px;
+  width: 55px;
+}

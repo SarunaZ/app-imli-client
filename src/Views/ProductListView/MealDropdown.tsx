@@ -16,8 +16,7 @@ interface Props {
 }
 
 const MealDropdown = ({ isLoading, data, onChange }: Props) => {
-    const [attachMealToProductM, attachMealToProductMData] =
-    useMutation(MEAL_ATTACH_TO_PRODUCT_MUTATION);
+    const [attachMealToProductM] = useMutation(MEAL_ATTACH_TO_PRODUCT_MUTATION);
 
   if (isLoading) {
     return <Loader/>

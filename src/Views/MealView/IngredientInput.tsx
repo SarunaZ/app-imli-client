@@ -1,4 +1,7 @@
-import React, { SyntheticEvent } from 'react';
+import Button from 'Components/Button';
+import Input from 'Components/Input';
+import { SyntheticEvent } from 'react';
+import style from './style.module.scss';
 
 interface Props {
   index: number;
@@ -6,14 +9,26 @@ interface Props {
   onDelete: (index: number) => void;
   onChange: (inputValue: string) => (index: number) => void;
 }
-const IngredientInput = ({ index, onDelete, onChange, inputValue }: Props) => (
-  <React.Fragment key={index}>
-    <button type="button" onClick={() => onDelete(index)}>-</button>
-    <input required value={inputValue} onChange={
-      (e: SyntheticEvent<HTMLInputElement>) => onChange(e.currentTarget.value)(index)
-    }
-    />
-  </React.Fragment>
-);
+const IngredientInput = ({ index, onDelete, onChange, inputValue }: Props) => {
+  const handleButtonAdd = (e: SyntheticEvent<HTMLInputElement>) => {
+    onChange(e.currentTarget.value)(index)
+  }
+  return (
+    <div className={style.ingredientFormInputWrapper}>
+      <Input
+        required
+        value={inputValue}
+        onChange={handleButtonAdd}
+      />
+      <Button
+        isHollow
+        className={style.ingredientFormButton}
+        onClick={() => onDelete(index)}
+      >
+        -
+      </Button>
+    </div>
+  )
+}
 
 export default IngredientInput;

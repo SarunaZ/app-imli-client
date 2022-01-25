@@ -16,7 +16,7 @@ interface Meal {
 }
 
 const MealList = () => {
-  const { loading, error, data, refetch } = useQuery(MEAL_LIST_DATA);
+  const { loading, data, refetch } = useQuery(MEAL_LIST_DATA);
   const [isShowAddModal, setShowAddModal] = useState<boolean>(false);
 
   if (loading) {

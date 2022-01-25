@@ -3,6 +3,7 @@ import { Helmet } from 'react-helmet-async';
 import { AuthenticationProvider } from 'Providers/Authentication/Authentication';
 import style from './style.module.scss';
 import Button from 'Components/Button';
+import Input from 'Components/Input';
 
 const LoginView = () => {
   const { login, isLoading } = useContext(AuthenticationProvider);
@@ -26,33 +27,24 @@ const LoginView = () => {
         <div className={style.loginContent}>
           <h2 className={style.loginPageTitle}>Login</h2>
           <form className={style.loginForm} onSubmit={submitLogin}>
-            <label
-              htmlFor="username"
-              className={style.loginLabel}
-            >
-              Username
-              <input
-                className={style.loginInput}
-                required ref={usernameRef}
-                name="username"
-                type="text"
-              />
-            </label>
-            <label
-              className={style.loginLabel}
-              htmlFor="password"
-            >
-              Password
-              <input
-                className={style.loginInput}
-                required ref={passwordRef}
-                name="password"
-                type="password"
-              />
-            </label>
+            <Input
+              required
+              ref={usernameRef}
+              label='Username'
+              name="username"
+              type="text"
+            />
+            <Input
+              required
+              ref={passwordRef}
+              label='Password'
+              name="password"
+              type="password"
+            />
             <Button
-              isLoading={isLoading}
               type="submit"
+              className={style.loginButton}
+              isLoading={isLoading}
             >
               <span className={style.loginButtonText}>Submit</span>
             </Button>

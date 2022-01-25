@@ -17,7 +17,7 @@
 }
 
 .productList {
-  height: calc(100vh - 390px);
+  max-height: calc(100vh - 390px);
   padding: 0;
   overflow: auto;
 }
