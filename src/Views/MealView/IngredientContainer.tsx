@@ -3,9 +3,12 @@ import IngredientInput from './IngredientInput';
 import { IngredientsInput } from './types';
 import style from './style.module.scss';
 import Button from 'Components/Button';
+import ErrorHandler from "Components/ErrorHandler";
+import { ApolloError } from '@apollo/client';
 
 interface Props {
   isLoading: boolean;
+  error?: ApolloError;
   inputData: (data: IngredientsInput[]) => void;
 }
 
@@ -13,7 +16,7 @@ const defaultInputValue = {
   name: ''
 };
 
-const IngredientContainer = ({ isLoading, inputData }: Props) => {
+const IngredientContainer = ({ error, isLoading, inputData }: Props) => {
   const [inputState, setInputState] = useState<IngredientsInput[]>(
     [defaultInputValue]
   );
@@ -56,6 +59,7 @@ const IngredientContainer = ({ isLoading, inputData }: Props) => {
           />
         ))}
       </div>
+      <ErrorHandler error={error} />
       <div className={style.indredientFieldButtonWrapper}>
         <Button
           type="submit"

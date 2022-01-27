@@ -6,7 +6,8 @@ import style from './style.module.scss';
 import { PRODUCT_LIST_DATA } from 'Schema/queries/productQueries';
 
 const ProductListView = () => {
-  const { loading, data, error, refetch } = useQuery(PRODUCT_LIST_DATA);
+  const { loading, data, error, refetch } = 
+    useQuery(PRODUCT_LIST_DATA, { errorPolicy: 'all' });
 
   return (
     <>

@@ -20,7 +20,7 @@ const ProductList = ({ data, isLoading, error, onChange }: Props) => {
   const deleteRef = useRef<boolean>(false);
   const listRef = useRef<HTMLUListElement>(null);
   const [updateProductListM] =
-    useMutation(PRODUCTS_LIST_ORDER_UPDATE_MUTATION);
+    useMutation(PRODUCTS_LIST_ORDER_UPDATE_MUTATION, { errorPolicy: 'all' });
 
   useEffect(() => {
 

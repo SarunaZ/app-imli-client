@@ -5,7 +5,6 @@ import IngredientContainer from "./IngredientContainer";
 import { IngredientsInput } from "./types";
 import style from './style.module.scss';
 import Input from "Components/Input";
-import ErrorHandler from "Components/ErrorHandler";
 import { MEAL_NAME_MUTATION } from "Schema/mutations/mealMutations";
 
 interface Props extends ModalProps {
@@ -16,7 +15,8 @@ const AddMealModal = ({ onChange }: Props) => {
   const [addSuccessful, setAddSuccessful] = useState<boolean>(false);
   const mealInputRef = useRef<HTMLInputElement>(null);
   const ingredientInputRef = useRef<IngredientsInput[]>();
-  const [addMealQ, addMealQData] = useMutation(MEAL_NAME_MUTATION);
+  const [addMealQ, addMealQData] = 
+    useMutation(MEAL_NAME_MUTATION, { errorPolicy: 'all' });
 
   const setInputData = (data: IngredientsInput[]) => {
     ingredientInputRef.current = data;
@@ -53,8 +53,8 @@ const AddMealModal = ({ onChange }: Props) => {
         label="Meal name"
         name="productName"
       />
-      <ErrorHandler error={addMealQData.error} />
       <IngredientContainer
+        error={addMealQData?.error}
         isLoading={addMealQData.loading}
         inputData={setInputData}
       />

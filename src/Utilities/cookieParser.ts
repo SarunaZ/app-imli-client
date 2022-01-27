@@ -9,7 +9,10 @@ export const isCookieSet = (name: string) => {
 
 export const setCookies = (name: string, value: string, days: number) => {
   let date = new Date();
-  date.setTime(date.getTime() + 24*60*60*1000*days);
+  const oneDay = 24*60*60;
+  const oneSecInMs = 1000;
+  
+  date.setTime(date.getTime() + oneDay*oneSecInMs*days);
   document.cookie = `${name}=${value};path=/;expires=${date.toUTCString()}`;
   return;
 }

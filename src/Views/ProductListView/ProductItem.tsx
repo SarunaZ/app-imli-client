@@ -13,7 +13,8 @@ interface Props {
 }
 
 const ProductItem = ({ id, name, onChange, index }: Props) => {
-  const [deleteProductM, deleteProductData] = useMutation(PRODUCT_DELETE);
+  const [deleteProductM, deleteProductData] = 
+    useMutation(PRODUCT_DELETE, { errorPolicy: 'all' });
 
   const deleteProduct = (id: string) => {
     deleteProductM({
