@@ -15,15 +15,3 @@ export const PRODUCT_LIST_DATA = gql`
       }
     }
 `;
-
-export const MEAL_LIST_DATA = gql`
-  query mealList {
-      meals {
-        id
-        name
-        ingredients {
-            name
-        }
-      }
-    }
-`;

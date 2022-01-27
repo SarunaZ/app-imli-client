@@ -27,17 +27,16 @@ const Button = (
   const buttonClasses = classnames(className, style.button, {
     [style.primary]: isPrimary && !isHollow,
     [style.hollow]: isHollow,
-    [style.disabled]: isDisabled
+    [style.disabled]: isDisabled || isLoading
   });
 
   return (
     <button
       type={type}
-      disabled={isLoading || isDisabled}
       className={buttonClasses}
       onClick={onClick}
     >
-      {isLoading && <Loader/>}
+      {isLoading && <Loader />}
       {!isLoading && children}
     </button>
   );

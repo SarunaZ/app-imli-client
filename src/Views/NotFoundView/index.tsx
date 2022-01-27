@@ -1,9 +1,10 @@
 import { Helmet } from 'react-helmet-async';
+import style from './style.module.scss';
 
 const NotFoundView = () => (
   <>
     <Helmet title="Not found | Imli" />
-    <div className="NotFound">
+    <div className={style.notFound}>
       <h2>Page not found</h2>
     </div>
   </>

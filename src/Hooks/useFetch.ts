@@ -47,7 +47,6 @@ const useFetch = (url: string): UseFetchTuple => {
 
     if (!resultData.user) {
       setState({ ...state, error: resultData.status, isLoading: false })
-        console.log(state.error);
     }
 
     if (options?.onSuccess) {
@@ -63,6 +62,7 @@ const useFetch = (url: string): UseFetchTuple => {
     }
     catch (error: any) {
       setState({ ...state, error, isLoading: false });
+      console.log(state.error);
 
       return error;
     }

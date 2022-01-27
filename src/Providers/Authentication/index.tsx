@@ -24,7 +24,7 @@ const Authentication = ({ children }: Props) => {
       : false;
 
   const [isLoggedIn, setIsLoggedIn] = useState<boolean>(isLoggedInCookie);
-  const [username, setUsername] = useState<string|undefined>(decodedAuth?.username);
+  const [username, setUsername] = useState<string | undefined>(decodedAuth?.username);
   const [submitLoginFetch, { isLoading, error }] =
     useFetch(process.env.REACT_APP_LOGIN_LINK!);
 

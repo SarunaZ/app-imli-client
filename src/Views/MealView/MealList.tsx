@@ -1,12 +1,12 @@
 import Loader from 'Components/Loader';
 import { useQuery } from '@apollo/client';
 import style from './style.module.scss';
-import { MEAL_LIST_DATA } from 'Schema/queries';
 import MealListItem from './MealListItem';
 import AddMealModal from './AddMealModal';
 import { ReactComponent as Add } from 'Images/icons/add.svg';
 import { useState } from 'react';
 import ErrorHandler from 'Components/ErrorHandler';
+import { MEAL_LIST_DATA } from 'Schema/queries/mealQueries';
 
 interface Meal {
   id: string;

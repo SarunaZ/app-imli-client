@@ -11,7 +11,7 @@ html {
 
 body {
   -webkit-font-smoothing: antialiased;
-  background: linear-gradient(264deg, rgba(238,238,241,1) 0%, rgba(255,255,255,1) 100%);
+  background: linear-gradient(264deg, rgba(238, 238, 241, 1) 0%, rgba(255, 255, 255, 1) 100%);
   font-family: "Montserrat", sans-serif;
 }
 
@@ -22,7 +22,7 @@ body {
 h2 {
   font-size: var(--fs-large);
   padding: 0 var(--regular);
-  
+
   @media (min-width: 600px) {
     font-size: var(--fs-x-large);
     padding: 0;

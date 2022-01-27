@@ -1,5 +1,7 @@
+@import '../../Styles/variables.module.scss';
+
 .loginWrapper {
-  color: white;
+  color: var(--white);
   margin: auto;
   max-width: 550px;
   height: 100vh;
@@ -9,7 +11,7 @@
 }
 
 .loginContent {
-  background: #4e1d4e;
+  background: var(--primary);
   padding: 25px;
   margin: 0 10px;
 
@@ -19,8 +21,8 @@
 }
 
 .loginPageTitle {
-  color: white;
-  font-size: 2.4rem;
+  color: var(--white);
+  font-size: var(--fs-large);
   margin-top: 0;
   padding: 0;
 }

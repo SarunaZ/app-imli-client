@@ -13,11 +13,12 @@ const LoginView = () => {
 
   const submitLogin = (e: SyntheticEvent<HTMLFormElement>) => {
     e.preventDefault();
+
     const userData = {
       username: usernameRef.current?.value,
       password: passwordRef.current?.value
     };
-    
+
     login(userData);
   };
 
@@ -50,7 +51,7 @@ const LoginView = () => {
               className={style.loginButton}
               isLoading={isLoading}
             >
-              <span className={style.loginButtonText}>Submit</span>
+              Submit
             </Button>
           </form>
         </div>

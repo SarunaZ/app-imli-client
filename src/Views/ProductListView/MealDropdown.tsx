@@ -3,7 +3,7 @@ import { IngredientsInput } from 'Views/MealView/types';
 import Loader from 'Components/Loader';
 import style from './style.module.scss';
 import { useMutation } from '@apollo/client';
-import { MEAL_ATTACH_TO_PRODUCT_MUTATION } from 'Schema/mutations';
+import { MEAL_ATTACH_TO_PRODUCT_MUTATION } from 'Schema/mutations/productMutations';
 
 interface Props {
   isLoading?: boolean;
@@ -38,9 +38,9 @@ const MealDropdown = ({ isLoading, data, onChange }: Props) => {
     attachMealToProductM({
       variables: {
         ingredients: normalizeData
-      }
+      },
+      update: () => onChange()
     })
-    .then(onChange);
   };
 
   return (

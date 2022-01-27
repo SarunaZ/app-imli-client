@@ -13,24 +13,26 @@ const App = () => (
   <HelmetProvider>
     <Helmet title="Present Connection showcase" />
     <Router>
-      <Authentication>
-        <Switch>
-          {authRouteMap.map(routeProp => {
-            return <AuthRoute key={routeProp.id} {...routeProp} />;
-          }
-          )}
-          {publicRouteMap.map(routeProp => {
-            return <PublicRoute key={routeProp.id} {...routeProp} />;
-          }
-          )}
-          {localRouteMap.map(routeProp => {
-            return <Suspense key={routeProp.id} fallback={<Loader />}><Route {...routeProp} /></Suspense>;
-          }
-          )}
-        </Switch>
-      </Authentication>
+      <Suspense fallback={<Loader />}>
+        <Authentication>
+          <Switch>
+            {authRouteMap.map(routeProp => {
+              return <AuthRoute key={routeProp.id} {...routeProp} />;
+            }
+            )}
+            {publicRouteMap.map(routeProp => {
+              return <PublicRoute key={routeProp.id} {...routeProp} />;
+            }
+            )}
+            {localRouteMap.map(routeProp => {
+              return <Suspense key={routeProp.id} fallback={<Loader />}><Route {...routeProp} /></Suspense>;
+            }
+            )}
+          </Switch>
+        </Authentication>
+      </Suspense>
     </Router>
-  </HelmetProvider>
+  </HelmetProvider >
 );
 
 export default App;

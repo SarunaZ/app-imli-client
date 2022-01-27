@@ -24,16 +24,16 @@ const itemMap = [
 ];
 
 const SidebarContent = () => (
-    <div className={style.sidebarContent}>
-      {itemMap.map(item => (
-        <SidebarItem
-          key={item.title}
-          title={item.title}
-          icon={item.icon}
-          links={kitchenLinkMap}
-        />
-      ))}
-    </div>
-  );
+  <div className={style.sidebarContent}>
+    {itemMap.map(item => (
+      <SidebarItem
+        key={item.title}
+        title={item.title}
+        icon={item.icon}
+        links={kitchenLinkMap}
+      />
+    ))}
+  </div>
+);
 
 export default SidebarContent;

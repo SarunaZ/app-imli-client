@@ -1,8 +1,10 @@
+@import '../../Styles/variables.module.scss';
+
 .logout {
   background-color: transparent;
   border: none;
   cursor: pointer;
-  color: white;
-  font-size: 1.4rem;
+  color: var(--white);
+  font-size: var(--fs-regular);
   font-weight: 700;
 }

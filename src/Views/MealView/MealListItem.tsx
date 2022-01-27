@@ -1,8 +1,8 @@
 import { useMutation } from '@apollo/client';
-import { MEAL_DELETE } from '../../Schema/mutations';
 import Box from 'Components/Box';
 import style from './style.module.scss';
 import DeleteButton from 'Components/DeleteButton';
+import { MEAL_DELETE } from 'Schema/mutations/mealMutations';
 
 interface Props {
   onDelete: () => void;
@@ -22,9 +22,9 @@ const MealListItem = ({ data, onDelete }: Props) => {
       deleteProductM({
         variables: {
           id
-        }
+        },
+        update: () => onDelete()
       })
-      .then(onDelete);
     }
   };
 
@@ -39,14 +39,14 @@ const MealListItem = ({ data, onDelete }: Props) => {
           />
         </div>
         <ol className={style.mealListItemIngredients}>
-        {data?.ingredients.map(ingredient => (
-          <li 
-            key={data?.id + ingredient.name}
-            className={style.mealListItemIngredientsItem}
-          >
-            {ingredient.name}
-          </li>
-        ))}
+          {data?.ingredients.map(ingredient => (
+            <li
+              key={data?.id + ingredient.name}
+              className={style.mealListItemIngredientsItem}
+            >
+              {ingredient.name}
+            </li>
+          ))}
         </ol>
       </li>
     </Box>

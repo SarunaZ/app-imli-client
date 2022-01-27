@@ -1,6 +1,5 @@
 import Loader from 'Components/Loader';
 import { ApolloError, useMutation } from '@apollo/client';
-import { PRODUCTS_LIST_ORDER_UPDATE_MUTATION } from 'Schema/mutations';
 import ProductItem from './ProductItem';
 import { DragDropContext, Droppable, DropResult } from 'react-beautiful-dnd';
 import { Product } from 'Schema/types';
@@ -8,6 +7,7 @@ import style from './style.module.scss';
 import ProductAddForm from './ProductAddForm';
 import { useEffect, useRef } from 'react';
 import ErrorHandler from 'Components/ErrorHandler';
+import { PRODUCTS_LIST_ORDER_UPDATE_MUTATION } from 'Schema/mutations/productMutations';
 
 interface Props {
   data: Product[];
@@ -17,15 +17,21 @@ interface Props {
 }
 
 const ProductList = ({ data, isLoading, error, onChange }: Props) => {
+  const deleteRef = useRef<boolean>(false);
   const listRef = useRef<HTMLUListElement>(null);
   const [updateProductListM] =
     useMutation(PRODUCTS_LIST_ORDER_UPDATE_MUTATION);
 
   useEffect(() => {
-    listRef.current?.scroll({
-      top: listRef?.current?.scrollHeight!,
-      behavior: 'smooth'
-    })
+
+    if (!deleteRef.current) {
+      listRef.current?.scroll({
+        top: listRef?.current?.scrollHeight!,
+        behavior: 'smooth'
+      })
+    }
+
+    deleteRef.current = false;
   }, [data?.length])
 
   if (isLoading) {
@@ -34,7 +40,7 @@ const ProductList = ({ data, isLoading, error, onChange }: Props) => {
         <Loader />
         <ProductAddForm onChange={onChange} />
       </>
-      );
+    );
   }
 
   if (!isLoading && !data?.length) {
@@ -68,6 +74,11 @@ const ProductList = ({ data, isLoading, error, onChange }: Props) => {
     }
   };
 
+  const handleDeleteItem = () => {
+    onChange();
+    deleteRef.current = true;
+  }
+
   return (
     <>
       <ErrorHandler error={error} />
@@ -85,7 +96,7 @@ const ProductList = ({ data, isLoading, error, onChange }: Props) => {
                     key={product.id}
                     id={product.id}
                     name={product.name}
-                    onChange={onChange}
+                    onChange={handleDeleteItem}
                   />
                 ))}
               </div>

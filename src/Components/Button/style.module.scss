@@ -1,9 +1,13 @@
+@import '../../Styles/variables.module.scss';
+
+$primeButtonColor: #7E2B46;
+
 .button {
   align-items: center;
   border: none;
   cursor: pointer;
   display: flex;
-  font-size: 2rem;
+  font-size: var(--fs-medium-rare);
   font-weight: 700;
   justify-content: center;
   margin-top: 15px;
@@ -11,23 +15,23 @@
   text-transform: uppercase;
 
   &.primary {
-    background: #7e2b46;
-    color: white;
+    background: var(--secondary);
+    color: var(--white);
     transition: background-color 150ms ease-in-out;
 
     &:hover {
-      background-color: darken(#7e2b46, 5%)
+      background-color: darken($primeButtonColor, 5%)
     }
   }
 
   &.hollow {
     background: transparent;
-    border: 2px solid #7e2b46;
-    color: #7e2b46;
+    border: 2px solid var(--secondary);
+    color: var(--secondary);
     transition: border-color 150ms ease-in-out;
 
     &:hover {
-      border-color: lighten(#7e2b46, 15%)
+      border-color: lighten($primeButtonColor, 15%)
     }
   }
 

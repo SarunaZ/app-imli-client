@@ -16,8 +16,6 @@ const ErrorHandler = ({ error }: Props) => {
     }
 
     if (typeof error === 'object') {
-      console.log((error as ApolloError)?.message);
-
       const errorObjMessage = (error as ApolloError)?.message;
       setErrorMessage(errorObjMessage);
     }

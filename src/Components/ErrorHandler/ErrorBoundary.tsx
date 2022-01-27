@@ -25,7 +25,7 @@ class ErrorBoundary extends Component<Props, State> {
   public render() {
     if (this.state.hasError) {
       return (
-        <ErrorHandler error="Lol Sorry.. there was an error"/>
+        <ErrorHandler error="Sorry.. there was an error" />
       );
     }
 

@@ -6,22 +6,20 @@ import { RouteComponentProps, withRouter } from 'react-router-dom';
 import style from './style.module.scss';
 
 export default function withLayout<P>(Component: React.ComponentType<P & RouteComponentProps<any>>) {
-  const WithLayoutComponent = (props: P & RouteComponentProps<any>) => {
-    return (
-      <>
-        <Sidebar />
-        <Suspense
-          fallback={<Loader />}>
-          <div className={style.mainContent}>
-            <ErrorBoundary>
-              <Component {...props} />
-            </ErrorBoundary>
+  const WithLayoutComponent = (props: P & RouteComponentProps<any>) => (
+    <>
+      <Sidebar />
+      <Suspense
+        fallback={<Loader />}>
+        <div className={style.mainContent}>
+          <ErrorBoundary>
+            <Component {...props} />
+          </ErrorBoundary>
 
-          </div>
-        </Suspense>
-      </>
-    )
-  }
+        </div>
+      </Suspense>
+    </>
+  )
 
   return withRouter(WithLayoutComponent);
 }

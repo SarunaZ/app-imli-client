@@ -1,27 +1,27 @@
 import { useMutation } from "@apollo/client";
 import withModal, { ModalProps } from "HOC/withModal";
 import { SyntheticEvent, useRef, useState } from "react";
-import { MEAL_NAME_MUTATION } from "Schema/mutations";
 import IngredientContainer from "./IngredientContainer";
 import { IngredientsInput } from "./types";
 import style from './style.module.scss';
 import Input from "Components/Input";
 import ErrorHandler from "Components/ErrorHandler";
+import { MEAL_NAME_MUTATION } from "Schema/mutations/mealMutations";
 
 interface Props extends ModalProps {
   onChange: () => void;
- };
+};
 
 const AddMealModal = ({ onChange }: Props) => {
   const [addSuccessful, setAddSuccessful] = useState<boolean>(false);
   const mealInputRef = useRef<HTMLInputElement>(null);
   const ingredientInputRef = useRef<IngredientsInput[]>();
   const [addMealQ, addMealQData] = useMutation(MEAL_NAME_MUTATION);
-  
+
   const setInputData = (data: IngredientsInput[]) => {
     ingredientInputRef.current = data;
   };
-  
+
   const submitProduct = (e: SyntheticEvent<HTMLFormElement>) => {
     e.preventDefault();
 
@@ -29,12 +29,12 @@ const AddMealModal = ({ onChange }: Props) => {
       variables: {
         name: mealInputRef.current?.value,
         ingredients: ingredientInputRef.current
+      },
+      update: () => {
+        onChange();
+        setAddSuccessful(true);
       }
     })
-    .then(() => {
-      onChange();
-      setAddSuccessful(true);
-    });
   };
 
   if (addSuccessful) {
@@ -47,15 +47,15 @@ const AddMealModal = ({ onChange }: Props) => {
 
   return (
     <form className={style.addMealModalWrapper} onSubmit={submitProduct}>
-      <Input 
+      <Input
         required
         ref={mealInputRef}
         label="Meal name"
         name="productName"
       />
       <ErrorHandler error={addMealQData.error} />
-      <IngredientContainer 
-        isLoading={addMealQData.loading} 
+      <IngredientContainer
+        isLoading={addMealQData.loading}
         inputData={setInputData}
       />
     </form>

@@ -1,12 +1,13 @@
 /**
  * File contains all the projects routes
  */
+
 import { lazy } from 'react';
 import { RouteProps } from "react-router";
-import { 
-  ROUTE_PRODUCT_LIST_PAGE, 
-  ROUTE_MEAL_PAGE, 
-  ROUTE_ROOT, 
+import {
+  ROUTE_PRODUCT_LIST_PAGE,
+  ROUTE_MEAL_PAGE,
+  ROUTE_ROOT,
 } from './constants';
 
 interface RouteParams extends RouteProps {

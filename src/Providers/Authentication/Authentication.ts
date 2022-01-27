@@ -19,8 +19,8 @@ const defaultState: State = {
   error: undefined,
   isLoggedIn: false,
   isLoading: false,
-  login: () => {},
-  logout: () => {},
+  login: () => { },
+  logout: () => { },
 }
 
 export const AuthenticationProvider = createContext(defaultState);

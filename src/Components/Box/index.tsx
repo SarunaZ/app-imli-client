@@ -4,7 +4,7 @@ import style from './style.module.scss';
 interface Props {
   isLoading?: boolean;
   className?: string;
-  children: JSX.Element|JSX.Element[];
+  children: JSX.Element | JSX.Element[];
 }
 
 const Box = (

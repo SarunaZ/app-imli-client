@@ -37,7 +37,7 @@ const SidebarItem = ({ icon, title, links = [] }: Props) => {
               key={link.name}
               to={link.pathname}
               className={style.sidebarLink}
-              >
+            >
               {link.name}
             </NavLink>
           ))}

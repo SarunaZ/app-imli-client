@@ -2,8 +2,8 @@ import Box from 'Components/Box';
 import { Draggable } from 'react-beautiful-dnd';
 import style from './style.module.scss';
 import { useMutation } from '@apollo/client';
-import { PRODUCT_DELETE } from 'Schema/mutations';
 import DeleteButton from 'Components/DeleteButton';
+import { PRODUCT_DELETE } from 'Schema/mutations/productMutations';
 
 interface Props {
   id: string;
@@ -19,7 +19,8 @@ const ProductItem = ({ id, name, onChange, index }: Props) => {
     deleteProductM({
       variables: {
         id
-      }
+      },
+      update: () => onChange()
     })
     .then(onChange);
   };

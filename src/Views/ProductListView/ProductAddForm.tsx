@@ -1,9 +1,9 @@
 import { useMutation } from '@apollo/client';
-import { PRODUCT_NAME_MUTATION } from 'Schema/mutations';
 import style from './style.module.scss';
 import { SyntheticEvent, useRef } from 'react';
 import Button from 'Components/Button';
 import ErrorHandler from 'Components/ErrorHandler';
+import { PRODUCT_NAME_MUTATION } from 'Schema/mutations/productMutations';
 
 interface Props {
   onChange: () => void;
@@ -21,12 +21,12 @@ const ProductAddForm = ({ onChange }: Props) => {
     addProductQ({
       variables: {
         name: productInputRef.current?.value
-      }
-    })
-      .then(() => {
+      },
+      update: () => {
         formRef.current?.reset();
         onChange();
-      });
+      }
+    })
   };
 
   return (

@@ -11,7 +11,7 @@ interface Props {
 
 const DeleteButton = ({ onClick, isLoading, className }: Props) => {
   const deleteButtonClasses = classnames(className, style.deleteButton);
-  
+
   if (isLoading) {
     return <Loader />
   }

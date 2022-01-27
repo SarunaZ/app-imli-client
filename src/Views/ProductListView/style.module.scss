@@ -1,3 +1,5 @@
+@import '../../Styles/variables.module.scss';
+
 .inputForm {
   & button {
     border: none;
@@ -33,12 +35,12 @@
 }
 
 .productListItemTitle {
-  font-size: 2rem;
+  font-size: var(--fs-medium-rare);
 }
 
 .productListDropdown {
   height: 65px;
-  font-size: 2rem;
+  font-size: var(--fs-medium-rare);
   padding: 15px;
   border: 1px solid;
 }
@@ -61,21 +63,21 @@
 }
 
 .formInput {
-  background: #f0f0f0;
+  background: var(--main-bg);
   border: none;
-  font-size: 2rem;
+  font-size: var(--fs-medium-rare);
   padding: 15px;
   margin-bottom: 15px;
 }
 
 .formLabel {
-  font-size: 1.6rem;
+  font-size: var(--fs-medium);
   padding-bottom: 10px;
 }
 
 .formButton {
-  background-color: #b39ddb;
-  font-size: 2rem;
+  background-color: var(--button-violet);
+  font-size: var(--fs-medium-rare);
   font-weight: 700;
   padding: 15px
 }

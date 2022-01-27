@@ -5,6 +5,7 @@ import style from './style.module.scss';
 interface Props {
   children: React.ReactChild | React.ReactChild[]
 }
+
 const PORTAL_MODAL_ID = "portal";
 
 export default function Modal({ children }: Props) {
