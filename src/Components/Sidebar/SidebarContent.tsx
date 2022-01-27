@@ -23,8 +23,7 @@ const itemMap = [
   }
 ];
 
-const SidebarContent = () => {
-  return (
+const SidebarContent = () => (
     <div className={style.sidebarContent}>
       {itemMap.map(item => (
         <SidebarItem
@@ -36,6 +35,5 @@ const SidebarContent = () => {
       ))}
     </div>
   );
-};
 
 export default SidebarContent;

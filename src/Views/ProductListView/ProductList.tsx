@@ -7,6 +7,7 @@ import { Product } from 'Schema/types';
 import style from './style.module.scss';
 import ProductAddForm from './ProductAddForm';
 import { useEffect, useRef } from 'react';
+import ErrorHandler from 'Components/ErrorHandler';
 
 interface Props {
   data: Product[];
@@ -30,8 +31,8 @@ const ProductList = ({ data, isLoading, error, onChange }: Props) => {
   if (isLoading) {
     return (
       <>
-        <ProductAddForm onChange={onChange} />
         <Loader />
+        <ProductAddForm onChange={onChange} />
       </>
       );
   }
@@ -69,6 +70,7 @@ const ProductList = ({ data, isLoading, error, onChange }: Props) => {
 
   return (
     <>
+      <ErrorHandler error={error} />
       <ul ref={listRef} className={style.productList}>
         <DragDropContext onDragEnd={onDragEd}>
           <Droppable droppableId="productList">

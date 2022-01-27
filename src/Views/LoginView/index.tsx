@@ -4,9 +4,10 @@ import { AuthenticationProvider } from 'Providers/Authentication/Authentication'
 import style from './style.module.scss';
 import Button from 'Components/Button';
 import Input from 'Components/Input';
+import ErrorHandler from 'Components/ErrorHandler';
 
 const LoginView = () => {
-  const { login, isLoading } = useContext(AuthenticationProvider);
+  const { login, isLoading, error } = useContext(AuthenticationProvider);
   const usernameRef = useRef<HTMLInputElement>(null);
   const passwordRef = useRef<HTMLInputElement>(null);
 
@@ -16,7 +17,7 @@ const LoginView = () => {
       username: usernameRef.current?.value,
       password: passwordRef.current?.value
     };
-
+    
     login(userData);
   };
 
@@ -41,6 +42,9 @@ const LoginView = () => {
               name="password"
               type="password"
             />
+            <div className={style.error}>
+              <ErrorHandler error={error} />
+            </div>
             <Button
               type="submit"
               className={style.loginButton}

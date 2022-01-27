@@ -1,3 +1,4 @@
+import ErrorBoundary from 'Components/ErrorHandler/ErrorBoundary';
 import Loader from 'Components/Loader';
 import Sidebar from 'Components/Sidebar';
 import { Suspense } from 'react';
@@ -12,7 +13,10 @@ export default function withLayout<P>(Component: React.ComponentType<P & RouteCo
         <Suspense
           fallback={<Loader />}>
           <div className={style.mainContent}>
-            <Component {...props} />
+            <ErrorBoundary>
+              <Component {...props} />
+            </ErrorBoundary>
+
           </div>
         </Suspense>
       </>

@@ -6,6 +6,7 @@ import IngredientContainer from "./IngredientContainer";
 import { IngredientsInput } from "./types";
 import style from './style.module.scss';
 import Input from "Components/Input";
+import ErrorHandler from "Components/ErrorHandler";
 
 interface Props extends ModalProps {
   onChange: () => void;
@@ -52,6 +53,7 @@ const AddMealModal = ({ onChange }: Props) => {
         label="Meal name"
         name="productName"
       />
+      <ErrorHandler error={addMealQData.error} />
       <IngredientContainer 
         isLoading={addMealQData.loading} 
         inputData={setInputData}

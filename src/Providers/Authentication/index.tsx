@@ -25,7 +25,7 @@ const Authentication = ({ children }: Props) => {
 
   const [isLoggedIn, setIsLoggedIn] = useState<boolean>(isLoggedInCookie);
   const [username, setUsername] = useState<string|undefined>(decodedAuth?.username);
-  const [submitLoginFetch, { isLoading }] =
+  const [submitLoginFetch, { isLoading, error }] =
     useFetch(process.env.REACT_APP_LOGIN_LINK!);
 
   const login = ({ username, password }: UserLoginData) => {
@@ -53,6 +53,7 @@ const Authentication = ({ children }: Props) => {
 
   const exportValues = {
     username,
+    error,
     isLoading,
     isLoggedIn,
     logout,

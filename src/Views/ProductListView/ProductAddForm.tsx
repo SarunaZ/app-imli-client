@@ -3,6 +3,7 @@ import { PRODUCT_NAME_MUTATION } from 'Schema/mutations';
 import style from './style.module.scss';
 import { SyntheticEvent, useRef } from 'react';
 import Button from 'Components/Button';
+import ErrorHandler from 'Components/ErrorHandler';
 
 interface Props {
   onChange: () => void;
@@ -11,7 +12,8 @@ interface Props {
 const ProductAddForm = ({ onChange }: Props) => {
   const productInputRef = useRef<HTMLInputElement>(null);
   const formRef = useRef<HTMLFormElement>(null);
-  const [addProductQ, productQData] = useMutation(PRODUCT_NAME_MUTATION);
+  const [addProductQ, productQData] =
+    useMutation(PRODUCT_NAME_MUTATION, { errorPolicy: 'all' });
 
   const submitProduct = (e: SyntheticEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -46,6 +48,7 @@ const ProductAddForm = ({ onChange }: Props) => {
         name="productName"
         type="text"
       />
+      <ErrorHandler error={productQData.error} />
       <Button
         type="submit"
         isLoading={productQData.loading}

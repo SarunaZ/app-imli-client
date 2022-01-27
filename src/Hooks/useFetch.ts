@@ -1,7 +1,7 @@
 import { useState } from "react";
 interface State {
   isLoading: boolean;
-  error?: { [variables: string]: any } | string | Error | null | unknown;
+  error?: { [variables: string]: any } | string | Error | null;
   data?: { [variables: string]: any } | null;
 }
 
@@ -38,24 +38,32 @@ const useFetch = (url: string): UseFetchTuple => {
     data: undefined
   });
 
-  const fetchInit = async (options?: FetchOptions) => {
+  const fetchContainer = async (options?: FetchOptions) => {
     setState({ ...state, isLoading: true });
 
-    try {
-      const response = await fetch(url, { ...DEFAULT_OPTIONS, ...options });
-      const resultData = await response.json();
-      setState({ ...state, data: resultData })
-      setState({ ...state, isLoading: false })
+    const response = await fetch(url, { ...DEFAULT_OPTIONS, ...options });
+    const resultData = await response.json();
+    setState({ ...state, data: resultData, isLoading: false })
 
-      if (options?.onSuccess) {
-        options.onSuccess(resultData);
-      }
-
-      return resultData;
+    if (!resultData.user) {
+      setState({ ...state, error: resultData.status, isLoading: false })
+        console.log(state.error);
     }
-    catch (error) {
-      setState({ ...state, error })
-      setState({ ...state, isLoading: false })
+
+    if (options?.onSuccess) {
+      options.onSuccess(resultData);
+    }
+
+    return resultData;
+  }
+
+  const fetchInit = async (options?: FetchOptions) => {
+    try {
+      fetchContainer(options);
+    }
+    catch (error: any) {
+      setState({ ...state, error, isLoading: false });
+
       return error;
     }
   }

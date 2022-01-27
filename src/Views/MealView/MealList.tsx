@@ -6,6 +6,7 @@ import MealListItem from './MealListItem';
 import AddMealModal from './AddMealModal';
 import { ReactComponent as Add } from 'Images/icons/add.svg';
 import { useState } from 'react';
+import ErrorHandler from 'Components/ErrorHandler';
 
 interface Meal {
   id: string;
@@ -16,7 +17,7 @@ interface Meal {
 }
 
 const MealList = () => {
-  const { loading, data, refetch } = useQuery(MEAL_LIST_DATA);
+  const { loading, error, data, refetch } = useQuery(MEAL_LIST_DATA);
   const [isShowAddModal, setShowAddModal] = useState<boolean>(false);
 
   if (loading) {
@@ -33,6 +34,7 @@ const MealList = () => {
       {!loading && !data?.meals.length && (
         <p>No data found</p>
       )}
+      <ErrorHandler error={error} />
       <ul className={style.mealList}>
         {data?.meals.map((meal: Meal, index: number) => (
           <MealListItem
