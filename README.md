@@ -16,6 +16,8 @@ REACT_APP_LOGIN_LINK="{YOUR SERVER API ROUTE URL or http://localhost:4000/api/lo
 REACT_APP_GRAPHQL_LINK="{YOUR APOLLO SERVER URL or http://localhost:4000/graphql}"
 ```
 
+When trying to login through `/login` any credentials will work in development mode
+
 ## Available Scripts
 
 In the project directory, you can run:
