@@ -112,6 +112,13 @@ export type MealMutationMutationVariables = Exact<{
 
 export type MealMutationMutation = { __typename?: 'Mutation', createMeal: { __typename?: 'Meal', id: string, name?: Maybe<string>, ingredients?: Maybe<Array<Maybe<{ __typename?: 'Ingredients', name: string }>>> } };
 
+export type MealDeleteMutationMutationVariables = Exact<{
+  id: Scalars['ID'];
+}>;
+
+
+export type MealDeleteMutationMutation = { __typename?: 'Mutation', deleteMeal?: Maybe<{ __typename?: 'Meal', id: string }> };
+
 export type ProductMutationMutationVariables = Exact<{
   id?: Maybe<Scalars['String']>;
   name: Scalars['String'];
@@ -127,13 +134,6 @@ export type AttachMealToProductMutationMutationVariables = Exact<{
 
 export type AttachMealToProductMutationMutation = { __typename?: 'Mutation', attachMealToProductMutation?: Maybe<{ __typename?: 'Product', id: string, name?: Maybe<string> }> };
 
-export type MealDeleteMutationMutationVariables = Exact<{
-  id: Scalars['ID'];
-}>;
-
-
-export type MealDeleteMutationMutation = { __typename?: 'Mutation', deleteMeal?: Maybe<{ __typename?: 'Meal', id: string }> };
-
 export type ProductDeleteMutationMutationVariables = Exact<{
   id: Scalars['ID'];
 }>;
@@ -148,12 +148,12 @@ export type ProductListOrderMutationMutationVariables = Exact<{
 
 export type ProductListOrderMutationMutation = { __typename?: 'Mutation', updateListOrderMutation?: Maybe<Array<{ __typename?: 'Product', id: string, name?: Maybe<string> }>> };
 
-export type ProductListQueryVariables = Exact<{ [key: string]: never; }>;
-
-
-export type ProductListQuery = { __typename?: 'Query', products?: Maybe<Array<{ __typename?: 'Product', id: string, name?: Maybe<string> }>>, meals?: Maybe<Array<{ __typename?: 'Meal', id: string, name?: Maybe<string>, ingredients?: Maybe<Array<Maybe<{ __typename?: 'Ingredients', name: string }>>> }>> };
-
 export type MealListQueryVariables = Exact<{ [key: string]: never; }>;
 
 
 export type MealListQuery = { __typename?: 'Query', meals?: Maybe<Array<{ __typename?: 'Meal', id: string, name?: Maybe<string>, ingredients?: Maybe<Array<Maybe<{ __typename?: 'Ingredients', name: string }>>> }>> };
+
+export type ProductListQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+export type ProductListQuery = { __typename?: 'Query', products?: Maybe<Array<{ __typename?: 'Product', id: string, name?: Maybe<string> }>>, meals?: Maybe<Array<{ __typename?: 'Meal', id: string, name?: Maybe<string>, ingredients?: Maybe<Array<Maybe<{ __typename?: 'Ingredients', name: string }>>> }>> };
