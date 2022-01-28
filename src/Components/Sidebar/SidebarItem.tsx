@@ -1,21 +1,24 @@
 import { useState } from 'react';
-import { NavLink } from 'react-router-dom';
+import { NavLink, useHistory } from 'react-router-dom';
 import style from './style.module.scss';
-
-interface Links {
-  name: string;
-  pathname: string,
-}
+import { Routes } from './types';
+import { getSanitizedPathname, isSamePathNameInRoutes } from './utils';
 
 interface Props {
   title: string;
-  icon: React.ReactNode,
-  links: Links[]
+  icon: React.ReactNode;
+  routes: Routes[];
+  defaultPath: string;
 }
 
-const SidebarItem = ({ icon, title, links = [] }: Props) => {
-  const [isShowItems, setShowItems] = useState<boolean>(false);
+const SidebarItem = ({ icon, title, routes = [], defaultPath }: Props) => {
+  const { location, push } = useHistory();
+  const isSameRoute =
+    isSamePathNameInRoutes(routes, getSanitizedPathname(location.pathname));
+  const [isShowItems, setShowItems] = useState<boolean>(isSameRoute);
+
   const handleToggle = () => {
+    push(defaultPath);
     setShowItems(prevValue => !prevValue);
   };
 
@@ -25,20 +28,23 @@ const SidebarItem = ({ icon, title, links = [] }: Props) => {
         className={style.sidebarItemTitle}
       >
         <h3>{title}</h3>
-        <button onClick={handleToggle} className={style.sidebarItemToggle}>
+        <button
+          onClick={handleToggle}
+          className={style.sidebarItemToggle}
+        >
           {icon}
         </button>
       </div>
-      {isShowItems && (
+      {(isShowItems && isSamePathNameInRoutes) && (
         <div className={style.sidebarLinkList}>
-          {links.map((link) => (
+          {routes.map((route) => (
             <NavLink
               activeClassName={style.activeLink}
-              key={link.name}
-              to={link.pathname}
+              key={route.name}
+              to={route.pathname}
               className={style.sidebarLink}
             >
-              {link.name}
+              {route.name}
             </NavLink>
           ))}
         </div>

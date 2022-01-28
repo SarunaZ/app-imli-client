@@ -7,20 +7,22 @@ const kitchenLinkMap = [
   {
     key: 'meal_view',
     name: 'Meal list',
-    pathname: ROUTE_MEAL_PAGE
+    pathname: ROUTE_MEAL_PAGE,
   },
   {
     key: 'product_list_view',
     name: 'Product list',
-    pathname: ROUTE_PRODUCT_LIST_PAGE
+    pathname: ROUTE_PRODUCT_LIST_PAGE,
   }
 ];
 
 const itemMap = [
   {
     title: 'Kitchen',
-    icon: <Kitchen />
-  }
+    icon: <Kitchen />,
+    routes: kitchenLinkMap,
+    defaultPath: ROUTE_PRODUCT_LIST_PAGE
+  },
 ];
 
 const SidebarContent = () => (
@@ -30,7 +32,8 @@ const SidebarContent = () => (
         key={item.title}
         title={item.title}
         icon={item.icon}
-        links={kitchenLinkMap}
+        routes={item.routes}
+        defaultPath={item.defaultPath}
       />
     ))}
   </div>

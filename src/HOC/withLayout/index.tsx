@@ -5,18 +5,18 @@ import { Suspense } from 'react';
 import { RouteComponentProps, withRouter } from 'react-router-dom';
 import style from './style.module.scss';
 
-export default function withLayout<P>(Component: React.ComponentType<P & RouteComponentProps<any>>) {
+export default function withLayout<P>
+  (Component: React.ComponentType<P & RouteComponentProps<any>>) {
   const WithLayoutComponent = (props: P & RouteComponentProps<any>) => (
     <>
       <Sidebar />
       <Suspense
         fallback={<Loader />}>
-        <div className={style.mainContent}>
+        <main className={style.mainContent}>
           <ErrorBoundary>
             <Component {...props} />
           </ErrorBoundary>
-
-        </div>
+        </main>
       </Suspense>
     </>
   )

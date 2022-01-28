@@ -16,18 +16,29 @@ const App = () => (
       <Suspense fallback={<Loader />}>
         <Authentication>
           <Switch>
-            {authRouteMap.map(routeProp => {
-              return <AuthRoute key={routeProp.id} {...routeProp} />;
+            {
+              authRouteMap.map(
+                routeProp =>
+                  <AuthRoute key={routeProp.id} {...routeProp} />
+              )
             }
-            )}
-            {publicRouteMap.map(routeProp => {
-              return <PublicRoute key={routeProp.id} {...routeProp} />;
+            {
+              publicRouteMap.map(
+                routeProp =>
+                  <PublicRoute key={routeProp.id} {...routeProp} />
+              )
             }
-            )}
-            {localRouteMap.map(routeProp => {
-              return <Suspense key={routeProp.id} fallback={<Loader />}><Route {...routeProp} /></Suspense>;
-            }
-            )}
+            {
+              localRouteMap.map(
+                routeProp => (
+                  <Suspense
+                    key={routeProp.id}
+                    fallback={<Loader />}
+                  >
+                    <Route {...routeProp} />
+                  </Suspense>
+                )
+              )}
           </Switch>
         </Authentication>
       </Suspense>

@@ -11,10 +11,7 @@
 }
 
 .productListWrapper {
-  display: flex;
-  height: 100%;
-  flex-direction: column;
-  max-width: 500px;
+  max-width: 550px;
   margin: auto;
 }
 
@@ -39,10 +36,12 @@
 }
 
 .productListDropdown {
+  border: 1px solid;
   height: 65px;
   font-size: var(--fs-medium-rare);
+  margin-bottom: 15px;
   padding: 15px;
-  border: 1px solid;
+  width: 100%;
 }
 
 .inputForm {
