@@ -56,7 +56,7 @@ const useFetch = (url: string): UseFetchTuple => {
     return resultData;
   }
 
-  const fetchInit = async (options?: FetchOptions) => {
+  const fetchInit = (options?: FetchOptions) => {
     try {
       fetchContainer(options);
     }

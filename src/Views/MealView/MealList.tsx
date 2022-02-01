@@ -40,7 +40,7 @@ const MealList = () => {
           <MealListItem
             data={meal}
             onDelete={refetch}
-            key={meal.id + index}
+            key={meal.id}
           />
         ))}
       </ul>
