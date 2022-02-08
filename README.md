@@ -1,4 +1,4 @@
-# Showcase project for Present Connection FE academy client side
+# Client side for IMLI home utility system (serverside is private)
 
 This project was made with:
 
