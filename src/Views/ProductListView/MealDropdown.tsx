@@ -4,6 +4,7 @@ import Loader from 'Components/Loader';
 import style from './style.module.scss';
 import { useMutation } from '@apollo/client';
 import { MEAL_ATTACH_TO_PRODUCT_MUTATION } from 'Schema/mutations/productMutations';
+import withModal from 'HOC/withModal';
 
 interface Props {
   isLoading?: boolean;
@@ -60,4 +61,4 @@ const MealDropdown = ({ isLoading, data, onChange }: Props) => {
   );
 };
 
-export default MealDropdown;
+export default withModal(MealDropdown);

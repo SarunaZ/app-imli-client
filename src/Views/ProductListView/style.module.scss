@@ -1,4 +1,4 @@
-@import '../../Styles/variables.module.scss';
+@import '../../Styles/variables.scss';
 
 .inputForm {
   & button {
@@ -16,9 +16,12 @@
 }
 
 .productList {
-  max-height: calc(100vh - 390px);
   padding: 0;
   overflow: auto;
+
+  @media (min-width: $small-screen) {
+    max-height: calc(100vh - 390px);
+  }
 }
 
 .productListItemWrapper {
@@ -32,11 +35,16 @@
 }
 
 .productListItemTitle {
-  font-size: var(--fs-medium-rare);
+  font-size: $fs-medium;
+
+  @media (min-width: $small-screen) {
+    font-size: $fs-medium-rare;
+  }
 }
 
 .productListDropdown {
   border: 1px solid;
+  display: block;
   height: 65px;
   font-size: var(--fs-medium-rare);
   margin-bottom: 15px;
@@ -46,18 +54,13 @@
 
 .inputForm {
   background: linear-gradient(264deg, #eeeef1 0%, white 100%);
-  bottom: 0;
-  left: 0;
   display: flex;
   flex-direction: column;
-  padding: 15px;
-  position: fixed;
   width: 100%;
 
   @media (min-width: 931px) {
     background: transparent;
     padding: 0;
-    position: static;
   }
 }
 
@@ -79,4 +82,25 @@
   font-size: var(--fs-medium-rare);
   font-weight: 700;
   padding: 15px
+}
+
+.mealDropdownAddButton {
+  bottom: 15px;
+  position: fixed;
+  right: 15px;
+
+  @media(min-width: 931px) {
+    bottom: 50px;
+    right: 50px;
+  }
+}
+
+.mealListAddIcon {
+  background: $white;
+  border-radius: 50%;
+  height: 50px;
+
+  path {
+    fill: $secondary
+  }
 }
