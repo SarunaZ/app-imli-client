@@ -18,17 +18,23 @@ interface Props {
 
 const ProductList = ({ data, isLoading, error, onChange }: Props) => {
   const deleteRef = useRef<boolean>(false);
+  const anchorRef = useRef<HTMLAnchorElement>(null);
   const listRef = useRef<HTMLUListElement>(null);
   const [updateProductListM] =
     useMutation(
-      PRODUCTS_LIST_ORDER_UPDATE_MUTATION, 
+      PRODUCTS_LIST_ORDER_UPDATE_MUTATION,
       { errorPolicy: 'all' }
     );
 
   const scrollToListBottom = () => {
     if (!deleteRef.current) {
       listRef.current?.scroll({
-        top: listRef?.current?.scrollHeight!,
+        top: listRef?.current?.scrollHeight,
+        behavior: 'smooth'
+      })
+
+      anchorRef.current?.scrollIntoView({
+        block: 'end',
         behavior: 'smooth'
       })
     }
@@ -111,6 +117,7 @@ const ProductList = ({ data, isLoading, error, onChange }: Props) => {
         </DragDropContext>
       </ul>
       <ProductAddForm onChange={onChange} />
+      <span ref={anchorRef}/>
     </>
   );
 };

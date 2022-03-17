@@ -11,8 +11,11 @@
 }
 
 .productListWrapper {
-  max-width: 550px;
+  display: flex;
+  flex-direction: column;
   margin: auto;
+  max-width: 550px;
+  min-height: calc(100vh - 30px);
 }
 
 .productList {
@@ -53,9 +56,10 @@
 }
 
 .inputForm {
-  background: linear-gradient(264deg, #eeeef1 0%, white 100%);
+  background: linear-gradient(264deg, #eeeef1 0%, $white 100%);
   display: flex;
   flex-direction: column;
+  margin-top: auto;
   width: 100%;
 
   @media (min-width: 931px) {
