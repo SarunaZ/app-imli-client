@@ -6,7 +6,7 @@ This project was made with:
 * [TypesScript](https://github.com/microsoft/TypeScript)
 * [Apollo/Graphql](https://www.apollographql.com/)
 
-## Enviroment variables (cannot run project without it)
+## Enviroment variables (cannot run project without it!)
 `.env.example` files need to be renamed to `.env` and populate the empty values
 
 ```
