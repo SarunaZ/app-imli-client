@@ -37,6 +37,10 @@
   justify-content: space-between;
 }
 
+.completed {
+  opacity: 0.4;
+}
+
 .productListItemTitle {
   font-size: $fs-medium;
 
@@ -88,17 +92,25 @@
   padding: 15px
 }
 
-.mealDropdownAddButton {
-  bottom: 15px;
+.productListButtons {
+  bottom: 6px;
   position: fixed;
-  right: 15px;
+  right: 6px;
+  width: 50px;
 
-  @media(min-width: 931px) {
+  @media (min-width: $small-screen) {
     bottom: 50px;
     right: 50px;
   }
 }
 
+.productListCompleteModal {
+  button {
+    width: 100%;
+  }
+}
+
+.cancelListIcon,
 .mealListAddIcon {
   background: $white;
   border-radius: 50%;
@@ -107,4 +119,8 @@
   path {
     fill: $secondary
   }
+}
+
+.returnIcon {
+  transform: scaleX(-1);
 }

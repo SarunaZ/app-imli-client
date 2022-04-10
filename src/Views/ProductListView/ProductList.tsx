@@ -75,7 +75,8 @@ const ProductList = ({ data, isLoading, error, onChange }: Props) => {
       const newList = items.map(item => {
         return {
           id: item.id,
-          name: item.name
+          name: item.name,
+          isDone: item.isDone
         };
       });
 
@@ -102,12 +103,13 @@ const ProductList = ({ data, isLoading, error, onChange }: Props) => {
                 <div className={style.placeholder}>
                   {provided.placeholder}
                 </div>
-                {data?.map((product: Product, index: number) => (
+                {data?.map(({ id, name, isDone }: Product, index: number) => (
                   <ProductItem
                     index={index}
-                    key={product.id}
-                    id={product.id}
-                    name={product.name}
+                    key={id}
+                    id={id}
+                    name={name}
+                    isCompleted={isDone!}
                     onChange={handleDeleteItem}
                   />
                 ))}

@@ -11,7 +11,7 @@ import { localRouteMap } from './localRoutes';
 
 const App = () => (
   <HelmetProvider>
-    <Helmet title="Present Connection showcase" />
+    <Helmet title="Imli Home Utility System" />
     <Router>
       <Suspense fallback={<Loader />}>
         <Authentication>

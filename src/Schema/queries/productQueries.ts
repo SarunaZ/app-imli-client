@@ -5,6 +5,7 @@ export const PRODUCT_LIST_DATA = gql`
       products {
         id
         name
+        isDone
       }
       meals {
         id
