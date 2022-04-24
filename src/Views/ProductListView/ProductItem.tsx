@@ -59,12 +59,13 @@ const ProductItem = ({ id, name, onChange, index, isCompleted }: Props) => {
           className={style.productListItemWrapper}
         >
           <Box className={productItemClass}>
-            <span className={style.productListItemTitle}>{name}</span>
-            <div>
+            <div className={style.productListItemFirst}>
               <DeleteButton
                 onClick={() => deleteProduct(id)}
                 isLoading={deleteProductData.loading}
               />
+              <span className={style.productListItemTitle}>{name}</span>
+            </div>
               {!isCompleted ?
                 <button type="button" onClick={() => completeProduct(id, true)}>
                   {!completeProductData.loading ?
@@ -83,7 +84,6 @@ const ProductItem = ({ id, name, onChange, index, isCompleted }: Props) => {
                     <Loader />}
                 </button>
               }
-            </div>
           </Box>
         </li>
       )}

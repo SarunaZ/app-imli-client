@@ -31,6 +31,11 @@
   list-style: none;
 }
 
+.productListItemFirst {
+  align-items: center;
+  display: flex;
+}
+
 .productListItem {
   align-items: center;
   display: flex;
@@ -43,6 +48,7 @@
 
 .productListItemTitle {
   font-size: $fs-medium;
+  padding-left: 10px;
 
   @media (min-width: $small-screen) {
     font-size: $fs-medium-rare;

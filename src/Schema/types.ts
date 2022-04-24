@@ -163,7 +163,7 @@ export type ProductListOrderMutationMutationVariables = Exact<{
 }>;
 
 
-export type ProductListOrderMutationMutation = { __typename?: 'Mutation', updateListOrderMutation?: Maybe<Array<{ __typename?: 'Product', id: string, name?: Maybe<string> }>> };
+export type ProductListOrderMutationMutation = { __typename?: 'Mutation', updateListOrderMutation?: Maybe<Array<{ __typename?: 'Product', id: string, name?: Maybe<string>, isDone?: Maybe<boolean> }>> };
 
 export type ProductListCancelMutationMutationVariables = Exact<{ [key: string]: never; }>;
 
