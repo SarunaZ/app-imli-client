@@ -17,7 +17,7 @@ const Dashboard = () => {
           <label>Please enter YOUR favourite password</label>
           <input type="text" onInput={(e: SyntheticEvent<HTMLInputElement>) => setInputValue(e.currentTarget.value)} />
         </form>
-        {inputValue === '10keksiuku' && (
+        {inputValue === '10pyrageliu' && (
           <div className={style.supriseShow}>
             <h3>{'Congratulations'}</h3>
             <img src="https://c.tenor.com/KVosJDEqP_UAAAAC/bo-burnham-inside.gif" alt="" />
