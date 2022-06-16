@@ -14,7 +14,7 @@ const Dashboard = () => {
       <div className={style.suprise}>
         <h2>{'Welcome back, my love!'}</h2>
         <form>
-          <label>Please enter YOUR password</label>
+          <label>Please enter YOUR favourite password</label>
           <input type="text" onInput={(e: SyntheticEvent<HTMLInputElement>) => setInputValue(e.currentTarget.value)} />
         </form>
         {inputValue === '10keksiuku' && (
