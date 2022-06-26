@@ -25,7 +25,12 @@ export default function withModal<P>(Component: React.ComponentType<P & ModalPro
       <Modal>
         <div className={style.modalContent}>
           <h3 className={style.modalTitle}>{title}</h3>
-          <button className={style.modalCloseButton} onClick={onModalClose}><Close /></button>
+          <button 
+            className={style.modalCloseButton}
+            onClick={onModalClose}
+          >
+            <Close />
+            </button>
           <Component {...props} />
         </div>
       </Modal>

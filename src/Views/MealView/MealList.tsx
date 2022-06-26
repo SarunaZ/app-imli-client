@@ -18,7 +18,7 @@ interface Meal {
 
 const MealList = () => {
   const { loading, error, data, refetch } 
-    = useQuery(MEAL_LIST_DATA, { errorPolicy: 'all' });
+    = useQuery(MEAL_LIST_DATA, { errorPolicy: 'all', fetchPolicy: "network-only" });
   const [isShowAddModal, setShowAddModal] = useState<boolean>(false);
 
   if (loading) {
@@ -32,11 +32,11 @@ const MealList = () => {
 
   return (
     <>
-      {!loading && !data?.meals.length && (
+      {!loading && (!data?.meals || !data?.meals?.length) && (
         <p>No data found</p>
       )}
       <ul className={style.mealList}>
-        {data?.meals.map((meal: Meal, index: number) => (
+        {data?.meals?.map((meal: Meal, index: number) => (
           <MealListItem
             data={meal}
             onDelete={refetch}
