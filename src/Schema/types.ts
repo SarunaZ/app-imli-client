@@ -109,6 +109,7 @@ export type Query = {
   __typename?: 'Query';
   meals?: Maybe<Array<Meal>>;
   products?: Maybe<Array<Product>>;
+  userDashboard: UserDashboard;
 };
 
 
@@ -117,6 +118,11 @@ export type User = {
   id: Scalars['ID'];
   password: Scalars['String'];
   username: Scalars['String'];
+};
+
+export type UserDashboard = {
+  __typename?: 'UserDashboard';
+  username?: Maybe<Scalars['String']>;
 };
 
 export type MealMutationMutationVariables = Exact<{
@@ -176,6 +182,11 @@ export type ProductDeleteMutationMutationVariables = Exact<{
 
 
 export type ProductDeleteMutationMutation = { __typename?: 'Mutation', deleteProduct?: Maybe<{ __typename?: 'Product', id: string }> };
+
+export type UserDataQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+export type UserDataQuery = { __typename?: 'Query', userDashboard: { __typename?: 'UserDashboard', username?: Maybe<string> } };
 
 export type MealListQueryVariables = Exact<{ [key: string]: never; }>;
 

@@ -13,7 +13,7 @@ const ProductListView = () => {
   const [toggleMealModal, setToggleMealModal] = useState(false);
   const [openCancelModal, setCancelModal] = useState(false);
   const { loading, data, error, refetch } =
-    useQuery(PRODUCT_LIST_DATA, { errorPolicy: 'all' });
+    useQuery(PRODUCT_LIST_DATA, { errorPolicy: 'all', fetchPolicy: "network-only" });
 
   const handleModalToggle = () => {
     setToggleMealModal(prev => !prev);

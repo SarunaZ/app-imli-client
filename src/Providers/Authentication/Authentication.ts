@@ -7,7 +7,7 @@ export interface UserLoginData {
 
 interface State {
   logout: () => void;
-  isLoggedIn: boolean | null | string;
+  isLoggedIn: boolean | undefined;
   isLoading: boolean;
   error?: { [variables: string]: any } | string | Error | null;
   username?: string;
