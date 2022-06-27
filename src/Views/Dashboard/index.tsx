@@ -1,13 +1,19 @@
-import { AuthenticationProvider } from 'Providers/Authentication/Authentication';
-import { useContext } from 'react';
 import style from './style.module.scss';
+import {useQuery} from "@apollo/client";
+import {DASHBOARD_DATA} from "Schema/queries/dashboardQueries";
+import Loader from "Components/Loader";
+import ErrorHandler from "../../Components/ErrorHandler";
 
 const Dashboard = () => {
-  const { username } = useContext(AuthenticationProvider);
+  const { loading, error, data = {} } = useQuery(DASHBOARD_DATA);
+
+  if (loading) return <Loader />
+  if (error) return <ErrorHandler error={error} />
+
   return (
     <>
       <h1 className={style.dashboardTitle}>
-        Hello, {username}
+        Hello, {data.userDashboard?.username}
       </h1>
     </>
   );

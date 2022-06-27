@@ -10,12 +10,10 @@ interface State {
   isLoggedIn: boolean | undefined;
   isLoading: boolean;
   error?: { [variables: string]: any } | string | Error | null;
-  username?: string;
   login: (userData: UserLoginData) => void;
 }
 
 const defaultState: State = {
-  username: undefined,
   error: undefined,
   isLoggedIn: false,
   isLoading: false,
