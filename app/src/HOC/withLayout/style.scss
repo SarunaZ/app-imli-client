@@ -1,0 +1,7 @@
+.mainContent {
+  padding: 15px;
+
+  @media(min-width: 931px) {
+    padding: 0 0 0 250px;
+  }
+}

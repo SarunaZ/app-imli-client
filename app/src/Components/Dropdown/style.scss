@@ -1,0 +1,48 @@
+.dropdownListWrapper {
+  position: relative;
+}
+
+.dropdownList {
+  background-color: $white;
+  cursor: default;
+  list-style: none;
+  max-width: 100px;
+  padding: 10px;
+  position: absolute;
+  width: 100%;
+  z-index: 2;
+}
+
+.dropdownItem {
+  margin-bottom: 10px;
+
+  &:last-child {
+    margin-bottom: 0;
+  }
+}
+
+.dropdownMoreIcon {
+  transform: rotate(90deg);
+  margin: 10px 0;
+}
+
+.dropdownMoreButton {
+  background-color: transparent;
+  border: none;
+
+
+  &.disabled {
+    opacity: 0.5;
+    pointer-events: none
+  }
+}
+
+.dropdownOverlay {
+  position: fixed;
+  top: 0;
+  bottom: 100%;
+  height: 100%;
+  width: 100%;
+  left: 0;
+  z-index: -1;
+}

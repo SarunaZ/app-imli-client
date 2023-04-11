@@ -1,0 +1,115 @@
+@import '../../Styles/variables.scss';
+
+.mealListWrapper {
+  margin: 0 auto;
+  max-width: 550px;
+}
+
+.mealList {
+  list-style: none;
+  padding: 0;
+}
+
+.mealListItemHeader {
+  display: flex;
+  justify-content: space-between;
+
+  button {
+    width: auto;
+  }
+}
+
+.mealListItemTitle {
+  font-size: var(--fs-medium-rare);
+  margin: 0 0 15px;
+  text-transform: capitalize;
+}
+
+.mealListItemIngredients {
+  padding-left: 25px;
+  font-size: var(--fs-regular);
+}
+
+.mealListItemIngredientsItem {
+  margin-bottom: 5px;
+
+  &:last-of-type {
+    margin-bottom: 0;
+  }
+}
+
+.mealListAddButton {
+  bottom: 15px;
+  position: fixed;
+  right: 15px;
+
+  @media(min-width: 931px) {
+    bottom: 50px;
+    right: 50px;
+  }
+}
+
+.mealListAddIcon {
+  height: 50px;
+  width: auto;
+
+  path {
+    fill: var(--secondary);
+  }
+}
+
+.addMealModalWrapper {
+  display: flex;
+  flex-direction: column;
+  min-width: 350px;
+}
+
+.ingredientFormInputWrapper {
+  align-items: center;
+  display: flex;
+  gap: 15px;
+
+  input {
+    flex: 1;
+  }
+}
+
+.indredientFieldsrapper {
+  max-height: calc(100vh - 390px);
+  overflow: auto;
+  margin-top: 5px;
+  min-height: 170px;
+
+  @media(min-width: 931px) {
+    max-height: 450px;
+  }
+}
+
+.ingredientFormButton {
+  height: 55px;
+  width: 55px;
+}
+
+.indredientFieldLabel {
+  font-size: var(--fs-medium-rare);
+}
+
+.indredientFieldButtonWrapper {
+  align-items: center;
+  display: flex;
+  gap: 15px;
+  margin-top: auto;
+}
+
+.indredientFieldButtonSubmit {
+  flex: 1;
+}
+
+.indredientFieldAddButton {
+  height: 55px;
+  width: 55px;
+}
+
+.deleteModalButton {
+  width: 100%;
+}

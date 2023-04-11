@@ -1,0 +1,40 @@
+$primeButtonColor: #7E2B46;
+
+.button {
+  align-items: center;
+  border: none;
+  cursor: pointer;
+  display: flex;
+  font-size: $fs-medium-rare;
+  font-weight: 700;
+  justify-content: center;
+  margin-top: 15px;
+  padding: 15px;
+  text-transform: uppercase;
+
+  &.hollow {
+    background: transparent;
+    border: 2px solid $secondary;
+    color: $secondary;
+    transition: border-color 150ms ease-in-out;
+
+    &:hover {
+      border-color: lighten($primeButtonColor, 15%)
+    }
+  }
+
+  &.disabled {
+    background: $lightGrey;
+    pointer-events: none;
+  }
+}
+
+.primary {
+  background: $secondary;
+  color: $white;
+  transition: background-color 150ms ease-in-out;
+
+  &:hover {
+    background-color: darken($primeButtonColor, 5%)
+  }
+}

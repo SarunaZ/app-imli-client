@@ -1,0 +1,172 @@
+.inputForm {
+  & button {
+    border: none;
+  }
+}
+
+.placeholder {
+  display: none;
+}
+
+.productListWrapper {
+  display: flex;
+  flex-direction: column;
+  margin: auto;
+  max-width: 550px;
+  min-height: calc(100vh - 30px);
+}
+
+.productList {
+  padding: 0;
+  overflow: auto;
+  flex: 1;
+}
+
+.productListItemWrapper {
+  list-style: none;
+}
+
+.productListItemFirst {
+  align-items: center;
+  display: flex;
+  width: calc(100% - 75px);
+
+  li {
+    &:hover {
+      span {
+        color: $secondary;
+      }
+    }
+  }
+}
+
+.productListItem {
+  align-items: center;
+  display: flex;
+  justify-content: space-between;
+  position: relative;
+}
+
+.completed {
+  opacity: 0.4;
+}
+
+.productListItemTitle {
+  font-size: $fs-medium;
+  padding-left: 10px;
+
+  @media (min-width: $small-screen) {
+    font-size: $fs-medium-rare;
+  }
+}
+
+.productListDropdown {
+  border: 1px solid;
+  display: block;
+  height: 65px;
+  font-size: var(--fs-medium-rare);
+  margin-bottom: 15px;
+  padding: 15px;
+  width: 100%;
+}
+
+.productListItemDropdownTitle {
+  font-size: 1.4rem
+}
+
+.inputForm {
+  background: linear-gradient(264deg, #eeeef1 0%, $white 100%);
+  display: flex;
+  flex-direction: column;
+  margin-top: auto;
+  width: 100%;
+
+  @media (min-width: 931px) {
+    background: transparent;
+    padding: 0;
+  }
+}
+
+.formInput {
+  background: var(--main-bg);
+  border: none;
+  font-size: var(--fs-medium-rare);
+  padding: 15px;
+  margin-bottom: 15px;
+}
+
+.formLabel {
+  font-size: var(--fs-medium);
+  padding-bottom: 10px;
+}
+
+.formButton {
+  background-color: var(--button-violet);
+  font-size: var(--fs-medium-rare);
+  font-weight: 700;
+  padding: 15px
+}
+
+.productListButtons {
+  bottom: 15px;
+  position: fixed;
+  right: 15px;
+  width: 50px;
+
+  @media (min-width: $small-screen) {
+    bottom: 50px;
+    right: 50px;
+  }
+}
+
+.productListCompleteModal {
+  button {
+    width: 100%;
+  }
+}
+
+.cancelListIcon,
+.mealListAddIcon {
+  background: $white;
+  border-radius: 50%;
+  height: 50px;
+
+  path {
+    fill: $secondary
+  }
+}
+
+.returnIcon {
+  transform: scaleX(-1);
+}
+
+.saveIcon {
+  transform: scaleX(-1);
+  fill: $secondary
+}
+
+.editIcon {
+  color: $primary;
+}
+
+.inline {
+  align-items: center;
+  display: flex;
+  justify-content: space-between;
+}
+
+.productListItemForm {
+  width: 100%;
+}
+
+.productListItemInput {
+  font-size: 1.4rem;
+  margin-left: 15px;
+  width: 100%;
+
+  @media (min-width: $small-screen) {
+    bottom: 50px;
+    font-size: 2rem;
+    right: 50px;
+  }
+}

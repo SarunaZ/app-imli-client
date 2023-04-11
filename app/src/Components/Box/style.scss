@@ -1,0 +1,18 @@
+.box {
+  background: var(--lightGrey);
+  box-sizing: border-box;
+  margin-bottom: 1.1rem;
+  padding: 0 calc(var(--regular) - 5px);
+  width: auto;
+
+  @media (min-width: $small-screen) {
+    margin-bottom: var(--regular);
+    padding: var(--regular);
+  }
+
+  span,
+  p,
+  a {
+    color: var(--black);
+  }
+}

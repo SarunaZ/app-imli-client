@@ -1,0 +1,19 @@
+version: "3.8"
+
+services: 
+  app:
+    stdin_open:  true
+    container_name: imli-client-dev
+    image: docker-react-dev-i
+    build:
+      dockerfile: Dockerfile.dev
+    volumes:
+      - ./app:/app
+      - node_modules:/app/nodes_modules/
+    ports: 
+      - "3000:3000"
+    environment:
+      - NODE_ENV=development
+volumes:
+  - "/app/node_modules":
+  -  “./:/app

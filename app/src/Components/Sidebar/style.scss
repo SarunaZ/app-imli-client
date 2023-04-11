@@ -1,0 +1,105 @@
+.sidebarWrapper {
+  background-color: $primary;
+  min-width: 250px;
+  position: fixed;
+  left: -250px;
+  height: 100%;
+  top: 0;
+  transition: left 150ms ease-in-out;
+  z-index: 100;
+
+  &.active {
+    left: 0;
+  }
+
+  @media(min-width: 931px) {
+    left: 0;
+  }
+}
+
+.siderbar {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  position: relative;
+}
+
+.sidebarFooter {
+  margin: auto 0 15px 0;
+  text-align: center;
+}
+
+.sidebarItem {
+  background-color: $secondary;
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  padding: 15px;
+
+  a {
+    color: $white;
+    font-size: $fs-regular;
+    padding-bottom: 5px;
+    text-decoration: none;
+  }
+
+  svg {
+    fill: $white;
+    height: 18px;
+  }
+}
+
+.sidebarItemTitle {
+  align-items: center;
+  display: flex;
+  gap: 10px;
+  justify-content: space-between;
+
+  h3 {
+    color: $white;
+    font-weight: 700;
+    font-size: $fs-medium;
+    margin: 0;
+  }
+}
+
+.sidebarItemToggle {
+  background: transparent;
+  border: none;
+  position: absolute;
+  right: 15px;
+  text-align: right;
+  width: 100%;
+}
+
+.sidebarLinkList {
+  display: flex;
+  flex-direction: column;
+  margin: 15px 0 -15px;
+
+  a {
+    margin: 0 -15px;
+    padding: 15px 0 15px 30px
+  }
+}
+
+.sidebarToggle {
+  position: absolute;
+  right: -37px;
+  top: 25px;
+  border: none;
+  background-color: transparent;
+  transition: transform 150ms ease-in-out;
+
+  &.active {
+    transform: rotate(180deg)
+  }
+
+  @media(min-width: 931px) {
+    display: none;
+  }
+}
+
+.activeLink {
+  font-weight: 700;
+}

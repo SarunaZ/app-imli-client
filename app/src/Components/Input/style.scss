@@ -1,0 +1,16 @@
+.inputLabel {
+  display: flex;
+  flex-direction: column;
+  font-size: calc($fs-medium-rare - 0.2rem);
+  margin-bottom: 15px;
+
+  &:last-of-type {
+    margin-bottom: 0;
+  }
+}
+
+.inputField {
+  font-size: calc($fs-medium-rare - 0.2rem);
+  margin-top: 15px;
+  padding: 15px;
+}

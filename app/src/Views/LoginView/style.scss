@@ -1,0 +1,39 @@
+.loginWrapper {
+  color: $white;
+  margin: auto;
+  max-width: 550px;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.loginContent {
+  background: $primary;
+  padding: 25px;
+  margin: 0 10px;
+
+  @media(min-width: 931px) {
+    margin: 0;  
+  }
+}
+
+.loginPageTitle {
+  color: $white;
+  font-size: $fs-large;
+  margin-top: 0;
+  padding: 0;
+}
+
+.loginForm {
+  display: flex;
+  flex-direction: column;
+}
+
+.loginButton {
+  margin-top: 15px;
+}
+
+.error {
+  margin-top: 15px;
+}

@@ -1,0 +1,22 @@
+@import "src/Styles/variables.scss";
+
+.errorWrapper {
+  align-items: center;
+  background-color: var(--danger);
+  color: var(--deepRed);
+  display: flex;
+  font-size: calc(var(--fs-medium) - 0.2rem);
+  font-weight: 700;
+  gap: 10px;
+  padding: 10px;
+}
+
+.errorIcon {
+  align-items: center;
+  display: flex;
+  padding: 5px;
+}
+
+.errorBoundaryMessage {
+  font-size: var(--fs-medium);
+}
