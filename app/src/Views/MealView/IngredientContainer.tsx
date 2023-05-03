@@ -1,11 +1,10 @@
-
-import React, { useState } from 'react';
-import IngredientInput from './IngredientInput';
-import { IngredientsInput } from './types';
-import style from './style.scss';
-import Button from 'Components/Button';
+import React, { useState } from "react";
+import IngredientInput from "./IngredientInput";
+import { IngredientsInput } from "./types";
+import style from "./style.scss";
+import Button from "Components/Button";
 import ErrorHandler from "Components/ErrorHandler";
-import { ApolloError } from '@apollo/client';
+import { ApolloError } from "@apollo/client";
 
 interface Props {
   isLoading: boolean;
@@ -14,16 +13,20 @@ interface Props {
 }
 
 const defaultInputValue = {
-  name: ''
+  name: "",
 };
 
-const IngredientContainer = ({ error, isLoading, inputData }: Props) => {
-  const [inputState, setInputState] = useState<IngredientsInput[]>(
-    [defaultInputValue]
-  );
+const IngredientContainer = ({
+  error,
+  isLoading,
+  inputData,
+}: Props) => {
+  const [inputState, setInputState] = useState<IngredientsInput[]>([
+    defaultInputValue,
+  ]);
 
   const handleAddInput = () => {
-    setInputState(prev => [...prev, defaultInputValue]);
+    setInputState((prev) => [...prev, defaultInputValue]);
   };
 
   const handleRemoveInput = (index: number) => {
@@ -39,22 +42,25 @@ const IngredientContainer = ({ error, isLoading, inputData }: Props) => {
     inputData(inputState);
   };
 
-  const handleInputChange = (inputValue: string) => (index: number) => {
-    const shallowCopyOfState = [...inputState];
-    shallowCopyOfState[index] = { name: inputValue };
-    setInputState(shallowCopyOfState);
-    inputData(inputState);
-  };
+  const handleInputChange =
+    (inputValue: string) => (index: number) => {
+      const shallowCopyOfState = [...inputState];
+      shallowCopyOfState[index] = { name: inputValue };
+      setInputState(shallowCopyOfState);
+      inputData(inputState);
+    };
 
   return (
     <>
-      <label className={style.indredientFieldLabel}>Ingredients</label>
+      <label className={style.indredientFieldLabel}>
+        Ingredients
+      </label>
       <div className={style.indredientFieldsrapper}>
         {inputState.map((input, index) => (
           <IngredientInput
             key={index}
             index={index}
-            inputValue={inputState[index].name}
+            inputValue={input.name}
             onDelete={handleRemoveInput}
             onChange={handleInputChange}
           />
@@ -78,7 +84,6 @@ const IngredientContainer = ({ error, isLoading, inputData }: Props) => {
           +
         </Button>
       </div>
-
     </>
   );
 };

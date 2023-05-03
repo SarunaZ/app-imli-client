@@ -1,7 +1,7 @@
-import React from 'react';
-import Loader from 'Components/Loader';
-import style from './style.scss';
-import classnames from 'classnames';
+import React from "react";
+import Loader from "Components/Loader";
+import style from "./style.scss";
+import classnames from "classnames";
 
 interface Props {
   className?: string;
@@ -10,11 +10,19 @@ interface Props {
   children: React.ReactChild;
 }
 
-const IconButton = ({ onClick, isLoading, className, children }: Props) => {
-  const deleteButtonClasses = classnames(className, style.deleteButton);
+const IconButton = ({
+  onClick,
+  isLoading,
+  className,
+  children,
+}: Props) => {
+  const deleteButtonClasses = classnames(
+    className,
+    style.deleteButton,
+  );
 
   if (isLoading) {
-    return <Loader />
+    return <Loader />;
   }
 
   return (

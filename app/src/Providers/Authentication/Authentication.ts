@@ -19,6 +19,6 @@ const defaultState: State = {
   isLoading: false,
   login: undefined,
   logout: undefined,
-}
+};
 
 export const AuthenticationProvider = createContext(defaultState);

@@ -1,5 +1,3 @@
-@import '../../Styles/variables.scss';
-
 .modalWrapper {
   position: fixed;
   top: 0;
@@ -22,7 +20,7 @@
 }
 
 .modalContent {
-  background-color: var(--white);
+  background-color: $white;
   margin: auto 15px;
   max-width: 550px;
   padding: 20px;

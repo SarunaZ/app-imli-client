@@ -1,14 +1,15 @@
-import React, { SyntheticEvent, useContext, useRef } from 'react';
-import { Helmet } from 'react-helmet-async';
-import { AuthenticationProvider } from 'Providers/Authentication/Authentication';
-import Button from 'Components/Button';
-import Input from 'Components/Input';
-import ErrorHandler from 'Components/ErrorHandler';
-import style from './style.scss';
-
+import React, { SyntheticEvent, useContext, useRef } from "react";
+import { Helmet } from "react-helmet-async";
+import { AuthenticationProvider } from "Providers/Authentication/Authentication";
+import Button from "Components/Button";
+import Input from "Components/Input";
+import ErrorHandler from "Components/ErrorHandler";
+import style from "./style.scss";
 
 const LoginView = () => {
-  const { login, isLoading, error } = useContext(AuthenticationProvider);
+  const { login, isLoading, error } = useContext(
+    AuthenticationProvider,
+  );
   const usernameRef = useRef<HTMLInputElement>(null);
   const passwordRef = useRef<HTMLInputElement>(null);
 
@@ -17,7 +18,7 @@ const LoginView = () => {
 
     const userData = {
       username: usernameRef.current?.value,
-      password: passwordRef.current?.value
+      password: passwordRef.current?.value,
     };
 
     login?.(userData);
@@ -25,7 +26,7 @@ const LoginView = () => {
 
   return (
     <>
-      <Helmet title={'Login | Imli'} />
+      <Helmet title={"Login | Imli"} />
       <div className={style.loginWrapper}>
         <div className={style.loginContent}>
           <h2 className={style.loginPageTitle}>Login</h2>
@@ -33,14 +34,14 @@ const LoginView = () => {
             <Input
               required
               ref={usernameRef}
-              label='Username'
+              label="Username"
               name="username"
               type="text"
             />
             <Input
               required
               ref={passwordRef}
-              label='Password'
+              label="Password"
               name="password"
               type="password"
             />

@@ -1,18 +1,26 @@
 .box {
-  background: var(--lightGrey);
+  background: $lightGrey;
   box-sizing: border-box;
   margin-bottom: 1.1rem;
-  padding: 0 calc(var(--regular) - 5px);
+  padding: 10px;
+  position: relative;
   width: auto;
 
   @media (min-width: $small-screen) {
-    margin-bottom: var(--regular);
-    padding: var(--regular);
+    margin-bottom: 15px;
+    padding: 15px;
   }
 
   span,
   p,
   a {
-    color: var(--black);
+    color: $black;
+  }
+
+  div[data-style-sort] {
+    height: 100%;
+    left: 0;
+    position: absolute;
+    width: 100%;
   }
 }

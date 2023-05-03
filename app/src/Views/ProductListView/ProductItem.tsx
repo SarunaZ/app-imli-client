@@ -1,16 +1,13 @@
-import React from 'react';
-import Box from 'Components/Box';
-import { Draggable } from 'react-beautiful-dnd';
-import style from './style.scss';
-import { useMutation } from '@apollo/client';
-import { PRODUCT_COMPLETE } from 'Schema/mutations/productMutations';
-import CurvedArrow from 'Images/icons/curved-arrow-right.svg';
-import CheckMark from 'Images/icons/checkmark.svg';
-import classnames from 'classnames';
-import Loader from 'Components/Loader';
-
-import { SyntheticEvent, useRef, useState } from 'react';
-import ProductDropdown from './ProductDropdown';
+import React, { SyntheticEvent, useRef, useState } from "react";
+import Box from "Components/Box";
+import style from "./style.scss";
+import { useMutation } from "@apollo/client";
+import { PRODUCT_COMPLETE } from "Schema/mutations/productMutations";
+import CurvedArrow from "Images/icons/curved-arrow-right.svg";
+import CheckMark from "Images/icons/checkmark.svg";
+import classnames from "classnames";
+import Loader from "Components/Loader";
+import ProductDropdown from "./ProductDropdown";
 
 interface Props {
   id: string;
@@ -22,124 +19,127 @@ interface Props {
   onProductEdit: (id: string, value?: string) => void;
 }
 
-const ProductItem = (
-  {
-    id,
-    name,
-    onChange,
-    onComplete,
-    index,
-    isCompleted,
-    onProductEdit
-  }: Props) => {
+const ProductItem = ({
+  id,
+  name,
+  onChange,
+  onComplete,
+  index,
+  isCompleted,
+  onProductEdit,
+}: Props) => {
   const [isEdit, setShowEdit] = useState<boolean>(false);
   const inputRef = useRef<HTMLInputElement>(null);
-  const [completeProductM, completeProductData] =
-    useMutation(PRODUCT_COMPLETE, { errorPolicy: 'all' });
+  const [completeProductM, completeProductData] = useMutation(
+    PRODUCT_COMPLETE,
+    { errorPolicy: "all" },
+  );
 
   const handleEditProduct = () => {
-    setShowEdit(true)
-  }
+    setShowEdit(true);
+  };
 
   const completeProduct = (value: boolean) => () => {
+    console.log("click");
+
     completeProductM({
       variables: {
         id,
         value,
       },
-      update: () => onComplete(id, value)
-    })
+      update: () => onComplete(id, value),
+    });
   };
 
   const productItemClass = classnames(style.productListItem, {
-    [style.completed]: isCompleted
+    [style.completed]: isCompleted,
   });
 
-
   const editProduct = () => {
-    console.log('submit');
+    console.log("click");
+
     onProductEdit(id, inputRef.current?.value);
     setShowEdit(false);
-  }
+  };
 
   const submitForm = (e: SyntheticEvent<HTMLFormElement>) => {
     e.preventDefault();
     editProduct();
-  }
+  };
 
   const InputIcons = () => {
     if (isEdit) {
       return (
-        <button type="button" onClick={editProduct}>
-          <CheckMark
-            height="25px"
-          />
+        <button
+          type="button"
+          className={style.productListItemButtons}
+          onClick={editProduct}
+        >
+          <CheckMark height="25px" />
         </button>
-      )
+      );
     }
 
     if (!isCompleted) {
       return (
-        <button type="button" onClick={completeProduct(true)}>
-          {!completeProductData.loading ?
-            <CheckMark
-              height="25px"
-            /> :
-            <Loader />}
+        <button
+          type="button"
+          className={style.productListItemButtons}
+          onClick={completeProduct(true)}
+        >
+          {!completeProductData.loading ? (
+            <CheckMark height="25px" />
+          ) : (
+            <Loader />
+          )}
         </button>
-      )
-
+      );
     }
 
     return (
-      <button type="button" onClick={completeProduct(false)}>
-        {!completeProductData.loading ?
-          <CurvedArrow
-            height="20px"
-            className={style.returnIcon}
-          /> :
-          <Loader />}
+      <button
+        type="button"
+        className={style.productListItemButtons}
+        onClick={completeProduct(false)}
+      >
+        {!completeProductData.loading ? (
+          <CurvedArrow height="20px" className={style.returnIcon} />
+        ) : (
+          <Loader />
+        )}
       </button>
-    )
-  }
+    );
+  };
 
   return (
-    <Draggable key={id} draggableId={id} index={index}>
-      {(provided) => (
-        <li
-          ref={provided.innerRef}
-          {...provided.draggableProps}
-          {...provided.dragHandleProps}
-          className={style.productListItemWrapper}
-        >
-          <Box className={productItemClass}>
-            <div className={style.productListItemFirst}>
-              <ProductDropdown
-                id={id}
-                onChange={onChange}
-                isDisabled={isCompleted}
-                onEditProduct={handleEditProduct}
+    <li className={style.productListItemWrapper}>
+      <Box id={id} isDragable className={productItemClass}>
+        <div className={style.productListItemFirst}>
+          <ProductDropdown
+            id={id}
+            onChange={onChange}
+            isDisabled={isCompleted}
+            onEditProduct={handleEditProduct}
+          />
+          {isEdit ? (
+            <form
+              onSubmit={submitForm}
+              className={style.productListItemForm}
+            >
+              <input
+                autoFocus
+                ref={inputRef}
+                className={style.productListItemInput}
+                defaultValue={name!}
               />
-              {isEdit ?
-                <form
-                  onSubmit={submitForm}
-                  className={style.productListItemForm}
-                >
-                  <input
-                    autoFocus
-                    ref={inputRef}
-                    className={style.productListItemInput}
-                    defaultValue={name!}
-                  />
-                </form>
-                :
-                <span className={style.productListItemTitle}>{name}</span>}
-            </div>
-            <InputIcons />
-          </Box>
-        </li>
-      )}
-    </Draggable>
+            </form>
+          ) : (
+            <span className={style.productListItemTitle}>{name}</span>
+          )}
+        </div>
+        <InputIcons />
+      </Box>
+    </li>
   );
 };
 

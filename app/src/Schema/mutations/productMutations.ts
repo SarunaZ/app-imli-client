@@ -11,7 +11,9 @@ export const PRODUCT_NAME_MUTATION = gql`
 `;
 
 export const MEAL_ATTACH_TO_PRODUCT_MUTATION = gql`
-  mutation attachMealToProductMutation($ingredients: [IngredientInput]) {
+  mutation attachMealToProductMutation(
+    $ingredients: [IngredientInput]
+  ) {
     attachMealToProductMutation(ingredients: $ingredients) {
       id
       name

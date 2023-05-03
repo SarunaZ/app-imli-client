@@ -1,98 +1,97 @@
-const path = require("path");
-const TerserPlugin = require("terser-webpack-plugin");
-const HtmlWebpackPlugin = require("html-webpack-plugin");
-const Dotenv = require('dotenv-webpack');
+const path = require('path')
+const TerserPlugin = require('terser-webpack-plugin')
+const HtmlWebpackPlugin = require('html-webpack-plugin')
+const Dotenv = require('dotenv-webpack')
+const MiniCssExtractPlugin = require('mini-css-extract-plugin')
+const CssMinimizerPlugin = require('css-minimizer-webpack-plugin')
 
 module.exports = {
-  entry: "./src/index.tsx",
+  entry: './src/index.tsx',
   output: {
-    path: path.resolve(
-      __dirname,
-      "./dist"
-    ),
-    filename: "bundle.js",
-    publicPath: '/'
+    path: path.resolve(__dirname, './dist'),
+    filename: 'bundle.js',
+    publicPath: '/',
   },
   module: {
-    rules: [{
+    rules: [
+      {
         test: /\.svg$/,
         use: ['@svgr/webpack'],
       },
       {
         test: /\.tsx|.ts?$/,
         exclude: /node_modules/,
-        loader: "ts-loader",
+        loader: 'ts-loader',
       },
       {
         test: /\.(sa|sc|c)ss$/i,
         exclude: /node_modules/,
         use: [
-          'style-loader',
+          MiniCssExtractPlugin.loader,
           {
             loader: 'css-loader',
             options: {
               importLoaders: 1,
               modules: {
-                mode: "local",
+                mode: 'local',
                 localIdentName: '[name]_[local]__[hash:base64:5]',
               },
-            }
+            },
           },
           {
             loader: 'postcss-loader',
             options: {
               postcssOptions: {
                 sourceMap: false,
-                plugins: [
-                  ["autoprefixer", {}]
-                ]
-              }
-            }
+                plugins: [['autoprefixer', {}]],
+              },
+            },
           },
           {
             loader: 'sass-loader',
             options: {
               sourceMap: false,
-              additionalData: `@import "src/Styles/variables.scss";`
-            }
-          }
+              additionalData: `@import "src/Styles/variables.scss";`,
+              sassOptions: {
+                outputStyle: 'compressed',
+              },
+            },
+          },
         ],
-        exclude: /node_modules/
-      }
+        exclude: /node_modules/,
+      },
     ],
   },
   plugins: [
-    new HtmlWebpackPlugin({
-      "template": "public/index.html",
+    new MiniCssExtractPlugin({
+      filename: '[contenthash].css',
+      chunkFilename: '[contenthash].css',
     }),
-    new Dotenv()
+    new HtmlWebpackPlugin({
+      template: 'public/index.html',
+    }),
+    new Dotenv(),
   ],
   resolve: {
-    extensions: [
-      ".tsx",
-      ".ts",
-      ".js",
-      ".jsx",
-      ".scss"
-    ],
-    modules: ["src", 'node_modules'],
+    extensions: ['.tsx', '.ts', '.js', '.jsx', '.scss'],
+    modules: ['src', 'node_modules'],
   },
   optimization: {
     minimize: true,
     minimizer: [
-      new TerserPlugin({
-        "test": /\.tsx|.ts|.js?$/i,
-        "exclude": /node_modules/,
+      new CssMinimizerPlugin({
+        test: /\.css$/i,
+        parallel: true,
+        minify: CssMinimizerPlugin.cleanCssMinify,
       }),
     ],
   },
   devServer: {
     historyApiFallback: true,
     static: {
-      directory: path.resolve(
-        __dirname,
-        "./public"
-      ),
+      directory: path.resolve(__dirname, './public'),
     },
+    compress: true,
+    port: 3000,
   },
-};
+}

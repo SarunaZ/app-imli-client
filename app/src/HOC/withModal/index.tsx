@@ -1,7 +1,7 @@
-import React from 'react';
+import React from "react";
 import Modal from "./Modal";
-import style from './style.scss';
-import Close from 'Images/icons/close.svg';
+import style from "./style.scss";
+import Close from "Images/icons/close.svg";
 
 export interface ModalProps {
   isOpen: boolean;
@@ -9,8 +9,9 @@ export interface ModalProps {
   title?: string;
 }
 
-
-export default function withModal<P>(Component: React.ComponentType<P & ModalProps>) {
+export default function withModal<P>(
+  Component: React.ComponentType<P & ModalProps>,
+) {
   const WithModalComponent = (props: P & ModalProps) => {
     const { isOpen, onClose, title } = props;
 
@@ -20,23 +21,23 @@ export default function withModal<P>(Component: React.ComponentType<P & ModalPro
 
     const onModalClose = () => {
       onClose();
-    }
+    };
 
     return (
       <Modal>
         <div className={style.modalContent}>
           <h3 className={style.modalTitle}>{title}</h3>
-          <button 
+          <button
             className={style.modalCloseButton}
             onClick={onModalClose}
           >
             <Close />
-            </button>
+          </button>
           <Component {...props} />
         </div>
       </Modal>
-    )
-  }
+    );
+  };
 
   return WithModalComponent;
 }

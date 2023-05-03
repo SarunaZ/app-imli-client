@@ -1,37 +1,47 @@
-import React, { useState } from 'react';
-import { deleteCookie, getCookieData, setCookies } from 'Utilities/cookieParser';
-import { AuthenticationProvider, UserLoginData } from './Authentication';
-import useFetch from 'Hooks/useFetch';
+import React, { useState } from "react";
+import {
+  deleteCookie,
+  getCookieData,
+  setCookies,
+} from "Utilities/cookieParser";
+import {
+  AuthenticationProvider,
+  UserLoginData,
+} from "./Authentication";
+import useFetch from "Hooks/useFetch";
 import { ROUTE_LOGIN_PAGE } from "App/constants";
 
 interface Props {
-  children: React.ReactNode
+  children: React.ReactNode;
 }
 
-const AUTH_COOKIE = 'auth';
+const AUTH_COOKIE = "auth";
 
 const Authentication = ({ children }: Props) => {
   const Auth = !!getCookieData(AUTH_COOKIE) || undefined;
 
-  const [isLoggedIn, setIsLoggedIn] = useState<boolean | undefined>(Auth);
-  const [submitLoginFetch, { isLoading, error }] =
-    useFetch(process.env.REACT_APP_LOGIN_LINK!);
+  const [isLoggedIn, setIsLoggedIn] = useState<boolean | undefined>(
+    Auth,
+  );
+
+  const [submitLoginFetch, { isLoading, error }] = useFetch(
+    process.env.REACT_APP_LOGIN_LINK,
+  );
 
   const login = ({ username, password }: UserLoginData) => {
-    const data = { username, password };
-
     const requestParameters = {
-      body: JSON.stringify(data),
+      body: JSON.stringify({ username, password }),
       onSuccess: (res: { token: string }) => {
         if (res.token) {
           setCookies(AUTH_COOKIE, `${res.token}`, 14);
           setIsLoggedIn(true);
         }
-      }
+      },
     };
 
     submitLoginFetch(requestParameters);
   };
+  console.log(isLoggedIn, "isLoggedIn");
 
   const logout = () => {
     deleteCookie(AUTH_COOKIE);
@@ -43,7 +53,7 @@ const Authentication = ({ children }: Props) => {
     isLoading,
     isLoggedIn,
     logout,
-    login
+    login,
   };
 
   return (

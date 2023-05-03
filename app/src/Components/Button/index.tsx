@@ -1,7 +1,7 @@
-import React from 'react';
-import classnames from 'classnames';
-import Loader from 'Components/Loader';
-import style from './style.scss';
+import React from "react";
+import classnames from "classnames";
+import Loader from "Components/Loader";
+import style from "./style.scss";
 
 interface Props {
   className?: string;
@@ -10,7 +10,7 @@ interface Props {
   isPrimary?: boolean;
   isHollow?: boolean;
   children?: React.ReactNode;
-  type?: 'button' | 'submit' | 'reset';
+  type?: "button" | "submit" | "reset";
   onClick?: () => void;
 }
 
@@ -20,15 +20,20 @@ const Button = ({
   isLoading,
   className,
   isDisabled,
-  type = 'button',
+  type = "button",
   isHollow = false,
-  isPrimary = true
+  isPrimary = true,
 }: Props) => {
-  const buttonClasses = classnames(className, style.button, style.primary, {
-    [style.primary]: isPrimary && !isHollow,
-    [style.hollow]: isHollow,
-    [style.disabled]: isDisabled || isLoading
-  });
+  const buttonClasses = classnames(
+    className,
+    style.button,
+    style.primary,
+    {
+      [style.primary]: isPrimary && !isHollow,
+      [style.hollow]: isHollow,
+      [style.disabled]: isDisabled || isLoading,
+    },
+  );
 
   return (
     <button type={type} className={buttonClasses} onClick={onClick}>

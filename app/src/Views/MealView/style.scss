@@ -1,5 +1,3 @@
-@import '../../Styles/variables.scss';
-
 .mealListWrapper {
   margin: 0 auto;
   max-width: 550px;
@@ -20,14 +18,14 @@
 }
 
 .mealListItemTitle {
-  font-size: var(--fs-medium-rare);
+  font-size: $fs-medium-rare;
   margin: 0 0 15px;
   text-transform: capitalize;
 }
 
 .mealListItemIngredients {
   padding-left: 25px;
-  font-size: var(--fs-regular);
+  font-size: $fs-regular;
 }
 
 .mealListItemIngredientsItem {
@@ -54,7 +52,7 @@
   width: auto;
 
   path {
-    fill: var(--secondary);
+    fill: $secondary;
   }
 }
 
@@ -91,7 +89,7 @@
 }
 
 .indredientFieldLabel {
-  font-size: var(--fs-medium-rare);
+  font-size: $fs-medium-rare;
 }
 
 .indredientFieldButtonWrapper {

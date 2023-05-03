@@ -1,21 +1,28 @@
-import React, { useEffect, useState } from 'react';
-import style from './style.scss';
-import Info from 'Images/icons/info.svg';
-import { ApolloError } from '@apollo/client';
+import React, { useEffect, useState } from "react";
+import style from "./style.scss";
+import Info from "Images/icons/info.svg";
+import { ApolloError } from "@apollo/client";
 
 interface Props {
-  error?: { [variables: string]: any } | string | Error | null | ApolloError[];
+  error?:
+    | { [variables: string]: any }
+    | string
+    | Error
+    | null
+    | ApolloError[];
 }
 
 const ErrorHandler = ({ error }: Props) => {
-  const [errorMessage, setErrorMessage] = useState<string | null>(null);
+  const [errorMessage, setErrorMessage] = useState<string | null>(
+    null,
+  );
 
   useEffect(() => {
-    if (typeof error === 'string') {
+    if (typeof error === "string") {
       setErrorMessage(error);
     }
 
-    if (typeof error === 'object') {
+    if (typeof error === "object") {
       const errorObjMessage = (error as ApolloError)?.message;
       setErrorMessage(errorObjMessage);
     }
@@ -29,10 +36,10 @@ const ErrorHandler = ({ error }: Props) => {
         </div>
         <span className={style.errorMessage}>{errorMessage}</span>
       </div>
-    )
+    );
   }
 
   return null;
-}
+};
 
 export default ErrorHandler;

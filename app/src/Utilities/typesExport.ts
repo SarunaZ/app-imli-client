@@ -1,4 +1,10 @@
 import { DocumentNode, OperationVariables } from "@apollo/client";
 
-export interface QueryDocument<TData = any, TVariables = OperationVariables> extends DocumentNode { };
-export interface MutationDocument<TData = any, TVariables = OperationVariables> extends DocumentNode { };
+export type QueryDocument<
+  TData = any,
+  TVariables = OperationVariables,
+> = DocumentNode;
+export type MutationDocument<
+  TData = any,
+  TVariables = OperationVariables,
+> = DocumentNode;

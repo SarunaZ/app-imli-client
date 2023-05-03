@@ -1,23 +1,24 @@
-import React from 'react';
+import React from "react";
 import { useMutation } from "@apollo/client";
 import withModal, { ModalProps } from "HOC/withModal";
 import { SyntheticEvent, useRef, useState } from "react";
 import IngredientContainer from "./IngredientContainer";
 import { IngredientsInput } from "./types";
-import style from './style.scss';
+import style from "./style.scss";
 import Input from "Components/Input";
 import { MEAL_NAME_MUTATION } from "Schema/mutations/mealMutations";
 
 interface Props extends ModalProps {
   onChange: () => void;
-};
+}
 
 const AddMealModal = ({ onChange }: Props) => {
   const [addSuccessful, setAddSuccessful] = useState<boolean>(false);
   const mealInputRef = useRef<HTMLInputElement>(null);
   const ingredientInputRef = useRef<IngredientsInput[]>();
-  const [addMealQ, addMealQData] = 
-    useMutation(MEAL_NAME_MUTATION, { errorPolicy: 'all' });
+  const [addMealQ, addMealQData] = useMutation(MEAL_NAME_MUTATION, {
+    errorPolicy: "all",
+  });
 
   const setInputData = (data: IngredientsInput[]) => {
     ingredientInputRef.current = data;
@@ -29,13 +30,13 @@ const AddMealModal = ({ onChange }: Props) => {
     addMealQ({
       variables: {
         name: mealInputRef.current?.value,
-        ingredients: ingredientInputRef.current
+        ingredients: ingredientInputRef.current,
       },
       update: () => {
         onChange();
         setAddSuccessful(true);
-      }
-    })
+      },
+    });
   };
 
   if (addSuccessful) {
@@ -43,11 +44,14 @@ const AddMealModal = ({ onChange }: Props) => {
       <div>
         <p>Meal has been succesfully added!</p>
       </div>
-    )
+    );
   }
 
   return (
-    <form className={style.addMealModalWrapper} onSubmit={submitProduct}>
+    <form
+      className={style.addMealModalWrapper}
+      onSubmit={submitProduct}
+    >
       <Input
         required
         ref={mealInputRef}
@@ -60,7 +64,7 @@ const AddMealModal = ({ onChange }: Props) => {
         inputData={setInputData}
       />
     </form>
-  )
-}
+  );
+};
 
 export default withModal(AddMealModal);

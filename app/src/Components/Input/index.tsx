@@ -1,7 +1,7 @@
-import React from 'react';
+import React from "react";
 import classnames from "classnames";
-import { forwardRef } from "react"
-import style from './style.scss';
+import { forwardRef } from "react";
+import style from "./style.scss";
 
 interface Props extends React.InputHTMLAttributes<HTMLInputElement> {
   label?: string;
@@ -9,15 +9,15 @@ interface Props extends React.InputHTMLAttributes<HTMLInputElement> {
   className?: string;
 }
 
-const Input = ({ label, name, className, ...rest }: Props, ref: any) => {
+const Input = (
+  { label, name, className, ...rest }: Props,
+  ref: any,
+) => {
   const inputFieldClasses = classnames(className, style.inputField);
 
   if (label) {
     return (
-      <label
-        className={style.inputLabel}
-        htmlFor={name}
-      >
+      <label className={style.inputLabel} htmlFor={name}>
         {label}
         <input
           className={style.inputField}
@@ -27,7 +27,7 @@ const Input = ({ label, name, className, ...rest }: Props, ref: any) => {
           {...rest}
         />
       </label>
-    )
+    );
   }
 
   return (
@@ -38,7 +38,7 @@ const Input = ({ label, name, className, ...rest }: Props, ref: any) => {
       name={name}
       {...rest}
     />
-  )
-}
+  );
+};
 
-export default forwardRef(Input)
+export default forwardRef(Input);

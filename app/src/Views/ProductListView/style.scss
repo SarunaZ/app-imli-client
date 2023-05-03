@@ -64,7 +64,7 @@
   border: 1px solid;
   display: block;
   height: 65px;
-  font-size: var(--fs-medium-rare);
+  font-size: $fs-medium-rare;
   margin-bottom: 15px;
   padding: 15px;
   width: 100%;
@@ -88,21 +88,21 @@
 }
 
 .formInput {
-  background: var(--main-bg);
+  background: $main-bg;
   border: none;
-  font-size: var(--fs-medium-rare);
+  font-size: $fs-medium-rare;
   padding: 15px;
   margin-bottom: 15px;
 }
 
 .formLabel {
-  font-size: var(--fs-medium);
+  font-size: $fs-medium;
   padding-bottom: 10px;
 }
 
 .formButton {
-  background-color: var(--button-violet);
-  font-size: var(--fs-medium-rare);
+  background-color: $button-violet;
+  font-size: $fs-medium-rare;
   font-weight: 700;
   padding: 15px
 }
@@ -169,4 +169,9 @@
     font-size: 2rem;
     right: 50px;
   }
+}
+
+.productListItemButtons {
+  position: relative;
+  z-index: 9999;
 }

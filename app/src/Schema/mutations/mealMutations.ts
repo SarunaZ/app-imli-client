@@ -2,15 +2,16 @@ import { gql } from "@apollo/client";
 
 export const MEAL_NAME_MUTATION = gql`
   mutation mealMutation(
-    $id: String,
-    $name: String!,
-    $ingredients: [IngredientInput]) {
+    $id: String
+    $name: String!
+    $ingredients: [IngredientInput]
+  ) {
     createMeal(id: $id, name: $name, ingredients: $ingredients) {
-        id
+      id
+      name
+      ingredients {
         name
-        ingredients {
-          name
-        }
+      }
     }
   }
 `;

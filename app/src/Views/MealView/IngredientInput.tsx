@@ -1,8 +1,8 @@
-import React from 'react';
-import Button from 'Components/Button';
-import Input from 'Components/Input';
-import { SyntheticEvent } from 'react';
-import style from './style.scss';
+import React from "react";
+import Button from "Components/Button";
+import Input from "Components/Input";
+import { SyntheticEvent } from "react";
+import style from "./style.scss";
 
 interface Props {
   index: number;
@@ -10,17 +10,19 @@ interface Props {
   onDelete: (index: number) => void;
   onChange: (inputValue: string) => (index: number) => void;
 }
-const IngredientInput = ({ index, onDelete, onChange, inputValue }: Props) => {
+const IngredientInput = ({
+  index,
+  onDelete,
+  onChange,
+  inputValue,
+}: Props) => {
   const handleButtonAdd = (e: SyntheticEvent<HTMLInputElement>) => {
-    onChange(e.currentTarget.value)(index)
-  }
+    onChange(e.currentTarget.value)(index);
+  };
+
   return (
     <div className={style.ingredientFormInputWrapper}>
-      <Input
-        required
-        value={inputValue}
-        onChange={handleButtonAdd}
-      />
+      <Input required value={inputValue} onChange={handleButtonAdd} />
       <Button
         isHollow
         className={style.ingredientFormButton}
@@ -29,7 +31,7 @@ const IngredientInput = ({ index, onDelete, onChange, inputValue }: Props) => {
         -
       </Button>
     </div>
-  )
-}
+  );
+};
 
 export default IngredientInput;

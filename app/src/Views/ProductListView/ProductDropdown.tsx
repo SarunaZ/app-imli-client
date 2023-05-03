@@ -1,11 +1,11 @@
-import React from 'react';
-import Dropdown from 'Components/Dropdown';
-import Delete from 'Images/icons/delete.svg';
-import Edit from 'Images/icons/edit.svg';
-import IconButton from 'Components/IconButton';
-import style from './style.scss';
-import { PRODUCT_DELETE } from 'Schema/mutations/productMutations';
-import { useMutation } from '@apollo/client';
+import React from "react";
+import Dropdown from "Components/Dropdown";
+import Delete from "Images/icons/delete.svg";
+import Edit from "Images/icons/edit.svg";
+import IconButton from "Components/IconButton";
+import style from "./style.scss";
+import { PRODUCT_DELETE } from "Schema/mutations/productMutations";
+import { useMutation } from "@apollo/client";
 
 interface Props {
   id: string;
@@ -13,24 +13,24 @@ interface Props {
   onChange: (id: string) => void;
   onEditProduct: () => void;
 }
-const ProductDropdown = (
-  {
-    id,
-    isDisabled,
-    onChange,
-    onEditProduct
-  }: Props) => {
-  const [deleteProductM, deleteProductData] =
-    useMutation(PRODUCT_DELETE, { errorPolicy: 'all' });
-
+const ProductDropdown = ({
+  id,
+  isDisabled,
+  onChange,
+  onEditProduct,
+}: Props) => {
+  const [deleteProductM, deleteProductData] = useMutation(
+    PRODUCT_DELETE,
+    { errorPolicy: "all" },
+  );
 
   const deleteProduct = (id: string) => () => {
     deleteProductM({
       variables: {
-        id
+        id,
       },
-      update: () => onChange(id)
-    })
+      update: () => onChange(id),
+    });
   };
 
   return (
@@ -41,8 +41,14 @@ const ProductDropdown = (
           isLoading={deleteProductData.loading}
         >
           <div className={style.inline}>
-            <span className={style.productListItemDropdownTitle}>{"Edit"}</span>
-            <Edit height="16px" width="16px" className={style.editIcon} />
+            <span className={style.productListItemDropdownTitle}>
+              {"Edit"}
+            </span>
+            <Edit
+              height="16px"
+              width="16px"
+              className={style.editIcon}
+            />
           </div>
         </IconButton>
       </>
@@ -52,14 +58,15 @@ const ProductDropdown = (
           isLoading={deleteProductData.loading}
         >
           <div className={style.inline}>
-            <span className={style.productListItemDropdownTitle}>{"Delete"}</span>
+            <span className={style.productListItemDropdownTitle}>
+              {"Delete"}
+            </span>
             <Delete height="16px" width="16px" />
           </div>
         </IconButton>
       </>
     </Dropdown>
-  )
-
-}
+  );
+};
 
 export default ProductDropdown;

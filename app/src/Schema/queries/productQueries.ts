@@ -1,5 +1,10 @@
 import { gql } from "@apollo/client";
-import { MealDropDownListQuery, MealDropDownListQueryVariables, ProductListQuery, ProductListQueryVariables } from "Schema/types";
+import {
+  MealDropDownListQuery,
+  MealDropDownListQueryVariables,
+  ProductListQuery,
+  ProductListQueryVariables,
+} from "Schema/types";
 import { QueryDocument } from "Utilities/typesExport";
 
 export const PRODUCT_LIST_DATA: QueryDocument<
@@ -7,19 +12,19 @@ export const PRODUCT_LIST_DATA: QueryDocument<
   ProductListQueryVariables
 > = gql`
   query productList {
-      products {
-        id
+    products {
+      id
+      name
+      isDone
+    }
+    meals {
+      id
+      name
+      ingredients {
         name
-        isDone
-      }
-      meals {
-        id
-        name
-        ingredients {
-            name
-        }
       }
     }
+  }
 `;
 
 export const MEAL_LIST_DATA: QueryDocument<
@@ -27,12 +32,12 @@ export const MEAL_LIST_DATA: QueryDocument<
   MealDropDownListQueryVariables
 > = gql`
   query mealDropDownList {
-      meals {
-        id
+    meals {
+      id
+      name
+      ingredients {
         name
-        ingredients {
-          name
-        }
       }
     }
+  }
 `;

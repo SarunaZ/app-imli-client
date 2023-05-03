@@ -1,9 +1,9 @@
-import React, { useState } from 'react';
-import Box from 'Components/Box';
-import style from './style.scss';
-import IconButton from 'Components/IconButton';
-import DeleteMealModal from './DeleteMealModal';
-import Delete from 'Images/icons/delete.svg';
+import React, { useState } from "react";
+import Box from "Components/Box";
+import style from "./style.scss";
+import IconButton from "Components/IconButton";
+import DeleteMealModal from "./DeleteMealModal";
+import Delete from "Images/icons/delete.svg";
 
 interface Props {
   onDelete: () => void;
@@ -11,13 +11,14 @@ interface Props {
     id: string;
     name: string;
     ingredients: {
-      name: string
-    }[]
+      name: string;
+    }[];
   };
 }
 
 const MealListItem = ({ data, onDelete }: Props) => {
-  const [isDeleteModalOpen, setDeleteModalOpen] = useState<boolean>(false);
+  const [isDeleteModalOpen, setDeleteModalOpen] =
+    useState<boolean>(false);
   const toggleDeleteModal = () => {
     setDeleteModalOpen((prev) => !prev);
   };
@@ -29,11 +30,11 @@ const MealListItem = ({ data, onDelete }: Props) => {
           <div className={style.mealListItemHeader}>
             <p className={style.mealListItemTitle}>{data?.name}</p>
             <IconButton onClick={toggleDeleteModal}>
-              <Delete height="24" />
+              <Delete height="24px" width="24px" />
             </IconButton>
           </div>
           <ol className={style.mealListItemIngredients}>
-            {data?.ingredients.map(ingredient => (
+            {data?.ingredients.map((ingredient) => (
               <li
                 key={data?.id + ingredient.name}
                 className={style.mealListItemIngredientsItem}
@@ -51,7 +52,6 @@ const MealListItem = ({ data, onDelete }: Props) => {
         onClose={toggleDeleteModal}
       />
     </>
-
   );
 };
 

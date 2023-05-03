@@ -1,47 +1,23 @@
 {
-  "root": true,
+  "env": {
+    "browser": true,
+    "es2021": true
+  },
   "extends": [
     "eslint:recommended",
+    "plugin:react/recommended",
     "plugin:@typescript-eslint/recommended",
-    "@typescript-eslint/parser",
     "plugin:prettier/recommended"
   ],
+  "overrides": [],
   "parser": "@typescript-eslint/parser",
   "parserOptions": {
-    "project": "tsconfig.json",
-    "tsconfigRootDir": ".",
+    "ecmaVersion": "latest",
     "sourceType": "module"
   },
-  "plugins": ["@typescript-eslint", "react"],
-  "env": {
-    "browser": true
-  },
   "rules": {
-    "prettier/prettier": {
-      "printWidth": 80,
-      "tabWidth": 2,
-      "singleQuote": false,
-      "trailingComma": "none",
-      "bracketSpacing": true,
-      "semi": true,
-      "useTabs": true,
-      "bracketSameLine": false
-    },
-    "arrow-body-style": "off",
-    "prefer-arrow-callback": "warn",
     "indent": ["error", 2],
-    "no-cond-assign": ["error", "always"],
-    "one-var": "off", // ["error", "never"]
-    "init-declarations": "off",
-    "no-console": "off",
-    "linebreak-style": "off",
-    "@typescript-eslint/adjacent-overload-signatures": "error"
-  },
-  "ignorePatterns": [
-    "src/**/*.test.ts",
-    "src/frontend/generated/*",
-    "dist/**/*.js",
-    "./**.js",
-    "./**.json"
-  ]
+    "quotes": ["error", "double"],
+    "semi": ["error", "always"]
+  }
 }
