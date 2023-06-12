@@ -4,10 +4,7 @@ import {
   getCookieData,
   setCookies,
 } from "Utilities/cookieParser";
-import {
-  AuthenticationProvider,
-  UserLoginData,
-} from "./Authentication";
+import { AuthenticationProvider, UserLoginData } from "./Authentication";
 import useFetch from "Hooks/useFetch";
 import { ROUTE_LOGIN_PAGE } from "App/constants";
 
@@ -20,9 +17,7 @@ const AUTH_COOKIE = "auth";
 const Authentication = ({ children }: Props) => {
   const Auth = !!getCookieData(AUTH_COOKIE) || undefined;
 
-  const [isLoggedIn, setIsLoggedIn] = useState<boolean | undefined>(
-    Auth,
-  );
+  const [isLoggedIn, setIsLoggedIn] = useState<boolean | undefined>(Auth);
 
   const [submitLoginFetch, { isLoading, error }] = useFetch(
     process.env.REACT_APP_LOGIN_LINK,
@@ -41,7 +36,6 @@ const Authentication = ({ children }: Props) => {
 
     submitLoginFetch(requestParameters);
   };
-  console.log(isLoggedIn, "isLoggedIn");
 
   const logout = () => {
     deleteCookie(AUTH_COOKIE);
