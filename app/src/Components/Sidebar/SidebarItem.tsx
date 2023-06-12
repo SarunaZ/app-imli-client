@@ -4,10 +4,7 @@ import { useState } from "react";
 import { NavLink } from "react-router-dom";
 import style from "./style.scss";
 import { Routes } from "./types";
-import {
-  getSanitizedPathname,
-  isSamePathNameInRoutes,
-} from "./utils";
+import { getSanitizedPathname, isSamePathNameInRoutes } from "./utils";
 import { useNavigate } from "react-router-dom";
 
 interface Props {
@@ -15,6 +12,7 @@ interface Props {
   icon: React.ReactNode;
   routes: Routes[];
   defaultPath: string;
+  onSelect: () => void;
 }
 
 const SidebarItem = ({
@@ -22,6 +20,7 @@ const SidebarItem = ({
   title,
   routes = [],
   defaultPath,
+  onSelect,
 }: Props) => {
   const navigate = useNavigate();
   const isSameRoute = isSamePathNameInRoutes(
@@ -39,10 +38,7 @@ const SidebarItem = ({
     <div className={style.sidebarItem}>
       <div className={style.sidebarItemTitle}>
         <h3>{title}</h3>
-        <button
-          onClick={handleToggle}
-          className={style.sidebarItemToggle}
-        >
+        <button onClick={handleToggle} className={style.sidebarItemToggle}>
           {icon}
         </button>
       </div>
@@ -51,6 +47,7 @@ const SidebarItem = ({
           {routes.map((route) => (
             <NavLink
               key={route.name}
+              onClick={onSelect}
               to={route.pathname}
               className={({ isActive }) =>
                 classnames(style.sidebarLink, {

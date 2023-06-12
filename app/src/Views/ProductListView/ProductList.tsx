@@ -15,15 +15,14 @@ import {
   closestCenter,
   DndContext,
   DragEndEvent,
-  KeyboardSensor,
-  PointerSensor,
+  MouseSensor,
+  TouchSensor,
   useSensor,
   useSensors,
 } from "@dnd-kit/core";
 import {
   arrayMove,
   SortableContext,
-  sortableKeyboardCoordinates,
   verticalListSortingStrategy,
 } from "@dnd-kit/sortable";
 
@@ -33,9 +32,9 @@ const ProductList = () => {
   const deleteRef = useRef<boolean>(false);
   const anchorRef = useRef<HTMLAnchorElement>(null);
   const listRef = useRef<HTMLUListElement>(null);
-  const [listData, setListData] = useState<
-    ProductListData | undefined
-  >(undefined);
+  const [listData, setListData] = useState<ProductListData | undefined>(
+    undefined,
+  );
 
   const { loading, error, refetch } = useQuery(PRODUCT_LIST_DATA, {
     errorPolicy: "all",
@@ -53,10 +52,12 @@ const ProductList = () => {
   });
 
   const sensors = useSensors(
-    useSensor(PointerSensor),
-    useSensor(KeyboardSensor, {
-      coordinateGetter: sortableKeyboardCoordinates,
+    useSensor(MouseSensor, {
+      activationConstraint: {
+        distance: 10,
+      },
     }),
+    useSensor(TouchSensor),
   );
 
   const [updateProductListM, updateProductListMData] = useMutation(
@@ -87,12 +88,8 @@ const ProductList = () => {
   const onDragEd = (event: DragEndEvent) => {
     const { active, over } = event;
     const items = listData && Array.from(listData);
-    const oldIndex = items.findIndex(
-      (object) => object.id === active.id,
-    );
-    const newIndex = items.findIndex(
-      (object) => object.id === over.id,
-    );
+    const oldIndex = items.findIndex((object) => object.id === active.id);
+    const newIndex = items.findIndex((object) => object.id === over.id);
     const newList = arrayMove(normalizedList(), oldIndex, newIndex);
 
     function normalizedList() {
@@ -124,8 +121,7 @@ const ProductList = () => {
   };
 
   const handleCompleteItem = (id: string, value: boolean) => {
-    const itemIndex =
-      listData?.findIndex((item) => item.id === id) || 0;
+    const itemIndex = listData?.findIndex((item) => item.id === id) || 0;
 
     const newList = listData?.map((item, index) => {
       if (index === itemIndex) {
@@ -144,8 +140,7 @@ const ProductList = () => {
   };
 
   const handleEditItem = (id: string, value?: string) => {
-    const itemIndex =
-      listData?.findIndex((item) => item.id === id) || 0;
+    const itemIndex = listData?.findIndex((item) => item.id === id) || 0;
     const newList = listData?.map((item, index) => {
       if (index === itemIndex) {
         return {
@@ -181,20 +176,18 @@ const ProductList = () => {
               items={listData}
               strategy={verticalListSortingStrategy}
             >
-              {listData?.map(
-                ({ id, name, isDone }: Product, index: number) => (
-                  <ProductItem
-                    index={index}
-                    key={id}
-                    id={id}
-                    name={name}
-                    isCompleted={isDone!}
-                    onChange={handleDeleteItem}
-                    onProductEdit={handleEditItem}
-                    onComplete={handleCompleteItem}
-                  />
-                ),
-              )}
+              {listData?.map(({ id, name, isDone }: Product, index: number) => (
+                <ProductItem
+                  index={index}
+                  key={id}
+                  id={id}
+                  name={name}
+                  isCompleted={isDone!}
+                  onChange={handleDeleteItem}
+                  onProductEdit={handleEditItem}
+                  onComplete={handleCompleteItem}
+                />
+              ))}
             </SortableContext>
           </DndContext>
         </ul>

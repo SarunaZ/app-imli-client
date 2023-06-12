@@ -22,12 +22,9 @@ const Sidebar = () => {
     <aside className={sidebarClasses}>
       <div className={style.siderbar}>
         <ErrorBoundary>
-          <SidebarContent />
+          <SidebarContent onSelect={toggleSiderbar} />
           <SidebarFooter />
-          <button
-            className={siderbarToggleClasses}
-            onClick={toggleSiderbar}
-          >
+          <button className={siderbarToggleClasses} onClick={toggleSiderbar}>
             <RightArrow height="25px" />
           </button>
         </ErrorBoundary>

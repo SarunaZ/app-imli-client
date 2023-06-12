@@ -1,8 +1,5 @@
 import React from "react";
-import {
-  ROUTE_MEAL_PAGE,
-  ROUTE_PRODUCT_LIST_PAGE,
-} from "App/constants";
+import { ROUTE_MEAL_PAGE, ROUTE_PRODUCT_LIST_PAGE } from "App/constants";
 import style from "./style.scss";
 import Kitchen from "Images/icons/kitchen.svg";
 import SidebarItem from "./SidebarItem";
@@ -29,10 +26,15 @@ const itemMap = [
   },
 ];
 
-const SidebarContent = () => (
+interface Props {
+  onSelect: () => void;
+}
+
+const SidebarContent = ({ onSelect }: Props) => (
   <div className={style.sidebarContent}>
     {itemMap.map((item) => (
       <SidebarItem
+        onSelect={onSelect}
         key={item.title}
         title={item.title}
         icon={item.icon}

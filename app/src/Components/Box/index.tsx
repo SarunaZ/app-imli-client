@@ -14,13 +14,7 @@ interface Props {
 }
 
 const Box = (
-  {
-    isLoading = false,
-    children,
-    className = "",
-    isDragable,
-    id,
-  }: Props,
+  { isLoading = false, children, className = "", isDragable, id }: Props,
   ref: any,
 ) => {
   const {

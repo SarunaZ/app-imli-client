@@ -122,10 +122,7 @@ const ProductItem = ({
             onEditProduct={handleEditProduct}
           />
           {isEdit ? (
-            <form
-              onSubmit={submitForm}
-              className={style.productListItemForm}
-            >
+            <form onSubmit={submitForm} className={style.productListItemForm}>
               <input
                 autoFocus
                 ref={inputRef}
