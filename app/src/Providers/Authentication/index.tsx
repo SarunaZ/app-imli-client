@@ -20,7 +20,7 @@ const Authentication = ({ children }: Props) => {
   const [isLoggedIn, setIsLoggedIn] = useState<boolean | undefined>(Auth);
 
   const [submitLoginFetch, { isLoading, error }] = useFetch(
-    "https://urchin-app-d5lgr.ondigitalocean.app/api/login",
+    process.env.ENV_LOGIN_LINK,
   );
 
   const login = ({ username, password }: UserLoginData) => {
