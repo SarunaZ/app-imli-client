@@ -18,6 +18,7 @@ const Authentication = ({ children }: Props) => {
   const Auth = !!getCookieData(AUTH_COOKIE) || undefined;
 
   const [isLoggedIn, setIsLoggedIn] = useState<boolean | undefined>(Auth);
+  console.log(process.env.ENV_LOGIN_LINK, "link");
 
   const [submitLoginFetch, { isLoading, error }] = useFetch(
     process.env.ENV_LOGIN_LINK,
