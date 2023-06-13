@@ -1,3 +1,9 @@
 {
-  "rewrites": [{ "source": "/(.*)", "destination": "/" }]
+  "rewrites": [
+    { "source": "/(.*)", "destination": "/" },
+    {
+      "source": "/api/login",
+      "destination": "https://urchin-app-d5lgr.ondigitalocean.app/api/login"
+    }
+  ]
 }
