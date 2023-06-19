@@ -1,9 +1,9 @@
 const path = require('path')
-const TerserPlugin = require('terser-webpack-plugin')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
-const Dotenv = require('dotenv-webpack')
+const dotenv = require('dotenv').config();
 const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 const CssMinimizerPlugin = require('css-minimizer-webpack-plugin')
+const webpack = require('webpack');
 
 module.exports = {
   entry: './src/index.tsx',
@@ -63,6 +63,9 @@ module.exports = {
     ],
   },
   plugins: [
+    new webpack.EnvironmentPlugin({
+      ...dotenv.parsed
+    }),
     new MiniCssExtractPlugin({
       filename: '[contenthash].css',
       chunkFilename: '[contenthash].css',
@@ -70,7 +73,6 @@ module.exports = {
     new HtmlWebpackPlugin({
       template: 'public/index.html',
     }),
-    new Dotenv(),
   ],
   resolve: {
     extensions: ['.tsx', '.ts', '.js', '.jsx', '.scss'],
