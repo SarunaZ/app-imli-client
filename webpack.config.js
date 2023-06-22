@@ -1,9 +1,8 @@
 const path = require('path')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
-const dotenv = require('dotenv').config();
+const Dotenv = require('dotenv-webpack');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 const CssMinimizerPlugin = require('css-minimizer-webpack-plugin')
-const webpack = require('webpack');
 
 module.exports = {
   entry: './src/index.tsx',
@@ -63,8 +62,9 @@ module.exports = {
     ],
   },
   plugins: [
-    new webpack.EnvironmentPlugin({
-      ...dotenv.parsed
+    new Dotenv({
+      path: './.env',
+      systemvars: true
     }),
     new MiniCssExtractPlugin({
       filename: '[contenthash].css',
