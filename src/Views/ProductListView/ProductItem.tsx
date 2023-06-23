@@ -24,7 +24,6 @@ const ProductItem = ({
   name,
   onChange,
   onComplete,
-  index,
   isCompleted,
   onProductEdit,
 }: Props) => {
@@ -40,8 +39,6 @@ const ProductItem = ({
   };
 
   const completeProduct = (value: boolean) => () => {
-    console.log("click");
-
     completeProductM({
       variables: {
         id,
@@ -56,8 +53,6 @@ const ProductItem = ({
   });
 
   const editProduct = () => {
-    console.log("click");
-
     onProductEdit(id, inputRef.current?.value);
     setShowEdit(false);
   };

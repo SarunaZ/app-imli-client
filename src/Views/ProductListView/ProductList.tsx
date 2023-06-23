@@ -57,7 +57,12 @@ const ProductList = () => {
         distance: 10,
       },
     }),
-    useSensor(TouchSensor),
+    useSensor(TouchSensor, {
+      activationConstraint: {
+        delay: 85,
+        tolerance: 8,
+      },
+    }),
   );
 
   const [updateProductListM, updateProductListMData] = useMutation(
