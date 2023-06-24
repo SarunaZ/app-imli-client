@@ -18,10 +18,8 @@ const Authentication = ({ children }: Props) => {
   const Auth = !!getCookieData(AUTH_COOKIE) || undefined;
 
   const [isLoggedIn, setIsLoggedIn] = useState<boolean | undefined>(Auth);
-  console.log(process.env.ENV_LOGIN_LINK, "link");
-
   const [submitLoginFetch, { isLoading, error }] = useFetch(
-    process.env.ENV_LOGIN_LINK,
+    process.env.CLIENT_LOGIN_LINK,
   );
 
   const login = ({ username, password }: UserLoginData) => {
@@ -40,7 +38,7 @@ const Authentication = ({ children }: Props) => {
 
   const logout = () => {
     deleteCookie(AUTH_COOKIE);
-    window.location.href = `${process.env.REACT_APP_BASE_URL}${ROUTE_LOGIN_PAGE}`;
+    window.location.href = `${process.env.CLIENT_BASE_URL}${ROUTE_LOGIN_PAGE}`;
   };
 
   const exportValues = {

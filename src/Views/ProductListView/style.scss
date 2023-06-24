@@ -44,7 +44,12 @@
   align-items: center;
   display: flex;
   justify-content: space-between;
+  padding: 0 10px !important;
   position: relative;
+
+  @media (min-width: $small-screen) {
+    padding: 10px !important;
+  }
 }
 
 .completed {
@@ -71,7 +76,7 @@
 }
 
 .productListItemDropdownTitle {
-  font-size: 1.4rem
+  font-size: 1.4rem;
 }
 
 .inputForm {
@@ -104,7 +109,7 @@
   background-color: $button-violet;
   font-size: $fs-medium-rare;
   font-weight: 700;
-  padding: 15px
+  padding: 15px;
 }
 
 .productListButtons {
@@ -132,7 +137,7 @@
   height: 50px;
 
   path {
-    fill: $secondary
+    fill: $secondary;
   }
 }
 
@@ -142,7 +147,7 @@
 
 .saveIcon {
   transform: scaleX(-1);
-  fill: $secondary
+  fill: $secondary;
 }
 
 .editIcon {

@@ -15,7 +15,7 @@ import { Helmet, HelmetProvider } from "react-helmet-async";
 import Authentication from "Providers/Authentication";
 
 const httpLink = createHttpLink({
-  uri: process.env.REACT_APP_GRAPHQL_LINK,
+  uri: process.env.CLIENT_GRAPHQL_LINK,
 });
 const authLink = setContext((_, { headers }) => {
   const token = getCookieData("auth");

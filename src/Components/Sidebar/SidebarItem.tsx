@@ -32,6 +32,7 @@ const SidebarItem = ({
   const handleToggle = () => {
     navigate(defaultPath);
     setShowItems((prevValue) => !prevValue);
+    onSelect();
   };
 
   return (
