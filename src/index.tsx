@@ -13,6 +13,7 @@ import {
 import { getCookieData } from "./Utilities/cookieParser";
 import { Helmet, HelmetProvider } from "react-helmet-async";
 import Authentication from "Providers/Authentication";
+import registerSW from "./service-worker";
 
 const httpLink = createHttpLink({
   uri: process.env.CLIENT_GRAPHQL_LINK,
@@ -49,3 +50,5 @@ container.render(
     </ApolloProvider>
   </React.StrictMode>,
 );
+
+registerSW();
