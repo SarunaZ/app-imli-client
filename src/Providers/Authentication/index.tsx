@@ -38,7 +38,7 @@ const Authentication = ({ children }: Props) => {
 
   const logout = () => {
     deleteCookie(AUTH_COOKIE);
-    window.location.href = `${process.env.CLIENT_BASE_URL}${ROUTE_LOGIN_PAGE}`;
+    setIsLoggedIn(false);
   };
 
   const exportValues = {
