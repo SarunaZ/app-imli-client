@@ -15,6 +15,10 @@ module.exports = {
   module: {
     rules: [
       {
+        test: /\.ejs$/i,
+        use: ["html-loader", "template-ejs-loader"],
+      },
+      {
         test: /\.svg$/,
         use: ["@svgr/webpack"],
       },
@@ -75,7 +79,8 @@ module.exports = {
       chunkFilename: "[contenthash].css",
     }),
     new HtmlWebpackPlugin({
-      template: "public/index.html",
+      filename: "index.html",
+      template: path.resolve(__dirname, "./public/index.ejs"),
     }),
   ],
   resolve: {
