@@ -14,6 +14,11 @@
     "allowSyntheticDefaultImports": true,
     "moduleResolution": "node"
   },
-  "include": ["src/**/*.ts", "src/**/*.tsx", "src/*.tsx"],
+  "include": [
+    "src/**/*.ts",
+    "src/**/*.tsx",
+    "src/*.tsx",
+    "public/serviceWorker.js"
+  ],
   "exclude": ["node_modules"]
 }

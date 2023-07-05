@@ -13,7 +13,6 @@ const AuthRoute = ({
   children,
 }: React.PropsWithChildren<Props>): JSX.Element => {
   const { isLoggedIn } = useContext(AuthenticationProvider);
-  console.log(isLoggedIn, "isLoggedIn");
 
   if (isLoggedIn) {
     return <Layout>{children}</Layout>;

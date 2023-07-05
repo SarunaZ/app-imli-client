@@ -4,6 +4,7 @@ const Dotenv = require("dotenv-webpack");
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const CssMinimizerPlugin = require("css-minimizer-webpack-plugin");
 const { WebpackManifestPlugin } = require("webpack-manifest-plugin");
+const CopyPlugin = require("copy-webpack-plugin");
 
 module.exports = {
   entry: "./src/index.tsx",
@@ -77,6 +78,14 @@ module.exports = {
     new MiniCssExtractPlugin({
       filename: "[contenthash].css",
       chunkFilename: "[contenthash].css",
+    }),
+    new CopyPlugin({
+      patterns: [
+        {
+          from: path.resolve(__dirname, "./public"),
+          to: path.resolve(__dirname, "./dist"),
+        },
+      ],
     }),
     new HtmlWebpackPlugin({
       filename: "index.html",

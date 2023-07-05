@@ -6,7 +6,6 @@ import {
 } from "Utilities/cookieParser";
 import { AuthenticationProvider, UserLoginData } from "./Authentication";
 import useFetch from "Hooks/useFetch";
-import { ROUTE_LOGIN_PAGE } from "App/constants";
 
 interface Props {
   children: React.ReactNode;
