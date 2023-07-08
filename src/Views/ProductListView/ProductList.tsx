@@ -38,11 +38,11 @@ const ProductList = () => {
 
   const { loading, error, refetch } = useQuery(PRODUCT_LIST_DATA, {
     errorPolicy: "all",
-    fetchPolicy: "cache-first",
+    fetchPolicy: "network-only",
     notifyOnNetworkStatusChange: true,
     onCompleted: (res) => {
       setListData(
-        res.products?.map((item: any) => ({
+        res.products?.map((item: Product) => ({
           id: item.id,
           name: item.name,
           isDone: item.isDone,
