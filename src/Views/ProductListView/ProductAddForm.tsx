@@ -14,10 +14,9 @@ interface Props {
 const ProductAddForm = ({ onChange }: Props) => {
   const productInputRef = useRef<HTMLInputElement>(null);
   const formRef = useRef<HTMLFormElement>(null);
-  const [addProductQ, productQData] = useMutation(
-    PRODUCT_NAME_MUTATION,
-    { errorPolicy: "all" },
-  );
+  const [addProductQ, productQData] = useMutation(PRODUCT_NAME_MUTATION, {
+    errorPolicy: "all",
+  });
 
   const submitProduct = (e: SyntheticEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -27,7 +26,11 @@ const ProductAddForm = ({ onChange }: Props) => {
         name: productInputRef.current?.value,
       },
       update: (_, res) => {
-        const newItem = res?.data.createProduct as Product;
+        const newItem = {
+          name: res?.data.createProduct.name,
+          isDone: res?.data.createProduct.isDone,
+          id: res.data.createProduct.id,
+        } as Product;
 
         formRef.current?.reset();
         onChange([newItem]);
@@ -36,11 +39,7 @@ const ProductAddForm = ({ onChange }: Props) => {
   };
 
   return (
-    <form
-      ref={formRef}
-      onSubmit={submitProduct}
-      className={style.inputForm}
-    >
+    <form ref={formRef} onSubmit={submitProduct} className={style.inputForm}>
       <label className={style.formLabel} htmlFor="productName">
         Product
       </label>
