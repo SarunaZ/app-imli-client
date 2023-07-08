@@ -90,6 +90,15 @@ const ProductList = () => {
     deleteRef.current = false;
   }, [listData?.length]);
 
+  const saveOnChange = (newList: Product[]) => {
+    setListData(newList);
+
+    updateProductListM({
+      fetchPolicy: "no-cache",
+      variables: { newList },
+    });
+  };
+
   const onDragEd = (event: DragEndEvent) => {
     const { active, over } = event;
     const items = listData && Array.from(listData);
@@ -105,11 +114,7 @@ const ProductList = () => {
       }));
     }
 
-    setListData(newList);
-    updateProductListM({
-      fetchPolicy: "no-cache",
-      variables: { newList },
-    });
+    saveOnChange(newList);
   };
 
   const updateList = (newList?: Product[]) => {
@@ -141,7 +146,7 @@ const ProductList = () => {
       return item;
     });
 
-    setListData(newList);
+    saveOnChange(newList);
   };
 
   const handleEditItem = (id: string, value?: string) => {
@@ -159,11 +164,7 @@ const ProductList = () => {
       return item;
     });
 
-    setListData(newList);
-    updateProductListM({
-      fetchPolicy: "no-cache",
-      variables: { newList },
-    });
+    saveOnChange(newList);
   };
 
   return (

@@ -39,13 +39,7 @@ const ProductItem = ({
   };
 
   const completeProduct = (value: boolean) => () => {
-    completeProductM({
-      variables: {
-        id,
-        value,
-      },
-      update: () => onComplete(id, value),
-    });
+    onComplete(id, value);
   };
 
   const productItemClass = classnames(style.productListItem, {
