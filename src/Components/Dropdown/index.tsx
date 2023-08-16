@@ -1,7 +1,8 @@
-import React, { useState } from "react";
-import style from "./style.scss";
+import { useState } from "react";
 import MoreDots from "Images/icons/3-vertical-dots-icon.svg";
+import style from "./style.scss";
 import classnames from "classnames";
+import DropdownList from "./DropdownList";
 
 interface Props {
   isDisabled?: boolean;
@@ -10,6 +11,7 @@ interface Props {
 
 const Dropdown = ({ children, isDisabled }: Props) => {
   const [isOpen, setIsOpen] = useState<boolean>(false);
+
   const handleMoreClick = () => {
     if (!isDisabled) {
       setIsOpen((prev) => !prev);
@@ -22,29 +24,10 @@ const Dropdown = ({ children, isDisabled }: Props) => {
 
   return (
     <div className={style.dropdownWrapper}>
-      <button
-        onClick={handleMoreClick}
-        className={dropdownButtonStyles}
-      >
+      <button onClick={handleMoreClick} className={dropdownButtonStyles}>
         <MoreDots className={style.dropdownMoreIcon} height="14px" />
       </button>
-      {isOpen && (
-        <ul className={style.dropdownList}>
-          {React.Children.map(children, (child) => (
-            <li
-              onClick={handleMoreClick}
-              className={style.dropdownItem}
-            >
-              {child}
-            </li>
-          ))}
-          <span
-            onDrag={handleMoreClick}
-            onClick={handleMoreClick}
-            className={style.dropdownOverlay}
-          />
-        </ul>
-      )}
+      {isOpen && <DropdownList onClick={handleMoreClick} children={children} />}
     </div>
   );
 };

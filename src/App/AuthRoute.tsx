@@ -1,4 +1,3 @@
-import React from "react";
 import { AuthenticationProvider } from "Providers/Authentication/Authentication";
 import { useContext } from "react";
 import { Route, Navigate, IndexRouteProps } from "react-router-dom";

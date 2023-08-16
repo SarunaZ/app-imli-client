@@ -1,4 +1,3 @@
-import React from "react";
 import { Helmet } from "react-helmet-async";
 import MealList from "./MealList";
 import style from "./style.scss";

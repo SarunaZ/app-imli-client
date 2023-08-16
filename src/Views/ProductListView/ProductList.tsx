@@ -1,4 +1,3 @@
-import React from "react";
 import Loader from "Components/Loader";
 import { useMutation } from "@apollo/client";
 import ProductItem from "./ProductItem";
@@ -90,7 +89,9 @@ const ProductList = () => {
     deleteRef.current = false;
   }, [listData?.length]);
 
-  const saveOnChange = (newList: Product[]) => {
+  const saveOnChange = (newList?: Product[]) => {
+    if (!newList?.length) return;
+
     setListData(newList);
 
     updateProductListM({
@@ -101,18 +102,16 @@ const ProductList = () => {
 
   const onDragEd = (event: DragEndEvent) => {
     const { active, over } = event;
-    const items = listData && Array.from(listData);
-    const oldIndex = items.findIndex((object) => object.id === active.id);
-    const newIndex = items.findIndex((object) => object.id === over.id);
-    const newList = arrayMove(normalizedList(), oldIndex, newIndex);
+    const items = (listData && Array.from(listData)) || [];
+    const oldIndex = items?.findIndex((object) => object.id === active.id);
+    const newIndex = items?.findIndex((object) => object.id === over?.id);
+    const normalizedList = items?.map((item) => ({
+      id: item.id,
+      name: item.name,
+      isDone: item.isDone,
+    }));
 
-    function normalizedList() {
-      return items.map((item) => ({
-        id: item.id,
-        name: item.name,
-        isDone: item.isDone,
-      }));
-    }
+    const newList = arrayMove(normalizedList, oldIndex || 0, newIndex || 0);
 
     saveOnChange(newList);
   };

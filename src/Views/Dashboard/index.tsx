@@ -1,4 +1,3 @@
-import React from "react";
 import style from "./style.scss";
 import { useQuery } from "@apollo/client";
 import { DASHBOARD_DATA } from "Schema/queries/dashboardQueries";

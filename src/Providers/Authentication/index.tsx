@@ -18,7 +18,7 @@ const Authentication = ({ children }: Props) => {
 
   const [isLoggedIn, setIsLoggedIn] = useState<boolean | undefined>(Auth);
   const [submitLoginFetch, { isLoading, error }] = useFetch(
-    process.env.CLIENT_LOGIN_LINK,
+    process.env.CLIENT_LOGIN_LINK!,
   );
 
   const login = ({ username, password }: UserLoginData) => {

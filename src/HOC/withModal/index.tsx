@@ -1,4 +1,3 @@
-import React from "react";
 import Modal from "./Modal";
 import style from "./style.scss";
 import Close from "Images/icons/close.svg";
@@ -27,10 +26,7 @@ export default function withModal<P>(
       <Modal>
         <div className={style.modalContent}>
           <h3 className={style.modalTitle}>{title}</h3>
-          <button
-            className={style.modalCloseButton}
-            onClick={onModalClose}
-          >
+          <button className={style.modalCloseButton} onClick={onModalClose}>
             <Close />
           </button>
           <Component {...props} />

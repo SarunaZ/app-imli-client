@@ -1,4 +1,3 @@
-import React from "react";
 import Button from "Components/Button";
 import Input from "Components/Input";
 import { SyntheticEvent } from "react";
@@ -10,12 +9,7 @@ interface Props {
   onDelete: (index: number) => void;
   onChange: (inputValue: string) => (index: number) => void;
 }
-const IngredientInput = ({
-  index,
-  onDelete,
-  onChange,
-  inputValue,
-}: Props) => {
+const IngredientInput = ({ index, onDelete, onChange, inputValue }: Props) => {
   const handleButtonAdd = (e: SyntheticEvent<HTMLInputElement>) => {
     onChange(e.currentTarget.value)(index);
   };

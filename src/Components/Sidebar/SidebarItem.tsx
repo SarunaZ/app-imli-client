@@ -1,4 +1,3 @@
-import React from "react";
 import classnames from "classnames";
 import { useState } from "react";
 import { NavLink } from "react-router-dom";
@@ -43,7 +42,7 @@ const SidebarItem = ({
           {icon}
         </button>
       </div>
-      {isShowItems && isSamePathNameInRoutes && (
+      {isShowItems && isSameRoute && (
         <div className={style.sidebarLinkList}>
           {routes.map((route) => (
             <NavLink

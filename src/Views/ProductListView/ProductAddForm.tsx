@@ -1,4 +1,3 @@
-import React from "react";
 import { useMutation } from "@apollo/client";
 import style from "./style.scss";
 import { SyntheticEvent, useRef } from "react";

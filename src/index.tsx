@@ -34,7 +34,7 @@ const client = new ApolloClient({
   cache: new InMemoryCache(),
 });
 
-const container = createRoot(document.getElementById("app"));
+const container = createRoot(document.getElementById("app") as Element);
 
 container.render(
   <React.StrictMode>

@@ -1,4 +1,3 @@
-import React from "react";
 import { ROUTE_MEAL_PAGE, ROUTE_PRODUCT_LIST_PAGE } from "App/constants";
 import style from "./style.scss";
 import Kitchen from "Images/icons/kitchen.svg";

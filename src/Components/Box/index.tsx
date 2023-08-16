@@ -24,7 +24,7 @@ const Box = (
     setNodeRef,
     transform,
     transition,
-  } = useSortable({ id });
+  } = useSortable({ id: id || "" });
 
   const boxClasses = classnames({
     [style.box]: !className,
