@@ -1,15 +1,18 @@
-import React, { useState } from "react";
+import React, { useLayoutEffect, useRef, useState } from "react";
 import style from "./style.scss";
 import MoreDots from "Images/icons/3-vertical-dots-icon.svg";
 import classnames from "classnames";
+import DropdownList from "./DropdownList";
 
 interface Props {
   isDisabled?: boolean;
   children: React.ReactNode;
 }
 
-const Dropdown = ({ children, isDisabled }: Props) => {
+const Dropdown = ({ isDisabled, children }: Props) => {
   const [isOpen, setIsOpen] = useState<boolean>(false);
+  const dropdownRef = useRef<HTMLDivElement>(null);
+  const listRef = useRef<HTMLUListElement>(null);
   const handleMoreClick = () => {
     if (!isDisabled) {
       setIsOpen((prev) => !prev);
@@ -20,30 +23,26 @@ const Dropdown = ({ children, isDisabled }: Props) => {
     [style.disabled]: isDisabled,
   });
 
+  useLayoutEffect(() => {
+    if (!listRef.current) return;
+
+    const { top, left } = dropdownRef.current.getBoundingClientRect();
+
+    listRef.current?.style.setProperty("left", `${left}px`);
+    listRef.current?.style?.setProperty("top", `${top + 20}px`);
+  }, [isOpen]);
+
   return (
-    <div className={style.dropdownWrapper}>
-      <button
-        onClick={handleMoreClick}
-        className={dropdownButtonStyles}
-      >
+    <div className={style.dropdownWrapper} ref={dropdownRef}>
+      <button onClick={handleMoreClick} className={dropdownButtonStyles}>
         <MoreDots className={style.dropdownMoreIcon} height="14px" />
       </button>
       {isOpen && (
-        <ul className={style.dropdownList}>
-          {React.Children.map(children, (child) => (
-            <li
-              onClick={handleMoreClick}
-              className={style.dropdownItem}
-            >
-              {child}
-            </li>
-          ))}
-          <span
-            onDrag={handleMoreClick}
-            onClick={handleMoreClick}
-            className={style.dropdownOverlay}
-          />
-        </ul>
+        <DropdownList
+          ref={listRef}
+          children={children}
+          handleMoreClick={handleMoreClick}
+        />
       )}
     </div>
   );

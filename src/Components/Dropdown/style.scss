@@ -9,7 +9,7 @@
   list-style: none;
   max-width: 100px;
   padding: 10px;
-  position: absolute;
+  position: fixed;
   width: 100%;
   z-index: 3;
 }
@@ -35,7 +35,7 @@
 
   &.disabled {
     opacity: 0.5;
-    pointer-events: none
+    pointer-events: none;
   }
 }
 

@@ -8,7 +8,7 @@ import { AuthenticationProvider, UserLoginData } from "./Authentication";
 import useFetch from "Hooks/useFetch";
 
 interface Props {
-  children: React.ReactNode;
+  children?: React.ReactNode;
 }
 
 const AUTH_COOKIE = "auth";

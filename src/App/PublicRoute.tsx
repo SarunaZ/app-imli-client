@@ -5,7 +5,7 @@ import { Navigate } from "react-router-dom";
 import { ROUTE_ROOT } from "./constants";
 
 interface Props {
-  children?: JSX.Element;
+  children: JSX.Element;
 }
 
 export const PublicRoute = ({
