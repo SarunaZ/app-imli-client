@@ -13,7 +13,7 @@ const Dropdown = ({ isDisabled, children }: Props) => {
   const [isOpen, setIsOpen] = useState<boolean>(false);
   const dropdownRef = useRef<HTMLDivElement>(null);
   const listRef = useRef<HTMLUListElement>(null);
-  const handleMoreClick = () => {
+  const handleDropdownToggle = () => {
     if (!isDisabled) {
       setIsOpen((prev) => !prev);
     }
@@ -23,25 +23,19 @@ const Dropdown = ({ isDisabled, children }: Props) => {
     [style.disabled]: isDisabled,
   });
 
-  useLayoutEffect(() => {
-    if (!listRef.current) return;
-
-    const { top, left } = dropdownRef.current.getBoundingClientRect();
-
-    listRef.current?.style.setProperty("left", `${left}px`);
-    listRef.current?.style?.setProperty("top", `${top + 20}px`);
-  }, [isOpen]);
+  const { x, y } = dropdownRef.current?.getBoundingClientRect();
 
   return (
     <div className={style.dropdownWrapper} ref={dropdownRef}>
-      <button onClick={handleMoreClick} className={dropdownButtonStyles}>
+      <button onClick={handleDropdownToggle} className={dropdownButtonStyles}>
         <MoreDots className={style.dropdownMoreIcon} height="14px" />
       </button>
       {isOpen && (
         <DropdownList
           ref={listRef}
           children={children}
-          handleMoreClick={handleMoreClick}
+          parrentOffset={{ x, y }}
+          onDropdownToggle={handleDropdownToggle}
         />
       )}
     </div>
