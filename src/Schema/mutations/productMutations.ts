@@ -11,21 +11,10 @@ export const PRODUCT_NAME_MUTATION = gql`
 `;
 
 export const MEAL_ATTACH_TO_PRODUCT_MUTATION = gql`
-  mutation attachMealToProductMutation(
-    $ingredients: [IngredientInput]
-  ) {
+  mutation attachMealToProductMutation($ingredients: [IngredientInput]) {
     attachMealToProductMutation(ingredients: $ingredients) {
       id
       name
-    }
-  }
-`;
-
-export const PRODUCT_COMPLETE = gql`
-  mutation productCompleteMutation($id: ID!, $value: Boolean) {
-    completeProduct(id: $id, value: $value) {
-      id
-      isDone
     }
   }
 `;
