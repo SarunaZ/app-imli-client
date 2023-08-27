@@ -15,11 +15,11 @@ const Layout = ({ children }: Props) => {
       <ErrorBoundary>
         <Sidebar />
       </ErrorBoundary>
-      <ErrorBoundary>
-        <main className={style.mainContent}>
+      <main className={style.mainContent}>
+        <ErrorBoundary>
           <Suspense fallback={<Loader />}>{children}</Suspense>
-        </main>
-      </ErrorBoundary>
+        </ErrorBoundary>
+      </main>
     </>
   );
 };
