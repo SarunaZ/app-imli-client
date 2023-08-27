@@ -1,4 +1,4 @@
-import React, { forwardRef, useEffect, useLayoutEffect, useRef } from "react";
+import React, { useEffect, useLayoutEffect, useRef } from "react";
 import style from "./style.scss";
 import { createPortal } from "react-dom";
 
@@ -11,38 +11,32 @@ interface Props {
   };
 }
 
-const DropdownList = (
-  { onDropdownToggle, children, parrentOffset }: Props,
-  ref: any,
-) => {
-  const getIsClicketOutside = () => {
-    if (
-      ref.current.getBoundingClientRect().y !== parrentOffset.y ||
-      ref.current.getBoundingClientRect().x !== parrentOffset.x
-    ) {
+const DropdownList = ({ onDropdownToggle, children, parrentOffset }: Props) => {
+  const listRef = useRef<HTMLUListElement>(null);
+
+  const getIsClickedOutside = (e: Event) => {
+    if (!listRef.current.contains(e.target as Node)) {
       onDropdownToggle();
     }
   };
 
   useLayoutEffect(() => {
-    if (!parrentOffset) return;
-
     const { x, y } = parrentOffset;
 
-    ref.current?.style.setProperty("left", `${x}px`);
-    ref.current?.style?.setProperty("top", `${y + 20}px`);
+    listRef.current?.style.setProperty("left", `${x}px`);
+    listRef.current?.style?.setProperty("top", `${y + 20}px`);
   }, []);
 
   useEffect(() => {
-    document.addEventListener("click", getIsClicketOutside);
+    document.addEventListener("mousedown", getIsClickedOutside);
 
     return () => {
-      document.removeEventListener("click", getIsClicketOutside);
+      document.removeEventListener("mousedown", getIsClickedOutside);
     };
   }, []);
 
   const template = (
-    <ul ref={ref} className={style.dropdownList}>
+    <ul ref={listRef} className={style.dropdownList}>
       {React.Children.map(children, (child) => (
         <li onClick={onDropdownToggle} className={style.dropdownItem}>
           {child}
@@ -54,4 +48,4 @@ const DropdownList = (
   return createPortal(template, document.body);
 };
 
-export default forwardRef(DropdownList);
+export default DropdownList;
