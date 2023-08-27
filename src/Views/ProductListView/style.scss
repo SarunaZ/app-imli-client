@@ -59,6 +59,7 @@
 .productListItemTitle {
   font-size: $fs-medium;
   padding-left: 10px;
+  margin-right: auto;
 
   @media (min-width: $small-screen) {
     font-size: $fs-medium-rare;
@@ -165,15 +166,13 @@
 }
 
 .productListItemInput {
-  font-size: 1.4rem;
+  font-size: 2rem;
+  height: 30px;
   margin-left: 15px;
+  max-width: 450px;
+  position: relative;
   width: 100%;
-
-  @media (min-width: $small-screen) {
-    bottom: 50px;
-    font-size: 2rem;
-    right: 50px;
-  }
+  z-index: 2;
 }
 
 .productListItemButtons {
