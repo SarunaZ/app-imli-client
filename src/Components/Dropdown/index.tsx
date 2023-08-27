@@ -12,7 +12,6 @@ interface Props {
 const Dropdown = ({ isDisabled, children }: Props) => {
   const [isOpen, setIsOpen] = useState<boolean>(false);
   const dropdownRef = useRef<HTMLDivElement>(null);
-  const listRef = useRef<HTMLUListElement>(null);
   const dropdownPosition = dropdownRef.current?.getBoundingClientRect();
 
   const handleDropdownToggle = () => {
@@ -32,7 +31,6 @@ const Dropdown = ({ isDisabled, children }: Props) => {
       </button>
       {isOpen && (
         <DropdownList
-          ref={listRef}
           onDropdownToggle={handleDropdownToggle}
           parrentOffset={{ x: dropdownPosition.x, y: dropdownPosition.y }}
         >
