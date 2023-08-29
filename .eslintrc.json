@@ -18,6 +18,12 @@
   "rules": {
     "indent": ["error", 2],
     "quotes": ["error", "double"],
-    "semi": ["error", "always"]
+    "semi": ["error", "always"],
+    "@typescript-eslint/no-unused-vars": ["error"]
+  },
+  "settings": {
+    "react": {
+      "version": "detect"
+    }
   }
 }

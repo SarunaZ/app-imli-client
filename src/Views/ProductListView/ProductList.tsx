@@ -188,7 +188,7 @@ const ProductList = () => {
                   key={id}
                   id={id}
                   name={name}
-                  isCompleted={isDone!}
+                  isCompleted={isDone}
                   onChange={handleDeleteItem}
                   onProductEdit={handleEditItem}
                   onComplete={handleCompleteItem}

@@ -11,10 +11,9 @@ interface Props extends ModalProps {
 }
 
 const DeleteMealModal = ({ id, onChange }: Props) => {
-  const [deleteProductM, deleteProductMData] = useMutation(
-    MEAL_DELETE,
-    { errorPolicy: "all" },
-  );
+  const [deleteProductM, deleteProductMData] = useMutation(MEAL_DELETE, {
+    errorPolicy: "all",
+  });
 
   const deleteProduct = () => {
     if (id) {

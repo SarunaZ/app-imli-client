@@ -27,10 +27,7 @@ export default function withModal<P>(
       <Modal>
         <div className={style.modalContent}>
           <h3 className={style.modalTitle}>{title}</h3>
-          <button
-            className={style.modalCloseButton}
-            onClick={onModalClose}
-          >
+          <button className={style.modalCloseButton} onClick={onModalClose}>
             <Close />
           </button>
           <Component {...props} />

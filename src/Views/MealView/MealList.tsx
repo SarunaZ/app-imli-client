@@ -37,12 +37,8 @@ const MealList = () => {
         <p>No data found</p>
       )}
       <ul className={style.mealList}>
-        {data?.meals?.map((meal: Meal, index: number) => (
-          <MealListItem
-            data={meal}
-            onDelete={refetch}
-            key={meal.id}
-          />
+        {data?.meals?.map((meal: Meal) => (
+          <MealListItem data={meal} onDelete={refetch} key={meal.id} />
         ))}
       </ul>
       <ErrorHandler error={error} />
@@ -52,10 +48,7 @@ const MealList = () => {
         title="Add new meals"
         onChange={refetch}
       />
-      <button
-        className={style.mealListAddButton}
-        onClick={toggleAddModal}
-      >
+      <button className={style.mealListAddButton} onClick={toggleAddModal}>
         <Add className={style.mealListAddIcon} />
       </button>
     </>

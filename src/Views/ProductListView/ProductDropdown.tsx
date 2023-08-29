@@ -19,10 +19,9 @@ const ProductDropdown = ({
   onChange,
   onEditProduct,
 }: Props) => {
-  const [deleteProductM, deleteProductData] = useMutation(
-    PRODUCT_DELETE,
-    { errorPolicy: "all" },
-  );
+  const [deleteProductM, deleteProductData] = useMutation(PRODUCT_DELETE, {
+    errorPolicy: "all",
+  });
 
   const deleteProduct = (id: string) => () => {
     deleteProductM({
@@ -41,14 +40,8 @@ const ProductDropdown = ({
           isLoading={deleteProductData.loading}
         >
           <div className={style.inline}>
-            <span className={style.productListItemDropdownTitle}>
-              {"Edit"}
-            </span>
-            <Edit
-              height="16px"
-              width="16px"
-              className={style.editIcon}
-            />
+            <span className={style.productListItemDropdownTitle}>{"Edit"}</span>
+            <Edit height="16px" width="16px" className={style.editIcon} />
           </div>
         </IconButton>
       </>

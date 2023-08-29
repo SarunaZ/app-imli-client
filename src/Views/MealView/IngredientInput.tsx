@@ -10,12 +10,7 @@ interface Props {
   onDelete: (index: number) => void;
   onChange: (inputValue: string) => (index: number) => void;
 }
-const IngredientInput = ({
-  index,
-  onDelete,
-  onChange,
-  inputValue,
-}: Props) => {
+const IngredientInput = ({ index, onDelete, onChange, inputValue }: Props) => {
   const handleButtonAdd = (e: SyntheticEvent<HTMLInputElement>) => {
     onChange(e.currentTarget.value)(index);
   };

@@ -16,11 +16,7 @@ const defaultInputValue = {
   name: "",
 };
 
-const IngredientContainer = ({
-  error,
-  isLoading,
-  inputData,
-}: Props) => {
+const IngredientContainer = ({ error, isLoading, inputData }: Props) => {
   const [inputState, setInputState] = useState<IngredientsInput[]>([
     defaultInputValue,
   ]);
@@ -42,19 +38,16 @@ const IngredientContainer = ({
     inputData(inputState);
   };
 
-  const handleInputChange =
-    (inputValue: string) => (index: number) => {
-      const shallowCopyOfState = [...inputState];
-      shallowCopyOfState[index] = { name: inputValue };
-      setInputState(shallowCopyOfState);
-      inputData(inputState);
-    };
+  const handleInputChange = (inputValue: string) => (index: number) => {
+    const shallowCopyOfState = [...inputState];
+    shallowCopyOfState[index] = { name: inputValue };
+    setInputState(shallowCopyOfState);
+    inputData(inputState);
+  };
 
   return (
     <>
-      <label className={style.indredientFieldLabel}>
-        Ingredients
-      </label>
+      <label className={style.indredientFieldLabel}>Ingredients</label>
       <div className={style.indredientFieldsrapper}>
         {inputState.map((input, index) => (
           <IngredientInput

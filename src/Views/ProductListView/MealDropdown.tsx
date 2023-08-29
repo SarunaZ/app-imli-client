@@ -16,10 +16,9 @@ interface Props {
 
 const MealDropdown = ({ onUpdate }: Props) => {
   const { loading, error, data } = useQuery(MEAL_LIST_DATA);
-  const [attachMealToProductM] = useMutation(
-    MEAL_ATTACH_TO_PRODUCT_MUTATION,
-    { errorPolicy: "all" },
-  );
+  const [attachMealToProductM] = useMutation(MEAL_ATTACH_TO_PRODUCT_MUTATION, {
+    errorPolicy: "all",
+  });
 
   if (loading) {
     return <Loader />;
@@ -33,13 +32,10 @@ const MealDropdown = ({ onUpdate }: Props) => {
 
   const mealData = data.meals as Meals;
 
-  const handleOnChange = (
-    event: SyntheticEvent<HTMLSelectElement>,
-  ) => {
+  const handleOnChange = (event: SyntheticEvent<HTMLSelectElement>) => {
     const mealId = event.currentTarget.value;
-    const ingredientList = mealData?.find(
-      (meal) => meal.id === mealId,
-    )?.ingredients;
+    const ingredientList = mealData?.find((meal) => meal.id === mealId)
+      ?.ingredients;
     const normalizeData = ingredientList?.map((item) => {
       return {
         name: item?.name,

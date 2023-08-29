@@ -6,15 +6,9 @@
 import { lazy, ReactNode } from "react";
 import { RouteProps } from "react-router";
 
-interface RouteParams {
-  id: string;
-}
-
 export const localRouteMap: RouteProps[] = [
   {
     id: "404 page",
-    element: lazy(
-      () => import("Views/NotFoundView"),
-    ) as unknown as ReactNode,
+    element: lazy(() => import("Views/NotFoundView")) as unknown as ReactNode,
   },
 ];

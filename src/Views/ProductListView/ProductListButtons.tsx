@@ -11,8 +11,7 @@ interface Props {
 }
 
 const ProductListButtons = ({ onChange }: Props) => {
-  const [toggleMealModal, setToggleMealModal] =
-    useState<boolean>(false);
+  const [toggleMealModal, setToggleMealModal] = useState<boolean>(false);
   const [openCancelModal, setCancelModal] = useState<boolean>(false);
 
   const handleModalToggle = () => {
@@ -32,15 +31,8 @@ const ProductListButtons = ({ onChange }: Props) => {
         >
           <MealAddIcon className={style.mealListAddIcon} />
         </button>
-        <button
-          className={style.cancelList}
-          onClick={handleCancelList}
-        >
-          <Cancel
-            width="50px"
-            height="50px"
-            className={style.cancelListIcon}
-          />
+        <button className={style.cancelList} onClick={handleCancelList}>
+          <Cancel width="50px" height="50px" className={style.cancelListIcon} />
         </button>
       </div>
       <MealDropdown

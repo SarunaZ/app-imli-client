@@ -7,9 +7,7 @@ import ErrorHandler from "Components/ErrorHandler";
 import style from "./style.scss";
 
 const LoginView = () => {
-  const { login, isLoading, error } = useContext(
-    AuthenticationProvider,
-  );
+  const { login, isLoading, error } = useContext(AuthenticationProvider);
   const usernameRef = useRef<HTMLInputElement>(null);
   const passwordRef = useRef<HTMLInputElement>(null);
 

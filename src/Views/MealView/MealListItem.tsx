@@ -17,8 +17,7 @@ interface Props {
 }
 
 const MealListItem = ({ data, onDelete }: Props) => {
-  const [isDeleteModalOpen, setDeleteModalOpen] =
-    useState<boolean>(false);
+  const [isDeleteModalOpen, setDeleteModalOpen] = useState<boolean>(false);
   const toggleDeleteModal = () => {
     setDeleteModalOpen((prev) => !prev);
   };

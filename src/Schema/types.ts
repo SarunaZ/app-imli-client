@@ -125,9 +125,7 @@ export type UserDashboard = {
 export type MealMutationMutationVariables = Exact<{
   id?: Maybe<Scalars["String"]>;
   name: Scalars["String"];
-  ingredients?: Maybe<
-    Array<Maybe<IngredientInput>> | Maybe<IngredientInput>
-  >;
+  ingredients?: Maybe<Array<Maybe<IngredientInput>> | Maybe<IngredientInput>>;
 }>;
 
 export type MealMutationMutation = {
@@ -167,9 +165,7 @@ export type ProductMutationMutation = {
 };
 
 export type AttachMealToProductMutationMutationVariables = Exact<{
-  ingredients?: Maybe<
-    Array<Maybe<IngredientInput>> | Maybe<IngredientInput>
-  >;
+  ingredients?: Maybe<Array<Maybe<IngredientInput>> | Maybe<IngredientInput>>;
 }>;
 
 export type AttachMealToProductMutationMutation = {

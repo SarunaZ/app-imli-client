@@ -1,7 +1,7 @@
 import React from "react";
 import { AuthenticationProvider } from "Providers/Authentication/Authentication";
 import { useContext } from "react";
-import { Route, Navigate, IndexRouteProps } from "react-router-dom";
+import { Navigate } from "react-router-dom";
 import { ROUTE_LOGIN_PAGE } from "./constants";
 import Layout from "HOC/withLayout";
 

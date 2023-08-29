@@ -48,16 +48,8 @@ const AddMealModal = ({ onChange }: Props) => {
   }
 
   return (
-    <form
-      className={style.addMealModalWrapper}
-      onSubmit={submitProduct}
-    >
-      <Input
-        required
-        ref={mealInputRef}
-        label="Meal name"
-        name="productName"
-      />
+    <form className={style.addMealModalWrapper} onSubmit={submitProduct}>
+      <Input required ref={mealInputRef} label="Meal name" name="productName" />
       <IngredientContainer
         error={addMealQData?.error}
         isLoading={addMealQData.loading}

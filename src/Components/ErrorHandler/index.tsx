@@ -4,18 +4,11 @@ import Info from "Images/icons/info.svg";
 import { ApolloError } from "@apollo/client";
 
 interface Props {
-  error?:
-    | { [variables: string]: any }
-    | string
-    | Error
-    | null
-    | ApolloError[];
+  error?: { [variables: string]: any } | string | Error | null | ApolloError[];
 }
 
 const ErrorHandler = ({ error }: Props) => {
-  const [errorMessage, setErrorMessage] = useState<string | null>(
-    null,
-  );
+  const [errorMessage, setErrorMessage] = useState<string | null>(null);
 
   useEffect(() => {
     if (typeof error === "string") {
