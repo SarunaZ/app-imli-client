@@ -56,14 +56,13 @@ module.exports = {
             loader: "sass-loader",
             options: {
               sourceMap: false,
-              additionalData: `@import "src/Styles/variables.scss";`,
+              additionalData: "@import \"src/Styles/variables.scss\";",
               sassOptions: {
                 outputStyle: "compressed",
               },
             },
           },
         ],
-        exclude: /node_modules/,
       },
     ],
   },
@@ -106,11 +105,16 @@ module.exports = {
       }),
     ],
   },
+  watchOptions: {
+    ignored: "/node_modules/",
+    poll: 1000, // Check for changes every second
+  },
   devServer: {
     historyApiFallback: true,
     static: {
       directory: path.resolve(__dirname, "./public"),
     },
+    hot: true,
     compress: true,
     port: 3000,
   },
