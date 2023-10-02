@@ -17,6 +17,15 @@
   }
 }
 
+.mealListItem {
+  padding: 10px 0;
+  
+  @media (min-width: $small-screen) {
+    padding:  0;
+
+  }
+}
+
 .mealListItemTitle {
   font-size: $fs-medium-rare;
   margin: 0 0 15px;

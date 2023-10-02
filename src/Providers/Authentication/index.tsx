@@ -12,12 +12,18 @@ interface Props {
   children?: React.ReactNode;
 }
 
+interface State {
+  auth?: boolean;
+}
+
 const AUTH_COOKIE = "auth";
 
 const Authentication = ({ children }: Props) => {
   const Auth = !!getCookieData(AUTH_COOKIE) || undefined;
 
-  const [isLoggedIn, setIsLoggedIn] = useState<boolean | undefined>(Auth);
+  const [state, setState] = useState<State>({
+    auth: Auth,
+  });
   const [submitLoginFetch, { isLoading, error }] = useFetch(
     process.env.CLIENT_LOGIN_LINK,
   );
@@ -28,7 +34,7 @@ const Authentication = ({ children }: Props) => {
       onSuccess: (res: { token: string }) => {
         if (res.token) {
           setCookies(AUTH_COOKIE, `${res.token}`, 14);
-          setIsLoggedIn(true);
+          setState({ auth: true });
         }
       },
     };
@@ -38,13 +44,13 @@ const Authentication = ({ children }: Props) => {
 
   const logout = () => {
     deleteCookie(AUTH_COOKIE);
-    setIsLoggedIn(false);
+    setState({ auth: false });
   };
 
   const exportValues = {
     error,
     isLoading,
-    isLoggedIn,
+    isLoggedIn: state.auth,
     logout,
     login,
   };
