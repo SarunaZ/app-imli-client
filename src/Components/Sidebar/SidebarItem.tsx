@@ -15,6 +15,10 @@ interface Props {
   onSelect: () => void;
 }
 
+interface State {
+  isShowItems: boolean;
+}
+
 const SidebarItem = ({
   icon,
   title,
@@ -27,11 +31,11 @@ const SidebarItem = ({
     routes,
     getSanitizedPathname(location.pathname),
   );
-  const [isShowItems, setShowItems] = useState<boolean>(isSameRoute);
+  const [state, setState] = useState<State>({ isShowItems: isSameRoute });
 
   const handleToggle = () => {
     navigate(defaultPath);
-    setShowItems((prevValue) => !prevValue);
+    setState({ isShowItems: !state.isShowItems });
     onSelect();
   };
 
@@ -43,7 +47,7 @@ const SidebarItem = ({
           {icon}
         </button>
       </div>
-      {isShowItems && isSamePathNameInRoutes && (
+      {state.isShowItems && isSamePathNameInRoutes && (
         <div className={style.sidebarLinkList}>
           {routes.map((route) => (
             <NavLink

@@ -8,19 +8,11 @@
 
   @media (min-width: $small-screen) {
     margin-bottom: 15px;
-    padding: 15px;
   }
 
   span,
   p,
   a {
     color: $black;
-  }
-
-  div[data-style-sort] {
-    height: 100%;
-    left: 0;
-    position: absolute;
-    width: 100%;
   }
 }

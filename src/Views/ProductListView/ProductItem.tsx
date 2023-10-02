@@ -1,10 +1,11 @@
-import React, { useState } from "react";
+import React from "react";
 import Box from "Components/Box";
 import style from "./style.scss";
 
 import classnames from "classnames";
 import ProductDropdown from "./ProductDropdown";
 import ProductItemInput from "./ProductItemInput";
+import useState from "Hooks/useState";
 
 interface Props {
   id: string;
@@ -16,6 +17,10 @@ interface Props {
   onProductEdit: (id: string, value?: string) => void;
 }
 
+interface State {
+  isEdit: boolean;
+}
+
 const ProductItem = ({
   id,
   name,
@@ -24,10 +29,12 @@ const ProductItem = ({
   isCompleted,
   onProductEdit,
 }: Props) => {
-  const [isEdit, setShowEdit] = useState<boolean>(false);
+  const [state, setState] = useState<State>({
+    isEdit: false,
+  });
 
   const handleEditProduct = () => {
-    setShowEdit(true);
+    setState({ isEdit: true });
   };
 
   const completeProduct = (value: boolean) => () => {
@@ -40,7 +47,7 @@ const ProductItem = ({
 
   const editProduct = (value?: string) => {
     onProductEdit(id, value);
-    setShowEdit(false);
+    setState({ isEdit: false });
   };
 
   const submitForm = (value: string) => {
@@ -49,21 +56,23 @@ const ProductItem = ({
 
   return (
     <li className={style.productListItemWrapper}>
-      <Box id={id} isDragable className={productItemClass}>
-        <ProductDropdown
-          id={id}
-          onChange={onChange}
-          isDisabled={isCompleted}
-          onEditProduct={handleEditProduct}
-        />
-        <ProductItemInput
-          isEdit={isEdit}
-          productName={name}
-          onEdit={editProduct}
-          onSubmit={submitForm}
-          isCompleted={isCompleted}
-          onCompleteProduct={completeProduct}
-        />
+      <Box id={id} isDragable>
+        <div className={productItemClass}>
+          <ProductDropdown
+            id={id}
+            onChange={onChange}
+            isDisabled={isCompleted}
+            onEditProduct={handleEditProduct}
+          />
+          <ProductItemInput
+            isEdit={state.isEdit}
+            productName={name}
+            onEdit={editProduct}
+            onSubmit={submitForm}
+            isCompleted={isCompleted}
+            onCompleteProduct={completeProduct}
+          />
+        </div>
       </Box>
     </li>
   );

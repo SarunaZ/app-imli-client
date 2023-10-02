@@ -3,18 +3,16 @@ import Loader from "../Loader";
 import style from "./style.scss";
 import { useSortable } from "@dnd-kit/sortable";
 import { CSS } from "@dnd-kit/utilities";
-import classnames from "classnames";
 
 interface Props {
   id?: string;
   isDragable?: boolean;
   isLoading?: boolean;
-  className?: string;
   children: JSX.Element | JSX.Element[];
 }
 
 const Box = (
-  { isLoading = false, children, className = "", isDragable, id }: Props,
+  { isLoading = false, children, isDragable, id }: Props,
   ref: any,
 ) => {
   const {
@@ -26,11 +24,6 @@ const Box = (
     transition,
   } = useSortable({ id });
 
-  const boxClasses = classnames({
-    [style.box]: !className,
-    [`${style.box} ${className}`]: className,
-  });
-
   const dragableStyle: CSSProperties = {
     opacity: isDragging ? 0.4 : undefined,
     transform: CSS.Translate.toString(transform),
@@ -39,17 +32,18 @@ const Box = (
 
   if (isDragable) {
     return (
-      <div className={boxClasses} style={dragableStyle}>
+      <div className={style.box} style={dragableStyle}>
         {isLoading && <Loader />}
         {!isLoading && (
           <>
-            {children}
             <div
               data-style-sort
               ref={setNodeRef}
               {...attributes}
               {...listeners}
-            ></div>
+            >
+              {children}
+            </div>
           </>
         )}
       </div>
@@ -57,10 +51,7 @@ const Box = (
   }
 
   return (
-    <div
-      ref={ref}
-      className={className ? `${style.box} ${className}` : style.box}
-    >
+    <div ref={ref} className={style.box}>
       {isLoading && <Loader />}
       {!isLoading && children}
     </div>

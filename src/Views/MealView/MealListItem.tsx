@@ -1,9 +1,10 @@
-import React, { useState } from "react";
+import React from "react";
 import Box from "Components/Box";
 import style from "./style.scss";
 import IconButton from "Components/IconButton";
 import DeleteMealModal from "./DeleteMealModal";
 import Delete from "Images/icons/delete.svg";
+import useState from "Hooks/useState";
 
 interface Props {
   onDelete: () => void;
@@ -16,10 +17,19 @@ interface Props {
   };
 }
 
+interface State {
+  isDeleteModalOpen: boolean;
+}
+
 const MealListItem = ({ data, onDelete }: Props) => {
-  const [isDeleteModalOpen, setDeleteModalOpen] = useState<boolean>(false);
+  const [state, setState] = useState<State>({
+    isDeleteModalOpen: false,
+  });
+
   const toggleDeleteModal = () => {
-    setDeleteModalOpen((prev) => !prev);
+    setState({
+      isDeleteModalOpen: !state.isDeleteModalOpen,
+    });
   };
 
   return (
@@ -47,7 +57,7 @@ const MealListItem = ({ data, onDelete }: Props) => {
       <DeleteMealModal
         id={data?.id}
         onChange={onDelete}
-        isOpen={isDeleteModalOpen}
+        isOpen={state.isDeleteModalOpen}
         onClose={toggleDeleteModal}
       />
     </>

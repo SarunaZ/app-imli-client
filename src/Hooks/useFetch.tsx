@@ -1,4 +1,5 @@
-import { useState } from "react";
+import useState from "./useState";
+
 interface State {
   isLoading: boolean;
   error?: { [variables: string]: any } | string | Error | null;
@@ -29,7 +30,7 @@ interface DataInterface {
   (all: FetchOptions): void;
 }
 
-type UseFetchTuple = [DataInterface, State];
+type UseFetchTuple = [DataInterface, Partial<State>];
 
 const useFetch = (url: string): UseFetchTuple => {
   const [state, setState] = useState<State>({

@@ -42,15 +42,11 @@
 
 .productListItem {
   align-items: center;
+  cursor: pointer;
   display: grid;
   position: relative;
   grid-template-columns: 15px auto 35px;
   grid-gap: 15px;
-  padding: 0 10px;
-
-  @media (min-width: $small-screen) {
-    padding: 10px;
-  }
 }
 
 .completed {

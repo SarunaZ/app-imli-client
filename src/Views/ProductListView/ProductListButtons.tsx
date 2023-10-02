@@ -3,23 +3,39 @@ import MealAddIcon from "Images/icons/meal.svg";
 import Cancel from "Images/icons/cancel.svg";
 import style from "./style.scss";
 import MealDropdown from "./MealDropdown";
-import { useState } from "react";
 import ProductCancelModal from "./ProductCancelModal";
+import useState from "Hooks/useState";
 
 interface Props {
   onChange: () => void;
 }
 
+interface State {
+  toggleMealModal: boolean;
+  openCancelModal: boolean;
+}
+
 const ProductListButtons = ({ onChange }: Props) => {
-  const [toggleMealModal, setToggleMealModal] = useState<boolean>(false);
-  const [openCancelModal, setCancelModal] = useState<boolean>(false);
+  const [state, setState] = useState<State>({
+    toggleMealModal: false,
+    openCancelModal: false,
+  });
 
   const handleModalToggle = () => {
-    setToggleMealModal((prev) => !prev);
+    setState({
+      toggleMealModal: !state.toggleMealModal,
+    });
   };
 
   const handleCancelList = () => {
-    setCancelModal((prev) => !prev);
+    setState({
+      openCancelModal: !state.openCancelModal,
+    });
+  };
+
+  const handleOnChangeCancel = () => {
+    onChange();
+    setState({ openCancelModal: false });
   };
 
   return (
@@ -38,17 +54,14 @@ const ProductListButtons = ({ onChange }: Props) => {
       <MealDropdown
         onUpdate={onChange}
         title={"Please select meal"}
-        isOpen={toggleMealModal}
+        isOpen={state.toggleMealModal}
         onClose={handleModalToggle}
       />
       <ProductCancelModal
         title={"Complete product list?"}
-        isOpen={openCancelModal}
+        isOpen={state.openCancelModal}
         onClose={handleCancelList}
-        onChange={() => {
-          onChange();
-          setCancelModal(false);
-        }}
+        onChange={handleOnChangeCancel}
       />
     </>
   );

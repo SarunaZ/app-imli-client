@@ -1,19 +1,26 @@
 import React from "react";
 import { useMutation } from "@apollo/client";
 import withModal, { ModalProps } from "HOC/withModal";
-import { SyntheticEvent, useRef, useState } from "react";
+import { SyntheticEvent, useRef } from "react";
 import IngredientContainer from "./IngredientContainer";
 import { IngredientsInput } from "./types";
 import style from "./style.scss";
 import Input from "Components/Input";
 import { MEAL_NAME_MUTATION } from "Schema/mutations/mealMutations";
+import useState from "Hooks/useState";
 
 interface Props extends ModalProps {
   onChange: () => void;
 }
 
+interface State {
+  addSuccessful: boolean;
+}
+
 const AddMealModal = ({ onChange }: Props) => {
-  const [addSuccessful, setAddSuccessful] = useState<boolean>(false);
+  const [state, setState] = useState<State>({
+    addSuccessful: false,
+  });
   const mealInputRef = useRef<HTMLInputElement>(null);
   const ingredientInputRef = useRef<IngredientsInput[]>();
   const [addMealQ, addMealQData] = useMutation(MEAL_NAME_MUTATION, {
@@ -34,12 +41,12 @@ const AddMealModal = ({ onChange }: Props) => {
       },
       update: () => {
         onChange();
-        setAddSuccessful(true);
+        setState({ addSuccessful: true });
       },
     });
   };
 
-  if (addSuccessful) {
+  if (state.addSuccessful) {
     return (
       <div>
         <p>Meal has been succesfully added!</p>

@@ -1,10 +1,11 @@
-import React, { useState } from "react";
+import React from "react";
 import IngredientInput from "./IngredientInput";
 import { IngredientsInput } from "./types";
 import style from "./style.scss";
 import Button from "Components/Button";
 import ErrorHandler from "Components/ErrorHandler";
 import { ApolloError } from "@apollo/client";
+import useState from "Hooks/useState";
 
 interface Props {
   isLoading: boolean;

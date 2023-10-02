@@ -3,19 +3,25 @@ import style from "./style.scss";
 import SidebarContent from "./SidebarContent";
 import SidebarFooter from "./SidebarFooter";
 import classnames from "classnames";
-import { useState } from "react";
 import RightArrow from "Images/icons/arrow-right.svg";
 import ErrorBoundary from "Components/ErrorHandler/ErrorBoundary";
+import useState from "Hooks/useState";
+
+interface State {
+  isSidebarShow: boolean;
+}
 
 const Sidebar = () => {
-  const [isSidebarShow, setSidebarShow] = useState<boolean>(false);
-  const toggleSiderbar = () => setSidebarShow((prev) => !prev);
+  const [state, setState] = useState<State>({ isSidebarShow: false });
+  const toggleSiderbar = () =>
+    setState({ isSidebarShow: !state.isSidebarShow });
+
   const sidebarClasses = classnames(style.sidebarWrapper, {
-    [style.active]: isSidebarShow,
+    [style.active]: state.isSidebarShow,
   });
 
   const siderbarToggleClasses = classnames(style.sidebarToggle, {
-    [style.active]: isSidebarShow,
+    [style.active]: state.isSidebarShow,
   });
 
   return (

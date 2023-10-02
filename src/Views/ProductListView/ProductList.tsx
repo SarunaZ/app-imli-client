@@ -2,10 +2,9 @@ import React from "react";
 import Loader from "Components/Loader";
 import { useMutation } from "@apollo/client";
 import ProductItem from "./ProductItem";
-import { Product, ProductListQuery } from "Schema/types";
 import style from "./style.scss";
 import ProductAddForm from "./ProductAddForm";
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef } from "react";
 import ErrorHandler from "Components/ErrorHandler";
 import { PRODUCTS_LIST_ORDER_UPDATE_MUTATION } from "Schema/mutations/productMutations";
 import { useQuery } from "@apollo/client";
@@ -25,29 +24,34 @@ import {
   SortableContext,
   verticalListSortingStrategy,
 } from "@dnd-kit/sortable";
+import useState from "Hooks/useState";
+import { ProductListData } from "./types";
+import { Product } from "Schema/types";
 
-type ProductListData = ProductListQuery["products"];
+interface State {
+  listData?: ProductListData;
+}
 
 const ProductList = () => {
   const deleteRef = useRef<boolean>(false);
   const anchorRef = useRef<HTMLAnchorElement>(null);
   const listRef = useRef<HTMLUListElement>(null);
-  const [listData, setListData] = useState<ProductListData | undefined>(
-    undefined,
-  );
+  const [state, setState] = useState<State>({
+    listData: undefined,
+  });
 
   const { loading, error, refetch } = useQuery(PRODUCT_LIST_DATA, {
     errorPolicy: "all",
     fetchPolicy: "network-only",
     notifyOnNetworkStatusChange: true,
     onCompleted: (res) => {
-      setListData(
-        res.products?.map((item: Product) => ({
+      setState({
+        listData: res.products?.map((item: Product) => ({
           id: item.id,
           name: item.name,
           isDone: item.isDone,
         })),
-      );
+      });
     },
   });
 
@@ -88,10 +92,10 @@ const ProductList = () => {
     scrollToListBottom();
 
     deleteRef.current = false;
-  }, [listData?.length]);
+  }, [state.listData?.length]);
 
-  const saveOnChange = (newList: Product[]) => {
-    setListData(newList);
+  const saveOnChange = (newList: ProductListData) => {
+    setState({ listData: newList });
 
     updateProductListM({
       fetchPolicy: "no-cache",
@@ -101,7 +105,7 @@ const ProductList = () => {
 
   const onDragEd = (event: DragEndEvent) => {
     const { active, over } = event;
-    const items = listData && Array.from(listData);
+    const items = state.listData;
     const oldIndex = items.findIndex((object) => object.id === active.id);
     const newIndex = items.findIndex((object) => object.id === over.id);
     const newList = arrayMove(normalizedList(), oldIndex, newIndex);
@@ -117,30 +121,29 @@ const ProductList = () => {
     saveOnChange(newList);
   };
 
-  const updateList = (newList?: Product[]) => {
+  const updateList = (newList?: ProductListData) => {
     if (newList) {
-      setListData((prev) => [...(prev || []), ...newList]);
+      setState({ listData: newList });
       return;
     }
   };
 
   const handleDeleteItem = (id: string) => {
-    const newList = listData?.filter((item) => item.id !== id);
-    setListData(newList);
+    const newList = state.listData?.filter((item) => item.id !== id);
+    setState({ listData: newList as ProductListData });
     deleteRef.current = true;
   };
 
   const handleCompleteItem = (id: string, value: boolean) => {
-    const itemIndex = listData?.findIndex((item) => item.id === id) || 0;
+    const itemIndex = state.listData?.findIndex((item) => item.id === id) || 0;
 
-    const newList = listData?.map((item, index) => {
+    const newList = state.listData?.map((item, index) => {
       if (index === itemIndex) {
         return {
-          __typename: item.__typename,
           id: item.id,
           name: item.name,
           isDone: value,
-        } as Product;
+        };
       }
 
       return item;
@@ -150,15 +153,15 @@ const ProductList = () => {
   };
 
   const handleEditItem = (id: string, value?: string) => {
-    const itemIndex = listData?.findIndex((item) => item.id === id) || 0;
-    const newList = listData?.map((item, index) => {
+    const itemIndex = state.listData?.findIndex((item) => item.id === id) || 0;
+    const newList = state.listData?.map((item, index) => {
       if (index === itemIndex) {
         return {
           __typename: item.__typename,
           id: item.id,
           name: value,
           isDone: item.isDone,
-        } as Product;
+        };
       }
 
       return item;
@@ -170,8 +173,8 @@ const ProductList = () => {
   return (
     <>
       {loading && <Loader />}
-      {!loading && !listData?.length && <p>No data found</p>}
-      {!loading && !!listData?.length && (
+      {!loading && !state.listData?.length && <p>No data found</p>}
+      {!loading && !!state.listData?.length && (
         <ul ref={listRef} className={style.productList}>
           <DndContext
             sensors={sensors}
@@ -179,10 +182,10 @@ const ProductList = () => {
             onDragEnd={onDragEd}
           >
             <SortableContext
-              items={listData}
+              items={state.listData}
               strategy={verticalListSortingStrategy}
             >
-              {listData?.map(({ id, name, isDone }: Product, index: number) => (
+              {state.listData?.map(({ id, name, isDone }, index: number) => (
                 <ProductItem
                   index={index}
                   key={id}
