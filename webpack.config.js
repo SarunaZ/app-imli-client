@@ -10,7 +10,8 @@ module.exports = {
   entry: "./src/index.tsx",
   output: {
     path: path.resolve(__dirname, "./dist"),
-    filename: "bundle.js",
+    filename: "[name].js",
+    chunkFilename: "[name].chunk.js",
     publicPath: "/",
   },
   module: {
@@ -97,6 +98,17 @@ module.exports = {
   },
   optimization: {
     minimize: true,
+    splitChunks: {
+      chunks: 'all',
+      cacheGroups: {
+        vendor: {
+          test: /[\\/]node_modules[\\/]/,
+          name: 'vendor',
+          chunks: 'all',
+          minSize: 0
+        }
+      }
+    },
     minimizer: [
       new CssMinimizerPlugin({
         test: /\.css$/i,
@@ -107,7 +119,7 @@ module.exports = {
   },
   watchOptions: {
     ignored: "/node_modules/",
-    poll: 1000, // Check for changes every second
+    poll: 1000,
   },
   devServer: {
     historyApiFallback: true,
