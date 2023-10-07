@@ -123,7 +123,7 @@ const ProductList = () => {
 
   const updateList = (newList?: ProductListData) => {
     if (newList) {
-      setState({ listData: newList });
+      setState((prevState) => ({ listData: [...prevState.listData, ...newList] }));
       return;
     }
   };
