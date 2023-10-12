@@ -3,7 +3,6 @@ const HtmlWebpackPlugin = require("html-webpack-plugin");
 const Dotenv = require("dotenv-webpack");
 const { WebpackManifestPlugin } = require("webpack-manifest-plugin");
 const CopyPlugin = require("copy-webpack-plugin");
-const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 
 const ROOT_PATH = "../../..";
 
@@ -29,42 +28,6 @@ module.exports = {
         exclude: /node_modules/,
         loader: "ts-loader",
       },
-      {
-        test: /\.(sa|sc|c)ss$/i,
-        exclude: /node_modules/,
-        use: [
-          MiniCssExtractPlugin.loader,
-          {
-            loader: "css-loader",
-            options: {
-              importLoaders: 1,
-              modules: {
-                mode: "local",
-                localIdentName: "[hash:base64:5]",
-              },
-            },
-          },
-          {
-            loader: "postcss-loader",
-            options: {
-              postcssOptions: {
-                sourceMap: false,
-                plugins: [["autoprefixer", {}]],
-              },
-            },
-          },
-          {
-            loader: "sass-loader",
-            options: {
-              sourceMap: false,
-              additionalData: "@import \"src/Styles/variables.scss\";",
-              sassOptions: {
-                outputStyle: "compressed",
-              },
-            },
-          },
-        ],
-      },
     ],
   },
   plugins: [
@@ -74,10 +37,6 @@ module.exports = {
     }),
     new WebpackManifestPlugin({
       fileName: "asset-manifest.json",
-    }),
-    new MiniCssExtractPlugin({
-      filename: "[contenthash].css",
-      chunkFilename: "[contenthash].css",
     }),
     new CopyPlugin({
       patterns: [
