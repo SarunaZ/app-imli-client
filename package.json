@@ -4,14 +4,11 @@
   "license": "MIT",
   "scripts": {
     "start": "webpack serve --mode=development",
-    "build": "webpack --mode production --progress",
+    "build": "webpack --mode=production --progress",
     "eslint": "eslint .",
     "eslint:fix": "eslint --fix ."
   },
   "module": "true",
-  "engines": {
-    "node": ">=18"
-  },
   "dependencies": {
     "@apollo/client": "3.7.11",
     "@dnd-kit/core": "6.0.8",
