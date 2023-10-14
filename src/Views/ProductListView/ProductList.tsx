@@ -63,8 +63,8 @@ const ProductList = () => {
     }),
     useSensor(TouchSensor, {
       activationConstraint: {
-        delay: 85,
-        tolerance: 8,
+        delay: 155,
+        tolerance: 15,
       },
     }),
   );

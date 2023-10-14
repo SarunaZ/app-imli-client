@@ -16,4 +16,8 @@
   a {
     color: $black;
   }
+
+  div[data-style-sort] { 
+    -webkit-tap-highlight-color:  rgba(255, 255, 255, 0);
+  }
 }
