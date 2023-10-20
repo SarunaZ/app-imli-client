@@ -1,7 +1,7 @@
 const path = require("path");
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 
-const ROOT_PATH = "../../..";
+const ROOT_PATH = "../..";
 
 module.exports = () => ({
   output: {

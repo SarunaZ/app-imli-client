@@ -4,7 +4,7 @@ const Dotenv = require("dotenv-webpack");
 const { WebpackManifestPlugin } = require("webpack-manifest-plugin");
 const CopyPlugin = require("copy-webpack-plugin");
 
-const ROOT_PATH = "../../..";
+const ROOT_PATH = "../..";
 
 module.exports = {
   entry: path.resolve(__dirname, ROOT_PATH,"src/index.tsx"),

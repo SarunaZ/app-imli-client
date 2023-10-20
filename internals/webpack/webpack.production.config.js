@@ -1,5 +1,7 @@
+const path = require("path");
 const CssMinimizerPlugin = require("css-minimizer-webpack-plugin");
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
+const WebpackObfuscator = require('webpack-obfuscator');
 
 module.exports = () => ({
   output: {
@@ -46,9 +48,13 @@ module.exports = () => ({
     ],
   },
   plugins: [
+    new WebpackObfuscator({
+      rotateStringArray: true,
+      reservedStrings: [ '\s*' ],
+    }, ['*node_modules*']),
     new MiniCssExtractPlugin({
-      filename: "[contenthash].css",
-      chunkFilename: "[contenthash].css",
+      filename: "[name].[contenthash].css",
+      chunkFilename: "[id].[contenthash].css",
     }),
   ],
   optimization: {
@@ -60,6 +66,7 @@ module.exports = () => ({
           test: /[\\/]node_modules[\\/]/,
           name: 'vendor',
           chunks: 'all',
+          minChunks: 2,
           minSize: 0
         }
       }
