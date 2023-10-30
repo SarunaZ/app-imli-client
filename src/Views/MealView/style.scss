@@ -8,6 +8,12 @@
   padding: 0;
 }
 
+.mealListHeader {
+  align-items: center;
+  display: flex;
+  justify-content: space-between;
+}
+
 .mealListItemHeader {
   display: flex;
   justify-content: space-between;
@@ -19,10 +25,9 @@
 
 .mealListItem {
   padding: 10px 0;
-  
-  @media (min-width: $small-screen) {
-    padding:  0;
 
+  @media (min-width: $small-screen) {
+    padding: 0;
   }
 }
 
@@ -50,7 +55,7 @@
   position: fixed;
   right: 15px;
 
-  @media(min-width: 931px) {
+  @media (min-width: 931px) {
     bottom: 50px;
     right: 50px;
   }
@@ -87,7 +92,7 @@
   margin-top: 5px;
   min-height: 170px;
 
-  @media(min-width: 931px) {
+  @media (min-width: 931px) {
     max-height: 450px;
   }
 }
@@ -119,4 +124,8 @@
 
 .deleteModalButton {
   width: 100%;
+}
+
+.mealExportButton {
+  height: 25px;
 }

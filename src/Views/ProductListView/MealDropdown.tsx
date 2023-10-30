@@ -2,12 +2,13 @@ import React from "react";
 import { SyntheticEvent } from "react";
 import Loader from "Components/Loader";
 import style from "./style.scss";
-import { useMutation, useQuery } from "@apollo/client";
+import { useQuery } from "@apollo/client/react/hooks/useQuery";
 import { MEAL_ATTACH_TO_PRODUCT_MUTATION } from "Schema/mutations/productMutations";
 import withModal from "HOC/withModal";
 import { MEAL_LIST_DATA } from "Schema/queries/productQueries";
 import { MealDropDownListQuery } from "Schema/types";
 import ErrorHandler from "Components/ErrorHandler";
+import { useMutation } from "@apollo/client/react/hooks/useMutation";
 
 type Meals = MealDropDownListQuery["meals"];
 interface Props {

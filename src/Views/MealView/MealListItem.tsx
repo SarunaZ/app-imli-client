@@ -1,20 +1,16 @@
-import React, {useId} from "react";
+import React, { useId } from "react";
 import Box from "Components/Box";
 import style from "./style.scss";
 import IconButton from "Components/IconButton";
 import DeleteMealModal from "./DeleteMealModal";
 import Delete from "Images/icons/delete.svg";
 import useState from "Hooks/useState";
+import { MealListQuery } from "Schema/types";
+import { DeepExtractTypeSkipArrays } from "Declarations/typeExtract";
 
 interface Props {
   onDelete: () => void;
-  data?: {
-    id: string;
-    name: string;
-    ingredients: {
-      name: string;
-    }[];
-  };
+  data?: DeepExtractTypeSkipArrays<MealListQuery, ["meals"]>;
 }
 
 interface State {
@@ -47,13 +43,11 @@ const MealListItem = ({ data, onDelete }: Props) => {
               const itemId = useId();
 
               return (
-              <li
-                key={itemId}
-                className={style.mealListItemIngredientsItem}
-              >
-                {ingredient.name}
-              </li>
-            )})}
+                <li key={itemId} className={style.mealListItemIngredientsItem}>
+                  {ingredient.name}
+                </li>
+              );
+            })}
           </ol>
         </li>
       </Box>

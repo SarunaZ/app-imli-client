@@ -1,31 +1,18 @@
 import React from "react";
-import Loader from "Components/Loader";
-import { useQuery } from "@apollo/client";
 import style from "./style.scss";
 import MealListItem from "./MealListItem";
 import AddMealModal from "./AddMealModal";
 import Add from "Images/icons/add.svg";
 import { useState } from "react";
-import ErrorHandler from "Components/ErrorHandler";
-import { MEAL_LIST_DATA } from "Schema/queries/mealQueries";
+import { MealListQuery } from "Schema/types";
 
-interface Meal {
-  id: string;
-  name: string;
-  ingredients: {
-    name: string;
-  }[];
+interface Props {
+  mealData: MealListQuery["meals"];
+  onChange: () => void;
 }
 
-const MealList = () => {
-  const { loading, error, data, refetch } = useQuery(MEAL_LIST_DATA, {
-    errorPolicy: "all",
-  });
+const MealList = ({ mealData, onChange }: Props) => {
   const [isShowAddModal, setShowAddModal] = useState<boolean>(false);
-
-  if (loading) {
-    return <Loader />;
-  }
 
   const toggleAddModal = () => {
     setShowAddModal((prev) => !prev);
@@ -33,20 +20,16 @@ const MealList = () => {
 
   return (
     <>
-      {!loading && (!data?.meals || !data?.meals?.length) && (
-        <p>No data found</p>
-      )}
       <ul className={style.mealList}>
-        {data?.meals?.map((meal: Meal) => (
-          <MealListItem data={meal} onDelete={refetch} key={meal.id} />
+        {mealData?.map((meal) => (
+          <MealListItem data={meal} onDelete={onChange} key={meal.id} />
         ))}
       </ul>
-      <ErrorHandler error={error} />
       <AddMealModal
         onClose={toggleAddModal}
         isOpen={isShowAddModal}
         title="Add new meals"
-        onChange={refetch}
+        onChange={onChange}
       />
       <button className={style.mealListAddButton} onClick={toggleAddModal}>
         <Add className={style.mealListAddIcon} />

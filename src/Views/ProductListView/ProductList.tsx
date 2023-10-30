@@ -7,9 +7,9 @@ import ProductAddForm from "./ProductAddForm";
 import { useEffect, useRef } from "react";
 import ErrorHandler from "Components/ErrorHandler";
 import { PRODUCTS_LIST_ORDER_UPDATE_MUTATION } from "Schema/mutations/productMutations";
-import { useQuery } from "@apollo/client";
 import { PRODUCT_LIST_DATA } from "Schema/queries/productQueries";
 import ProductListButtons from "./ProductListButtons";
+import { useQuery } from "@apollo/client/react/hooks/useQuery";
 import {
   closestCenter,
   DndContext,
@@ -123,7 +123,9 @@ const ProductList = () => {
 
   const updateList = (newList?: ProductListData) => {
     if (newList) {
-      setState((prevState) => ({ listData: [...prevState.listData, ...newList] }));
+      setState((prevState) => ({
+        listData: [...prevState.listData, ...newList],
+      }));
       return;
     }
   };
