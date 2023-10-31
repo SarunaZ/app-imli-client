@@ -1,9 +1,12 @@
 .mealListWrapper {
   margin: 0 auto;
-  max-width: 550px;
+  max-width: 1200px;
 }
 
 .mealList {
+  display: grid;
+  grid-gap: 15px;
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
   list-style: none;
   padding: 0;
 }
@@ -12,6 +15,11 @@
   align-items: center;
   display: flex;
   justify-content: space-between;
+
+  @media (min-width: $small-screen) {
+    gap: 15px;
+    justify-content: initial;
+  }
 }
 
 .mealListItemHeader {

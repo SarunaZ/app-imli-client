@@ -1,13 +1,11 @@
 .box {
   background: $lightGrey;
   box-sizing: border-box;
-  margin-bottom: 1.1rem;
   padding: 5px 10px;
   position: relative;
   width: auto;
 
   @media (min-width: $small-screen) {
-    margin-bottom: 15px;
     padding: 10px;
   }
 
@@ -17,7 +15,7 @@
     color: $black;
   }
 
-  div[data-style-sort] { 
-    -webkit-tap-highlight-color:  rgba(255, 255, 255, 0);
+  div[data-style-sort] {
+    -webkit-tap-highlight-color: rgba(255, 255, 255, 0);
   }
 }
