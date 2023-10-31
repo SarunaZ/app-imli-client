@@ -6,12 +6,10 @@ import { ROUTE_LOGIN_PAGE } from "./constants";
 import Layout from "HOC/withLayout";
 
 interface Props {
-  children?: JSX.Element;
+  children?: React.ReactNode;
 }
 
-const AuthRoute = ({
-  children,
-}: React.PropsWithChildren<Props>): JSX.Element => {
+const AuthRoute = ({ children }: Props) => {
   const { isLoggedIn } = useContext(AuthenticationProvider);
 
   if (isLoggedIn) {

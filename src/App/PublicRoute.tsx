@@ -8,9 +8,7 @@ interface Props {
   children: JSX.Element;
 }
 
-export const PublicRoute = ({
-  children,
-}: React.PropsWithChildren<Props>): JSX.Element => {
+export const PublicRoute = ({ children }: Props): JSX.Element => {
   const { isLoggedIn } = useContext(AuthenticationProvider);
 
   if (!isLoggedIn) {
