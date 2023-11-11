@@ -1,4 +1,4 @@
-import React, { useId } from "react";
+import React from "react";
 import Box from "Components/Box";
 import style from "./style.scss";
 import IconButton from "Components/IconButton";
@@ -39,11 +39,12 @@ const MealListItem = ({ data, onDelete }: Props) => {
             </IconButton>
           </div>
           <ol className={style.mealListItemIngredients}>
-            {data?.ingredients.map((ingredient) => {
-              const itemId = useId();
-
+            {data?.ingredients.map((ingredient, index) => {
               return (
-                <li key={itemId} className={style.mealListItemIngredientsItem}>
+                <li
+                  key={`${ingredient.name}--${index}`}
+                  className={style.mealListItemIngredientsItem}
+                >
                   {ingredient.name}
                 </li>
               );
