@@ -19,6 +19,7 @@
     "src/**/*.ts",
     "src/**/*.tsx",
     "src/*.tsx",
+    "internals/*.js",
     "public/serviceWorker.js"
   ],
   "exclude": ["node_modules"]

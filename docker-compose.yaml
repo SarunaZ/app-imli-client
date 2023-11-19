@@ -1,0 +1,20 @@
+version: "3.8"
+services:
+  # api:
+  #   build: ../app-imli-server
+  #   container_name: imli-api
+  #   ports:
+  #     - "4000:4000"
+  #   volumes:
+  #     - ../app-imli-server:/app/api
+  #   command: sh -c "yarn && yarn dev:docker"
+  client:
+    build: ./
+    container_name: imli-client
+    depends_on:
+      - api
+    ports:
+      - "3000:3000"
+    volumes:
+      - ./:/app/client/
+    command: sh -c "yarn && yarn start"
