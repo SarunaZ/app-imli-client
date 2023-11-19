@@ -1,6 +1,6 @@
 import "./index.scss";
 import React from "react";
-import { createRoot } from "react-dom/client";
+import { createRoot, hydrateRoot } from "react-dom/client";
 import { setContext } from "@apollo/client/link/context";
 import { BrowserRouter } from "react-router-dom";
 import App from "./App";
@@ -34,19 +34,29 @@ const client = new ApolloClient({
   cache: new InMemoryCache(),
 });
 
-const container = createRoot(document.getElementById("app"));
+const renderApp = () => {
+  const root = document.getElementById("app");
 
-container.render(
-  <React.StrictMode>
-    <ApolloProvider client={client}>
-      <HelmetProvider>
-        <BrowserRouter>
-          <Helmet title="Imli Home Utility System" />
-          <Authentication>
-            <App />
-          </Authentication>
-        </BrowserRouter>
-      </HelmetProvider>
-    </ApolloProvider>
-  </React.StrictMode>,
-);
+  const app = (
+    <React.StrictMode>
+      <ApolloProvider client={client}>
+        <HelmetProvider>
+          <BrowserRouter>
+            <Helmet title="Imli Home Utility System" />
+            <Authentication>
+              <App />
+            </Authentication>
+          </BrowserRouter>
+        </HelmetProvider>
+      </ApolloProvider>
+    </React.StrictMode>
+  );
+
+  if (process.env.NODE_ENV && process.env.SSR_ON) {
+    hydrateRoot(root, app);
+  } else {
+    createRoot(root).render(app);
+  }
+};
+
+renderApp();
