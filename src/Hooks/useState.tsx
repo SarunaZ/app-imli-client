@@ -5,7 +5,7 @@ type NewState<T> = Partial<T> | ((newState: T) => void);
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 const useState = <T extends { [key: string]: any }>(
   defaultState: T,
-): [Partial<T>, (newState: NewState<T>) => void] => {
+): [T, (newState: NewState<T>) => void] => {
   const [state, setState] = useReactState<T>(defaultState);
 
   const setNewState = (newState: NewState<T>) => {

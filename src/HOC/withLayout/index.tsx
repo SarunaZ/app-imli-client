@@ -9,19 +9,16 @@ interface Props {
   children: ReactNode;
 }
 
-const Layout = ({ children }: Props) => {
-  return (
-    <>
+const Layout = ({ children }: Props) => (
+  <>
+    <ErrorBoundary>
+      <Sidebar />
+    </ErrorBoundary>
+    <main className={style.mainContent}>
       <ErrorBoundary>
-        <Sidebar />
+        <Suspense fallback={<Loader />}>{children}</Suspense>
       </ErrorBoundary>
-      <main className={style.mainContent}>
-        <ErrorBoundary>
-          <Suspense fallback={<Loader />}>{children}</Suspense>
-        </ErrorBoundary>
-      </main>
-    </>
-  );
-};
-
+    </main>
+  </>
+);
 export default Layout;
