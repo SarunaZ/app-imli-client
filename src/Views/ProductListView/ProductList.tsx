@@ -167,7 +167,6 @@ const ProductList = () => {
 
       return item;
     });
-    console.log(newList, "newList");
 
     saveOnChange(newList);
   };
