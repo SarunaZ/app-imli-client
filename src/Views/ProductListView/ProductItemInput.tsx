@@ -29,8 +29,6 @@ const ProductItemInput = ({
   };
 
   const handleOnEdit = () => {
-    console.log("clock");
-
     onEdit(inputRef.current.value);
   };
 

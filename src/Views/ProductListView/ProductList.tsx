@@ -159,7 +159,6 @@ const ProductList = () => {
     const newList = state.listData?.map((item, index) => {
       if (index === itemIndex) {
         return {
-          __typename: item.__typename,
           id: item.id,
           name: value,
           isDone: item.isDone,

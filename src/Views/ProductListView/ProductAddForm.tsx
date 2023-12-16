@@ -30,7 +30,7 @@ const ProductAddForm = ({ onChange }: Props) => {
           name: res?.data.createProduct.name,
           isDone: res?.data.createProduct.isDone,
           id: res.data.createProduct.id,
-        } as Product;
+        };
 
         formRef.current?.reset();
         onChange([newItem]);
