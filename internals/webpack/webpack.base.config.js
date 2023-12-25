@@ -7,9 +7,9 @@ const CopyPlugin = require("copy-webpack-plugin");
 const ROOT_PATH = "../..";
 
 module.exports = {
-  entry: path.resolve(__dirname, ROOT_PATH,"src/index.tsx"),
+  entry: path.resolve(__dirname, ROOT_PATH, "src/index.tsx"),
   output: {
-    path: path.resolve(__dirname, ROOT_PATH ,"dist"),
+    path: path.resolve(__dirname, ROOT_PATH, "dist"),
     filename: "[name].js",
     publicPath: "/",
   },
@@ -22,6 +22,14 @@ module.exports = {
       {
         test: /\.svg$/,
         use: ["@svgr/webpack"],
+      },
+      {
+        test: /\.(png|jpe?g|gif)$/i,
+        use: [
+          {
+            loader: "file-loader",
+          },
+        ],
       },
       {
         test: /\.tsx|.ts?$/,
@@ -41,18 +49,18 @@ module.exports = {
     new CopyPlugin({
       patterns: [
         {
-          from: path.resolve(__dirname, ROOT_PATH ,"public"),
-          to: path.resolve(__dirname, ROOT_PATH ,"dist"),
+          from: path.resolve(__dirname, ROOT_PATH, "public"),
+          to: path.resolve(__dirname, ROOT_PATH, "dist"),
         },
       ],
     }),
     new HtmlWebpackPlugin({
       filename: "index.html",
-      template: path.resolve(__dirname, ROOT_PATH ,"public/index.ejs"),
+      template: path.resolve(__dirname, ROOT_PATH, "public/index.ejs"),
     }),
   ],
   resolve: {
     extensions: [".tsx", ".ts", ".js", ".jsx", ".scss"],
     modules: ["src", "node_modules"],
   },
-}
+};
