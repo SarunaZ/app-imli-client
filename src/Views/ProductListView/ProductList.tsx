@@ -34,7 +34,6 @@ interface State {
 
 const ProductList = () => {
   const deleteRef = useRef<boolean>(false);
-  const anchorRef = useRef<HTMLAnchorElement>(null);
   const listRef = useRef<HTMLUListElement>(null);
   const [state, setState] = useState<State>({
     listData: undefined,
@@ -78,11 +77,6 @@ const ProductList = () => {
     if (!deleteRef.current) {
       listRef.current?.scroll({
         top: listRef?.current?.scrollHeight,
-        behavior: "smooth",
-      });
-
-      anchorRef.current?.scrollIntoView({
-        block: "end",
         behavior: "smooth",
       });
     }
@@ -133,6 +127,7 @@ const ProductList = () => {
   const handleDeleteItem = (id: string) => {
     const newList = state.listData?.filter((item) => item.id !== id);
     setState({ listData: newList as ProductListData });
+
     deleteRef.current = true;
   };
 
@@ -205,7 +200,6 @@ const ProductList = () => {
       <ErrorHandler error={error || updateProductListMData.error} />
       <ProductAddForm onChange={updateList} />
       <ProductListButtons onChange={refetch} />
-      <span ref={anchorRef} />
     </>
   );
 };
