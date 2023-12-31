@@ -65,7 +65,7 @@ const ProductItemInput = ({
           {!isCompleted ? (
             <CheckMark height="25px" />
           ) : (
-            <CurvedArrow height="20px" className={style.returnIcon} />
+            <CurvedArrow height="25px" className={style.returnIcon} />
           )}
         </button>
       )}
