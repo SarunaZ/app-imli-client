@@ -1,9 +1,9 @@
 import React from "react";
-import { useMutation } from "@apollo/client";
 import withModal, { ModalProps } from "HOC/withModal";
 import { MEAL_DELETE } from "Schema/mutations/mealMutations";
 import Button from "Components/Button";
 import style from "./style.scss";
+import useMutation from "Hooks/useMutation";
 
 interface Props extends ModalProps {
   id?: string;
@@ -11,9 +11,7 @@ interface Props extends ModalProps {
 }
 
 const DeleteMealModal = ({ id, onChange }: Props) => {
-  const [deleteProductM, deleteProductMData] = useMutation(MEAL_DELETE, {
-    errorPolicy: "all",
-  });
+  const [deleteProductM, deleteProductMData] = useMutation(MEAL_DELETE);
 
   const deleteProduct = () => {
     if (id) {

@@ -1,6 +1,5 @@
 import React from "react";
 import Loader from "Components/Loader";
-import { useMutation } from "@apollo/client";
 import ProductItem from "./ProductItem";
 import style from "./style.scss";
 import ProductAddForm from "./ProductAddForm";
@@ -9,7 +8,6 @@ import ErrorHandler from "Components/ErrorHandler";
 import { PRODUCTS_LIST_ORDER_UPDATE_MUTATION } from "Schema/mutations/productMutations";
 import { PRODUCT_LIST_DATA } from "Schema/queries/productQueries";
 import ProductListButtons from "./ProductListButtons";
-import { useQuery } from "@apollo/client/react/hooks/useQuery";
 import {
   closestCenter,
   DndContext,
@@ -27,6 +25,8 @@ import {
 import useState from "Hooks/useState";
 import { ProductListData } from "./types";
 import { Product } from "Schema/types";
+import useQuery from "Hooks/useQuery";
+import useMutation from "Hooks/useMutation";
 
 interface State {
   listData?: ProductListData;
@@ -40,7 +40,6 @@ const ProductList = () => {
   });
 
   const { loading, error, refetch } = useQuery(PRODUCT_LIST_DATA, {
-    errorPolicy: "all",
     fetchPolicy: "network-only",
     notifyOnNetworkStatusChange: true,
     onCompleted: (res) => {
@@ -70,7 +69,6 @@ const ProductList = () => {
 
   const [updateProductListM, updateProductListMData] = useMutation(
     PRODUCTS_LIST_ORDER_UPDATE_MUTATION,
-    { errorPolicy: "all" },
   );
 
   const scrollToListBottom = () => {
@@ -91,9 +89,15 @@ const ProductList = () => {
   const saveOnChange = (newList: ProductListData) => {
     setState({ listData: newList });
 
+    const filteredList = newList.map((item) => ({
+      id: item.id,
+      name: item.name,
+      isDone: item.isDone,
+    }));
+
     updateProductListM({
       fetchPolicy: "no-cache",
-      variables: { newList },
+      variables: { newList: filteredList },
     });
   };
 

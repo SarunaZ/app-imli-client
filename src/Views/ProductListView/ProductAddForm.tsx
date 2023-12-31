@@ -1,11 +1,11 @@
 import React from "react";
-import { useMutation } from "@apollo/client";
 import style from "./style.scss";
 import { SyntheticEvent, useRef } from "react";
 import Button from "Components/Button";
 import ErrorHandler from "Components/ErrorHandler";
 import { PRODUCT_NAME_MUTATION } from "Schema/mutations/productMutations";
 import { Product } from "Schema/types";
+import useMutation from "Hooks/useMutation";
 
 interface Props {
   onChange: (productItem: Product[]) => void;
@@ -14,9 +14,7 @@ interface Props {
 const ProductAddForm = ({ onChange }: Props) => {
   const productInputRef = useRef<HTMLInputElement>(null);
   const formRef = useRef<HTMLFormElement>(null);
-  const [addProductQ, productQData] = useMutation(PRODUCT_NAME_MUTATION, {
-    errorPolicy: "all",
-  });
+  const [addProductQ, productQData] = useMutation(PRODUCT_NAME_MUTATION);
 
   const submitProduct = (e: SyntheticEvent<HTMLFormElement>) => {
     e.preventDefault();

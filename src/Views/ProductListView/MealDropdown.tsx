@@ -8,7 +8,7 @@ import withModal from "HOC/withModal";
 import { MEAL_LIST_DATA } from "Schema/queries/productQueries";
 import { MealDropDownListQuery } from "Schema/types";
 import ErrorHandler from "Components/ErrorHandler";
-import { useMutation } from "@apollo/client/react/hooks/useMutation";
+import useMutation from "Hooks/useMutation";
 
 type Meals = MealDropDownListQuery["meals"];
 interface Props {
@@ -17,9 +17,7 @@ interface Props {
 
 const MealDropdown = ({ onUpdate }: Props) => {
   const { loading, error, data } = useQuery(MEAL_LIST_DATA);
-  const [attachMealToProductM] = useMutation(MEAL_ATTACH_TO_PRODUCT_MUTATION, {
-    errorPolicy: "all",
-  });
+  const [attachMealToProductM] = useMutation(MEAL_ATTACH_TO_PRODUCT_MUTATION);
 
   if (loading) {
     return <Loader />;
