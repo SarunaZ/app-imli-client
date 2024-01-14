@@ -1,4 +1,3 @@
-import React from "react";
 import withModal, { ModalProps } from "HOC/withModal";
 import { MEAL_DELETE } from "Schema/mutations/mealMutations";
 import Button from "Components/Button";

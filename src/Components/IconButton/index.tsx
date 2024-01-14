@@ -11,14 +11,14 @@ interface Props {
 }
 
 const IconButton = ({ onClick, isLoading, className, children }: Props) => {
-  const deleteButtonClasses = classnames(className, style.deleteButton);
+  const iconButtonClasses = classnames(className, style.iconButton);
 
   if (isLoading) {
     return <Loader />;
   }
 
   return (
-    <button type="button" onClick={onClick} className={deleteButtonClasses}>
+    <button type="button" onClick={onClick} className={iconButtonClasses}>
       {children}
     </button>
   );

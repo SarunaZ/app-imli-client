@@ -50,7 +50,7 @@ const IngredientContainer = ({ error, isLoading, inputData }: Props) => {
     <>
       <label className={style.indredientFieldLabel}>Ingredients</label>
       <div className={style.indredientFieldsrapper}>
-        {inputState.map((input, index) => (
+        {inputState?.map((input, index) => (
           <IngredientInput
             key={index}
             index={index}

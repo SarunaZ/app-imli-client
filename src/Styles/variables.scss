@@ -1,15 +1,19 @@
-$white: #FFFFFF;
+$white: #ffffff;
 $black: #000000;
-$lightGrey: #0000000d;
-$orange: #F05A22;
-$orangeHover: #FF6F1B;
-$danger: #FFB2C7;
-$red: #FF0000;
-$deepRed: #D0021B;
-$primary: #4E1D4E;
-$secondary: #7E2B46;
-$button-violet: #B39DDB;
-$main-bg: #F0F0F0;
+
+$primaryText: var(--text-black);
+$secondaryText: var(--text-white);
+$lightGrey: var(--text-light-grey);
+$orange: var(--orange);
+$orangeHover: var(--orange-hover);
+$danger: var(--danger);
+$red: var(--red);
+$deepRed: var(--deep-red);
+$primary: var(--primary-color);
+$secondary: var(--secondary-color);
+$button-violet: var(--button-violet);
+$main-bg-color: var(--main-bg-color);
+$dropdownBg: var(--dropdown-bg);
 
 $fs-regular: 1.4rem;
 $fs-medium: 1.6rem;

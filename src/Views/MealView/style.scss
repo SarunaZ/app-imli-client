@@ -1,6 +1,7 @@
 .mealListWrapper {
   margin: 0 auto;
   max-width: 1200px;
+  padding: 0 20px;
 }
 
 .mealList {
@@ -19,6 +20,10 @@
   @media (min-width: $small-screen) {
     gap: 15px;
     justify-content: initial;
+  }
+
+  h2 {
+    color: $primaryText;
   }
 }
 
@@ -40,12 +45,14 @@
 }
 
 .mealListItemTitle {
+  color: $secondaryText;
   font-size: $fs-medium-rare;
   margin: 0 0 15px;
   text-transform: capitalize;
 }
 
 .mealListItemIngredients {
+  color: $primaryText;
   padding-left: 25px;
   font-size: $fs-regular;
 }
@@ -111,6 +118,7 @@
 }
 
 .indredientFieldLabel {
+  color: $primaryText;
   font-size: $fs-medium-rare;
 }
 
@@ -136,4 +144,10 @@
 
 .mealExportButton {
   height: 25px;
+}
+
+.mealListItemDeleteButton {
+  right: 10px;
+  position: absolute;
+  top: 10px;
 }

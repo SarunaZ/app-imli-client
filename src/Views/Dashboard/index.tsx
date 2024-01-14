@@ -1,4 +1,3 @@
-import React from "react";
 import style from "./style.scss";
 import { DASHBOARD_DATA } from "Schema/queries/dashboardQueries";
 import Loader from "Components/Loader";

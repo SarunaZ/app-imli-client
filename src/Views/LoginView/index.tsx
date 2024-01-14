@@ -1,4 +1,4 @@
-import React, { SyntheticEvent, useContext, useRef } from "react";
+import React, { ElementRef, SyntheticEvent, useContext, useRef } from "react";
 import { Helmet } from "react-helmet-async";
 import { AuthenticationProvider } from "Providers/Authentication/Authentication";
 import Button from "Components/Button";
@@ -8,8 +8,8 @@ import style from "./style.scss";
 
 const LoginView = () => {
   const { login, isLoading, error } = useContext(AuthenticationProvider);
-  const usernameRef = useRef<HTMLInputElement>(null);
-  const passwordRef = useRef<HTMLInputElement>(null);
+  const usernameRef = useRef<ElementRef<"input">>(null);
+  const passwordRef = useRef<ElementRef<"input">>(null);
 
   const submitLogin = (e: SyntheticEvent<HTMLFormElement>) => {
     e.preventDefault();

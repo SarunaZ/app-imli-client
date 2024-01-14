@@ -1,4 +1,3 @@
-import React from "react";
 import Loader from "Components/Loader";
 import ProductItem from "./ProductItem";
 import style from "./style.scss";

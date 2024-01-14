@@ -1,7 +1,7 @@
 .box {
   background: $lightGrey;
   box-sizing: border-box;
-  padding: 5px 10px;
+  padding: 10px;
   position: relative;
   width: auto;
 
@@ -9,13 +9,14 @@
     padding: 10px;
   }
 
-  span,
-  p,
-  a {
-    color: $black;
-  }
-
   div[data-style-sort] {
     -webkit-tap-highlight-color: rgba(255, 255, 255, 0);
   }
+}
+
+.boxTitle {
+  color: $primaryText;
+  font-size: 2rem;
+  margin: 0;
+  padding: 0;
 }

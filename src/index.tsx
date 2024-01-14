@@ -13,6 +13,7 @@ import {
 import { getCookieData } from "./Utilities/cookieParser";
 import { Helmet, HelmetProvider } from "react-helmet-async";
 import Authentication from "Providers/Authentication";
+import ThemeSwither from "Providers/ThemeProvider";
 import "../public/sw";
 
 const httpLink = createHttpLink({
@@ -24,6 +25,7 @@ const authLink = setContext((_, { headers }) => {
   return {
     headers: {
       ...headers,
+      "Cache-Control": "max-age=3600",
       authorization: `${token}`,
     },
   };
@@ -43,7 +45,9 @@ container.render(
         <BrowserRouter>
           <Helmet title="Imli Home Utility System" />
           <Authentication>
-            <App />
+            <ThemeSwither>
+              <App />
+            </ThemeSwither>
           </Authentication>
         </BrowserRouter>
       </HelmetProvider>

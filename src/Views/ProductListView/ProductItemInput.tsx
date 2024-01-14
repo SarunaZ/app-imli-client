@@ -1,4 +1,4 @@
-import React, { SyntheticEvent, useRef } from "react";
+import { ElementRef, SyntheticEvent, useRef } from "react";
 import style from "./style.scss";
 import CurvedArrow from "Images/icons/curved-arrow-right.svg";
 import CheckMark from "Images/icons/checkmark.svg";
@@ -20,7 +20,7 @@ const ProductItemInput = ({
   isCompleted,
   onCompleteProduct,
 }: Props) => {
-  const inputRef = useRef<HTMLInputElement>(null);
+  const inputRef = useRef<ElementRef<"input">>(null);
 
   const submitName = (e: SyntheticEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -63,9 +63,9 @@ const ProductItemInput = ({
           onClick={onCompleteProduct(!isCompleted)}
         >
           {!isCompleted ? (
-            <CheckMark height="25px" />
+            <CheckMark height="30px" />
           ) : (
-            <CurvedArrow height="25px" className={style.returnIcon} />
+            <CurvedArrow height="30px" className={style.returnIcon} />
           )}
         </button>
       )}

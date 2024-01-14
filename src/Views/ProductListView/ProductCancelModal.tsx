@@ -1,4 +1,3 @@
-import React from "react";
 import style from "./style.scss";
 import { PRODUCTS_LIST_CANCEL_MUTATION } from "Schema/mutations/productMutations";
 import withModal from "HOC/withModal";

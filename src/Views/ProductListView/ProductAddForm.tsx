@@ -1,4 +1,4 @@
-import React from "react";
+import React, { ElementRef } from "react";
 import style from "./style.scss";
 import { SyntheticEvent, useRef } from "react";
 import Button from "Components/Button";
@@ -12,8 +12,8 @@ interface Props {
 }
 
 const ProductAddForm = ({ onChange }: Props) => {
-  const productInputRef = useRef<HTMLInputElement>(null);
-  const formRef = useRef<HTMLFormElement>(null);
+  const productInputRef = useRef<ElementRef<"input">>(null);
+  const formRef = useRef<ElementRef<"form">>(null);
   const [addProductQ, productQData] = useMutation(PRODUCT_NAME_MUTATION);
 
   const submitProduct = (e: SyntheticEvent<HTMLFormElement>) => {

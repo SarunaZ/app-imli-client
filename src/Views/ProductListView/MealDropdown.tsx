@@ -1,4 +1,3 @@
-import React from "react";
 import { SyntheticEvent } from "react";
 import Loader from "Components/Loader";
 import style from "./style.scss";

@@ -1,4 +1,4 @@
-import React, { useRef } from "react";
+import React, { ElementRef, useRef } from "react";
 import style from "./style.scss";
 import MoreDots from "Images/icons/3-vertical-dots-icon.svg";
 import classnames from "classnames";
@@ -18,7 +18,7 @@ const Dropdown = ({ isDisabled, children }: Props) => {
   const [state, setState] = useState<State>({
     isOpen: false,
   });
-  const dropdownRef = useRef<HTMLDivElement>(null);
+  const dropdownRef = useRef<ElementRef<"div">>(null);
   const dropdownPosition = dropdownRef.current?.getBoundingClientRect();
 
   const handleDropdownToggle = () => {

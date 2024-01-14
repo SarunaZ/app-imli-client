@@ -1,4 +1,4 @@
-import React, { useEffect, useLayoutEffect, useRef } from "react";
+import React, { ElementRef, useEffect, useLayoutEffect, useRef } from "react";
 import style from "./style.scss";
 import { createPortal } from "react-dom";
 
@@ -12,7 +12,7 @@ interface Props {
 }
 
 const DropdownList = ({ onDropdownToggle, children, parrentOffset }: Props) => {
-  const listRef = useRef<HTMLUListElement>(null);
+  const listRef = useRef<ElementRef<"ul">>(null);
 
   const getIsClickedOutside = (e: Event) => {
     if (!listRef.current.contains(e.target as Node)) {
