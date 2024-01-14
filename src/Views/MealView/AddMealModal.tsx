@@ -1,13 +1,12 @@
-import React from "react";
-import { useMutation } from "@apollo/client";
 import withModal, { ModalProps } from "HOC/withModal";
-import { SyntheticEvent, useRef } from "react";
+import { ElementRef, SyntheticEvent, useRef } from "react";
 import IngredientContainer from "./IngredientContainer";
 import { IngredientsInput } from "./types";
 import style from "./style.scss";
 import Input from "Components/Input";
 import { MEAL_NAME_MUTATION } from "Schema/mutations/mealMutations";
 import useState from "Hooks/useState";
+import useMutation from "Hooks/useMutation";
 
 interface Props extends ModalProps {
   onChange: () => void;
@@ -21,11 +20,9 @@ const AddMealModal = ({ onChange }: Props) => {
   const [state, setState] = useState<State>({
     addSuccessful: false,
   });
-  const mealInputRef = useRef<HTMLInputElement>(null);
+  const mealInputRef = useRef<ElementRef<"input">>(null);
   const ingredientInputRef = useRef<IngredientsInput[]>();
-  const [addMealQ, addMealQData] = useMutation(MEAL_NAME_MUTATION, {
-    errorPolicy: "all",
-  });
+  const [addMealQ, addMealQData] = useMutation(MEAL_NAME_MUTATION);
 
   const setInputData = (data: IngredientsInput[]) => {
     ingredientInputRef.current = data;

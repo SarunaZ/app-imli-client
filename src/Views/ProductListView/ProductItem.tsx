@@ -1,4 +1,3 @@
-import React from "react";
 import Box from "Components/Box";
 import style from "./style.scss";
 

@@ -1,4 +1,3 @@
-import React from "react";
 import Box from "Components/Box";
 import style from "./style.scss";
 import IconButton from "Components/IconButton";
@@ -30,11 +29,14 @@ const MealListItem = ({ data, onDelete }: Props) => {
 
   return (
     <>
-      <Box>
+      <Box title={data?.name}>
         <li className={style.mealListItem}>
           <div className={style.mealListItemHeader}>
-            <p className={style.mealListItemTitle}>{data?.name}</p>
-            <IconButton onClick={toggleDeleteModal}>
+            <p className={style.mealListItemTitle}>{}</p>
+            <IconButton
+              onClick={toggleDeleteModal}
+              className={style.mealListItemDeleteButton}
+            >
               <Delete height="24px" width="24px" />
             </IconButton>
           </div>

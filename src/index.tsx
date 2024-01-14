@@ -13,8 +13,8 @@ import {
 import { getCookieData } from "./Utilities/cookieParser";
 import { Helmet, HelmetProvider } from "react-helmet-async";
 import Authentication from "Providers/Authentication";
-import "../public/sw";
 import ThemeSwither from "Providers/ThemeProvider";
+import "../public/sw";
 
 const httpLink = createHttpLink({
   uri: process.env.CLIENT_GRAPHQL_LINK,
@@ -25,6 +25,7 @@ const authLink = setContext((_, { headers }) => {
   return {
     headers: {
       ...headers,
+      "Cache-Control": "max-age=3600",
       authorization: `${token}`,
     },
   };

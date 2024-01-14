@@ -1,6 +1,4 @@
-import React from "react";
 import Loader from "Components/Loader";
-import { useMutation } from "@apollo/client";
 import ProductItem from "./ProductItem";
 import style from "./style.scss";
 import ProductAddForm from "./ProductAddForm";
@@ -9,7 +7,6 @@ import ErrorHandler from "Components/ErrorHandler";
 import { PRODUCTS_LIST_ORDER_UPDATE_MUTATION } from "Schema/mutations/productMutations";
 import { PRODUCT_LIST_DATA } from "Schema/queries/productQueries";
 import ProductListButtons from "./ProductListButtons";
-import { useQuery } from "@apollo/client/react/hooks/useQuery";
 import {
   closestCenter,
   DndContext,
@@ -27,6 +24,8 @@ import {
 import useState from "Hooks/useState";
 import { ProductListData } from "./types";
 import { Product } from "Schema/types";
+import useQuery from "Hooks/useQuery";
+import useMutation from "Hooks/useMutation";
 
 interface State {
   listData?: ProductListData;
@@ -34,14 +33,12 @@ interface State {
 
 const ProductList = () => {
   const deleteRef = useRef<boolean>(false);
-  const anchorRef = useRef<HTMLAnchorElement>(null);
   const listRef = useRef<HTMLUListElement>(null);
   const [state, setState] = useState<State>({
     listData: undefined,
   });
 
   const { loading, error, refetch } = useQuery(PRODUCT_LIST_DATA, {
-    errorPolicy: "all",
     fetchPolicy: "network-only",
     notifyOnNetworkStatusChange: true,
     onCompleted: (res) => {
@@ -71,18 +68,12 @@ const ProductList = () => {
 
   const [updateProductListM, updateProductListMData] = useMutation(
     PRODUCTS_LIST_ORDER_UPDATE_MUTATION,
-    { errorPolicy: "all" },
   );
 
   const scrollToListBottom = () => {
     if (!deleteRef.current) {
       listRef.current?.scroll({
         top: listRef?.current?.scrollHeight,
-        behavior: "smooth",
-      });
-
-      anchorRef.current?.scrollIntoView({
-        block: "end",
         behavior: "smooth",
       });
     }
@@ -97,9 +88,15 @@ const ProductList = () => {
   const saveOnChange = (newList: ProductListData) => {
     setState({ listData: newList });
 
+    const filteredList = newList.map((item) => ({
+      id: item.id,
+      name: item.name,
+      isDone: item.isDone,
+    }));
+
     updateProductListM({
       fetchPolicy: "no-cache",
-      variables: { newList },
+      variables: { newList: filteredList },
     });
   };
 
@@ -133,6 +130,7 @@ const ProductList = () => {
   const handleDeleteItem = (id: string) => {
     const newList = state.listData?.filter((item) => item.id !== id);
     setState({ listData: newList as ProductListData });
+
     deleteRef.current = true;
   };
 
@@ -159,7 +157,6 @@ const ProductList = () => {
     const newList = state.listData?.map((item, index) => {
       if (index === itemIndex) {
         return {
-          __typename: item.__typename,
           id: item.id,
           name: value,
           isDone: item.isDone,
@@ -206,7 +203,6 @@ const ProductList = () => {
       <ErrorHandler error={error || updateProductListMData.error} />
       <ProductAddForm onChange={updateList} />
       <ProductListButtons onChange={refetch} />
-      <span ref={anchorRef} />
     </>
   );
 };

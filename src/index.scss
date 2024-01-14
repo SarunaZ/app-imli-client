@@ -1,4 +1,40 @@
-// @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400&display=swap');
+:root {
+  --text-white: #ffffff;
+  --text-black: #000000;
+  --text-light-grey: #0000000d;
+  --orange: #f05a22;
+  --orange-hover: #ff6f1b;
+  --danger: #ffb2c7;
+  --red: #ff0000;
+  --deep-red: #d0021b;
+  --primary-color: #4e1d4e;
+  --secondary-color: #7e2b46;
+  --button-violet: #b39ddb;
+  --main-bg-color: #f0f0f0;
+  --main-bg: linear-gradient(
+    264deg,
+    var(--text-light-grey) 0%,
+    var(--main-bg-color) 100%
+  );
+  --dropdown-bg: #ffffff;
+}
+
+[data-theme="DARK"] {
+  --text-white: #000000;
+  --text-black: #ffffff;
+  --text-light-grey: #00000061;
+  --orange: #2259f0;
+  --orange-hover: #ff6f1b;
+  --danger: #ffb2c7;
+  --red: #ff000017;
+  --deep-red: #d0021b;
+  --primary-color: #282a2c;
+  --secondary-color: #6887a5;
+  --button-violet: #b39ddb;
+  --main-bg-color: rgb(60, 60, 60);
+  --main-bg: var(--main-bg-color);
+  --dropdown-bg: #121111bd;
+}
 
 * {
   box-sizing: border-box;
@@ -10,19 +46,9 @@ html {
 
 body {
   -webkit-font-smoothing: antialiased;
-  background: linear-gradient(
-    264deg,
-    rgba(238, 238, 241, 1) 0%,
-    rgba(255, 255, 255, 1) 100%
-  );
+  background: var(--main-bg);
   font-family: "Montserrat", sans-serif;
-}
-
-body[data-theme="DARK"] {
-  -webkit-font-smoothing: antialiased;
-  background: linear-gradient(264deg, rgb(60, 60, 60) 0%, rgb(60, 60, 60) 100%);
-  color: $white !important;
-  font-family: "Montserrat", sans-serif;
+  margin: 0;
 }
 
 #root {

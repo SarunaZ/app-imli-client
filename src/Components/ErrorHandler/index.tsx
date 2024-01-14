@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import { useEffect } from "react";
 import style from "./style.scss";
 import Info from "Images/icons/info.svg";
 import { ApolloError } from "@apollo/client";

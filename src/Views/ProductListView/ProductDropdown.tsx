@@ -5,7 +5,7 @@ import Edit from "Images/icons/edit.svg";
 import IconButton from "Components/IconButton";
 import style from "./style.scss";
 import { PRODUCT_DELETE } from "Schema/mutations/productMutations";
-import { useMutation } from "@apollo/client";
+import useMutation from "Hooks/useMutation";
 
 interface Props {
   id: string;
@@ -19,9 +19,7 @@ const ProductDropdown = ({
   onChange,
   onEditProduct,
 }: Props) => {
-  const [deleteProductM, deleteProductData] = useMutation(PRODUCT_DELETE, {
-    errorPolicy: "all",
-  });
+  const [deleteProductM, deleteProductData] = useMutation(PRODUCT_DELETE);
 
   const deleteProduct = (id: string) => () => {
     deleteProductM({

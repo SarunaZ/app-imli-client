@@ -8,7 +8,7 @@
 }
 
 .dropdownList {
-  background-color: $white;
+  background-color: $dropdownBg;
   cursor: default;
   list-style: none;
   max-width: 100px;
@@ -27,6 +27,7 @@
 }
 
 .dropdownMoreIcon {
+  color: $primaryText;
   margin: 0;
 }
 

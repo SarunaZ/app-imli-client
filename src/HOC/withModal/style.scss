@@ -16,11 +16,12 @@
 }
 
 .modalTitle {
+  color: $primaryText;
   margin: 0 0 25px;
 }
 
 .modalContent {
-  background-color: $white;
+  background-color: $main-bg-color;
   margin: auto 15px;
   max-width: 550px;
   padding: 20px;
@@ -28,6 +29,7 @@
 }
 
 .modalCloseButton {
+  color: $primaryText;
   position: absolute;
   right: 0;
   top: 5px;

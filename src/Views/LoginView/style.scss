@@ -1,5 +1,5 @@
 .loginWrapper {
-  color: $white;
+  color: $secondaryText;
   margin: auto;
   max-width: 550px;
   height: 100vh;
@@ -13,13 +13,13 @@
   padding: 25px;
   margin: 0 10px;
 
-  @media(min-width: 931px) {
-    margin: 0;  
+  @media (min-width: 931px) {
+    margin: 0;
   }
 }
 
 .loginPageTitle {
-  color: $white;
+  color: $secondaryText;
   font-size: $fs-large;
   margin-top: 0;
   padding: 0;

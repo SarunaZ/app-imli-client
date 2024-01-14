@@ -1,4 +1,4 @@
-import React, { ReactNode } from "react";
+import { ReactNode } from "react";
 import ErrorBoundary from "Components/ErrorHandler/ErrorBoundary";
 import Loader from "Components/Loader";
 import Sidebar from "Components/Sidebar";

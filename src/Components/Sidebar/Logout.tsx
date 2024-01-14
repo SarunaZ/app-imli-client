@@ -1,4 +1,3 @@
-import React from "react";
 import { AuthenticationProvider } from "Providers/Authentication/Authentication";
 import { useContext } from "react";
 import style from "./style.scss";

@@ -1,4 +1,3 @@
-import React from "react";
 import MealAddIcon from "Images/icons/meal.svg";
 import Cancel from "Images/icons/cancel.svg";
 import style from "./style.scss";

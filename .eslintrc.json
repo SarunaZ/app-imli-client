@@ -28,6 +28,7 @@
   },
   "rules": {
     "indent": ["error", 2],
+    "react/display-name": "off",
     "quotes": ["error", "double"],
     "semi": ["error", "always"],
     "react/react-in-jsx-scope": "off",

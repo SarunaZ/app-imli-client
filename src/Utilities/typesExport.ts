@@ -1,10 +1,9 @@
 import { DocumentNode, OperationVariables } from "@apollo/client";
 
-export type QueryDocument<
-  TData = any,
-  TVariables = OperationVariables,
-> = DocumentNode;
-export type MutationDocument<
-  TData = any,
-  TVariables = OperationVariables,
-> = DocumentNode;
+// eslint-disable-next-line @typescript-eslint/no-empty-interface, @typescript-eslint/no-unused-vars
+export interface QueryDocument<TData = any, TVariables = OperationVariables>
+  extends DocumentNode {}
+
+// eslint-disable-next-line @typescript-eslint/no-empty-interface, @typescript-eslint/no-unused-vars
+export interface MutationDocument<TData = any, TVariables = OperationVariables>
+  extends DocumentNode {}

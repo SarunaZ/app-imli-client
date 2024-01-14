@@ -1,5 +1,5 @@
 import useState from "Hooks/useState";
-import { createContext, useMemo } from "react";
+import { createContext } from "react";
 import { Helmet } from "react-helmet-async";
 
 export const enum Theme {
@@ -36,18 +36,15 @@ const ThemeSwither = ({ children }: Props) => {
     setState({ currentTheme: theme });
   };
 
-  const providerValue = useMemo(
-    () => ({
-      currentTheme: state.currentTheme,
-      setCurrentTheme: setTheme,
-    }),
-    [state.currentTheme],
-  );
+  const providerValue = {
+    currentTheme: state.currentTheme,
+    setCurrentTheme: setTheme,
+  };
 
   return (
     <ThemeProvider.Provider value={providerValue}>
       <Helmet>
-        <body data-theme={state.currentTheme} />
+        <html data-theme={state.currentTheme} />
       </Helmet>
       {children}
     </ThemeProvider.Provider>
