@@ -2,6 +2,7 @@ const path = require("path");
 const CssMinimizerPlugin = require("css-minimizer-webpack-plugin");
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const WebpackObfuscator = require('webpack-obfuscator');
+const CopyPlugin = require("copy-webpack-plugin");
 
 module.exports = () => ({
   output: {
@@ -48,6 +49,17 @@ module.exports = () => ({
     ],
   },
   plugins: [
+    new CopyPlugin({
+      patterns: [
+        {
+          from: path.resolve(__dirname, ROOT_PATH, "public"),
+          globOptions: {
+            ignore: ["**/index.ejs"],
+          },
+          to: path.resolve(__dirname, ROOT_PATH, "dist"),
+        },
+      ],
+    }),
     new WebpackObfuscator({
       rotateStringArray: true,
       reservedStrings: [ '\s*' ],
