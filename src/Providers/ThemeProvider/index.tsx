@@ -1,11 +1,9 @@
 import useState from "Hooks/useState";
+import { setCookies } from "Utilities/cookieParser";
 import { createContext } from "react";
 import { Helmet } from "react-helmet-async";
-
-export const enum Theme {
-  Light = "LIGHT",
-  Dark = "DARK",
-}
+import { Theme } from "./types";
+import { storedTheme } from "./utility";
 
 interface State {
   currentTheme: Theme;
@@ -29,11 +27,12 @@ export const ThemeProvider = createContext(defaultState);
 
 const ThemeSwither = ({ children }: Props) => {
   const [state, setState] = useState<State>({
-    currentTheme: Theme.Light,
+    currentTheme: storedTheme,
   });
 
   const setTheme = (theme: Theme) => {
     setState({ currentTheme: theme });
+    setCookies("theme", theme, 14);
   };
 
   const providerValue = {

@@ -1,5 +1,3 @@
-$primeButtonColor: #7e2b46;
-
 .button {
   align-items: center;
   border: none;
@@ -19,7 +17,7 @@ $primeButtonColor: #7e2b46;
     transition: border-color 150ms ease-in-out;
 
     &:hover {
-      border-color: lighten($primeButtonColor, 15%);
+      border-color: $white;
     }
   }
 
@@ -35,6 +33,6 @@ $primeButtonColor: #7e2b46;
   transition: background-color 150ms ease-in-out;
 
   &:hover {
-    background-color: darken($primeButtonColor, 5%);
+    background-color: $white;
   }
 }
