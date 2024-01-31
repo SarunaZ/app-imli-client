@@ -8,7 +8,7 @@ import { Product } from "Schema/types";
 import useMutation from "Hooks/useMutation";
 
 interface Props {
-  onChange: (productItem: Product[]) => void;
+  onChange: (productItem: Product) => void;
 }
 
 const ProductAddForm = ({ onChange }: Props) => {
@@ -31,7 +31,7 @@ const ProductAddForm = ({ onChange }: Props) => {
         };
 
         formRef.current?.reset();
-        onChange([newItem]);
+        onChange(newItem);
       },
     });
   };
