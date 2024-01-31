@@ -7,15 +7,13 @@ interface Props {
   isEdit: boolean;
   isCompleted: boolean;
   productName: string;
-  onEdit: (id: string) => void;
-  onSubmit: (inputValue: string) => void;
+  onEdit: (inputValue: string) => void;
   onCompleteProduct: (value: boolean) => () => void;
 }
 
 const ProductItemInput = ({
   isEdit,
   onEdit,
-  onSubmit,
   productName,
   isCompleted,
   onCompleteProduct,
@@ -25,7 +23,7 @@ const ProductItemInput = ({
   const submitName = (e: SyntheticEvent<HTMLFormElement>) => {
     e.preventDefault();
 
-    onSubmit(inputRef.current.value);
+    onEdit(inputRef.current.value);
   };
 
   const handleOnEdit = () => {

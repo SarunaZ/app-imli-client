@@ -1,12 +1,8 @@
 import Loader from "Components/Loader";
 import ProductItem from "./ProductItem";
 import style from "./style.scss";
-import ProductAddForm from "./ProductAddForm";
 import { useEffect, useRef } from "react";
 import ErrorHandler from "Components/ErrorHandler";
-import { PRODUCTS_LIST_ORDER_UPDATE_MUTATION } from "Schema/mutations/productMutations";
-import { PRODUCT_LIST_DATA } from "Schema/queries/productQueries";
-import ProductListButtons from "./ProductListButtons";
 import {
   closestCenter,
   DndContext,
@@ -21,36 +17,26 @@ import {
   SortableContext,
   verticalListSortingStrategy,
 } from "@dnd-kit/sortable";
-import useState from "Hooks/useState";
 import { ProductListData } from "./types";
-import { Product } from "Schema/types";
-import useQuery from "Hooks/useQuery";
-import useMutation from "Hooks/useMutation";
+import { ApolloError } from "@apollo/client";
 
-interface State {
+interface Props {
   listData?: ProductListData;
+  loading: boolean;
+  error: ApolloError;
+  onChange: (newList: ProductListData) => void;
+  onDelete: (id: string) => void;
 }
 
-const ProductList = () => {
+const ProductList = ({
+  listData,
+  loading,
+  error,
+  onChange,
+  onDelete,
+}: Props) => {
   const deleteRef = useRef<boolean>(false);
   const listRef = useRef<HTMLUListElement>(null);
-  const [state, setState] = useState<State>({
-    listData: undefined,
-  });
-
-  const { loading, error, refetch } = useQuery(PRODUCT_LIST_DATA, {
-    fetchPolicy: "network-only",
-    notifyOnNetworkStatusChange: true,
-    onCompleted: (res) => {
-      setState({
-        listData: res.products?.map((item: Product) => ({
-          id: item.id,
-          name: item.name,
-          isDone: item.isDone,
-        })),
-      });
-    },
-  });
 
   const sensors = useSensors(
     useSensor(MouseSensor, {
@@ -66,10 +52,6 @@ const ProductList = () => {
     }),
   );
 
-  const [updateProductListM, updateProductListMData] = useMutation(
-    PRODUCTS_LIST_ORDER_UPDATE_MUTATION,
-  );
-
   const scrollToListBottom = () => {
     if (!deleteRef.current) {
       listRef.current?.scroll({
@@ -83,97 +65,55 @@ const ProductList = () => {
     scrollToListBottom();
 
     deleteRef.current = false;
-  }, [state.listData?.length]);
-
-  const saveOnChange = (newList: ProductListData) => {
-    setState({ listData: newList });
-
-    const filteredList = newList.map((item) => ({
-      id: item.id,
-      name: item.name,
-      isDone: item.isDone,
-    }));
-
-    updateProductListM({
-      fetchPolicy: "no-cache",
-      variables: { newList: filteredList },
-    });
-  };
+  }, [listData?.length]);
 
   const onDragEd = (event: DragEndEvent) => {
     const { active, over } = event;
-    const items = state.listData;
-    const oldIndex = items.findIndex((object) => object.id === active.id);
-    const newIndex = items.findIndex((object) => object.id === over.id);
-    const newList = arrayMove(normalizedList(), oldIndex, newIndex);
 
-    function normalizedList() {
-      return items.map((item) => ({
+    const oldIndex = listData.findIndex((object) => object.id === active.id);
+    const newIndex = listData.findIndex((object) => object.id === over.id);
+
+    const normalizedList = () => {
+      return listData.map((item) => ({
         id: item.id,
         name: item.name,
         isDone: item.isDone,
       }));
-    }
+    };
 
-    saveOnChange(newList);
+    const newList = arrayMove(normalizedList(), oldIndex, newIndex);
+
+    onChange(newList);
   };
+  console.log(listData, "list");
 
-  const updateList = (newList?: ProductListData) => {
-    if (newList) {
-      setState((prevState) => ({
-        listData: [...prevState.listData, ...newList],
-      }));
-      return;
-    }
-  };
+  const handleItemChange = (id: string, value?: boolean | string) => {
+    const itemIndex = listData?.findIndex((item) => item.id === id) || 0;
 
-  const handleDeleteItem = (id: string) => {
-    const newList = state.listData?.filter((item) => item.id !== id);
-    setState({ listData: newList as ProductListData });
+    const newList = listData?.map((item, index) => {
+      const changeValueName = typeof value === "string" ? value : item.name;
+      const changeValueIsDone =
+        typeof value === "boolean" ? value : item.isDone;
 
-    deleteRef.current = true;
-  };
-
-  const handleCompleteItem = (id: string, value: boolean) => {
-    const itemIndex = state.listData?.findIndex((item) => item.id === id) || 0;
-
-    const newList = state.listData?.map((item, index) => {
       if (index === itemIndex) {
         return {
           id: item.id,
-          name: item.name,
-          isDone: value,
+          name: changeValueName,
+          isDone: changeValueIsDone,
         };
       }
 
       return item;
     });
 
-    saveOnChange(newList);
-  };
-
-  const handleEditItem = (id: string, value?: string) => {
-    const itemIndex = state.listData?.findIndex((item) => item.id === id) || 0;
-    const newList = state.listData?.map((item, index) => {
-      if (index === itemIndex) {
-        return {
-          id: item.id,
-          name: value,
-          isDone: item.isDone,
-        };
-      }
-
-      return item;
-    });
-
-    saveOnChange(newList);
+    onChange(newList);
   };
 
   return (
     <>
       {loading && <Loader />}
-      {!loading && !state.listData?.length && <p>No data found</p>}
-      {!loading && !!state.listData?.length && (
+      {!loading && !listData?.length && <p>No data found</p>}
+      {!loading && !!listData?.length && (
         <ul ref={listRef} className={style.productList}>
           <DndContext
             sensors={sensors}
@@ -181,28 +121,24 @@ const ProductList = () => {
             onDragEnd={onDragEd}
           >
             <SortableContext
-              items={state.listData}
+              items={listData}
               strategy={verticalListSortingStrategy}
             >
-              {state.listData?.map(({ id, name, isDone }, index: number) => (
+              {listData?.map(({ id, name, isDone }) => (
                 <ProductItem
-                  index={index}
                   key={id}
                   id={id}
                   name={name}
                   isCompleted={isDone}
-                  onChange={handleDeleteItem}
-                  onProductEdit={handleEditItem}
-                  onComplete={handleCompleteItem}
+                  onChange={handleItemChange}
+                  onDelete={onDelete}
                 />
               ))}
             </SortableContext>
           </DndContext>
         </ul>
       )}
-      <ErrorHandler error={error || updateProductListMData.error} />
-      <ProductAddForm onChange={updateList} />
-      <ProductListButtons onChange={refetch} />
+      <ErrorHandler error={error} />
     </>
   );
 };

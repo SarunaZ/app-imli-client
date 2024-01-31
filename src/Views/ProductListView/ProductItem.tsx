@@ -9,25 +9,16 @@ import useState from "Hooks/useState";
 interface Props {
   id: string;
   name?: string | null;
-  index: number;
   isCompleted: boolean;
-  onChange: (id: string) => void;
-  onComplete: (id: string, value: boolean) => void;
-  onProductEdit: (id: string, value?: string) => void;
+  onDelete: (id: string) => void;
+  onChange: (id: string, value: boolean | string) => void;
 }
 
 interface State {
   isEdit: boolean;
 }
 
-const ProductItem = ({
-  id,
-  name,
-  onChange,
-  onComplete,
-  isCompleted,
-  onProductEdit,
-}: Props) => {
+const ProductItem = ({ id, name, onChange, onDelete, isCompleted }: Props) => {
   const [state, setState] = useState<State>({
     isEdit: false,
   });
@@ -37,7 +28,7 @@ const ProductItem = ({
   };
 
   const completeProduct = (value: boolean) => () => {
-    onComplete(id, value);
+    onChange(id, value);
   };
 
   const productItemClass = classnames(style.productListItem, {
@@ -45,12 +36,8 @@ const ProductItem = ({
   });
 
   const editProduct = (value?: string) => {
-    onProductEdit(id, value);
+    onChange(id, value);
     setState({ isEdit: false });
-  };
-
-  const submitForm = (value: string) => {
-    editProduct(value);
   };
 
   return (
@@ -59,7 +46,7 @@ const ProductItem = ({
         <div className={productItemClass}>
           <ProductDropdown
             id={id}
-            onChange={onChange}
+            onChange={onDelete}
             isDisabled={isCompleted}
             onEditProduct={handleEditProduct}
           />
@@ -67,7 +54,6 @@ const ProductItem = ({
             isEdit={state.isEdit}
             productName={name}
             onEdit={editProduct}
-            onSubmit={submitForm}
             isCompleted={isCompleted}
             onCompleteProduct={completeProduct}
           />
