@@ -54,9 +54,9 @@ const MealDropdown = ({ onUpdate }: Props) => {
     <select
       className={style.productListDropdown}
       onChange={handleOnChange}
-      defaultValue=""
+      defaultValue={null}
     >
-      <option value="" disabled>
+      <option value={null} disabled>
         Choose your meal
       </option>
       {mealData?.map((meal) => (
