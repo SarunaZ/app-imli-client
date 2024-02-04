@@ -18,38 +18,22 @@ import {
   verticalListSortingStrategy,
 } from "@dnd-kit/sortable";
 import { ProductListData } from "./types";
-import { ApolloError } from "@apollo/client";
+import useMutation from "Hooks/useMutation";
+import { PRODUCTS_LIST_ORDER_UPDATE_MUTATION } from "Schema/mutations/productMutations";
 
 interface Props {
   listData?: ProductListData;
   loading: boolean;
-  error: ApolloError;
   onChange: (newList: ProductListData) => void;
   onDelete: (id: string) => void;
 }
 
-const ProductList = ({
-  listData,
-  loading,
-  error,
-  onChange,
-  onDelete,
-}: Props) => {
+const ProductList = ({ listData, loading, onChange, onDelete }: Props) => {
   const deleteRef = useRef<boolean>(false);
   const listRef = useRef<HTMLUListElement>(null);
 
-  const sensors = useSensors(
-    useSensor(MouseSensor, {
-      activationConstraint: {
-        distance: 10,
-      },
-    }),
-    useSensor(TouchSensor, {
-      activationConstraint: {
-        delay: 155,
-        tolerance: 15,
-      },
-    }),
+  const [updateProductListM, updateProductListMData] = useMutation(
+    PRODUCTS_LIST_ORDER_UPDATE_MUTATION,
   );
 
   const scrollToListBottom = () => {
@@ -67,6 +51,34 @@ const ProductList = ({
     deleteRef.current = false;
   }, [listData?.length]);
 
+  const saveOnChange = (newList: ProductListData) => {
+    onChange(newList);
+
+    const filteredList = [...newList].map((item) => ({
+      id: item.id,
+      name: item.name,
+      isDone: item.isDone,
+    }));
+
+    updateProductListM({
+      variables: { newList: structuredClone(filteredList) },
+    });
+  };
+
+  const sensors = useSensors(
+    useSensor(MouseSensor, {
+      activationConstraint: {
+        distance: 10,
+      },
+    }),
+    useSensor(TouchSensor, {
+      activationConstraint: {
+        delay: 155,
+        tolerance: 15,
+      },
+    }),
+  );
+
   const onDragEd = (event: DragEndEvent) => {
     const { active, over } = event;
 
@@ -83,9 +95,8 @@ const ProductList = ({
 
     const newList = arrayMove(normalizedList(), oldIndex, newIndex);
 
-    onChange(newList);
+    saveOnChange(newList);
   };
-  console.log(listData, "list");
 
   const handleItemChange = (id: string, value?: boolean | string) => {
     const itemIndex = listData?.findIndex((item) => item.id === id) || 0;
@@ -106,39 +117,38 @@ const ProductList = ({
       return item;
     });
 
-    onChange(newList);
+    saveOnChange(newList);
   };
+
+  if (loading) return <Loader />;
+  if (!listData?.length) return <p>No data found</p>;
 
   return (
     <>
-      {loading && <Loader />}
-      {!loading && !listData?.length && <p>No data found</p>}
-      {!loading && !!listData?.length && (
-        <ul ref={listRef} className={style.productList}>
-          <DndContext
-            sensors={sensors}
-            collisionDetection={closestCenter}
-            onDragEnd={onDragEd}
+      <ul ref={listRef} className={style.productList}>
+        <DndContext
+          sensors={sensors}
+          collisionDetection={closestCenter}
+          onDragEnd={onDragEd}
+        >
+          <SortableContext
+            items={listData}
+            strategy={verticalListSortingStrategy}
           >
-            <SortableContext
-              items={listData}
-              strategy={verticalListSortingStrategy}
-            >
-              {listData?.map(({ id, name, isDone }) => (
-                <ProductItem
-                  key={id}
-                  id={id}
-                  name={name}
-                  isCompleted={isDone}
-                  onChange={handleItemChange}
-                  onDelete={onDelete}
-                />
-              ))}
-            </SortableContext>
-          </DndContext>
-        </ul>
-      )}
-      <ErrorHandler error={error} />
+            {listData?.map(({ id, name, isDone }) => (
+              <ProductItem
+                key={id}
+                id={id}
+                name={name}
+                isCompleted={isDone}
+                onChange={handleItemChange}
+                onDelete={onDelete}
+              />
+            ))}
+          </SortableContext>
+        </DndContext>
+      </ul>
+      <ErrorHandler error={updateProductListMData.error} />
     </>
   );
 };

@@ -1,13 +1,12 @@
 import ProductAddForm from "./ProductAddForm";
-import { useEffect, useRef, useState } from "react";
-import { PRODUCTS_LIST_ORDER_UPDATE_MUTATION } from "Schema/mutations/productMutations";
+import { useRef, useState } from "react";
 import { PRODUCT_LIST_DATA } from "Schema/queries/productQueries";
 import ProductListButtons from "./ProductListButtons";
 import { ProductListData } from "./types";
 import { Product } from "Schema/types";
 import useQuery from "Hooks/useQuery";
-import useMutation from "Hooks/useMutation";
 import ProductList from "./ProductList";
+import ErrorHandler from "Components/ErrorHandler";
 
 interface State {
   listData?: ProductListData;
@@ -15,7 +14,6 @@ interface State {
 
 const ProductListWrapper = () => {
   const deleteRef = useRef<boolean>(false);
-  const listRef = useRef<HTMLUListElement>(null);
   const [state, setState] = useState<State>({
     listData: undefined,
   });
@@ -34,37 +32,8 @@ const ProductListWrapper = () => {
     },
   });
 
-  const [updateProductListM, updateProductListMData] = useMutation(
-    PRODUCTS_LIST_ORDER_UPDATE_MUTATION,
-  );
-
-  const scrollToListBottom = () => {
-    if (!deleteRef.current) {
-      listRef.current?.scroll({
-        top: listRef?.current?.scrollHeight,
-        behavior: "smooth",
-      });
-    }
-  };
-
-  useEffect(() => {
-    scrollToListBottom();
-
-    deleteRef.current = false;
-  }, [state.listData?.length]);
-
   const saveOnChange = (newList: ProductListData) => {
     setState({ listData: [...newList] });
-
-    const filteredList = [...newList].map((item) => ({
-      id: item.id,
-      name: item.name,
-      isDone: item.isDone,
-    }));
-
-    updateProductListM({
-      variables: { newList: structuredClone(filteredList) },
-    });
   };
 
   const updateList = (newList?: Product) => {
@@ -89,8 +58,8 @@ const ProductListWrapper = () => {
         onChange={saveOnChange}
         listData={state.listData}
         onDelete={handleDeleteItem}
-        error={error || updateProductListMData.error}
       />
+      <ErrorHandler error={error} />
       <ProductAddForm onChange={updateList} />
       <ProductListButtons onChange={refetch} />
     </>
