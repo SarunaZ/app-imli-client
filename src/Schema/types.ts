@@ -1,49 +1,45 @@
 export type Maybe<T> = T | null;
-export type Exact<T extends { [key: string]: unknown }> = {
-  [K in keyof T]: T[K];
-};
-export type MakeOptional<T, K extends keyof T> = Omit<T, K> & {
-  [SubKey in K]?: Maybe<T[SubKey]>;
-};
-export type MakeMaybe<T, K extends keyof T> = Omit<T, K> & {
-  [SubKey in K]: Maybe<T[SubKey]>;
-};
+export type InputMaybe<T> = Maybe<T>;
+export type Exact<T extends { [key: string]: unknown }> = { [K in keyof T]: T[K] };
+export type MakeOptional<T, K extends keyof T> = Omit<T, K> & { [SubKey in K]?: Maybe<T[SubKey]> };
+export type MakeMaybe<T, K extends keyof T> = Omit<T, K> & { [SubKey in K]: Maybe<T[SubKey]> };
+export type MakeEmpty<T extends { [key: string]: unknown }, K extends keyof T> = { [_ in K]?: never };
+export type Incremental<T> = T | { [P in keyof T]?: P extends ' $fragmentName' | '__typename' ? T[P] : never };
 /** All built-in and custom scalars, mapped to their actual values */
 export type Scalars = {
-  ID: string;
-  String: string;
-  Boolean: boolean;
-  Int: number;
-  Float: number;
-  /** The `Upload` scalar type represents a file upload. */
-  Upload: any;
+  ID: { input: string; output: string; }
+  String: { input: string; output: string; }
+  Boolean: { input: boolean; output: boolean; }
+  Int: { input: number; output: number; }
+  Float: { input: number; output: number; }
+  Upload: { input: any; output: any; }
 };
 
 export enum CacheControlScope {
-  Private = "PRIVATE",
-  Public = "PUBLIC",
+  Private = 'PRIVATE',
+  Public = 'PUBLIC'
 }
 
 export type IngredientInput = {
-  name?: Maybe<Scalars["String"]>;
+  name?: InputMaybe<Scalars['String']['input']>;
 };
 
 export type Ingredients = {
-  __typename?: "Ingredients";
-  name: Scalars["String"];
+  __typename?: 'Ingredients';
+  name: Scalars['String']['output'];
 };
 
 export type Meal = {
-  __typename?: "Meal";
-  id: Scalars["ID"];
+  __typename?: 'Meal';
+  id: Scalars['ID']['output'];
   ingredients?: Maybe<Array<Maybe<Ingredients>>>;
-  name?: Maybe<Scalars["String"]>;
+  name?: Maybe<Scalars['String']['output']>;
 };
 
 export type Mutation = {
-  __typename?: "Mutation";
+  __typename?: 'Mutation';
   attachMealToProductMutation?: Maybe<Product>;
-  cancelProductList?: Maybe<Scalars["String"]>;
+  cancelProductList?: Maybe<Scalars['String']['output']>;
   completeProduct: Product;
   createMeal: Meal;
   createProduct: Product;
@@ -52,245 +48,149 @@ export type Mutation = {
   updateListOrderMutation?: Maybe<Array<Product>>;
 };
 
+
 export type MutationAttachMealToProductMutationArgs = {
-  ingredients?: Maybe<Array<Maybe<IngredientInput>>>;
+  ingredients?: InputMaybe<Array<InputMaybe<IngredientInput>>>;
 };
+
 
 export type MutationCompleteProductArgs = {
-  id: Scalars["ID"];
-  value?: Maybe<Scalars["Boolean"]>;
+  id: Scalars['ID']['input'];
+  value?: InputMaybe<Scalars['Boolean']['input']>;
 };
+
 
 export type MutationCreateMealArgs = {
-  id?: Maybe<Scalars["String"]>;
-  ingredients?: Maybe<Array<Maybe<IngredientInput>>>;
-  name: Scalars["String"];
+  id?: InputMaybe<Scalars['String']['input']>;
+  ingredients?: InputMaybe<Array<InputMaybe<IngredientInput>>>;
+  name: Scalars['String']['input'];
 };
+
 
 export type MutationCreateProductArgs = {
-  id?: Maybe<Scalars["String"]>;
-  isDone?: Maybe<Scalars["Boolean"]>;
-  name: Scalars["String"];
+  id?: InputMaybe<Scalars['String']['input']>;
+  isDone?: InputMaybe<Scalars['Boolean']['input']>;
+  name: Scalars['String']['input'];
 };
+
 
 export type MutationDeleteMealArgs = {
-  id: Scalars["ID"];
+  id: Scalars['ID']['input'];
 };
+
 
 export type MutationDeleteProductArgs = {
-  id: Scalars["ID"];
+  id: Scalars['ID']['input'];
 };
 
+
 export type MutationUpdateListOrderMutationArgs = {
-  newList?: Maybe<Array<Maybe<ProductInput>>>;
+  newList?: InputMaybe<Array<InputMaybe<ProductInput>>>;
 };
 
 export type Null = {
-  __typename?: "Null";
-  success?: Maybe<Scalars["Boolean"]>;
+  __typename?: 'Null';
+  success?: Maybe<Scalars['Boolean']['output']>;
 };
 
 export type Product = {
-  __typename?: "Product";
-  id: Scalars["ID"];
-  isDone?: Maybe<Scalars["Boolean"]>;
-  name?: Maybe<Scalars["String"]>;
+  __typename?: 'Product';
+  id: Scalars['ID']['output'];
+  isDone?: Maybe<Scalars['Boolean']['output']>;
+  name?: Maybe<Scalars['String']['output']>;
 };
 
 export type ProductInput = {
-  id: Scalars["ID"];
-  isDone: Scalars["Boolean"];
-  name?: Maybe<Scalars["String"]>;
+  id: Scalars['ID']['input'];
+  isDone: Scalars['Boolean']['input'];
+  name?: InputMaybe<Scalars['String']['input']>;
 };
 
 export type Query = {
-  __typename?: "Query";
+  __typename?: 'Query';
   meals?: Maybe<Array<Meal>>;
   products?: Maybe<Array<Product>>;
   userDashboard: UserDashboard;
 };
 
 export type User = {
-  __typename?: "User";
-  id: Scalars["ID"];
-  password: Scalars["String"];
-  username: Scalars["String"];
+  __typename?: 'User';
+  id: Scalars['ID']['output'];
+  password: Scalars['String']['output'];
+  username: Scalars['String']['output'];
 };
 
 export type UserDashboard = {
-  __typename?: "UserDashboard";
-  username?: Maybe<Scalars["String"]>;
+  __typename?: 'UserDashboard';
+  username?: Maybe<Scalars['String']['output']>;
 };
 
 export type MealMutationMutationVariables = Exact<{
-  id?: Maybe<Scalars["String"]>;
-  name: Scalars["String"];
-  ingredients?: Maybe<Array<Maybe<IngredientInput>> | Maybe<IngredientInput>>;
+  id?: InputMaybe<Scalars['String']['input']>;
+  name: Scalars['String']['input'];
+  ingredients?: InputMaybe<Array<InputMaybe<IngredientInput>> | InputMaybe<IngredientInput>>;
 }>;
 
-export type MealMutationMutation = {
-  __typename?: "Mutation";
-  createMeal: {
-    __typename?: "Meal";
-    id: string;
-    name?: Maybe<string>;
-    ingredients?: Maybe<
-      Array<Maybe<{ __typename?: "Ingredients"; name: string }>>
-    >;
-  };
-};
+
+export type MealMutationMutation = { __typename?: 'Mutation', createMeal: { __typename?: 'Meal', id: string, name?: string | null, ingredients?: Array<{ __typename?: 'Ingredients', name: string } | null> | null } };
 
 export type MealDeleteMutationMutationVariables = Exact<{
-  id: Scalars["ID"];
+  id: Scalars['ID']['input'];
 }>;
 
-export type MealDeleteMutationMutation = {
-  __typename?: "Mutation";
-  deleteMeal?: Maybe<{ __typename?: "Meal"; id: string }>;
-};
+
+export type MealDeleteMutationMutation = { __typename?: 'Mutation', deleteMeal?: { __typename?: 'Meal', id: string } | null };
 
 export type ProductMutationMutationVariables = Exact<{
-  id?: Maybe<Scalars["String"]>;
-  name: Scalars["String"];
+  id?: InputMaybe<Scalars['String']['input']>;
+  name: Scalars['String']['input'];
 }>;
 
-export type ProductMutationMutation = {
-  __typename?: "Mutation";
-  createProduct: {
-    __typename?: "Product";
-    id: string;
-    name?: Maybe<string>;
-    isDone?: Maybe<boolean>;
-  };
-};
+
+export type ProductMutationMutation = { __typename?: 'Mutation', createProduct: { __typename?: 'Product', id: string, name?: string | null, isDone?: boolean | null } };
 
 export type AttachMealToProductMutationMutationVariables = Exact<{
-  ingredients?: Maybe<Array<Maybe<IngredientInput>> | Maybe<IngredientInput>>;
+  ingredients?: InputMaybe<Array<InputMaybe<IngredientInput>> | InputMaybe<IngredientInput>>;
 }>;
 
-export type AttachMealToProductMutationMutation = {
-  __typename?: "Mutation";
-  attachMealToProductMutation?: Maybe<{
-    __typename?: "Product";
-    id: string;
-    name?: Maybe<string>;
-  }>;
-};
 
-export type ProductCompleteMutationMutationVariables = Exact<{
-  id: Scalars["ID"];
-  value?: Maybe<Scalars["Boolean"]>;
-}>;
-
-export type ProductCompleteMutationMutation = {
-  __typename?: "Mutation";
-  completeProduct: {
-    __typename?: "Product";
-    id: string;
-    isDone?: Maybe<boolean>;
-  };
-};
+export type AttachMealToProductMutationMutation = { __typename?: 'Mutation', attachMealToProductMutation?: { __typename?: 'Product', id: string, name?: string | null } | null };
 
 export type ProductListOrderMutationMutationVariables = Exact<{
-  newList?: Maybe<Array<Maybe<ProductInput>> | Maybe<ProductInput>>;
+  newList?: InputMaybe<Array<InputMaybe<ProductInput>> | InputMaybe<ProductInput>>;
 }>;
 
-export type ProductListOrderMutationMutation = {
-  __typename?: "Mutation";
-  updateListOrderMutation?: Maybe<
-    Array<{
-      __typename?: "Product";
-      id: string;
-      name?: Maybe<string>;
-      isDone?: Maybe<boolean>;
-    }>
-  >;
-};
 
-export type ProductListCancelMutationMutationVariables = Exact<{
-  [key: string]: never;
-}>;
+export type ProductListOrderMutationMutation = { __typename?: 'Mutation', updateListOrderMutation?: Array<{ __typename?: 'Product', id: string, name?: string | null, isDone?: boolean | null }> | null };
 
-export type ProductListCancelMutationMutation = {
-  __typename?: "Mutation";
-  cancelProductList?: Maybe<string>;
-};
+export type ProductListCancelMutationMutationVariables = Exact<{ [key: string]: never; }>;
+
+
+export type ProductListCancelMutationMutation = { __typename?: 'Mutation', cancelProductList?: string | null };
 
 export type ProductDeleteMutationMutationVariables = Exact<{
-  id: Scalars["ID"];
+  id: Scalars['ID']['input'];
 }>;
 
-export type ProductDeleteMutationMutation = {
-  __typename?: "Mutation";
-  deleteProduct?: Maybe<{ __typename?: "Product"; id: string }>;
-};
 
-export type UserDataQueryVariables = Exact<{ [key: string]: never }>;
+export type ProductDeleteMutationMutation = { __typename?: 'Mutation', deleteProduct?: { __typename?: 'Product', id: string } | null };
 
-export type UserDataQuery = {
-  __typename?: "Query";
-  userDashboard: {
-    __typename?: "UserDashboard";
-    username?: Maybe<string>;
-  };
-};
+export type UserDataQueryVariables = Exact<{ [key: string]: never; }>;
 
-export type MealListQueryVariables = Exact<{ [key: string]: never }>;
 
-export type MealListQuery = {
-  __typename?: "Query";
-  meals?: Maybe<
-    Array<{
-      __typename?: "Meal";
-      id: string;
-      name?: Maybe<string>;
-      ingredients?: Maybe<
-        Array<Maybe<{ __typename?: "Ingredients"; name: string }>>
-      >;
-    }>
-  >;
-};
+export type UserDataQuery = { __typename?: 'Query', userDashboard: { __typename?: 'UserDashboard', username?: string | null } };
 
-export type ProductListQueryVariables = Exact<{
-  [key: string]: never;
-}>;
+export type MealListQueryVariables = Exact<{ [key: string]: never; }>;
 
-export type ProductListQuery = {
-  __typename?: "Query";
-  products?: Maybe<
-    Array<{
-      __typename?: "Product";
-      id: string;
-      name?: Maybe<string>;
-      isDone?: Maybe<boolean>;
-    }>
-  >;
-  meals?: Maybe<
-    Array<{
-      __typename?: "Meal";
-      id: string;
-      name?: Maybe<string>;
-      ingredients?: Maybe<
-        Array<Maybe<{ __typename?: "Ingredients"; name: string }>>
-      >;
-    }>
-  >;
-};
 
-export type MealDropDownListQueryVariables = Exact<{
-  [key: string]: never;
-}>;
+export type MealListQuery = { __typename?: 'Query', meals?: Array<{ __typename?: 'Meal', id: string, name?: string | null, ingredients?: Array<{ __typename?: 'Ingredients', name: string } | null> | null }> | null };
 
-export type MealDropDownListQuery = {
-  __typename?: "Query";
-  meals?: Maybe<
-    Array<{
-      __typename?: "Meal";
-      id: string;
-      name?: Maybe<string>;
-      ingredients?: Maybe<
-        Array<Maybe<{ __typename?: "Ingredients"; name: string }>>
-      >;
-    }>
-  >;
-};
+export type ProductListQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+export type ProductListQuery = { __typename?: 'Query', products?: Array<{ __typename?: 'Product', id: string, name?: string | null, isDone?: boolean | null }> | null, meals?: Array<{ __typename?: 'Meal', id: string, name?: string | null, ingredients?: Array<{ __typename?: 'Ingredients', name: string } | null> | null }> | null };
+
+export type MealDropDownListQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+export type MealDropDownListQuery = { __typename?: 'Query', meals?: Array<{ __typename?: 'Meal', id: string, name?: string | null, ingredients?: Array<{ __typename?: 'Ingredients', name: string } | null> | null }> | null };
