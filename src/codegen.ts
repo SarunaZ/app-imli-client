@@ -1,16 +1,21 @@
-import type { CodegenConfig } from "@graphql-codegen/cli";
+import { CodegenConfig } from "@graphql-codegen/cli";
+import "dotenv/config";
 
 const config: CodegenConfig = {
-  overwrite: true,
-  schema: "https://swapi-graphql.netlify.app/.netlify/functions/index",
-  documents: "src/**/*.tsx",
-  generates: {
-    "src/Schema/types.ts": {
-      preset: "client",
-      plugins: [],
+  schema: [
+    {
+      [process.env.CLIENT_GRAPHQL_SCHEMA_LINK]: {
+        headers: {
+          "codegen-request": "true",
+        },
+      },
     },
-    "./graphql.schema.json": {
-      plugins: ["introspection"],
+  ],
+  documents: ["src/Schema/**/*.ts"],
+  ignoreNoDocuments: true,
+  generates: {
+    "./src/Schema/types.ts": {
+      plugins: ["typescript", "typescript-operations"],
     },
   },
 };

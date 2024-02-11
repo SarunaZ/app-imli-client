@@ -17,7 +17,8 @@
     "node_modules",
     "webpack.config.js",
     "internals/webpack",
-    "tsconfig.json"
+    "tsconfig.json",
+    "src/Schema/types.ts"
   ],
   "parserOptions": {
     "ecmaVersion": "latest",
