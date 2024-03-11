@@ -7,9 +7,9 @@ interface Props {
   className?: string;
   isLoading?: boolean;
   isDisabled?: boolean;
-  isPrimary?: boolean;
-  isHollow?: boolean;
+  isStyleStripped?: boolean;
   children?: React.ReactNode;
+  buttonStyle?: "prime" | "hollow" | "none";
   type?: "button" | "submit" | "reset";
   onClick?: () => void;
 }
@@ -21,13 +21,13 @@ const Button = ({
   className,
   isDisabled,
   type = "button",
-  isHollow = false,
-  isPrimary = true,
+  buttonStyle = "prime",
 }: Props) => {
-  const buttonClasses = classnames(className, style.button, style.primary, {
-    [style.primary]: isPrimary && !isHollow,
-    [style.hollow]: isHollow,
+  const buttonClasses = classnames(className, {
+    [style.primary]: buttonStyle === "prime",
+    [style.hollow]: buttonStyle === "hollow",
     [style.disabled]: isDisabled || isLoading,
+    [style.button]: buttonStyle !== "none",
   });
 
   return (

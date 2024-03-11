@@ -4,7 +4,7 @@ import IngredientContainer from "./IngredientContainer";
 import { IngredientsInput } from "./types";
 import style from "./style.scss";
 import Input from "Components/Input";
-import { MEAL_NAME_MUTATION } from "Schema/mutations/mealMutations";
+import { MEAL_NAME_MUTATION } from "Schema/mutations/meal.mutations";
 import useState from "Hooks/useState";
 import useMutation from "Hooks/useMutation";
 

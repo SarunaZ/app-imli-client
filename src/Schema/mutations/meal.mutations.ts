@@ -27,7 +27,7 @@ export const MEAL_NAME_MUTATION: MutationDocument<
 export const MEAL_DELETE = gql`
   mutation mealDeleteMutation($id: ID!) {
     deleteMeal(id: $id) {
-      id
+      success
     }
   }
 `;

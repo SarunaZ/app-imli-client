@@ -1,7 +1,7 @@
 import Loader from "Components/Loader";
 import ProductItem from "./ProductItem";
 import style from "./style.scss";
-import { useEffect, useRef } from "react";
+import { ComponentProps, useEffect, useRef } from "react";
 import ErrorHandler from "Components/ErrorHandler";
 import {
   closestCenter,
@@ -17,18 +17,36 @@ import {
   SortableContext,
   verticalListSortingStrategy,
 } from "@dnd-kit/sortable";
-import { ProductListData } from "./types";
+import { ProductError, ProductListData } from "./types";
 import useMutation from "Hooks/useMutation";
-import { PRODUCTS_LIST_ORDER_UPDATE_MUTATION } from "Schema/mutations/productMutations";
+import { PRODUCTS_LIST_ORDER_UPDATE_MUTATION } from "Schema/mutations/product.mutations";
+import useState from "Hooks/useState";
 
 interface Props {
   listData?: ProductListData;
   loading: boolean;
   onChange: (newList: ProductListData) => void;
-  onDelete: (id: string) => void;
+  onRename: ComponentProps<typeof ProductItem>["onRename"];
+  onDelete: ComponentProps<typeof ProductItem>["onDelete"];
+  onCompleted: ComponentProps<typeof ProductItem>["onCompleted"];
 }
 
-const ProductList = ({ listData, loading, onChange, onDelete }: Props) => {
+interface State {
+  error?: ProductError;
+}
+
+const ProductList = ({
+  listData,
+  loading,
+  onChange,
+  onDelete,
+  onRename,
+  onCompleted,
+}: Props) => {
+  const [state, setState] = useState<State>({
+    error: undefined,
+  });
+
   const deleteRef = useRef<boolean>(false);
   const listRef = useRef<HTMLUListElement>(null);
 
@@ -95,29 +113,17 @@ const ProductList = ({ listData, loading, onChange, onDelete }: Props) => {
 
     const newList = arrayMove(normalizedList(), oldIndex, newIndex);
 
+    // updatetM({
+    //   variables: {
+    //     id: active.id.toString(),
+    //     previousItemId: over.id.toString(),
+    //   },
+    // });
     saveOnChange(newList);
   };
 
-  const handleItemChange = (id: string, value?: boolean | string) => {
-    const itemIndex = listData?.findIndex((item) => item.id === id) || 0;
-
-    const newList = listData?.map((item, index) => {
-      const changeValueName = typeof value === "string" ? value : item.name;
-      const changeValueIsDone =
-        typeof value === "boolean" ? value : item.isDone;
-
-      if (index === itemIndex) {
-        return {
-          id: item.id,
-          name: changeValueName,
-          isDone: changeValueIsDone,
-        };
-      }
-
-      return item;
-    });
-
-    saveOnChange(newList);
+  const handleOnError = (error: ProductError) => {
+    setState({ error });
   };
 
   if (loading) return <Loader />;
@@ -141,14 +147,16 @@ const ProductList = ({ listData, loading, onChange, onDelete }: Props) => {
                 id={id}
                 name={name}
                 isCompleted={isDone}
-                onChange={handleItemChange}
                 onDelete={onDelete}
+                onError={handleOnError}
+                onRename={onRename}
+                onCompleted={onCompleted}
               />
             ))}
           </SortableContext>
         </DndContext>
       </ul>
-      <ErrorHandler error={updateProductListMData.error} />
+      <ErrorHandler error={updateProductListMData.error || state.error} />
     </>
   );
 };

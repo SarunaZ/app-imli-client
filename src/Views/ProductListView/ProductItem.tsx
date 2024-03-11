@@ -5,30 +5,62 @@ import classnames from "classnames";
 import ProductDropdown from "./ProductDropdown";
 import ProductItemInput from "./ProductItemInput";
 import useState from "Hooks/useState";
+import {
+  PRODUCT_COMPLETE,
+  PRODUCT_RENAME_PRODUCT,
+} from "Schema/mutations/product.mutations";
+import { ProductError } from "./types";
+import useMutation from "../../Hooks/useMutation";
 
 interface Props {
   id: string;
   name?: string | null;
   isCompleted: boolean;
   onDelete: (id: string) => void;
-  onChange: (id: string, value: boolean | string) => void;
+  onError: (err: ProductError) => void;
+  onRename: (id: string, value: string) => void;
+  onCompleted: (id: string, value: boolean) => void;
 }
 
 interface State {
   isEdit: boolean;
 }
 
-const ProductItem = ({ id, name, onChange, onDelete, isCompleted }: Props) => {
+const ProductItem = ({
+  id,
+  name,
+  onCompleted,
+  onDelete,
+  isCompleted,
+  onError,
+  onRename,
+}: Props) => {
   const [state, setState] = useState<State>({
     isEdit: false,
   });
+
+  const [completeProduct, completeProductData] = useMutation(PRODUCT_COMPLETE);
+  const [renameProduct, renameProductData] = useMutation(
+    PRODUCT_RENAME_PRODUCT,
+  );
+
+  const isLoading = renameProductData.loading || completeProductData.loading;
 
   const handleEditProduct = () => {
     setState({ isEdit: true });
   };
 
-  const completeProduct = (value: boolean) => () => {
-    onChange(id, value);
+  const handleOnComplete = (value: boolean) => () => {
+    completeProduct({
+      variables: {
+        id,
+        value,
+      },
+      update: () => {
+        onCompleted(id, value);
+      },
+      onError: (error) => onError(error),
+    });
   };
 
   const productItemClass = classnames(style.productListItem, {
@@ -36,8 +68,19 @@ const ProductItem = ({ id, name, onChange, onDelete, isCompleted }: Props) => {
   });
 
   const editProduct = (value?: string) => {
-    onChange(id, value);
-    setState({ isEdit: false });
+    renameProduct({
+      variables: {
+        id,
+        value,
+      },
+      update: () => {
+        onRename(id, value);
+        setState({ isEdit: false });
+      },
+      onError: (err) => {
+        onError(err);
+      },
+    });
   };
 
   return (
@@ -46,16 +89,18 @@ const ProductItem = ({ id, name, onChange, onDelete, isCompleted }: Props) => {
         <div className={productItemClass}>
           <ProductDropdown
             id={id}
-            onChange={onDelete}
+            onError={onError}
+            onDelete={onDelete}
             isDisabled={isCompleted}
             onEditProduct={handleEditProduct}
           />
           <ProductItemInput
-            isEdit={state.isEdit}
             productName={name}
             onEdit={editProduct}
+            isLoading={isLoading}
+            isEdit={state.isEdit}
             isCompleted={isCompleted}
-            onCompleteProduct={completeProduct}
+            onCompleteProduct={handleOnComplete}
           />
         </div>
       </Box>

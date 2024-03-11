@@ -70,8 +70,8 @@ const IngredientContainer = ({ error, isLoading, inputData }: Props) => {
           Submit
         </Button>
         <Button
-          isHollow
           type="button"
+          buttonStyle="hollow"
           onClick={handleAddInput}
           className={style.indredientFieldAddButton}
         >

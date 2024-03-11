@@ -1,5 +1,5 @@
 import style from "./style.scss";
-import { PRODUCTS_LIST_CANCEL_MUTATION } from "Schema/mutations/productMutations";
+import { PRODUCTS_LIST_CANCEL_MUTATION } from "Schema/mutations/product.mutations";
 import withModal from "HOC/withModal";
 import Button from "Components/Button";
 import ErrorHandler from "Components/ErrorHandler";

@@ -47,8 +47,8 @@ const LoginView = () => {
               <ErrorHandler error={error} />
             </div>
             <Button
-              isPrimary
               type="submit"
+              buttonStyle="prime"
               className={style.loginButton}
               isLoading={isLoading}
             >

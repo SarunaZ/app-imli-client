@@ -43,8 +43,9 @@ export type Mutation = {
   completeProduct: Product;
   createMeal: Meal;
   createProduct: Product;
-  deleteMeal?: Maybe<Meal>;
-  deleteProduct?: Maybe<Product>;
+  deleteMeal?: Maybe<Null>;
+  deleteProduct?: Maybe<Null>;
+  renameProduct: Product;
   updateListOrderMutation?: Maybe<Array<Product>>;
 };
 
@@ -81,6 +82,12 @@ export type MutationDeleteMealArgs = {
 
 export type MutationDeleteProductArgs = {
   id: Scalars['ID']['input'];
+};
+
+
+export type MutationRenameProductArgs = {
+  id: Scalars['ID']['input'];
+  value: Scalars['String']['input'];
 };
 
 
@@ -139,7 +146,7 @@ export type MealDeleteMutationMutationVariables = Exact<{
 }>;
 
 
-export type MealDeleteMutationMutation = { __typename?: 'Mutation', deleteMeal?: { __typename?: 'Meal', id: string } | null };
+export type MealDeleteMutationMutation = { __typename?: 'Mutation', deleteMeal?: { __typename?: 'Null', success?: boolean | null } | null };
 
 export type ProductMutationMutationVariables = Exact<{
   id?: InputMaybe<Scalars['String']['input']>;
@@ -149,31 +156,47 @@ export type ProductMutationMutationVariables = Exact<{
 
 export type ProductMutationMutation = { __typename?: 'Mutation', createProduct: { __typename?: 'Product', id: string, name?: string | null, isDone?: boolean | null } };
 
-export type AttachMealToProductMutationMutationVariables = Exact<{
+export type AttachMealToProductMutationVariables = Exact<{
   ingredients?: InputMaybe<Array<InputMaybe<IngredientInput>> | InputMaybe<IngredientInput>>;
 }>;
 
 
-export type AttachMealToProductMutationMutation = { __typename?: 'Mutation', attachMealToProductMutation?: { __typename?: 'Product', id: string, name?: string | null } | null };
+export type AttachMealToProductMutation = { __typename?: 'Mutation', attachMealToProductMutation?: { __typename?: 'Product', id: string, name?: string | null } | null };
 
-export type ProductListOrderMutationMutationVariables = Exact<{
+export type ProductListOrderMutationVariables = Exact<{
   newList?: InputMaybe<Array<InputMaybe<ProductInput>> | InputMaybe<ProductInput>>;
 }>;
 
 
-export type ProductListOrderMutationMutation = { __typename?: 'Mutation', updateListOrderMutation?: Array<{ __typename?: 'Product', id: string, name?: string | null, isDone?: boolean | null }> | null };
+export type ProductListOrderMutation = { __typename?: 'Mutation', updateListOrderMutation?: Array<{ __typename?: 'Product', id: string, name?: string | null, isDone?: boolean | null }> | null };
 
-export type ProductListCancelMutationMutationVariables = Exact<{ [key: string]: never; }>;
+export type ProductListCancelMutationVariables = Exact<{ [key: string]: never; }>;
 
 
-export type ProductListCancelMutationMutation = { __typename?: 'Mutation', cancelProductList?: string | null };
+export type ProductListCancelMutation = { __typename?: 'Mutation', cancelProductList?: string | null };
 
-export type ProductDeleteMutationMutationVariables = Exact<{
+export type ProductDeleteMutationVariables = Exact<{
   id: Scalars['ID']['input'];
 }>;
 
 
-export type ProductDeleteMutationMutation = { __typename?: 'Mutation', deleteProduct?: { __typename?: 'Product', id: string } | null };
+export type ProductDeleteMutation = { __typename?: 'Mutation', deleteProduct?: { __typename?: 'Null', success?: boolean | null } | null };
+
+export type ProductRenameMutationVariables = Exact<{
+  id: Scalars['ID']['input'];
+  value: Scalars['String']['input'];
+}>;
+
+
+export type ProductRenameMutation = { __typename?: 'Mutation', renameProduct: { __typename?: 'Product', id: string, name?: string | null, isDone?: boolean | null } };
+
+export type ProductCompleteMutationVariables = Exact<{
+  id: Scalars['ID']['input'];
+  value: Scalars['Boolean']['input'];
+}>;
+
+
+export type ProductCompleteMutation = { __typename?: 'Mutation', completeProduct: { __typename?: 'Product', id: string, name?: string | null, isDone?: boolean | null } };
 
 export type UserDataQueryVariables = Exact<{ [key: string]: never; }>;
 

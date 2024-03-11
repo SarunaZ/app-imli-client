@@ -18,7 +18,6 @@ const IngredientInput = ({ index, onDelete, onChange, inputValue }: Props) => {
     <div className={style.ingredientFormInputWrapper}>
       <Input required value={inputValue} onChange={handleButtonAdd} />
       <Button
-        isHollow
         className={style.ingredientFormButton}
         onClick={() => onDelete(index)}
       >

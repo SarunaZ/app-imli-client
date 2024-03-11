@@ -3,7 +3,7 @@ import style from "./style.scss";
 import { SyntheticEvent, useRef } from "react";
 import Button from "Components/Button";
 import ErrorHandler from "Components/ErrorHandler";
-import { PRODUCT_NAME_MUTATION } from "Schema/mutations/productMutations";
+import { PRODUCT_NAME_MUTATION } from "Schema/mutations/product.mutations";
 import { Product } from "Schema/types";
 import useMutation from "Hooks/useMutation";
 
