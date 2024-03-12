@@ -11,7 +11,7 @@ const config: CodegenConfig = {
       },
     },
   ],
-  documents: ["src/Schema/**/*.ts"],
+  documents: ["src/Schema/**/*.queries.ts", "src/Schema/**/*.mutations.ts"],
   ignoreNoDocuments: true,
   generates: {
     "./src/Schema/types.ts": {

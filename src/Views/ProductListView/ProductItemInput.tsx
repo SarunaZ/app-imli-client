@@ -2,9 +2,11 @@ import { ElementRef, SyntheticEvent, useRef } from "react";
 import style from "./style.scss";
 import CurvedArrow from "Images/icons/curved-arrow-right.svg";
 import CheckMark from "Images/icons/checkmark.svg";
+import Button from "Components/Button";
 
 interface Props {
   isEdit: boolean;
+  isLoading: boolean;
   isCompleted: boolean;
   productName: string;
   onEdit: (inputValue: string) => void;
@@ -14,6 +16,7 @@ interface Props {
 const ProductItemInput = ({
   isEdit,
   onEdit,
+  isLoading,
   productName,
   isCompleted,
   onCompleteProduct,
@@ -46,17 +49,20 @@ const ProductItemInput = ({
         </form>
       )}
       {isEdit && (
-        <button
+        <Button
           type="button"
+          buttonStyle="none"
           onClick={handleOnEdit}
           className={style.productListItemButtons}
         >
           <CheckMark height="25px" />
-        </button>
+        </Button>
       )}
       {!isEdit && (
-        <button
+        <Button
           type="button"
+          buttonStyle="none"
+          isLoading={isLoading}
           className={style.productListItemButtons}
           onClick={onCompleteProduct(!isCompleted)}
         >
@@ -65,7 +71,7 @@ const ProductItemInput = ({
           ) : (
             <CurvedArrow height="30px" className={style.returnIcon} />
           )}
-        </button>
+        </Button>
       )}
     </>
   );

@@ -1,7 +1,7 @@
 import { Helmet } from "react-helmet-async";
 import MealList from "./MealList";
 import style from "./style.scss";
-import { MEAL_LIST_DATA } from "Schema/queries/mealQueries";
+import { MEAL_LIST_DATA } from "Schema/queries/meal.queries";
 import Loader from "Components/Loader";
 import ErrorHandler from "Components/ErrorHandler";
 import ExportToCsv from "./ExportToCsv";

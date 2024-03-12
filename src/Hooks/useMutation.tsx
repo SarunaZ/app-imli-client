@@ -20,6 +20,7 @@ const useMutation = <Q, V extends OperationVariables>(
   const [apolloMutation, apolloMutationData] = useApolloMutation<Q, V>(
     mutation,
     {
+      fetchPolicy: "no-cache",
       errorPolicy: "all",
     },
   );

@@ -6,8 +6,7 @@ RUN apt-get update && apt-get install -y curl \
   apt-get install -y nodejs
 
 FROM node:20-alpine
-
-WORKDIR /app/client
+WORKDIR /client
 COPY ./package.json yarn.lock ./
 COPY . .
 EXPOSE 3000

@@ -1,6 +1,6 @@
 import ProductAddForm from "./ProductAddForm";
 import { useRef, useState } from "react";
-import { PRODUCT_LIST_DATA } from "Schema/queries/productQueries";
+import { PRODUCT_LIST_DATA } from "Schema/queries/product.queries";
 import ProductListButtons from "./ProductListButtons";
 import { ProductListData } from "./types";
 import { Product } from "Schema/types";
@@ -51,6 +51,33 @@ const ProductListWrapper = () => {
     deleteRef.current = true;
   };
 
+  // This is perfectly fine even if the solution repeats itself with different variables
+  // This is more maintainable and readable than having multiple if statements for different use cases
+  // Not everything has to be strictly according to DRY
+  const handleProductRename = (id: string, value: string) => {
+    const newList = state.listData?.map((item) => {
+      if (item.id === id) {
+        item.name = value;
+      }
+
+      return item;
+    });
+
+    setState({ listData: [...newList] });
+  };
+
+  const handleProductComplete = (id: string, value: boolean) => {
+    const newList = state.listData?.map((item) => {
+      if (item.id === id) {
+        item.isDone = value;
+      }
+
+      return item;
+    });
+
+    setState({ listData: [...newList] });
+  };
+
   return (
     <>
       <ProductList
@@ -58,6 +85,8 @@ const ProductListWrapper = () => {
         onChange={saveOnChange}
         listData={state.listData}
         onDelete={handleDeleteItem}
+        onRename={handleProductRename}
+        onCompleted={handleProductComplete}
       />
       <ErrorHandler error={error} />
       <ProductAddForm onChange={updateList} />

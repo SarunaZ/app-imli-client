@@ -4,19 +4,23 @@ import Delete from "Images/icons/delete.svg";
 import Edit from "Images/icons/edit.svg";
 import IconButton from "Components/IconButton";
 import style from "./style.scss";
-import { PRODUCT_DELETE } from "Schema/mutations/productMutations";
+import { PRODUCT_DELETE } from "Schema/mutations/product.mutations";
 import useMutation from "Hooks/useMutation";
+import { ProductError } from "./types";
 
 interface Props {
   id: string;
   isDisabled?: boolean;
-  onChange: (id: string) => void;
+  onDelete: (id: string) => void;
   onEditProduct: () => void;
+  onError: (error: ProductError) => void;
 }
+
 const ProductDropdown = ({
   id,
   isDisabled,
-  onChange,
+  onDelete,
+  onError,
   onEditProduct,
 }: Props) => {
   const [deleteProductM, deleteProductData] = useMutation(PRODUCT_DELETE);
@@ -26,7 +30,8 @@ const ProductDropdown = ({
       variables: {
         id,
       },
-      update: () => onChange(id),
+      update: () => onDelete(id),
+      onError: (error) => onError(error),
     });
   };
 
