@@ -56,7 +56,7 @@ const MealDropdown = ({ onUpdate }: Props) => {
       onChange={handleOnChange}
       defaultValue={null}
     >
-      <option value={null} disabled>
+      <option value={null} disabled selected>
         Choose your meal
       </option>
       {mealData?.map((meal) => (
