@@ -13,7 +13,7 @@ import {
 import { getCookieData } from "./Utilities/cookieParser";
 import { Helmet, HelmetProvider } from "react-helmet-async";
 import Authentication from "Providers/Authentication";
-import ThemeSwither from "Providers/ThemeProvider";
+import ThemeSwitcher from "Providers/ThemeProvider";
 import "../public/sw";
 
 const httpLink = createHttpLink({
@@ -45,9 +45,9 @@ container.render(
         <BrowserRouter>
           <Helmet title="Imli Home Utility System" />
           <Authentication>
-            <ThemeSwither>
+            <ThemeSwitcher>
               <App />
-            </ThemeSwither>
+            </ThemeSwitcher>
           </Authentication>
         </BrowserRouter>
       </HelmetProvider>

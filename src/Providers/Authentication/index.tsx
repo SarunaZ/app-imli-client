@@ -33,7 +33,7 @@ const Authentication = ({ children }: Props) => {
       body: JSON.stringify({ username, password }),
       onSuccess: (res: { token: string }) => {
         if (res.token) {
-          setCookies(AUTH_COOKIE, `${res.token}`, 14);
+          setCookies(AUTH_COOKIE, `${res.token}`, 31);
           setState({ auth: true });
         }
       },

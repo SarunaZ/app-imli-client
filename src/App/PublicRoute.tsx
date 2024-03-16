@@ -1,13 +1,13 @@
 import { AuthenticationProvider } from "Providers/Authentication/Authentication";
-import { useContext } from "react";
+import { ReactElement, useContext } from "react";
 import { Navigate } from "react-router-dom";
 import { ROUTE_ROOT } from "./constants";
 
 interface Props {
-  children: JSX.Element;
+  children: ReactElement;
 }
 
-export const PublicRoute = ({ children }: Props): JSX.Element => {
+export const PublicRoute = ({ children }: Props) => {
   const { isLoggedIn } = useContext(AuthenticationProvider);
 
   if (!isLoggedIn) {

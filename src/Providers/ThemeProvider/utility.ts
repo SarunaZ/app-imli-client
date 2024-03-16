@@ -1,4 +1,4 @@
-import { getCookieData } from "Utilities/cookieParser";
 import { Theme } from "./types";
 
-export const storedTheme = getCookieData("theme") as Theme;
+export const storedTheme =
+  (localStorage.getItem("theme") as Theme) || Theme.Light;

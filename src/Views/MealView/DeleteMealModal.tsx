@@ -25,7 +25,9 @@ const DeleteMealModal = ({ id, onChange }: Props) => {
 
   return (
     <div>
-      <h3>Do you want to delete this meal?</h3>
+      <h3 className={style.deleteModalTitle}>
+        Do you want to delete this meal?
+      </h3>
       <Button
         className={style.deleteModalButton}
         onClick={deleteProduct}

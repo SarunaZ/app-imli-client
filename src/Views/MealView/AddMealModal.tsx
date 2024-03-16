@@ -22,7 +22,7 @@ const AddMealModal = ({ onChange }: Props) => {
   });
   const mealInputRef = useRef<ElementRef<"input">>(null);
   const ingredientInputRef = useRef<IngredientsInput[]>();
-  const [addMealQ, addMealQData] = useMutation(MEAL_NAME_MUTATION);
+  const [addMeal, mealData] = useMutation(MEAL_NAME_MUTATION);
 
   const setInputData = (data: IngredientsInput[]) => {
     ingredientInputRef.current = data;
@@ -30,17 +30,17 @@ const AddMealModal = ({ onChange }: Props) => {
 
   const submitProduct = (e: SyntheticEvent<HTMLFormElement>) => {
     e.preventDefault();
-
-    addMealQ({
-      variables: {
-        name: mealInputRef.current?.value,
-        ingredients: ingredientInputRef.current,
-      },
-      update: () => {
-        onChange();
-        setState({ addSuccessful: true });
-      },
-    });
+    console.log(ingredientInputRef.current);
+    // addMealQ({
+    //   variables: {
+    //     name: mealInputRef.current?.value,
+    //     ingredients: ingredientInputRef.current,
+    //   },
+    //   update: () => {
+    //     onChange();
+    //     setState({ addSuccessful: true });
+    //   },
+    // });
   };
 
   if (state.addSuccessful) {
@@ -55,9 +55,9 @@ const AddMealModal = ({ onChange }: Props) => {
     <form className={style.addMealModalWrapper} onSubmit={submitProduct}>
       <Input required ref={mealInputRef} label="Meal name" name="productName" />
       <IngredientContainer
-        error={addMealQData?.error}
-        isLoading={addMealQData.loading}
-        inputData={setInputData}
+        error={mealData?.error}
+        isLoading={mealData.loading}
+        onInput={setInputData}
       />
     </form>
   );

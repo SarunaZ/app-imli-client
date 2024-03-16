@@ -32,7 +32,6 @@ const MealListItem = ({ data, onDelete }: Props) => {
       <Box title={data?.name}>
         <li className={style.mealListItem}>
           <div className={style.mealListItemHeader}>
-            <p className={style.mealListItemTitle}>{}</p>
             <IconButton
               onClick={toggleDeleteModal}
               className={style.mealListItemDeleteButton}
