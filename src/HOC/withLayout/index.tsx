@@ -10,17 +10,15 @@ interface Props {
 }
 
 const Layout = ({ children }: Props) => (
-  <ErrorBoundary>
+  <>
     <ErrorBoundary>
       <Sidebar />
     </ErrorBoundary>
     <main className={style.mainContent}>
-      <ErrorBoundary>
-        <Suspense fallback={<Loader />}>
-          <ErrorBoundary>{children}</ErrorBoundary>
-        </Suspense>
-      </ErrorBoundary>
+      <Suspense fallback={<Loader />}>
+        <ErrorBoundary>{children}</ErrorBoundary>
+      </Suspense>
     </main>
-  </ErrorBoundary>
+  </>
 );
 export default Layout;

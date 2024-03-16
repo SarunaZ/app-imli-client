@@ -38,17 +38,11 @@
 
 .mealListItem {
   padding: 10px 0;
+  margin-top: 15px;
 
   @media (min-width: $small-screen) {
     padding: 0;
   }
-}
-
-.mealListItemTitle {
-  color: $secondaryText;
-  font-size: $fs-medium-rare;
-  margin: 0 0 15px;
-  text-transform: capitalize;
 }
 
 .mealListItemIngredients {
@@ -144,10 +138,18 @@
 
 .mealExportButton {
   height: 25px;
+
+  svg {
+    color: $primaryText
+  }
 }
 
 .mealListItemDeleteButton {
   right: 10px;
   position: absolute;
   top: 10px;
+}
+
+.deleteModalTitle {
+  color: $primaryText
 }

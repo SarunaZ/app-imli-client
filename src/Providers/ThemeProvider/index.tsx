@@ -1,6 +1,6 @@
 import useState from "Hooks/useState";
 import { setCookies } from "Utilities/cookieParser";
-import { createContext } from "react";
+import { createContext, ReactNode } from "react";
 import { Helmet } from "react-helmet-async";
 import { Theme } from "./types";
 import { storedTheme } from "./utility";
@@ -10,7 +10,7 @@ interface State {
 }
 
 interface Props {
-  children: React.ReactNode;
+  children: ReactNode;
 }
 
 interface ContextState {
@@ -25,14 +25,14 @@ const defaultState: ContextState = {
 
 export const ThemeProvider = createContext(defaultState);
 
-const ThemeSwither = ({ children }: Props) => {
+const ThemeSwitcher = ({ children }: Props) => {
   const [state, setState] = useState<State>({
     currentTheme: storedTheme,
   });
 
   const setTheme = (theme: Theme) => {
+    localStorage.setItem("theme", theme);
     setState({ currentTheme: theme });
-    setCookies("theme", theme, 14);
   };
 
   const providerValue = {
@@ -50,4 +50,4 @@ const ThemeSwither = ({ children }: Props) => {
   );
 };
 
-export default ThemeSwither;
+export default ThemeSwitcher;

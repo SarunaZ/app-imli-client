@@ -1,56 +1,62 @@
 import React from "react";
 import IngredientInput from "./IngredientInput";
-import { IngredientsInput } from "./types";
 import style from "./style.scss";
 import Button from "Components/Button";
 import ErrorHandler from "Components/ErrorHandler";
 import { ApolloError } from "@apollo/client";
 import useState from "Hooks/useState";
+import { IngredientsInput } from "./types";
 
 interface Props {
   isLoading: boolean;
   error?: ApolloError;
-  inputData: (data: IngredientsInput[]) => void;
+  onInput: (data: IngredientsInput[]) => void;
 }
 
 const defaultInputValue = {
   name: "",
 };
 
-const IngredientContainer = ({ error, isLoading, inputData }: Props) => {
-  const [inputState, setInputState] = useState<IngredientsInput[]>([
-    defaultInputValue,
-  ]);
+interface State {
+  inputState?: IngredientsInput[];
+}
+
+const IngredientContainer = ({ error, isLoading, onInput }: Props) => {
+  const [state, setState] = useState<State>({
+    inputState: [{ name: "" }],
+  });
 
   const handleAddInput = () => {
-    setInputState((prev) => [...prev, defaultInputValue]);
+    setState((prev) => ({
+      inputState: [...prev.inputState, defaultInputValue],
+    }));
   };
 
   const handleRemoveInput = (index: number) => {
-    if (inputState.length === 1) {
+    if (state.inputState.length === 1) {
       return;
     }
 
-    const newInputState = inputState.filter((value, arrIndex) => {
+    const newInputState = state.inputState.filter((value, arrIndex) => {
       return index !== arrIndex;
     });
 
-    setInputState(newInputState);
-    inputData(inputState);
+    setState({ inputState: newInputState });
+    onInput(state.inputState);
   };
 
   const handleInputChange = (inputValue: string) => (index: number) => {
-    const shallowCopyOfState = [...inputState];
+    const shallowCopyOfState = [...state.inputState];
     shallowCopyOfState[index] = { name: inputValue };
-    setInputState(shallowCopyOfState);
-    inputData(inputState);
+    setState({ inputState: shallowCopyOfState });
+    onInput(shallowCopyOfState);
   };
 
   return (
     <>
       <label className={style.indredientFieldLabel}>Ingredients</label>
       <div className={style.indredientFieldsrapper}>
-        {inputState?.map((input, index) => (
+        {state.inputState?.map((input, index) => (
           <IngredientInput
             key={index}
             index={index}
