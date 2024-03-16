@@ -30,17 +30,17 @@ const AddMealModal = ({ onChange }: Props) => {
 
   const submitProduct = (e: SyntheticEvent<HTMLFormElement>) => {
     e.preventDefault();
-    console.log(ingredientInputRef.current);
-    // addMealQ({
-    //   variables: {
-    //     name: mealInputRef.current?.value,
-    //     ingredients: ingredientInputRef.current,
-    //   },
-    //   update: () => {
-    //     onChange();
-    //     setState({ addSuccessful: true });
-    //   },
-    // });
+
+    addMeal({
+      variables: {
+        name: mealInputRef.current?.value,
+        ingredients: ingredientInputRef.current,
+      },
+      update: () => {
+        onChange();
+        setState({ addSuccessful: true });
+      },
+    });
   };
 
   if (state.addSuccessful) {
