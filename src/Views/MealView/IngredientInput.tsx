@@ -11,7 +11,6 @@ interface Props {
 }
 const IngredientInput = ({ index, onDelete, onChange, inputValue }: Props) => {
   const handleButtonAdd = (e: SyntheticEvent<HTMLInputElement>) => {
-    console.log(e.currentTarget.value);
     onChange(e.currentTarget.value)(index);
   };
 
