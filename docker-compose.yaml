@@ -21,7 +21,7 @@ services:
       - "3000:3000"
     volumes:
       - ./:/client/
-    entrypoint: ./wait-for-it.sh imli-api:4000 --  sh -c "yarn && yarn start"
+    entrypoint: ./wait-for-it.sh imli-api:4000 -- sh -c "yarn && yarn start"
   imli-db:
     image: mongo:latest
     volumes:
