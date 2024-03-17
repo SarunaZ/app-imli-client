@@ -17,4 +17,4 @@ services:
       - "3000:3000"
     volumes:
       - ./:/client/
-    command: ./wait-for-it.sh imli-api:4000 --  sh -c "yarn && yarn start"
+    entrypoint: ./wait-for-it.sh imli-api:4000 -- sh -c "yarn && yarn start"
