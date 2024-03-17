@@ -10,4 +10,3 @@ WORKDIR /client
 COPY ./package.json yarn.lock wait-for-it.sh ./
 COPY . .
 EXPOSE 3000
-CMD ["yarn", "start"]

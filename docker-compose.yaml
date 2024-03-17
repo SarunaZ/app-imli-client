@@ -3,10 +3,14 @@ services:
   imli-api:
     build: ../app-imli-server
     container_name: imli-api
+    environment:
+      NODE_DATABASE_URL: 'mongodb://imli-db:27017/imli'
     ports:
       - "4000:4000"
     volumes:
       - ../app-imli-server:/api
+    depends_on:
+      - imli-db
     command: sh -c "yarn && yarn dev:docker"
   imli-client:
     build: ./
@@ -17,4 +21,14 @@ services:
       - "3000:3000"
     volumes:
       - ./:/client/
-    command: ./wait-for-it.sh imli-api:4000 --  sh -c "yarn && yarn start"
+    entrypoint: ./wait-for-it.sh imli-api:4000 --  sh -c "yarn && yarn start"
+  imli-db:
+    image: mongo:latest
+    volumes:
+      - mongoDb:/data/db
+    environment:
+      - MONGO_INITDB_DATABASE=imli
+    restart: always
+
+volumes:
+  mongoDb: {}
