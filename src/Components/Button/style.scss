@@ -33,6 +33,6 @@
   transition: background-color 150ms ease-in-out;
 
   &:hover {
-    background-color: $white;
+    background-color:  color-mix(in srgb, $primaryText 20%, $secondary);
   }
 }

@@ -7,6 +7,9 @@ import { Theme } from "Providers/ThemeProvider/types";
 const SidebarFooter = () => {
   const { currentTheme, setCurrentTheme } = useContext(ThemeProvider);
 
+  const currentThemeTitle =
+    currentTheme === Theme.Light ? Theme.Dark : Theme.Light;
+
   const handleSetTheme = () => {
     const currentThemeValue =
       currentTheme === Theme.Light ? Theme.Dark : Theme.Light;
@@ -18,7 +21,7 @@ const SidebarFooter = () => {
     <div className={style.sidebarFooter}>
       <Logout />
       <button className={style.themeName} onClick={handleSetTheme}>
-        {currentTheme}
+        {currentThemeTitle}
       </button>
     </div>
   );
