@@ -11,6 +11,7 @@ interface State {
   isLoading: boolean;
   error?: { [variables: string]: any } | string | Error | null;
   login?: (userData: UserLoginData) => void;
+  register?: (userData: UserLoginData) => void;
 }
 
 const defaultState: State = {
@@ -18,6 +19,7 @@ const defaultState: State = {
   isLoggedIn: false,
   isLoading: false,
   login: undefined,
+  register: undefined,
   logout: undefined,
 };
 
