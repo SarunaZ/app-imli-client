@@ -9,6 +9,7 @@
 }
 
 .productListWrapper {
+  color: $primaryText;
   display: flex;
   flex-direction: column;
   margin: auto;
@@ -98,14 +99,24 @@
   }
 }
 
+.formInputWrapper {
+  position: relative;
+}
+
 .formInput {
   background: $main-bg-color;
   border: 2px solid $primaryText;
   border-radius: 4px;
   color: $primaryText;
   font-size: $fs-medium-rare;
-  padding: 15px;
-  margin-bottom: 15px;
+  padding: 15px 40px 15px 15px;
+  width: 100%;
+}
+
+.formInputLoader {
+  right: 10px;
+  top: 15px;
+  position: absolute;
 }
 
 .formLabel {

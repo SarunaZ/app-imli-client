@@ -20,7 +20,6 @@ const ProductListWrapper = () => {
 
   const { loading, error, refetch } = useQuery(PRODUCT_LIST_DATA, {
     fetchPolicy: "network-only",
-    notifyOnNetworkStatusChange: true,
     onCompleted: (res) => {
       setState({
         listData: res.products?.map((item: Product) => ({

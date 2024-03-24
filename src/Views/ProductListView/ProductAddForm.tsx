@@ -1,11 +1,11 @@
 import React, { ElementRef } from "react";
 import style from "./style.scss";
 import { SyntheticEvent, useRef } from "react";
-import Button from "Components/Button";
 import ErrorHandler from "Components/ErrorHandler";
 import { PRODUCT_NAME_MUTATION } from "Schema/mutations/product.mutations";
 import { Product } from "Schema/types";
 import useMutation from "Hooks/useMutation";
+import Loader from "Components/Loader";
 
 interface Props {
   onChange: (productItem: Product) => void;
@@ -41,17 +41,21 @@ const ProductAddForm = ({ onChange }: Props) => {
       <label className={style.formLabel} htmlFor="productName">
         Product
       </label>
-      <input
-        required
-        className={style.formInput}
-        ref={productInputRef}
-        name="productName"
-        type="text"
-      />
+      <div className={style.formInputWrapper}>
+        <input
+          required
+          className={style.formInput}
+          ref={productInputRef}
+          name="productName"
+          type="text"
+        />
+        {productQData.loading && (
+          <div className={style.formInputLoader}>
+            <Loader />
+          </div>
+        )}
+      </div>
       <ErrorHandler error={productQData.error} />
-      <Button type="submit" isLoading={productQData.loading}>
-        <span>Add</span>
-      </Button>
     </form>
   );
 };
