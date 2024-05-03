@@ -5,13 +5,13 @@ import { createPortal } from "react-dom";
 interface Props {
   children: React.ReactNode;
   onDropdownToggle: () => void;
-  parrentOffset: {
-    x: number;
-    y: number;
-  };
+  parentRef: ElementRef<"div">;
 }
 
-const DropdownList = ({ onDropdownToggle, children, parrentOffset }: Props) => {
+const TOP_GAP_SIZE = 20;
+const ALIGNMENT_SIZE = 10;
+
+const DropdownList = ({ onDropdownToggle, children, parentRef }: Props) => {
   const listRef = useRef<ElementRef<"ul">>(null);
 
   const getIsClickedOutside = (e: Event) => {
@@ -20,17 +20,28 @@ const DropdownList = ({ onDropdownToggle, children, parrentOffset }: Props) => {
     }
   };
 
-  useLayoutEffect(() => {
-    const { x, y } = parrentOffset;
+  const calculatePosition = () => {
+    const { x, y } = parentRef.getBoundingClientRect();
+    const clientWidth = document.documentElement.clientWidth;
+    const listSize = listRef.current.getBoundingClientRect().width;
 
-    listRef.current?.style.setProperty("left", `${x}px`);
-    listRef.current?.style?.setProperty("top", `${y + 20}px`);
+    const xOffset =
+      clientWidth < listSize + x ? x - listSize + ALIGNMENT_SIZE : x;
+
+    listRef.current?.style.setProperty("left", `${xOffset}px`);
+    listRef.current?.style?.setProperty("top", `${y + TOP_GAP_SIZE}px`);
+  };
+
+  useLayoutEffect(() => {
+    calculatePosition();
   }, []);
 
   useEffect(() => {
+    window.addEventListener("resize", calculatePosition);
     document.addEventListener("mousedown", getIsClickedOutside);
 
     return () => {
+      window.removeEventListener("resize", calculatePosition);
       document.removeEventListener("mousedown", getIsClickedOutside);
     };
   }, []);

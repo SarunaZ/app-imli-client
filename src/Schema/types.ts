@@ -45,6 +45,7 @@ export type Mutation = {
   createProduct: Product;
   deleteMeal?: Maybe<Null>;
   deleteProduct?: Maybe<Null>;
+  editMeal?: Maybe<Null>;
   renameProduct: Product;
   updateListOrderMutation?: Maybe<Array<Product>>;
 };
@@ -82,6 +83,13 @@ export type MutationDeleteMealArgs = {
 
 export type MutationDeleteProductArgs = {
   id: Scalars['ID']['input'];
+};
+
+
+export type MutationEditMealArgs = {
+  id: Scalars['ID']['input'];
+  ingredients: Array<InputMaybe<Scalars['String']['input']>>;
+  instructions?: InputMaybe<Scalars['String']['input']>;
 };
 
 

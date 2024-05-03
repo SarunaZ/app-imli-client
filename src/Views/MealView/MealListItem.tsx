@@ -6,6 +6,7 @@ import Delete from "Images/icons/delete.svg";
 import useState from "Hooks/useState";
 import { MealListQuery } from "Schema/types";
 import { DeepExtractTypeSkipArrays } from "Declarations/typeExtract";
+import Dropdown from "Components/Dropdown";
 
 interface Props {
   onDelete: () => void;
@@ -29,16 +30,22 @@ const MealListItem = ({ data, onDelete }: Props) => {
 
   return (
     <>
-      <Box title={data?.name}>
-        <li className={style.mealListItem}>
-          <div className={style.mealListItemHeader}>
+      <Box
+        title={data?.name}
+        dropdownComponent={
+          <Dropdown>
             <IconButton
               onClick={toggleDeleteModal}
               className={style.mealListItemDeleteButton}
             >
-              <Delete height="24px" width="24px" />
+              {"Delete"}
+              <Delete height="16px" />
             </IconButton>
-          </div>
+          </Dropdown>
+        }
+      >
+        <li className={style.mealListItem}>
+          <div className={style.mealListItemHeader}></div>
           <ol className={style.mealListItemIngredients}>
             {data?.ingredients.map((ingredient, index) => {
               return (

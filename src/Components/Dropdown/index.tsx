@@ -19,7 +19,7 @@ const Dropdown = ({ isDisabled, children }: Props) => {
     isOpen: false,
   });
   const dropdownRef = useRef<ElementRef<"div">>(null);
-  const dropdownPosition = dropdownRef.current?.getBoundingClientRect();
+  const parentRef = dropdownRef.current;
 
   const handleDropdownToggle = () => {
     if (!isDisabled) {
@@ -39,7 +39,7 @@ const Dropdown = ({ isDisabled, children }: Props) => {
       {state.isOpen && (
         <DropdownList
           onDropdownToggle={handleDropdownToggle}
-          parrentOffset={{ x: dropdownPosition.x, y: dropdownPosition.y }}
+          parentRef={parentRef}
         >
           {children}
         </DropdownList>
