@@ -46,15 +46,15 @@ const useFetch = (url: string): UseFetchTuple => {
       ...DEFAULT_OPTIONS,
       ...options,
     })
-      .then((response) => {
-        if (response.ok) return response.json();
+      .then((res) => {
+        if (res.ok) return res.json();
       })
       .catch((error) => {
         console.error(error);
         setState({ ...state, error, isLoading: false });
       });
 
-    const resultData = await response.json();
+    const resultData = await response;
     setState({ ...state, data: resultData, isLoading: false });
 
     if (!resultData) {
