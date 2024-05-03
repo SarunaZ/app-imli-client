@@ -1,5 +1,7 @@
 import { gql } from "@apollo/client";
 import {
+  EditMealMutationMutation,
+  EditMealMutationMutationVariables,
   MealMutationMutation,
   MealMutationMutationVariables,
 } from "Schema/types";
@@ -20,6 +22,26 @@ export const MEAL_NAME_MUTATION: MutationDocument<
       ingredients {
         name
       }
+    }
+  }
+`;
+export const MEAL_EDIT_MUTATION: MutationDocument<
+  EditMealMutationMutation,
+  EditMealMutationMutationVariables
+> = gql`
+  mutation editMealMutation(
+    $id: ID!
+    $name: String!
+    $ingredients: [IngredientInput]
+    $instructions: String
+  ) {
+    editMeal(
+      id: $id
+      name: $name
+      instructions: $instructions
+      ingredients: $ingredients
+    ) {
+      success
     }
   }
 `;

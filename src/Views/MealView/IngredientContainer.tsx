@@ -5,9 +5,10 @@ import Button from "Components/Button";
 import ErrorHandler from "Components/ErrorHandler";
 import { ApolloError } from "@apollo/client";
 import useState from "Hooks/useState";
-import { IngredientsInput } from "./types";
+import { IngredientsInput, Meals } from "./types";
 
 interface Props {
+  data: Meals["ingredients"];
   isLoading: boolean;
   error?: ApolloError;
   onInput: (data: IngredientsInput[]) => void;
@@ -21,9 +22,11 @@ interface State {
   inputState?: IngredientsInput[];
 }
 
-const IngredientContainer = ({ error, isLoading, onInput }: Props) => {
+const IngredientContainer = ({ data, error, isLoading, onInput }: Props) => {
   const [state, setState] = useState<State>({
-    inputState: [{ name: "" }],
+    inputState: data?.map((item) => ({
+      name: item.name,
+    })) || [{ name: "" }],
   });
 
   const handleAddInput = () => {

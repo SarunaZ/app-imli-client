@@ -22,7 +22,12 @@ const MealList = ({ mealData, onChange }: Props) => {
     <>
       <ul className={style.mealList}>
         {mealData?.map((meal) => (
-          <MealListItem data={meal} onDelete={onChange} key={meal.id} />
+          <MealListItem
+            data={meal}
+            onDelete={onChange}
+            onEdit={onChange}
+            key={meal.id}
+          />
         ))}
       </ul>
       <AddMealModal

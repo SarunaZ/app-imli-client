@@ -136,11 +136,12 @@
   }
 }
 
-.mealListItemDeleteButton {
+.mealListItemOption {
   align-items: center;
   color: $primaryText;
   display: flex;
   justify-content: space-between;
+  width: 100%;
 }
 
 .deleteModalTitle {
