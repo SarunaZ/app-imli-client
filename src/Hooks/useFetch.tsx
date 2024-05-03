@@ -45,7 +45,15 @@ const useFetch = (url: string): UseFetchTuple => {
     const response = await fetch(url, {
       ...DEFAULT_OPTIONS,
       ...options,
-    });
+    })
+      .then((response) => {
+        if (response.ok) return response.json();
+      })
+      .catch((error) => {
+        console.error(error);
+        setState({ ...state, error, isLoading: false });
+      });
+
     const resultData = await response.json();
     setState({ ...state, data: resultData, isLoading: false });
 

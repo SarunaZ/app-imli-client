@@ -113,12 +113,6 @@ const ProductList = ({
 
     const newList = arrayMove(normalizedList(), oldIndex, newIndex);
 
-    // updatetM({
-    //   variables: {
-    //     id: active.id.toString(),
-    //     previousItemId: over.id.toString(),
-    //   },
-    // });
     saveOnChange(newList);
   };
 
