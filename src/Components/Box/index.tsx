@@ -1,4 +1,4 @@
-import { CSSProperties, ElementRef, forwardRef } from "react";
+import { CSSProperties, ElementRef, forwardRef, ReactNode } from "react";
 import Loader from "../Loader";
 import style from "./style.scss";
 import { useSortable } from "@dnd-kit/sortable";
@@ -9,11 +9,15 @@ interface Props {
   title?: string;
   isDragable?: boolean;
   isLoading?: boolean;
-  children: JSX.Element | JSX.Element[];
+  children: ReactNode | ReactNode[];
+  dropdownComponent?: ReactNode;
 }
 
 const Box = forwardRef<ElementRef<"div">, Props>(
-  ({ isLoading = false, children, isDragable, id, title }, ref) => {
+  (
+    { isLoading = false, children, isDragable, id, title, dropdownComponent },
+    ref,
+  ) => {
     const {
       attributes,
       isDragging,
@@ -31,7 +35,15 @@ const Box = forwardRef<ElementRef<"div">, Props>(
 
     const boxContent = (
       <>
-        {title && <h2 className={style.boxTitle}>{title}</h2>}
+        {title && dropdownComponent && (
+          <div className={style.boxHeader}>
+            <h2 className={style.boxTitle}>{title}</h2>
+            {dropdownComponent}
+          </div>
+        )}
+        {title && !dropdownComponent && (
+          <h2 className={style.boxTitle}>{title}</h2>
+        )}
         {children}
       </>
     );
