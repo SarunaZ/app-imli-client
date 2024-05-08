@@ -12,7 +12,7 @@ import AddMealModal from "Views/MealView/AddMealModal";
 import React from "react";
 
 interface Props {
-  onEdit: () => void;
+  onEdit: (id: string) => void;
   onDelete: () => void;
   data?: DeepExtractTypeSkipArrays<MealListQuery, ["meals"]>;
 }
@@ -34,10 +34,8 @@ const MealListItem = ({ data, onDelete, onEdit }: Props) => {
     });
   };
 
-  const toggleEditModal = () => {
-    setState({
-      isEditModalOpen: !state.isEditModalOpen,
-    });
+  const handleOnEdit = () => {
+    onEdit(data.id);
   };
 
   return (
@@ -48,7 +46,7 @@ const MealListItem = ({ data, onDelete, onEdit }: Props) => {
           <Dropdown>
             <Button
               buttonStyle="none"
-              onClick={toggleEditModal}
+              onClick={handleOnEdit}
               className={style.mealListItemOption}
             >
               {"Edit"}
@@ -80,14 +78,14 @@ const MealListItem = ({ data, onDelete, onEdit }: Props) => {
           </ol>
         </li>
       </Box>
-      <AddMealModal
-        isEdit
-        mealData={data}
-        onChange={onEdit}
-        onClose={toggleEditModal}
-        title={`Edit ${data?.name}`}
-        isOpen={state.isEditModalOpen}
-      />
+      {/*<AddMealModal*/}
+      {/*  isEdit*/}
+      {/*  mealData={data}*/}
+      {/*  onChange={onEdit}*/}
+      {/*  onClose={toggleEditModal}*/}
+      {/*  title={`Edit ${data?.name}`}*/}
+      {/*  isOpen={state.isEditModalOpen}*/}
+      {/*/>*/}
       <DeleteMealModal
         id={data?.id}
         onChange={onDelete}

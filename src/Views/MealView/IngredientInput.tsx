@@ -16,7 +16,7 @@ const IngredientInput = ({ index, onDelete, onChange, inputValue }: Props) => {
 
   return (
     <div className={style.ingredientFormInputWrapper}>
-      <Input required value={inputValue} onChange={handleButtonAdd} />
+      <Input value={inputValue} onChange={handleButtonAdd} />
       <Button
         className={style.ingredientFormButton}
         onClick={() => onDelete(index)}

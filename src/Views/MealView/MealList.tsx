@@ -1,22 +1,20 @@
 import React from "react";
 import style from "./style.scss";
 import MealListItem from "./MealListItem";
-import AddMealModal from "./AddMealModal";
-import Add from "Images/icons/add.svg";
-import { useState } from "react";
 import { MealListQuery } from "Schema/types";
 
 interface Props {
+  onEdit: (id: string) => void;
   mealData: MealListQuery["meals"];
   onChange: () => void;
 }
 
-const MealList = ({ mealData, onChange }: Props) => {
-  const [isShowAddModal, setShowAddModal] = useState<boolean>(false);
+const MealList = ({ mealData, onChange, onEdit }: Props) => {
+  // const [isShowAddModal, setShowAddModal] = useState<boolean>(false);
 
-  const toggleAddModal = () => {
-    setShowAddModal((prev) => !prev);
-  };
+  // const toggleAddModal = () => {
+  //   setShowAddModal((prev) => !prev);
+  // };
 
   return (
     <>
@@ -25,20 +23,11 @@ const MealList = ({ mealData, onChange }: Props) => {
           <MealListItem
             data={meal}
             onDelete={onChange}
-            onEdit={onChange}
+            onEdit={onEdit}
             key={meal.id}
           />
         ))}
       </ul>
-      <AddMealModal
-        onClose={toggleAddModal}
-        isOpen={isShowAddModal}
-        title="Add new meals"
-        onChange={onChange}
-      />
-      <button className={style.mealListAddButton} onClick={toggleAddModal}>
-        <Add className={style.mealListAddIcon} />
-      </button>
     </>
   );
 };
