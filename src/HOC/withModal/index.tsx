@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import Modal from "./Modal";
 import style from "./style.scss";
 import Close from "Images/icons/close.svg";
@@ -12,7 +12,7 @@ export interface ModalProps {
 export default function withModal<P>(
   Component: React.ComponentType<P & ModalProps>,
 ) {
-  const WithModalComponent = (props: P & ModalProps) => {
+  return (props: P & ModalProps) => {
     const { isOpen, onClose, title } = props;
 
     if (!isOpen) {
@@ -22,6 +22,20 @@ export default function withModal<P>(
     const onModalClose = () => {
       onClose();
     };
+
+    const handleKeyDown = (event: KeyboardEvent) => {
+      if (event.key === "Escape") {
+        onClose();
+      }
+    };
+
+    useEffect(() => {
+      document.addEventListener("keydown", handleKeyDown);
+
+      return () => {
+        document.removeEventListener("keydown", handleKeyDown);
+      };
+    }, []);
 
     return (
       <Modal>
@@ -35,6 +49,4 @@ export default function withModal<P>(
       </Modal>
     );
   };
-
-  return WithModalComponent;
 }

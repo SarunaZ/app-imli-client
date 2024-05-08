@@ -66,9 +66,8 @@ const MealListItem = ({ data, onDelete, onEdit }: Props) => {
         }
       >
         <li className={style.mealListItem}>
-          <div className={style.mealListItemHeader}></div>
           <ol className={style.mealListItemIngredients}>
-            {data?.ingredients.map((ingredient, index) => {
+            {data?.ingredients?.map((ingredient, index) => {
               return (
                 <li
                   key={`${ingredient.name}--${index}`}

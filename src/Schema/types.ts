@@ -153,7 +153,7 @@ export type MealMutationMutation = { __typename?: 'Mutation', createMeal: { __ty
 export type EditMealMutationMutationVariables = Exact<{
   id: Scalars['ID']['input'];
   name: Scalars['String']['input'];
-  ingredients: Array<InputMaybe<IngredientInput>> | InputMaybe<IngredientInput>;
+  ingredients?: InputMaybe<Array<InputMaybe<IngredientInput>> | InputMaybe<IngredientInput>>;
   instructions?: InputMaybe<Scalars['String']['input']>;
 }>;
 

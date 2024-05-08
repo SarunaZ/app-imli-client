@@ -16,25 +16,13 @@ const Input = ({ label, name, className, ...rest }: Props, ref: any) => {
     return (
       <label className={style.inputLabel} htmlFor={name}>
         {label}
-        <input
-          className={style.inputField}
-          required
-          ref={ref}
-          name={name}
-          {...rest}
-        />
+        <input className={style.inputField} ref={ref} name={name} {...rest} />
       </label>
     );
   }
 
   return (
-    <input
-      className={inputFieldClasses}
-      required
-      ref={ref}
-      name={name}
-      {...rest}
-    />
+    <input className={inputFieldClasses} ref={ref} name={name} {...rest} />
   );
 };
 
