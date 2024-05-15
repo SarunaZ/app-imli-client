@@ -19,7 +19,7 @@ services:
       - "3000:3000"
     volumes:
       - ./:/app-imli-client/
-      - ./node_modules:/app-imli-client/node_modules
+      - ./node_modules:/app-imli-client/node_modules/
     entrypoint: ./wait-for-it.sh imli-api:4000 -- sh -c "yarn && yarn start"
   imli-db:
     image: mongo:latest
