@@ -71,10 +71,12 @@
   }
 }
 
-.addMealModalWrapper {
+.addMealFormWrapper {
   display: flex;
   flex-direction: column;
+  margin: 0 auto;
   min-width: 350px;
+  width: 100%;
 }
 
 .ingredientFormInputWrapper {
@@ -146,4 +148,15 @@
 
 .deleteModalTitle {
   color: $primaryText
+}
+
+.mealFormContainer {
+  display: grid;
+  grid-gap: 15px;
+  margin: 0 auto;
+  max-width: 850px;
+}
+
+.mealEditor {
+  min-height: 500px;
 }

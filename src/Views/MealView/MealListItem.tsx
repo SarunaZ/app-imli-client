@@ -8,7 +8,7 @@ import { MealListQuery } from "Schema/types";
 import { DeepExtractTypeSkipArrays } from "Declarations/typeExtract";
 import Dropdown from "Components/Dropdown";
 import Button from "Components/Button";
-import AddMealModal from "Views/MealView/AddMealModal";
+import AddMealModal from "Views/MealView/AddMealForm";
 import React from "react";
 
 interface Props {

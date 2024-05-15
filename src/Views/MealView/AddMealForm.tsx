@@ -1,4 +1,3 @@
-import withModal, { ModalProps } from "HOC/withModal";
 import { ElementRef, SyntheticEvent, useRef } from "react";
 import IngredientContainer from "./IngredientContainer";
 import { IngredientsInput, Meals } from "./types";
@@ -11,7 +10,7 @@ import {
 import useState from "Hooks/useState";
 import useMutation from "Hooks/useMutation";
 
-interface Props extends ModalProps {
+interface Props {
   mealData?: Meals;
   isEdit?: boolean;
   onChange: () => void;
@@ -21,12 +20,14 @@ interface State {
   addSuccessful: boolean;
 }
 
-const AddMealModal = ({ isEdit, mealData, onChange }: Props) => {
+const AddMealForm = ({ isEdit, mealData, onChange }: Props) => {
   const [state, setState] = useState<State>({
     addSuccessful: false,
   });
-  const mealInputRef = useRef<ElementRef<"input">>(null);
+
   const ingredientInputRef = useRef<IngredientsInput[]>();
+  const mealInputRef = useRef<ElementRef<"input">>(null);
+
   const [addMeal, addMealData] = useMutation(MEAL_NAME_MUTATION);
   const [editMeal, editMealData] = useMutation(MEAL_EDIT_MUTATION);
 
@@ -74,14 +75,7 @@ const AddMealModal = ({ isEdit, mealData, onChange }: Props) => {
   }
 
   return (
-    <form className={style.addMealModalWrapper} onSubmit={submitProduct}>
-      <Input
-        required
-        label="Meal name"
-        name="productName"
-        ref={mealInputRef}
-        defaultValue={mealData?.name}
-      />
+    <form className={style.addMealFormWrapper} onSubmit={submitProduct}>
       <IngredientContainer
         onInput={setInputData}
         data={mealData?.ingredients}
@@ -92,4 +86,4 @@ const AddMealModal = ({ isEdit, mealData, onChange }: Props) => {
   );
 };
 
-export default withModal(AddMealModal);
+export default AddMealForm;

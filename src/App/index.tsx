@@ -2,6 +2,7 @@ import { lazy } from "react";
 import { Route, Routes } from "react-router-dom";
 import {
   ROUTE_LOGIN_PAGE,
+  ROUTE_MEAL_CREATE_PAGE,
   ROUTE_MEAL_EDIT_PAGE,
   ROUTE_MEAL_PAGE,
   ROUTE_PRODUCT_LIST_PAGE,
@@ -35,6 +36,14 @@ const App = () => (
     />
     <Route
       path={ROUTE_MEAL_EDIT_PAGE}
+      element={
+        <AuthRoute>
+          <MealList />
+        </AuthRoute>
+      }
+    />{" "}
+    <Route
+      path={ROUTE_MEAL_CREATE_PAGE}
       element={
         <AuthRoute>
           <MealList />
