@@ -7,7 +7,7 @@ This project was made with:
 * [TypesScript](https://github.com/microsoft/TypeScript)
 * [Apollo/Graphql](https://www.apollographql.com/)
 
-Client and api has to be in the same directory with its default forlder name: `app-imli-client` and `app-imli-serverf`
+Client and api has to be in the same directory with its default forlder name: `app-imli-client` and `app-imli-server`
 
 ## Enviroment variables (cannot run project without it!)
 `.env.example` files need to be renamed to `.env` and populate the empty values
