@@ -135,11 +135,12 @@ const ProductList = ({
             items={listData}
             strategy={verticalListSortingStrategy}
           >
-            {listData?.map(({ id, name, isDone }) => (
+            {listData?.map(({ id, name, isDone }, index) => (
               <ProductItem
                 key={id}
                 id={id}
                 name={name}
+                index={index}
                 isCompleted={isDone}
                 onDelete={onDelete}
                 onError={handleOnError}
