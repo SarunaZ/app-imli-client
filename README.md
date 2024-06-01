@@ -12,11 +12,13 @@ Client and api has to be in the same directory with its default forlder name: `a
 ## Enviroment variables (cannot run project without it!)
 `.env.example` files need to be renamed to `.env` and populate the empty values
 
+## Docker
 This project is docker friendly
 If runnig on windows, make sure that docker runs on WSL, and you are running commands from a linux terminal (Ubuntu or Bash)
 
 When all of the services are in place, from top directory of client service run `docker compose up --build`
 The project should be up and running momenterally
 
-When accessing `localhost:3000` you will be greated with the loggin screan for the first time.
-For development use there will be a `Register` button, for you to create a new local testing account
+## Dev account
+When accessing `localhost:3000` you will be greated with the loggin screen for the first time.
+For development use there will be a `Register` button visible for you to create a new local dev account
