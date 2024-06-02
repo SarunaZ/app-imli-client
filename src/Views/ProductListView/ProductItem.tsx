@@ -14,7 +14,8 @@ import useMutation from "../../Hooks/useMutation";
 
 interface Props {
   id: string;
-  name?: string | null;
+  name?: string;
+  index: number;
   isCompleted: boolean;
   onDelete: (id: string) => void;
   onError: (err: ProductError) => void;
@@ -29,6 +30,7 @@ interface State {
 const ProductItem = ({
   id,
   name,
+  index,
   onCompleted,
   onDelete,
   isCompleted,
@@ -83,8 +85,12 @@ const ProductItem = ({
     });
   };
 
+  const productListItemClasses = classnames(style.productListItemWrapper, {
+    [style.productListItemFirst]: index === 0,
+  });
+
   return (
-    <li className={style.productListItemWrapper}>
+    <li className={productListItemClasses}>
       <Box id={id} isDragable>
         <div className={productItemClass}>
           <ProductDropdown

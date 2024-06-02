@@ -10,7 +10,7 @@ import {
   ApolloProvider,
   createHttpLink,
 } from "@apollo/client";
-import { getCookieData } from "./Utilities/cookieParser";
+import { getCookieData } from "Utilities/cookieParser";
 import { Helmet, HelmetProvider } from "react-helmet-async";
 import Authentication from "Providers/Authentication";
 import ThemeSwitcher from "Providers/ThemeProvider";

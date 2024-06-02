@@ -36,16 +36,8 @@
 }
 
 .productListItemFirst {
-  align-items: center;
-  display: flex;
-  width: calc(100% - 75px);
-
-  li {
-    &:hover {
-      span {
-        color: $secondary;
-      }
-    }
+  @media(max-width: $x-small-screen) {
+    margin-top: auto;
   }
 }
 
