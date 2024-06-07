@@ -10,7 +10,7 @@ This project was made with:
 Client and api has to be in the same directory with its default forlder name: `app-imli-client` and `app-imli-server`
 
 ## Enviroment variables (cannot run project without it!)
-To set up your env file correctly run this command ` cp .env.example .env` from a top of directory `app-imli-client` and `app-imli-server`
+To set up your env file correctly run this command `cp .env.example .env` from a top of directory `app-imli-client` and `app-imli-server`
 
 ## Docker
 If runnig on windows, make sure that docker runs on WSL, and you are running commands from a linux terminal Ubuntu
