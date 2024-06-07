@@ -1,4 +1,3 @@
-version: "3.8"
 services:
   imli-api:
     build: ../app-imli-server
@@ -11,16 +10,21 @@ services:
     depends_on:
       - imli-db
     command: sh -c "yarn && yarn dev:docker"
+    healthcheck:
+      test: "curl --fail http://localhost:4000/health || exit 1"
+      timeout: 15s
+      retries: 5
   imli-client:
     build: ./
     depends_on:
-      - imli-api
+      imli-api:
+        condition: service_healthy
     ports:
       - "3000:3000"
     volumes:
-      - ./:/app-imli-client
+      - .:/app-imli-client
       - ./node_modules:/app-imli-client/node_modules
-    entrypoint: ./wait-for-it.sh imli-api:4000 -- sh -c "yarn && yarn start"
+    entrypoint: sh -c "yarn && yarn start"
   imli-db:
     image: mongo:latest
     volumes:
