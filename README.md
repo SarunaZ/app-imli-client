@@ -7,37 +7,17 @@ This project was made with:
 * [TypesScript](https://github.com/microsoft/TypeScript)
 * [Apollo/Graphql](https://www.apollographql.com/)
 
+Client and api has to be in the same directory with its default forlder name: `app-imli-client` and `app-imli-server`
+
 ## Enviroment variables (cannot run project without it!)
-`.env.example` files need to be renamed to `.env` and populate the empty values
+To set up your env file correctly run this command `cp .env.example .env` from a top of directory `app-imli-client` and `app-imli-server`
 
-```
-REACT_APP_ENV="development"
-REACT_APP_AUTH_SECRET="secret123"
-REACT_APP_LOGIN_LINK="{YOUR SERVER API ROUTE URL or http://localhost:4000/api/login}"
-REACT_APP_GRAPHQL_LINK="{YOUR APOLLO SERVER URL or http://localhost:4000/graphql}"
-```
+## Docker
+If runnig on windows, make sure that docker runs on WSL, and you are running commands from a linux terminal Ubuntu
 
-When trying to login through `/login` any credentials will work in development mode
+When all of the services are in place, from top directory of client service run `docker compose up --build`
+The project should be up and running momenterally
 
-## Available Scripts
-
-In the project directory, you can run:
-
-### `yarn start` or `npm run start`
-
-Run this command `only` when the `server is up` (because it needs to generate graphql types from server)
-
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
-
-The page will reload if you make edits.\
-
-### `yarn build` or `npm run build`
-
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-This project is docker friendly
+## Dev account
+When accessing `localhost:3000` you will be greated with the loggin screen for the first time.
+For development use there will be a `Register` button visible for you to create a new local dev account
