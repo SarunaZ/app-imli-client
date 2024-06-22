@@ -228,7 +228,7 @@ export type UserDataQuery = { __typename?: 'Query', userDashboard: { __typename?
 export type MealListQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type MealListQuery = { __typename?: 'Query', meals?: Array<{ __typename?: 'Meal', id: string, name?: string | null, ingredients?: Array<{ __typename?: 'Ingredients', name: string } | null> | null }> | null };
+export type MealListQuery = { __typename?: 'Query', meals?: Array<{ __typename?: 'Meal', id: string, name?: string | null, instructions?: string | null, ingredients?: Array<{ __typename?: 'Ingredients', name: string } | null> | null }> | null };
 
 export type ProductListQueryVariables = Exact<{ [key: string]: never; }>;
 

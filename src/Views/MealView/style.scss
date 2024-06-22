@@ -36,8 +36,14 @@
   @media (min-width: $small-screen) {
     padding: 0;
   }
+}
+
+.mealListItemButton {
+  height: 100%;
+  width: 100%;
 
   > div {
+    align-items: self-start;
     display: flex;
     height: 100%;
     flex-direction: column;

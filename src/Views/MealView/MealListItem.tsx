@@ -9,6 +9,7 @@ import { DeepExtractTypeSkipArrays } from "Declarations/typeExtract";
 import Dropdown from "Components/Dropdown";
 import Button from "Components/Button";
 import React from "react";
+import MealPreviewModal from "Views/MealView/MealPreviewModal";
 
 interface Props {
   onEdit: (id: string) => void;
@@ -17,12 +18,14 @@ interface Props {
 }
 
 interface State {
+  isPreviewOpen: boolean;
   isDeleteModalOpen: boolean;
   isEditModalOpen: boolean;
 }
 
 const MealListItem = ({ data, onDelete, onEdit }: Props) => {
   const [state, setState] = useState<State>({
+    isPreviewOpen: false,
     isDeleteModalOpen: false,
     isEditModalOpen: false,
   });
@@ -37,51 +40,66 @@ const MealListItem = ({ data, onDelete, onEdit }: Props) => {
     onEdit(data.id);
   };
 
+  const handlePreviewClick = () => {
+    setState((prevState) => ({ isPreviewOpen: !prevState.isPreviewOpen }));
+  };
+
   return (
     <>
       <li className={style.mealListItem}>
-        <Box
-          title={data?.name}
-          dropdownComponent={
-            <Dropdown>
-              <Button
-                buttonStyle="none"
-                onClick={handleOnEdit}
-                className={style.mealListItemOption}
-              >
-                {"Edit"}
-                <Edit height="16px" />
-              </Button>
-              <Button
-                buttonStyle="none"
-                onClick={toggleDeleteModal}
-                className={style.mealListItemOption}
-              >
-                {"Delete"}
-                <Delete height="16px" />
-              </Button>
-            </Dropdown>
-          }
+        <Button
+          buttonStyle="none"
+          className={style.mealListItemButton}
+          onClick={handlePreviewClick}
         >
-          <ol className={style.mealListItemIngredients}>
-            {data?.ingredients?.map((ingredient, index) => {
-              return (
-                <li
-                  key={`${ingredient.name}--${index}`}
-                  className={style.mealListItemIngredientsItem}
+          <Box
+            title={data?.name}
+            dropdownComponent={
+              <Dropdown>
+                <Button
+                  buttonStyle="none"
+                  onClick={handleOnEdit}
+                  className={style.mealListItemOption}
                 >
-                  {ingredient.name}
-                </li>
-              );
-            })}
-          </ol>
-        </Box>
+                  {"Edit"}
+                  <Edit height="16px" />
+                </Button>
+                <Button
+                  buttonStyle="none"
+                  onClick={toggleDeleteModal}
+                  className={style.mealListItemOption}
+                >
+                  {"Delete"}
+                  <Delete height="16px" />
+                </Button>
+              </Dropdown>
+            }
+          >
+            <ol className={style.mealListItemIngredients}>
+              {data?.ingredients?.map((ingredient, index) => {
+                return (
+                  <li
+                    key={`${ingredient.name}--${index}`}
+                    className={style.mealListItemIngredientsItem}
+                  >
+                    {ingredient.name}
+                  </li>
+                );
+              })}
+            </ol>
+          </Box>
+        </Button>
       </li>
       <DeleteMealModal
         id={data?.id}
         onChange={onDelete}
         onClose={toggleDeleteModal}
         isOpen={state.isDeleteModalOpen}
+      />
+      <MealPreviewModal
+        mealData={data}
+        onClose={handlePreviewClick}
+        isOpen={state.isPreviewOpen}
       />
     </>
   );
