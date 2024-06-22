@@ -31,9 +31,17 @@
 .mealListItem {
   padding: 10px 0;
   margin-top: 15px;
+  min-height: 200px;
 
   @media (min-width: $small-screen) {
     padding: 0;
+  }
+
+  > div {
+    display: flex;
+    height: 100%;
+    flex-direction: column;
+    gap: 15px;
   }
 }
 
@@ -159,4 +167,13 @@
 
 .mealEditor {
   min-height: 500px;
+
+  :global(.tox-tinymce) {
+    border-radius: 0;
+  }
+}
+
+.addSuccessful {
+  color: $green;
+  font-size: $fs-regular;
 }

@@ -33,6 +33,7 @@ export type Meal = {
   __typename?: 'Meal';
   id: Scalars['ID']['output'];
   ingredients?: Maybe<Array<Maybe<Ingredients>>>;
+  instructions?: Maybe<Scalars['String']['output']>;
   name?: Maybe<Scalars['String']['output']>;
 };
 
@@ -65,6 +66,7 @@ export type MutationCompleteProductArgs = {
 export type MutationCreateMealArgs = {
   id?: InputMaybe<Scalars['String']['input']>;
   ingredients?: InputMaybe<Array<InputMaybe<IngredientInput>>>;
+  instructions?: InputMaybe<Scalars['String']['input']>;
   name: Scalars['String']['input'];
 };
 
@@ -145,10 +147,11 @@ export type MealMutationMutationVariables = Exact<{
   id?: InputMaybe<Scalars['String']['input']>;
   name: Scalars['String']['input'];
   ingredients?: InputMaybe<Array<InputMaybe<IngredientInput>> | InputMaybe<IngredientInput>>;
+  instructions?: InputMaybe<Scalars['String']['input']>;
 }>;
 
 
-export type MealMutationMutation = { __typename?: 'Mutation', createMeal: { __typename?: 'Meal', id: string, name?: string | null, ingredients?: Array<{ __typename?: 'Ingredients', name: string } | null> | null } };
+export type MealMutationMutation = { __typename?: 'Mutation', createMeal: { __typename?: 'Meal', id: string, name?: string | null, instructions?: string | null, ingredients?: Array<{ __typename?: 'Ingredients', name: string } | null> | null } };
 
 export type EditMealMutationMutationVariables = Exact<{
   id: Scalars['ID']['input'];

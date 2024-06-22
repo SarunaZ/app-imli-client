@@ -7,7 +7,7 @@ import ErrorHandler from "Components/ErrorHandler";
 import ExportToCsv from "./ExportToCsv";
 import useQuery from "Hooks/useQuery";
 import Add from "Images/icons/add.svg";
-import React, { useEffect } from "react";
+import React from "react";
 import useState from "Hooks/useState";
 import MealForm from "Views/MealView/MealForm";
 import { useLocation, useNavigate, useParams } from "react-router-dom";
@@ -30,16 +30,14 @@ const MealListView = () => {
     isEdit: params.id,
     isCreate: location.pathname === "/meal/create",
   });
-  console.log(state);
+
   const { loading, error, data, refetch } = useQuery(MEAL_LIST_DATA, {
+    fetchPolicy: "network-only",
     notifyOnNetworkStatusChange: true,
   });
 
   const isMealCreate = location.pathname.includes("/meal/create");
   const isMealEdit = location.pathname.includes("meal/edit");
-  console.log(params, "params");
-
-  useEffect(() => {}, [location.pathname]);
 
   if (loading) return <Loader />;
   if (error) return <ErrorHandler error={error} />;

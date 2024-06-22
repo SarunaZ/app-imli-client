@@ -10,12 +10,6 @@ interface Props {
 }
 
 const MealList = ({ mealData, onChange, onEdit }: Props) => {
-  // const [isShowAddModal, setShowAddModal] = useState<boolean>(false);
-
-  // const toggleAddModal = () => {
-  //   setShowAddModal((prev) => !prev);
-  // };
-
   return (
     <>
       <ul className={style.mealList}>

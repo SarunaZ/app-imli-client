@@ -10,7 +10,6 @@ services:
     depends_on:
       - imli-db
     command: sh -c "yarn && yarn dev:docker"
-    restart: always
     healthcheck:
       test: "curl --fail http://localhost:4000/health || exit 1"
       timeout: 15s
@@ -30,9 +29,10 @@ services:
     image: mongo:latest
     volumes:
       - mongoDb:/data/db
+    logging:
+      driver: "none"
     environment:
       - MONGO_INITDB_DATABASE=imli
-    restart: always
     ports:
       - "27017:27017"
 

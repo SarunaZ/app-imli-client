@@ -9,7 +9,10 @@ interface Props extends React.InputHTMLAttributes<HTMLInputElement> {
   className?: string;
 }
 
-const Input = ({ label, name, className, ...rest }: Props, ref: any) => {
+const Input = (
+  { label, name, className, ...rest }: Props,
+  ref: React.Ref<HTMLInputElement>,
+) => {
   const inputFieldClasses = classnames(className, style.inputField);
 
   if (label) {

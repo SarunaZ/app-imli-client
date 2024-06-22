@@ -8,7 +8,6 @@ import { MealListQuery } from "Schema/types";
 import { DeepExtractTypeSkipArrays } from "Declarations/typeExtract";
 import Dropdown from "Components/Dropdown";
 import Button from "Components/Button";
-import AddMealModal from "Views/MealView/AddMealForm";
 import React from "react";
 
 interface Props {
@@ -40,30 +39,30 @@ const MealListItem = ({ data, onDelete, onEdit }: Props) => {
 
   return (
     <>
-      <Box
-        title={data?.name}
-        dropdownComponent={
-          <Dropdown>
-            <Button
-              buttonStyle="none"
-              onClick={handleOnEdit}
-              className={style.mealListItemOption}
-            >
-              {"Edit"}
-              <Edit height="16px" />
-            </Button>
-            <Button
-              buttonStyle="none"
-              onClick={toggleDeleteModal}
-              className={style.mealListItemOption}
-            >
-              {"Delete"}
-              <Delete height="16px" />
-            </Button>
-          </Dropdown>
-        }
-      >
-        <li className={style.mealListItem}>
+      <li className={style.mealListItem}>
+        <Box
+          title={data?.name}
+          dropdownComponent={
+            <Dropdown>
+              <Button
+                buttonStyle="none"
+                onClick={handleOnEdit}
+                className={style.mealListItemOption}
+              >
+                {"Edit"}
+                <Edit height="16px" />
+              </Button>
+              <Button
+                buttonStyle="none"
+                onClick={toggleDeleteModal}
+                className={style.mealListItemOption}
+              >
+                {"Delete"}
+                <Delete height="16px" />
+              </Button>
+            </Dropdown>
+          }
+        >
           <ol className={style.mealListItemIngredients}>
             {data?.ingredients?.map((ingredient, index) => {
               return (
@@ -76,16 +75,8 @@ const MealListItem = ({ data, onDelete, onEdit }: Props) => {
               );
             })}
           </ol>
-        </li>
-      </Box>
-      {/*<AddMealModal*/}
-      {/*  isEdit*/}
-      {/*  mealData={data}*/}
-      {/*  onChange={onEdit}*/}
-      {/*  onClose={toggleEditModal}*/}
-      {/*  title={`Edit ${data?.name}`}*/}
-      {/*  isOpen={state.isEditModalOpen}*/}
-      {/*/>*/}
+        </Box>
+      </li>
       <DeleteMealModal
         id={data?.id}
         onChange={onDelete}
