@@ -39,17 +39,19 @@ const MealPreviewModal = ({ mealData }: Props) => {
             {"Recipe"}
           </Button>
         )}
-        <Button
-          buttonStyle="none"
-          className={ingredientsButtonClasses}
-          onClick={() => setState({ tab: "ingredients" })}
-        >
-          {"Ingredients"}
-        </Button>
+        {mealData.ingredients && (
+          <Button
+            buttonStyle="none"
+            className={ingredientsButtonClasses}
+            onClick={() => setState({ tab: "ingredients" })}
+          >
+            {"Ingredients"}
+          </Button>
+        )}
       </div>
       {state.tab === "ingredients" && (
         <ol className={style.mealPreviewModalIngredients}>
-          {mealData.ingredients.map((ingredient) => (
+          {mealData.ingredients?.map((ingredient) => (
             <li key={ingredient.name}>{ingredient.name}</li>
           ))}
         </ol>

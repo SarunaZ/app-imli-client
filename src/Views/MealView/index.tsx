@@ -1,5 +1,4 @@
 import { Helmet } from "react-helmet-async";
-import MealList from "./MealList";
 import style from "./style.scss";
 import { MEAL_LIST_DATA } from "Schema/queries/meal.queries";
 import Loader from "Components/Loader";
@@ -8,28 +7,13 @@ import ExportToCsv from "./ExportToCsv";
 import useQuery from "Hooks/useQuery";
 import Add from "Images/icons/add.svg";
 import React from "react";
-import useState from "Hooks/useState";
-import MealForm from "Views/MealView/MealForm";
-import { useLocation, useNavigate, useParams } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import { ROUTE_MEAL_CREATE_PAGE } from "App/constants";
-
-interface State {
-  isCreate: boolean;
-  isEdit?: string;
-}
-
-interface Params {
-  id: string;
-}
+import MealListItem from "Views/MealView/MealListItem";
 
 const MealListView = () => {
-  const params = useParams<keyof Params>() as Params;
   const location = useLocation();
   const navigate = useNavigate();
-  const [state, setState] = useState<State>({
-    isEdit: params.id,
-    isCreate: location.pathname === "/meal/create",
-  });
 
   const { loading, error, data, refetch } = useQuery(MEAL_LIST_DATA, {
     fetchPolicy: "network-only",
@@ -47,7 +31,7 @@ const MealListView = () => {
   };
 
   const handleOnEdit = (mealId: string) => {
-    setState({ isEdit: mealId });
+    navigate(`edit/${mealId}`);
   };
 
   const isMealForm = isMealCreate || isMealEdit;
@@ -64,23 +48,21 @@ const MealListView = () => {
           {!loading && (!data?.meals || !data?.meals?.length) && (
             <p>No data found</p>
           )}
-          <MealList
-            onEdit={handleOnEdit}
-            mealData={data.meals}
-            onChange={refetch}
-          />
+          <ul className={style.mealList}>
+            {data.meals?.map((meal) => (
+              <MealListItem
+                data={meal}
+                key={meal.id}
+                onDelete={refetch}
+                onEdit={handleOnEdit}
+              />
+            ))}
+          </ul>
           <button className={style.mealListAddButton} onClick={handleAddMeal}>
             <Add className={style.mealListAddIcon} />
           </button>
         </section>
       )}
-      {isMealCreate && (
-        <MealForm
-          onChange={() => {}}
-          mealData={data.meals.find((item) => item.id === state.isEdit)}
-        />
-      )}
-      {isMealEdit && <MealForm onChange={() => {}} />}
     </>
   );
 };

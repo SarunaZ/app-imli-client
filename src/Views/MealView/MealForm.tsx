@@ -14,24 +14,36 @@ import {
 } from "Schema/mutations/meal.mutations";
 import Loader from "Components/Loader";
 import { editorConfig } from "Views/MealView/constants";
-
-interface Props {
-  mealData?: DeepExtractTypeSkipArrays<MealListQuery, ["meals"]>;
-  onChange: () => void;
-}
+import useQuery from "Hooks/useQuery";
+import { MEAL_LIST_DATA } from "Schema/queries/meal.queries";
+import { useNavigate, useParams } from "react-router-dom";
+import ErrorHandler from "Components/ErrorHandler";
+import { ROUTE_MEAL_PAGE } from "App/constants";
 
 interface State {
+  mealData?: DeepExtractTypeSkipArrays<MealListQuery, ["meals"]>;
   isLoaded: boolean;
   addSuccessful: boolean;
 }
 
-const MealForm = ({ mealData, onChange }: Props) => {
-  const formRef = useRef<HTMLFormElement>(null);
+const MealForm = () => {
   const [state, setState] = useState<State>({
     isLoaded: false,
     addSuccessful: false,
+    mealData: undefined,
   });
 
+  const { id } = useParams();
+  const navigate = useNavigate();
+
+  const { loading, error } = useQuery(MEAL_LIST_DATA, {
+    skip: !id,
+    onCompleted: (res) => {
+      setState({ mealData: res.meals.find((meal) => meal.id === id) });
+    },
+  });
+
+  const formRef = useRef<HTMLFormElement>(null);
   const ingredientInputRef = useRef<IngredientsInput[]>();
   const mealInputRef = useRef<ElementRef<"input">>(null);
   const mealInstructionsRef = useRef<string>(null);
@@ -43,7 +55,7 @@ const MealForm = ({ mealData, onChange }: Props) => {
     ingredientInputRef.current = data;
   };
 
-  const isEdit = !!mealData;
+  const isEdit = !!state.mealData;
 
   const submitProduct = (e: SyntheticEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -51,14 +63,15 @@ const MealForm = ({ mealData, onChange }: Props) => {
     if (isEdit) {
       editMeal({
         variables: {
-          id: mealData.id,
+          id,
           name: mealInputRef.current.value,
-          ingredients: ingredientInputRef.current,
-          instructions: mealInstructionsRef.current,
+          ingredients: ingredientInputRef.current || state.mealData.ingredients,
+          instructions:
+            mealInstructionsRef.current || state.mealData.instructions,
         },
         update: () => {
-          onChange();
           setState({ addSuccessful: true });
+          navigate(ROUTE_MEAL_PAGE);
         },
       });
 
@@ -72,7 +85,6 @@ const MealForm = ({ mealData, onChange }: Props) => {
         instructions: mealInstructionsRef.current,
       },
       update: () => {
-        onChange();
         formRef.current.reset();
         setState({ addSuccessful: true });
       },
@@ -82,6 +94,9 @@ const MealForm = ({ mealData, onChange }: Props) => {
   const onEditorChange = (e: string) => {
     mealInstructionsRef.current = e;
   };
+
+  if (loading) return <Loader />;
+  if (error) return <ErrorHandler error={error} />;
 
   return (
     <>
@@ -95,12 +110,13 @@ const MealForm = ({ mealData, onChange }: Props) => {
           label="Meal name"
           name="productName"
           ref={mealInputRef}
-          defaultValue={mealData?.name}
+          defaultValue={state.mealData?.name}
         />
         <div className={style.mealEditor}>
           {/*Todo: consider using Tiptap*/}
           {!state.isLoaded && <Loader />}
           <Editor
+            initialValue={state.mealData?.instructions}
             init={editorConfig}
             apiKey={process.env.CLIENT_TINY_MCE_EDITOR_KEY}
             onEditorChange={onEditorChange}
@@ -111,7 +127,7 @@ const MealForm = ({ mealData, onChange }: Props) => {
         </div>
         <IngredientContainer
           onInput={setInputData}
-          data={mealData?.ingredients}
+          data={state.mealData?.ingredients}
           error={addMealData?.error || editMealData.error}
           isLoading={addMealData.loading || editMealData.loading}
         />

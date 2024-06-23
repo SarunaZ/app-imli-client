@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import IngredientInput from "./IngredientInput";
 import style from "./style.scss";
 import Button from "Components/Button";
@@ -24,10 +24,16 @@ interface State {
 
 const IngredientContainer = ({ data, error, isLoading, onInput }: Props) => {
   const [state, setState] = useState<State>({
-    inputState: data?.map((item) => ({
-      name: item.name,
-    })) || [{ name: "" }],
+    inputState: [defaultInputValue],
   });
+
+  useEffect(() => {
+    setState({
+      inputState: data?.map((item) => ({
+        name: item.name,
+      })) || [defaultInputValue],
+    });
+  }, [data]);
 
   const handleAddInput = () => {
     setState((prev) => ({
@@ -45,7 +51,7 @@ const IngredientContainer = ({ data, error, isLoading, onInput }: Props) => {
     });
 
     setState({ inputState: newInputState });
-    onInput(state.inputState);
+    onInput(newInputState);
   };
 
   const handleInputChange = (inputValue: string) => (index: number) => {

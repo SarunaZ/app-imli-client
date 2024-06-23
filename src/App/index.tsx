@@ -10,6 +10,7 @@ import {
 } from "./constants";
 import AuthRoute from "./AuthRoute";
 import { PublicRoute } from "./PublicRoute";
+import MealForm from "Views/MealView/MealForm";
 
 const Login = lazy(() => import("Views/LoginView"));
 const Dashboard = lazy(() => import("Views/Dashboard"));
@@ -38,15 +39,15 @@ const App = () => (
       path={ROUTE_MEAL_EDIT_PAGE}
       element={
         <AuthRoute>
-          <MealList />
+          <MealForm />
         </AuthRoute>
       }
-    />{" "}
+    />
     <Route
       path={ROUTE_MEAL_CREATE_PAGE}
       element={
         <AuthRoute>
-          <MealList />
+          <MealForm />
         </AuthRoute>
       }
     />
