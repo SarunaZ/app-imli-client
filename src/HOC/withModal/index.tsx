@@ -16,10 +16,6 @@ export default function withModal<P>(
   return (props: P & ModalProps) => {
     const { isOpen, onClose, title, modalWrapperClassName } = props;
 
-    if (!isOpen) {
-      return null;
-    }
-
     const onModalClose = () => {
       onClose();
     };
@@ -31,12 +27,22 @@ export default function withModal<P>(
     };
 
     useEffect(() => {
+      if (!isOpen) {
+        return () => {
+          document.removeEventListener("keydown", handleKeyDown);
+        };
+      }
+
       document.addEventListener("keydown", handleKeyDown);
 
       return () => {
         document.removeEventListener("keydown", handleKeyDown);
       };
-    }, []);
+    }, [isOpen]);
+
+    if (!isOpen) {
+      return null;
+    }
 
     return (
       <Modal modalWrapperClassName={modalWrapperClassName}>

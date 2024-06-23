@@ -34,6 +34,7 @@
   min-height: 200px;
 
   @media (min-width: $small-screen) {
+    cursor: pointer;
     padding: 0;
   }
 }
@@ -186,9 +187,13 @@
 }
 
 .mealPreviewModal {
-  min-height: 500px;
-  min-width: 550px;
-  width: 100%;
+  > div {
+    @media (max-width: $small-screen - 1px) {
+      height: 100%;
+      margin: 0;
+      width: 100%;
+    }
+  }
 }
 
 .mealPreviewModalContent {
@@ -219,7 +224,6 @@
   margin-bottom: 20px;
 }
 
-
 .mealPreviewModalButton {
   border: 1px solid $primaryText;
   border-radius: 5px;
@@ -228,5 +232,12 @@
   &.active {
     background-color: $primaryText;
     color: $secondaryText;
+  }
+}
+
+.mealPreviewWrapper {
+  @media (min-width: $small-screen) {
+    min-height: 500px;
+    min-width: 550px;
   }
 }

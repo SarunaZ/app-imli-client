@@ -85,7 +85,6 @@ const MealForm = ({ mealData, onChange }: Props) => {
 
   return (
     <>
-      {!state.isLoaded && <Loader />}
       <form
         ref={formRef}
         onSubmit={submitProduct}
@@ -100,6 +99,7 @@ const MealForm = ({ mealData, onChange }: Props) => {
         />
         <div className={style.mealEditor}>
           {/*Todo: consider using Tiptap*/}
+          {!state.isLoaded && <Loader />}
           <Editor
             init={editorConfig}
             apiKey={process.env.CLIENT_TINY_MCE_EDITOR_KEY}

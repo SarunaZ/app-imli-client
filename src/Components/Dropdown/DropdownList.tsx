@@ -1,4 +1,10 @@
-import React, { ElementRef, useEffect, useLayoutEffect, useRef } from "react";
+import React, {
+  ElementRef,
+  SyntheticEvent,
+  useEffect,
+  useLayoutEffect,
+  useRef,
+} from "react";
 import style from "./style.scss";
 import { createPortal } from "react-dom";
 
@@ -18,6 +24,11 @@ const DropdownList = ({ onDropdownToggle, children, parentRef }: Props) => {
     if (!listRef.current.contains(e.target as Node)) {
       onDropdownToggle();
     }
+  };
+
+  const handleDropdownToggle = (e: SyntheticEvent<HTMLLIElement>) => {
+    e.stopPropagation();
+    onDropdownToggle();
   };
 
   const calculatePosition = () => {
@@ -49,7 +60,7 @@ const DropdownList = ({ onDropdownToggle, children, parentRef }: Props) => {
   const template = (
     <ul ref={listRef} className={style.dropdownList}>
       {React.Children.map(children, (child) => (
-        <li onClick={onDropdownToggle} className={style.dropdownItem}>
+        <li onClick={handleDropdownToggle} className={style.dropdownItem}>
           {child}
         </li>
       ))}

@@ -1,4 +1,4 @@
-import React, { ElementRef, useRef } from "react";
+import React, { ElementRef, SyntheticEvent, useRef } from "react";
 import style from "./style.scss";
 import MoreDots from "Images/icons/3-vertical-dots-icon.svg";
 import classnames from "classnames";
@@ -21,10 +21,12 @@ const Dropdown = ({ isDisabled, children }: Props) => {
   const dropdownRef = useRef<ElementRef<"div">>(null);
   const parentRef = dropdownRef.current;
 
-  const handleDropdownToggle = () => {
+  const handleDropdownToggle = (e?: SyntheticEvent<HTMLButtonElement>) => {
     if (!isDisabled) {
       setState({ isOpen: !state.isOpen });
     }
+
+    e.stopPropagation();
   };
 
   const dropdownButtonStyles = classnames(style.dropdownMoreButton, {

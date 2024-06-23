@@ -3,7 +3,7 @@ import classnames from "classnames";
 import Loader from "Components/Loader";
 import style from "./style.scss";
 
-interface Props {
+interface Props extends React.HTMLProps<HTMLButtonElement> {
   className?: string;
   isLoading?: boolean;
   isDisabled?: boolean;
@@ -11,17 +11,16 @@ interface Props {
   children?: React.ReactNode;
   buttonStyle?: "prime" | "hollow" | "none";
   type?: "button" | "submit" | "reset";
-  onClick?: () => void;
 }
 
 const Button = ({
-  onClick,
   children,
   isLoading,
   className,
   isDisabled,
   type = "button",
   buttonStyle = "prime",
+  ...rest
 }: Props) => {
   const buttonClasses = classnames(className, {
     [style.primary]: buttonStyle === "prime",
@@ -31,7 +30,7 @@ const Button = ({
   });
 
   return (
-    <button type={type} className={buttonClasses} onClick={onClick}>
+    <button {...rest} type={type} className={buttonClasses}>
       {isLoading && <Loader />}
       {!isLoading && children}
     </button>

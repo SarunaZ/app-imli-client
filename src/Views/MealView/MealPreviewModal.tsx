@@ -16,7 +16,7 @@ interface State {
 
 const MealPreviewModal = ({ mealData }: Props) => {
   const [state, setState] = useState<State>({
-    tab: "instructions",
+    tab: mealData.instructions ? "instructions" : "ingredients",
   });
 
   const ingredientsButtonClasses = classnames(style.mealPreviewModalButton, {
@@ -28,15 +28,17 @@ const MealPreviewModal = ({ mealData }: Props) => {
   });
 
   return (
-    <div className={style.mealPreviewModal}>
+    <div className={style.mealPreviewWrapper}>
       <div className={style.mealPreviewModalButtons}>
-        <Button
-          buttonStyle="none"
-          className={instructionsButtonClasses}
-          onClick={() => setState({ tab: "instructions" })}
-        >
-          {"Recipe"}
-        </Button>
+        {mealData.instructions && (
+          <Button
+            buttonStyle="none"
+            className={instructionsButtonClasses}
+            onClick={() => setState({ tab: "instructions" })}
+          >
+            {"Recipe"}
+          </Button>
+        )}
         <Button
           buttonStyle="none"
           className={ingredientsButtonClasses}

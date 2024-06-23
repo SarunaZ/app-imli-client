@@ -8,7 +8,7 @@ import { MealListQuery } from "Schema/types";
 import { DeepExtractTypeSkipArrays } from "Declarations/typeExtract";
 import Dropdown from "Components/Dropdown";
 import Button from "Components/Button";
-import React from "react";
+import React, { SyntheticEvent } from "react";
 import MealPreviewModal from "Views/MealView/MealPreviewModal";
 
 interface Props {
@@ -36,21 +36,23 @@ const MealListItem = ({ data, onDelete, onEdit }: Props) => {
     });
   };
 
-  const handleOnEdit = () => {
+  const handleOnEdit = (e: SyntheticEvent<HTMLButtonElement>) => {
+    e.stopPropagation();
     onEdit(data.id);
   };
 
-  const handlePreviewClick = () => {
+  const handlePreviewClick = (e?: SyntheticEvent<HTMLDivElement>) => {
+    e?.stopPropagation();
     setState((prevState) => ({ isPreviewOpen: !prevState.isPreviewOpen }));
   };
 
   return (
     <>
       <li className={style.mealListItem}>
-        <Button
-          buttonStyle="none"
-          className={style.mealListItemButton}
+        <div
+          role="button"
           onClick={handlePreviewClick}
+          className={style.mealListItemButton}
         >
           <Box
             title={data?.name}
@@ -58,7 +60,7 @@ const MealListItem = ({ data, onDelete, onEdit }: Props) => {
               <Dropdown>
                 <Button
                   buttonStyle="none"
-                  onClick={handleOnEdit}
+                  onMouseDown={handleOnEdit}
                   className={style.mealListItemOption}
                 >
                   {"Edit"}
@@ -88,7 +90,7 @@ const MealListItem = ({ data, onDelete, onEdit }: Props) => {
               })}
             </ol>
           </Box>
-        </Button>
+        </div>
       </li>
       <DeleteMealModal
         id={data?.id}
