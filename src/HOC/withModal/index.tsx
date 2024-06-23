@@ -7,17 +7,14 @@ export interface ModalProps {
   isOpen: boolean;
   onClose: () => void;
   title?: string;
+  modalWrapperClassName?: string;
 }
 
 export default function withModal<P>(
   Component: React.ComponentType<P & ModalProps>,
 ) {
   return (props: P & ModalProps) => {
-    const { isOpen, onClose, title } = props;
-
-    if (!isOpen) {
-      return null;
-    }
+    const { isOpen, onClose, title, modalWrapperClassName } = props;
 
     const onModalClose = () => {
       onClose();
@@ -30,15 +27,25 @@ export default function withModal<P>(
     };
 
     useEffect(() => {
+      if (!isOpen) {
+        return () => {
+          document.removeEventListener("keydown", handleKeyDown);
+        };
+      }
+
       document.addEventListener("keydown", handleKeyDown);
 
       return () => {
         document.removeEventListener("keydown", handleKeyDown);
       };
-    }, []);
+    }, [isOpen]);
+
+    if (!isOpen) {
+      return null;
+    }
 
     return (
-      <Modal>
+      <Modal modalWrapperClassName={modalWrapperClassName}>
         <div className={style.modalContent}>
           <h3 className={style.modalTitle}>{title}</h3>
           <button className={style.modalCloseButton} onClick={onModalClose}>

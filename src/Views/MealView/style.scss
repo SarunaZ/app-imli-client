@@ -31,9 +31,24 @@
 .mealListItem {
   padding: 10px 0;
   margin-top: 15px;
+  min-height: 200px;
 
   @media (min-width: $small-screen) {
+    cursor: pointer;
     padding: 0;
+  }
+}
+
+.mealListItemButton {
+  height: 100%;
+  width: 100%;
+
+  > div {
+    align-items: self-start;
+    display: flex;
+    height: 100%;
+    flex-direction: column;
+    gap: 15px;
   }
 }
 
@@ -41,6 +56,7 @@
   color: $primaryText;
   padding-left: 25px;
   font-size: $fs-regular;
+  text-transform: capitalize;
 }
 
 .mealListItemIngredientsItem {
@@ -71,10 +87,12 @@
   }
 }
 
-.addMealModalWrapper {
+.addMealFormWrapper {
   display: flex;
   flex-direction: column;
+  margin: 0 auto;
   min-width: 350px;
+  width: 100%;
 }
 
 .ingredientFormInputWrapper {
@@ -146,4 +164,80 @@
 
 .deleteModalTitle {
   color: $primaryText
+}
+
+.mealFormContainer {
+  display: grid;
+  grid-gap: 15px;
+  margin: 0 auto;
+  max-width: 850px;
+}
+
+.mealEditor {
+  min-height: 500px;
+
+  :global(.tox-tinymce) {
+    border-radius: 0;
+  }
+}
+
+.addSuccessful {
+  color: $green;
+  font-size: $fs-regular;
+}
+
+.mealPreviewModal {
+  > div {
+    @media (max-width: $small-screen - 1px) {
+      height: 100%;
+      margin: 0;
+      width: 100%;
+    }
+  }
+}
+
+.mealPreviewModalContent {
+  p {
+    font-size: 1.6rem;
+    margin: 0
+  }
+
+  ul, ol {
+    display: grid;
+    grid-gap: 5px;
+    font-size: $fs-regular;
+    padding-left: 25px;
+  }
+}
+
+.mealPreviewModalIngredients {
+  display: grid;
+  font-size: $fs-regular;
+  grid-gap: 10px;
+  padding-left: 25px;
+  text-transform: capitalize;
+}
+
+.mealPreviewModalButtons {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 20px;
+}
+
+.mealPreviewModalButton {
+  border: 1px solid $primaryText;
+  border-radius: 5px;
+  color: $primaryText;
+
+  &.active {
+    background-color: $primaryText;
+    color: $secondaryText;
+  }
+}
+
+.mealPreviewWrapper {
+  @media (min-width: $small-screen) {
+    min-height: 500px;
+    min-width: 550px;
+  }
 }

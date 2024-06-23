@@ -21,7 +21,6 @@ const useMutation = <Q, V extends OperationVariables>(
     mutation,
     {
       fetchPolicy: "no-cache",
-      errorPolicy: "all",
     },
   );
 

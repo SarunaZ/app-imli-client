@@ -2,12 +2,15 @@ import { lazy } from "react";
 import { Route, Routes } from "react-router-dom";
 import {
   ROUTE_LOGIN_PAGE,
+  ROUTE_MEAL_CREATE_PAGE,
+  ROUTE_MEAL_EDIT_PAGE,
   ROUTE_MEAL_PAGE,
   ROUTE_PRODUCT_LIST_PAGE,
   ROUTE_ROOT,
 } from "./constants";
 import AuthRoute from "./AuthRoute";
 import { PublicRoute } from "./PublicRoute";
+import MealForm from "Views/MealView/MealForm";
 
 const Login = lazy(() => import("Views/LoginView"));
 const Dashboard = lazy(() => import("Views/Dashboard"));
@@ -29,6 +32,22 @@ const App = () => (
       element={
         <AuthRoute>
           <Dashboard />
+        </AuthRoute>
+      }
+    />
+    <Route
+      path={ROUTE_MEAL_EDIT_PAGE}
+      element={
+        <AuthRoute>
+          <MealForm />
+        </AuthRoute>
+      }
+    />
+    <Route
+      path={ROUTE_MEAL_CREATE_PAGE}
+      element={
+        <AuthRoute>
+          <MealForm />
         </AuthRoute>
       }
     />

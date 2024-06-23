@@ -15,10 +15,17 @@ export const MEAL_NAME_MUTATION: MutationDocument<
     $id: String
     $name: String!
     $ingredients: [IngredientInput]
+    $instructions: String
   ) {
-    createMeal(id: $id, name: $name, ingredients: $ingredients) {
+    createMeal(
+      id: $id
+      name: $name
+      ingredients: $ingredients
+      instructions: $instructions
+    ) {
       id
       name
+      instructions
       ingredients {
         name
       }

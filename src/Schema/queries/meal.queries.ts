@@ -10,6 +10,7 @@ export const MEAL_LIST_DATA: QueryDocument<
     meals {
       id
       name
+      instructions
       ingredients {
         name
       }

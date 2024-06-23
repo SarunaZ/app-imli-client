@@ -1,14 +1,18 @@
 import { ReactNode } from "react";
 import { createPortal } from "react-dom";
 import style from "./style.scss";
+import classnames from "classnames";
 
 interface Props {
   children: ReactNode | ReactNode[];
+  modalWrapperClassName?: string;
 }
 
-const Modal = ({ children }: Props) =>
+const Modal = ({ children, modalWrapperClassName }: Props) =>
   createPortal(
-    <div className={style.modalWrapper}>{children}</div>,
+    <div className={classnames(style.modalWrapper, modalWrapperClassName)}>
+      {children}
+    </div>,
     document.body,
   );
 
