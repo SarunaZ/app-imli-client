@@ -55,6 +55,7 @@
   color: $primaryText;
   padding-left: 25px;
   font-size: $fs-regular;
+  text-transform: capitalize;
 }
 
 .mealListItemIngredientsItem {
@@ -182,4 +183,50 @@
 .addSuccessful {
   color: $green;
   font-size: $fs-regular;
+}
+
+.mealPreviewModal {
+  min-height: 500px;
+  min-width: 550px;
+  width: 100%;
+}
+
+.mealPreviewModalContent {
+  p {
+    font-size: 1.6rem;
+    margin: 0
+  }
+
+  ul, ol {
+    display: grid;
+    grid-gap: 5px;
+    font-size: $fs-regular;
+    padding-left: 25px;
+  }
+}
+
+.mealPreviewModalIngredients {
+  display: grid;
+  font-size: $fs-regular;
+  grid-gap: 10px;
+  padding-left: 25px;
+  text-transform: capitalize;
+}
+
+.mealPreviewModalButtons {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 20px;
+}
+
+
+.mealPreviewModalButton {
+  border: 1px solid $primaryText;
+  border-radius: 5px;
+  color: $primaryText;
+
+  &.active {
+    background-color: $primaryText;
+    color: $secondaryText;
+  }
 }

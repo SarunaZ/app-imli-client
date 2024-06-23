@@ -97,7 +97,9 @@ const MealListItem = ({ data, onDelete, onEdit }: Props) => {
         isOpen={state.isDeleteModalOpen}
       />
       <MealPreviewModal
+        title={data.name}
         mealData={data}
+        modalWrapperClassName={style.mealPreviewModal}
         onClose={handlePreviewClick}
         isOpen={state.isPreviewOpen}
       />

@@ -71,7 +71,12 @@ h3 {
   margin-top: 0;
 }
 
+ul, ol {
+  color: $primaryText;
+}
+
 p {
+  color: $primaryText;
   font-size: $fs-regular;
   line-height: 24px;
 }
