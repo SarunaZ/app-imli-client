@@ -65,7 +65,11 @@ const MealForm = () => {
         variables: {
           id,
           name: mealInputRef.current.value,
-          ingredients: ingredientInputRef.current || state.mealData.ingredients,
+          ingredients:
+            ingredientInputRef.current ||
+            state.mealData.ingredients.map((item) => ({
+              name: item.name,
+            })),
           instructions:
             mealInstructionsRef.current || state.mealData.instructions,
         },
