@@ -15,7 +15,7 @@ To set up your env file correctly run this command `cp .env.example .env` from a
 ## Docker
 If runnig on windows, make sure that docker runs on WSL, and you are running commands from a linux terminal Ubuntu
 
-When all of the services are in place, from top directory of client service run `docker compose up --build`
+When all the services are in place, from top directory of client service run `docker compose up --build`
 The project should be up and running momenterally
 
 ## Dev account
