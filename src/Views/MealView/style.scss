@@ -107,7 +107,6 @@
   max-height: calc(100vh - 390px);
   overflow: auto;
   margin-top: 5px;
-  min-height: 170px;
 
   @media (min-width: 931px) {
     max-height: 450px;
@@ -164,11 +163,23 @@
   color: $primaryText
 }
 
+.mealFormTitle {
+  color: $primaryText;
+  max-width: 850px;
+}
+
 .mealFormContainer {
+  margin: 0 auto 0 15px;
+  max-width: 850px;
+
+  @media (min-width: $small-screen) {
+    margin: 0 auto;
+  }
+}
+
+.mealForm {
   display: grid;
   grid-gap: 15px;
-  margin: 0 auto;
-  max-width: 850px;
 }
 
 .mealEditor {

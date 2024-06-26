@@ -103,12 +103,9 @@ const MealForm = () => {
   if (error) return <ErrorHandler error={error} />;
 
   return (
-    <>
-      <form
-        ref={formRef}
-        onSubmit={submitProduct}
-        className={style.mealFormContainer}
-      >
+    <div className={style.mealFormContainer}>
+      <h1 className={style.mealFormTitle}>Add your meal</h1>
+      <form ref={formRef} onSubmit={submitProduct} className={style.mealForm}>
         <Input
           required
           label="Meal name"
@@ -141,7 +138,7 @@ const MealForm = () => {
           </span>
         )}
       </form>
-    </>
+    </div>
   );
 };
 

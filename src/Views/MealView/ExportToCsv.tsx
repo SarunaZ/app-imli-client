@@ -23,6 +23,7 @@ const ExportToCsv = ({ mealData }: Props) => {
     const formatedData = mealData.map((meal) => ({
       name: meal.name,
       ingredients: meal.ingredients.map((ingredient) => ingredient.name),
+      instructions: meal.instructions,
     }));
 
     if (formatedData && formatedData) {
