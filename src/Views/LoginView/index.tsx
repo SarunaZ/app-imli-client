@@ -53,6 +53,7 @@ const LoginView = () => {
           <form className={style.loginForm} onSubmit={handleOnSubmit}>
             <Input
               required
+              color="white"
               ref={usernameRef}
               label="Username"
               name="username"
@@ -60,6 +61,7 @@ const LoginView = () => {
             />
             <Input
               required
+              color="white"
               ref={passwordRef}
               label="Password"
               name="password"

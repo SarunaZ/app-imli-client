@@ -8,6 +8,10 @@
   &:last-of-type {
     margin-bottom: 0;
   }
+
+  &.white {
+    color: $white
+  }
 }
 
 .inputField {

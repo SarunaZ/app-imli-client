@@ -7,17 +7,23 @@ interface Props extends React.InputHTMLAttributes<HTMLInputElement> {
   label?: string;
   name?: string;
   className?: string;
+  color?: "white" | "black" | "default";
 }
 
 const Input = (
-  { label, name, className, ...rest }: Props,
+  { label, name, className, color = "default", ...rest }: Props,
   ref: React.Ref<HTMLInputElement>,
 ) => {
   const inputFieldClasses = classnames(className, style.inputField);
 
   if (label) {
     return (
-      <label className={style.inputLabel} htmlFor={name}>
+      <label
+        className={classnames(style.inputLabel, {
+          [style.white]: color === "white",
+        })}
+        htmlFor={name}
+      >
         {label}
         <input className={style.inputField} ref={ref} name={name} {...rest} />
       </label>

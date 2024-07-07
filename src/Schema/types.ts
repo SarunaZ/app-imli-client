@@ -40,7 +40,7 @@ export type Meal = {
 export type Mutation = {
   __typename?: 'Mutation';
   attachMealToProductMutation?: Maybe<Product>;
-  cancelProductList?: Maybe<Scalars['String']['output']>;
+  cancelProductList?: Maybe<Null>;
   completeProduct: Product;
   createMeal: Meal;
   createProduct: Product;
@@ -195,7 +195,7 @@ export type ProductListOrderMutation = { __typename?: 'Mutation', updateListOrde
 export type ProductListCancelMutationVariables = Exact<{ [key: string]: never; }>;
 
 
-export type ProductListCancelMutation = { __typename?: 'Mutation', cancelProductList?: string | null };
+export type ProductListCancelMutation = { __typename?: 'Mutation', cancelProductList?: { __typename?: 'Null', success?: boolean | null } | null };
 
 export type ProductDeleteMutationVariables = Exact<{
   id: Scalars['ID']['input'];

@@ -63,8 +63,8 @@ const IngredientContainer = ({ data, error, isLoading, onInput }: Props) => {
 
   return (
     <>
-      <label className={style.indredientFieldLabel}>Ingredients</label>
-      <div className={style.indredientFieldsrapper}>
+      <label className={style.ingredientFieldLabel}>Ingredients</label>
+      <div className={style.ingredientFieldsWrapper}>
         {state.inputState?.map((input, index) => (
           <IngredientInput
             key={index}
@@ -76,11 +76,11 @@ const IngredientContainer = ({ data, error, isLoading, onInput }: Props) => {
         ))}
       </div>
       <ErrorHandler error={error} />
-      <div className={style.indredientFieldButtonWrapper}>
+      <div className={style.ingredientFieldButtonSubmit}>
         <Button
           type="submit"
           isLoading={isLoading}
-          className={style.indredientFieldButtonSubmit}
+          className={style.ingredientFieldButtonSubmit}
         >
           Submit
         </Button>
@@ -88,7 +88,7 @@ const IngredientContainer = ({ data, error, isLoading, onInput }: Props) => {
           type="button"
           buttonStyle="hollow"
           onClick={handleAddInput}
-          className={style.indredientFieldAddButton}
+          className={style.ingredientFieldAddButton}
         >
           +
         </Button>

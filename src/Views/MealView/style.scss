@@ -103,7 +103,7 @@
   }
 }
 
-.indredientFieldsrapper {
+.ingredientFieldsWrapper {
   max-height: calc(100vh - 390px);
   overflow: auto;
   margin-top: 5px;
@@ -118,23 +118,23 @@
   width: 55px;
 }
 
-.indredientFieldLabel {
+.ingredientFieldLabel {
   color: $primaryText;
   font-size: $fs-medium-rare;
 }
 
-.indredientFieldButtonWrapper {
+.ingredientFieldButtonWrapper {
   align-items: center;
   display: flex;
   gap: 15px;
   margin-top: auto;
 }
 
-.indredientFieldButtonSubmit {
+.ingredientFieldButtonSubmit {
   flex: 1;
 }
 
-.indredientFieldAddButton {
+.ingredientFieldAddButton {
   height: 55px;
   width: 55px;
 }

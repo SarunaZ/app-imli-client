@@ -61,7 +61,9 @@ export const PRODUCTS_LIST_CANCEL_MUTATION: MutationDocument<
   ProductListCancelMutationVariables
 > = gql`
   mutation productListCancel {
-    cancelProductList
+    cancelProductList {
+      success
+    }
   }
 `;
 
