@@ -2,6 +2,7 @@ import React, { useEffect } from "react";
 import Modal from "./Modal";
 import style from "./style.scss";
 import Close from "Images/icons/close.svg";
+import { Helmet } from "react-helmet-async";
 
 export interface ModalProps {
   isOpen: boolean;
@@ -45,15 +46,20 @@ export default function withModal<P>(
     }
 
     return (
-      <Modal modalWrapperClassName={modalWrapperClassName}>
-        <div className={style.modalContent}>
-          <h3 className={style.modalTitle}>{title}</h3>
-          <button className={style.modalCloseButton} onClick={onModalClose}>
-            <Close />
-          </button>
-          <Component {...props} />
-        </div>
-      </Modal>
+      <>
+        <Helmet>
+          <body className={style.noScroll} />
+        </Helmet>
+        <Modal modalWrapperClassName={modalWrapperClassName}>
+          <div className={style.modalContent}>
+            <h3 className={style.modalTitle}>{title}</h3>
+            <button className={style.modalCloseButton} onClick={onModalClose}>
+              <Close />
+            </button>
+            <Component {...props} />
+          </div>
+        </Modal>
+      </>
     );
   };
 }

@@ -132,6 +132,8 @@
 
 .ingredientFieldButtonSubmit {
   flex: 1;
+  display: flex;
+  gap: 15px;
 }
 
 .ingredientFieldAddButton {
@@ -206,6 +208,9 @@
 }
 
 .mealPreviewModalContent {
+  flex: 1 1 0;
+  overflow: auto;
+
   p {
     font-size: 1.6rem;
     margin: 0
@@ -245,6 +250,10 @@
 }
 
 .mealPreviewWrapper {
+  display: flex;
+  flex-direction: column;
+  height: 85%;
+
   @media (min-width: $small-screen) {
     min-height: 500px;
     min-width: 550px;
