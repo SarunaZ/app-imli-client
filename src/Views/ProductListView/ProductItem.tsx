@@ -65,9 +65,17 @@ const ProductItem = ({
     });
   };
 
-  const productItemClass = classnames(style.productListItem, {
-    [style.completed]: isCompleted,
+  const productListItemClasses = classnames(style.productListItemWrapper, {
+    [style.productListItemFirst]: index === 0,
   });
+
+  const productItemClass = classnames(
+    style.productListItem,
+    productListItemClasses,
+    {
+      [style.completed]: isCompleted,
+    },
+  );
 
   const editProduct = (value?: string) => {
     renameProduct({
@@ -85,32 +93,26 @@ const ProductItem = ({
     });
   };
 
-  const productListItemClasses = classnames(style.productListItemWrapper, {
-    [style.productListItemFirst]: index === 0,
-  });
-
   return (
-    <li className={productListItemClasses}>
-      <Box id={id} isDragable>
-        <div className={productItemClass}>
-          <ProductDropdown
-            id={id}
-            onError={onError}
-            onDelete={onDelete}
-            isDisabled={isCompleted}
-            onEditProduct={handleEditProduct}
-          />
-          <ProductItemInput
-            productName={name}
-            onEdit={editProduct}
-            isLoading={isLoading}
-            isEdit={state.isEdit}
-            isCompleted={isCompleted}
-            onCompleteProduct={handleOnComplete}
-          />
-        </div>
-      </Box>
-    </li>
+    <Box id={id} as="li" isDraggable>
+      <div className={productItemClass}>
+        <ProductDropdown
+          id={id}
+          onError={onError}
+          onDelete={onDelete}
+          isDisabled={isCompleted}
+          onEditProduct={handleEditProduct}
+        />
+        <ProductItemInput
+          productName={name}
+          onEdit={editProduct}
+          isLoading={isLoading}
+          isEdit={state.isEdit}
+          isCompleted={isCompleted}
+          onCompleteProduct={handleOnComplete}
+        />
+      </div>
+    </Box>
   );
 };
 

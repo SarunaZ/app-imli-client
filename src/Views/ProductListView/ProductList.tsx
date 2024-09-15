@@ -17,6 +17,10 @@ import {
   SortableContext,
   verticalListSortingStrategy,
 } from "@dnd-kit/sortable";
+import {
+  restrictToVerticalAxis,
+  restrictToParentElement,
+} from "@dnd-kit/modifiers";
 import { ProductError, ProductListData } from "./types";
 import useMutation from "Hooks/useMutation";
 import { PRODUCTS_LIST_ORDER_UPDATE_MUTATION } from "Schema/mutations/product.mutations";
@@ -91,8 +95,8 @@ const ProductList = ({
     }),
     useSensor(TouchSensor, {
       activationConstraint: {
-        delay: 155,
-        tolerance: 15,
+        delay: 153,
+        tolerance: 13,
       },
     }),
   );
@@ -127,6 +131,7 @@ const ProductList = ({
     <>
       <ul ref={listRef} className={style.productList}>
         <DndContext
+          modifiers={[restrictToVerticalAxis, restrictToParentElement]}
           sensors={sensors}
           collisionDetection={closestCenter}
           onDragEnd={onDragEd}
