@@ -6,17 +6,26 @@ import { CSS } from "@dnd-kit/utilities";
 
 interface Props {
   id?: string;
+  as?: "div" | "li" | "p";
   title?: string;
-  isDragable?: boolean;
+  isDraggable?: boolean;
   isLoading?: boolean;
   children: ReactNode | ReactNode[];
   dropdownComponent?: ReactNode;
 }
 
-const Box = forwardRef<ElementRef<"div">, Props>(
+const Box = forwardRef<ElementRef<any>, Props>(
   (
-    { isLoading = false, children, isDragable, id, title, dropdownComponent },
-    ref,
+    {
+      as,
+      id,
+      title,
+      children,
+      isLoading = false,
+      isDraggable,
+      dropdownComponent,
+    },
+    ref: any,
   ) => {
     const {
       attributes,
@@ -33,6 +42,8 @@ const Box = forwardRef<ElementRef<"div">, Props>(
       transition,
     };
 
+    const Component = as ? as : undefined;
+
     const boxContent = (
       <>
         {title && dropdownComponent && (
@@ -48,31 +59,29 @@ const Box = forwardRef<ElementRef<"div">, Props>(
       </>
     );
 
-    if (isDragable) {
+    if (isDraggable) {
       return (
-        <div className={style.box} style={dragableStyle}>
-          {isLoading && <Loader />}
-          {!isLoading && (
-            <>
-              <div
-                data-style-sort
-                ref={setNodeRef}
-                {...attributes}
-                {...listeners}
-              >
-                {boxContent}
-              </div>
-            </>
-          )}
-        </div>
+        <Component
+          className={style.box}
+          style={dragableStyle}
+          data-style-sort
+          ref={setNodeRef}
+          {...attributes}
+          {...listeners}
+        >
+          <>
+            {isLoading && <Loader />}
+            {!isLoading && boxContent}
+          </>
+        </Component>
       );
     }
 
     return (
-      <div ref={ref} className={style.box}>
+      <Component ref={ref} className={style.box}>
         {isLoading && <Loader />}
         {!isLoading && boxContent}
-      </div>
+      </Component>
     );
   },
 );

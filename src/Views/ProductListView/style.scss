@@ -28,7 +28,8 @@
   gap: 15px;
   margin: 0 0 20px;
   padding: 0;
-  overflow: auto;
+  overflow-y: auto;
+  overflow-x: hidden;
 }
 
 .productListItemWrapper {
@@ -58,6 +59,7 @@
   color: $primaryText;
   font-size: $fs-medium;
   margin-right: auto;
+  text-transform: capitalize;
 
   @media (min-width: $small-screen) {
     font-size: $fs-medium-rare;
