@@ -55,6 +55,7 @@ const MealListItem = ({ data, onDelete, onEdit }: Props) => {
           className={style.mealListItemButton}
         >
           <Box
+            as="div"
             title={data?.name}
             dropdownComponent={
               <Dropdown>
