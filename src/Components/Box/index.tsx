@@ -6,7 +6,7 @@ import { CSS } from "@dnd-kit/utilities";
 
 interface Props {
   id?: string;
-  as?: "div" | "li" | "p";
+  as: "div" | "li" | "p";
   title?: string;
   isDraggable?: boolean;
   isLoading?: boolean;
@@ -14,10 +14,13 @@ interface Props {
   dropdownComponent?: ReactNode;
 }
 
-const Box = forwardRef<ElementRef<any>, Props>(
+const Box = forwardRef<
+  ElementRef<"div"> | ElementRef<"p"> | ElementRef<"li">,
+  Props
+>(
   (
     {
-      as,
+      as: Component,
       id,
       title,
       children,
@@ -41,8 +44,6 @@ const Box = forwardRef<ElementRef<any>, Props>(
       transform: CSS.Translate.toString(transform),
       transition,
     };
-
-    const Component = as ? as : undefined;
 
     const boxContent = (
       <>
