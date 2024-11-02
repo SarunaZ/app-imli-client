@@ -10,7 +10,7 @@ import {
   PRODUCT_RENAME_PRODUCT,
 } from "Schema/mutations/product.mutations";
 import { ProductError } from "./types";
-import useMutation from "../../Hooks/useMutation";
+import useMutation from "Hooks/useMutation";
 
 interface Props {
   id: string;
@@ -65,17 +65,9 @@ const ProductItem = ({
     });
   };
 
-  const productListItemClasses = classnames(style.productListItemWrapper, {
-    [style.productListItemFirst]: index === 0,
+  const productItemClass = classnames(style.productListItem, {
+    [style.completed]: isCompleted,
   });
-
-  const productItemClass = classnames(
-    style.productListItem,
-    productListItemClasses,
-    {
-      [style.completed]: isCompleted,
-    },
-  );
 
   const editProduct = (value?: string) => {
     renameProduct({

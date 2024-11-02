@@ -30,16 +30,16 @@
   padding: 0;
   overflow-y: auto;
   overflow-x: hidden;
+
+  li:first-child {
+    @media (max-width: $x-small-screen) {
+      margin-top: auto;
+    }
+  }
 }
 
 .productListItemWrapper {
   list-style: none;
-}
-
-.productListItemFirst {
-  @media(max-width: $x-small-screen) {
-    margin-top: auto;
-  }
 }
 
 .productListItem {
@@ -85,11 +85,12 @@
   display: flex;
   flex-direction: column;
   margin-top: auto;
-  width: 100%;
+  width: calc(100% - 55px);
 
-  @media (min-width: 931px) {
+  @media (min-width: $x-small-screen) {
     background: transparent;
     padding: 0;
+    width: 100%;
   }
 }
 
