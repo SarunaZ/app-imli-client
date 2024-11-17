@@ -1,15 +1,13 @@
 import { SyntheticEvent } from "react";
 import Loader from "Components/Loader";
 import style from "./style.scss";
-import { useQuery } from "@apollo/client/react/hooks/useQuery";
 import { MEAL_ATTACH_TO_PRODUCT_MUTATION } from "Schema/mutations/product.mutations";
 import withModal from "HOC/withModal";
 import { MEAL_LIST_DATA } from "Schema/queries/product.queries";
-import { MealDropDownListQuery } from "Schema/types";
 import ErrorHandler from "Components/ErrorHandler";
 import useMutation from "Hooks/useMutation";
+import useQuery from "Hooks/useQuery";
 
-type Meals = MealDropDownListQuery["meals"];
 interface Props {
   onUpdate: () => void;
 }
@@ -28,7 +26,7 @@ const MealDropdown = ({ onUpdate }: Props) => {
     return <p>No meals found</p>;
   }
 
-  const mealData = data.meals as Meals;
+  const mealData = data.meals;
 
   const handleOnChange = (event: SyntheticEvent<HTMLSelectElement>) => {
     const mealId = event.currentTarget.value;

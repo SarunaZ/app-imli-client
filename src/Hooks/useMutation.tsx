@@ -10,7 +10,6 @@ import { MutationDocument } from "Utilities/typesExport";
 
 type MutationOptions<A, B> = MutationHookOptions<A, B>;
 
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
 const useMutation = <Q, V extends OperationVariables>(
   mutation: MutationDocument<Q, V>,
 ): [

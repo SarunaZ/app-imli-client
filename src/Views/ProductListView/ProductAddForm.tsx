@@ -12,16 +12,16 @@ interface Props {
 }
 
 const ProductAddForm = ({ onChange }: Props) => {
-  const productInputRef = useRef<ElementRef<"input">>(null);
   const formRef = useRef<ElementRef<"form">>(null);
   const [addProductQ, productQData] = useMutation(PRODUCT_NAME_MUTATION);
 
   const submitProduct = (e: SyntheticEvent<HTMLFormElement>) => {
     e.preventDefault();
+    const formData = new FormData(formRef.current);
 
     addProductQ({
       variables: {
-        name: productInputRef.current?.value,
+        name: formData.get("productName") as string,
       },
       update: (_, res) => {
         const newItem = {
@@ -45,7 +45,6 @@ const ProductAddForm = ({ onChange }: Props) => {
         <input
           required
           className={style.formInput}
-          ref={productInputRef}
           name="productName"
           type="text"
         />
