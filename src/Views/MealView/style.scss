@@ -149,7 +149,7 @@
   height: 25px;
 
   svg {
-    color: $primaryText
+    color: $primaryText;
   }
 }
 
@@ -162,7 +162,7 @@
 }
 
 .deleteModalTitle {
-  color: $primaryText
+  color: $primaryText;
 }
 
 .mealFormTitle {
@@ -199,7 +199,7 @@
 
 .mealPreviewModal {
   > div {
-    @media (max-width: $small-screen - 1px) {
+    @media (max-width: ($small-screen - 1px)) {
       height: 100%;
       margin: 0;
       width: 100%;
@@ -213,10 +213,11 @@
 
   p {
     font-size: 1.6rem;
-    margin: 0
+    margin: 0;
   }
 
-  ul, ol {
+  ul,
+  ol {
     display: grid;
     grid-gap: 5px;
     font-size: $fs-regular;
@@ -253,6 +254,7 @@
   display: flex;
   flex-direction: column;
   height: 85%;
+  max-width: 550px;
 
   @media (min-width: $small-screen) {
     min-height: 500px;
