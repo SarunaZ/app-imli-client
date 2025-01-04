@@ -14,7 +14,7 @@
   flex-direction: column;
   margin: auto;
   max-width: 550px;
-  min-height: calc(100vh - 30px);
+  min-height: calc(100dvh - 30px);
 
   h2 {
     color: $primaryText;
@@ -26,6 +26,7 @@
   flex-direction: column;
   flex: 1 1 0;
   gap: 15px;
+  list-style: none;
   margin: 0 0 20px;
   padding: 0;
   overflow-y: auto;
@@ -36,10 +37,6 @@
       margin-top: auto;
     }
   }
-}
-
-.productListItemWrapper {
-  list-style: none;
 }
 
 .productListItem {
