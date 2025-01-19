@@ -2,7 +2,7 @@ import { DeepExtractTypeSkipArrays } from "Declarations/typeExtract";
 import { MealListQuery } from "Schema/types";
 import style from "./style.scss";
 import Input from "Components/Input";
-import { ElementRef, SyntheticEvent, useRef } from "react";
+import { SyntheticEvent, useRef } from "react";
 import { Editor } from "@tinymce/tinymce-react";
 import IngredientContainer from "Views/MealView/IngredientContainer";
 import useState from "Hooks/useState";
@@ -44,8 +44,8 @@ const MealForm = () => {
   });
 
   const formRef = useRef<HTMLFormElement>(null);
-  const ingredientInputRef = useRef<IngredientsInput[]>();
-  const mealInputRef = useRef<ElementRef<"input">>(null);
+  const ingredientInputRef = useRef<IngredientsInput[]>(null);
+  const mealInputRef = useRef<HTMLInputElement>(null);
   const mealInstructionsRef = useRef<string>(null);
 
   const [addMeal, addMealData] = useMutation(MEAL_NAME_MUTATION);

@@ -6,7 +6,6 @@ import ErrorHandler from "Components/ErrorHandler";
 import ExportToCsv from "./ExportToCsv";
 import useQuery from "Hooks/useQuery";
 import Add from "Images/icons/add.svg";
-import React from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import { ROUTE_MEAL_CREATE_PAGE } from "App/constants";
 import MealListItem from "Views/MealView/MealListItem";

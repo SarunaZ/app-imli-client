@@ -20,7 +20,7 @@
   --dropdown-bg: #ffffff;
 }
 
-[data-theme="Dark"] {
+[data-theme="dark"] {
   --text-white: #000000;
   --text-black: #ffffff;
   --text-light-grey: #00000061;
@@ -71,7 +71,8 @@ h3 {
   margin-top: 0;
 }
 
-ul, ol {
+ul,
+ol {
   color: $primaryText;
 }
 

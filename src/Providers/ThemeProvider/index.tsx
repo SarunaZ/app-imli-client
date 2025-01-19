@@ -1,7 +1,5 @@
 import useState from "Hooks/useState";
-import { setCookies } from "Utilities/cookieParser";
-import { createContext, ReactNode } from "react";
-import { Helmet } from "react-helmet-async";
+import { createContext, ReactNode, useContext, useEffect } from "react";
 import { Theme } from "./types";
 import { storedTheme } from "./utility";
 
@@ -32,6 +30,9 @@ const ThemeSwitcher = ({ children }: Props) => {
 
   const setTheme = (theme: Theme) => {
     localStorage.setItem("theme", theme);
+
+    document.querySelector("html").setAttribute("data-theme", theme);
+
     setState({ currentTheme: theme });
   };
 
@@ -40,14 +41,22 @@ const ThemeSwitcher = ({ children }: Props) => {
     setCurrentTheme: setTheme,
   };
 
+  useEffect(() => {
+    try {
+      document
+        .querySelector("html")
+        .setAttribute("data-theme", state.currentTheme);
+    } catch {
+      console.log("Error setting error");
+    }
+  }, []);
+
   return (
     <ThemeProvider.Provider value={providerValue}>
-      <Helmet>
-        <html data-theme={state.currentTheme} />
-      </Helmet>
       {children}
     </ThemeProvider.Provider>
   );
 };
 
+export const useTheme = () => useContext(ThemeProvider);
 export default ThemeSwitcher;

@@ -1,11 +1,10 @@
-import { useContext } from "react";
 import style from "./style.scss";
 import Logout from "Components/Sidebar/Logout";
-import { ThemeProvider } from "Providers/ThemeProvider";
+import { useTheme } from "Providers/ThemeProvider";
 import { Theme } from "Providers/ThemeProvider/types";
 
 const SidebarFooter = () => {
-  const { currentTheme, setCurrentTheme } = useContext(ThemeProvider);
+  const { currentTheme, setCurrentTheme } = useTheme();
 
   const currentThemeTitle =
     currentTheme === Theme.Light ? Theme.Dark : Theme.Light;
@@ -13,6 +12,7 @@ const SidebarFooter = () => {
   const handleSetTheme = () => {
     const currentThemeValue =
       currentTheme === Theme.Light ? Theme.Dark : Theme.Light;
+    console.log(currentThemeValue, "currentThemeValue");
 
     setCurrentTheme(currentThemeValue);
   };
