@@ -1,10 +1,14 @@
 import React from "react";
-import { ROUTE_MEAL_PAGE, ROUTE_PRODUCT_LIST_PAGE } from "App/constants";
+import {
+  ROUTE_MEAL_PAGE,
+  ROUTE_PRODUCT_LIST_PAGE,
+  ROUTE_CHORES_PAGE,
+} from "App/constants";
 import style from "./style.scss";
 import Kitchen from "Images/icons/kitchen.svg";
 import SidebarItem from "./SidebarItem";
 
-const kitchenLinkMap = [
+const cookingLinkMap = [
   {
     key: "meal_view",
     name: "Meal list",
@@ -17,12 +21,26 @@ const kitchenLinkMap = [
   },
 ];
 
+const choresLinkMap = [
+  {
+    key: "chores_view",
+    name: "Chores",
+    pathname: ROUTE_CHORES_PAGE,
+  },
+];
+
 const itemMap = [
   {
-    title: "Kitchen",
+    title: "Cooking",
     icon: <Kitchen />,
-    routes: kitchenLinkMap,
+    routes: cookingLinkMap,
     defaultPath: ROUTE_PRODUCT_LIST_PAGE,
+  },
+  {
+    title: "Chores",
+    icon: <Kitchen />,
+    routes: choresLinkMap,
+    defaultPath: ROUTE_CHORES_PAGE,
   },
 ];
 

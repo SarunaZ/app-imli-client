@@ -6,6 +6,7 @@ import {
   ROUTE_MEAL_EDIT_PAGE,
   ROUTE_MEAL_PAGE,
   ROUTE_PRODUCT_LIST_PAGE,
+  ROUTE_CHORES_PAGE,
   ROUTE_ROOT,
 } from "./constants";
 import AuthRoute from "./AuthRoute";
@@ -16,6 +17,7 @@ const Login = lazy(() => import("Views/LoginView"));
 const Dashboard = lazy(() => import("Views/Dashboard"));
 const MealList = lazy(() => import("Views/MealView"));
 const ProductList = lazy(() => import("Views/ProductListView"));
+const ChoresView = lazy(() => import("Views/ChoresView"));
 
 const App = () => (
   <Routes>
@@ -64,6 +66,14 @@ const App = () => (
       element={
         <AuthRoute>
           <ProductList />
+        </AuthRoute>
+      }
+    />
+    <Route
+      path={ROUTE_CHORES_PAGE}
+      element={
+        <AuthRoute>
+          <ChoresView />
         </AuthRoute>
       }
     />

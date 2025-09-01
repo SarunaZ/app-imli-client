@@ -1,4 +1,4 @@
-import { CSSProperties, ElementRef, forwardRef, ReactNode } from "react";
+import { CSSProperties, forwardRef, ReactNode, Ref } from "react";
 import Loader from "../Loader";
 import style from "./style.scss";
 import { useSortable } from "@dnd-kit/sortable";
@@ -14,22 +14,18 @@ interface Props {
   dropdownComponent?: ReactNode;
 }
 
-const Box = forwardRef<
-  ElementRef<"div"> | ElementRef<"p"> | ElementRef<"li">,
-  Props
->(
-  (
-    {
-      as: Component,
-      id,
-      title,
-      children,
-      isLoading = false,
-      isDraggable,
-      dropdownComponent,
-    },
-    ref: any,
-  ) => {
+type Elements = HTMLDivElement | HTMLParagraphElement | HTMLLIElement;
+
+const Box = forwardRef<Elements, Props>(
+  ({
+    as: Component,
+    id,
+    title,
+    children,
+    isLoading = false,
+    isDraggable,
+    dropdownComponent,
+  }) => {
     const {
       attributes,
       isDragging,
@@ -79,7 +75,7 @@ const Box = forwardRef<
     }
 
     return (
-      <Component ref={ref} className={style.box}>
+      <Component ref={setNodeRef} className={style.box}>
         {isLoading && <Loader />}
         {!isLoading && boxContent}
       </Component>
