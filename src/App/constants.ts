@@ -5,3 +5,5 @@ export const ROUTE_CHORES_PAGE = "/chores";
 export const ROUTE_LOGIN_PAGE = "/login";
 export const ROUTE_MEAL_EDIT_PAGE = "/meal/edit/:id";
 export const ROUTE_MEAL_CREATE_PAGE = "/meal/create";
+export const ROUTE_CHORE_EDIT_PAGE = "/chores/edit/:id";
+export const ROUTE_CHORE_CREATE_PAGE = "/chores/create";

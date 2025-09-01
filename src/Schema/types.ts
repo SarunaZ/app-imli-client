@@ -24,7 +24,7 @@ export type Chore = {
   __typename?: 'Chore';
   id: Scalars['ID']['output'];
   name?: Maybe<Scalars['String']['output']>;
-  timestamp?: Maybe<Scalars['Int']['output']>;
+  timestamp?: Maybe<Scalars['String']['output']>;
 };
 
 export type IngredientInput = {
@@ -183,7 +183,7 @@ export type ChoreCreateMutationVariables = Exact<{
 }>;
 
 
-export type ChoreCreateMutation = { __typename?: 'Mutation', createChore: { __typename?: 'Chore', id: string, name?: string | null, timestamp?: number | null } };
+export type ChoreCreateMutation = { __typename?: 'Mutation', createChore: { __typename?: 'Chore', id: string, name?: string | null, timestamp?: string | null } };
 
 export type ChoreSaveMutationVariables = Exact<{
   id: Scalars['ID']['input'];
@@ -191,7 +191,7 @@ export type ChoreSaveMutationVariables = Exact<{
 }>;
 
 
-export type ChoreSaveMutation = { __typename?: 'Mutation', saveChore: { __typename?: 'Chore', id: string, name?: string | null, timestamp?: number | null } };
+export type ChoreSaveMutation = { __typename?: 'Mutation', saveChore: { __typename?: 'Chore', id: string, name?: string | null, timestamp?: string | null } };
 
 export type ChoreDeleteMutationVariables = Exact<{
   id: Scalars['ID']['input'];
@@ -205,7 +205,7 @@ export type ChoreTakeMutationVariables = Exact<{
 }>;
 
 
-export type ChoreTakeMutation = { __typename?: 'Mutation', takeChore: { __typename?: 'Chore', id: string, name?: string | null, timestamp?: number | null } };
+export type ChoreTakeMutation = { __typename?: 'Mutation', takeChore: { __typename?: 'Chore', id: string, name?: string | null, timestamp?: string | null } };
 
 export type MealMutationMutationVariables = Exact<{
   id?: InputMaybe<Scalars['String']['input']>;
@@ -287,7 +287,7 @@ export type ProductCompleteMutation = { __typename?: 'Mutation', completeProduct
 export type ChoreListQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type ChoreListQuery = { __typename?: 'Query', chores?: Array<{ __typename?: 'Chore', id: string, name?: string | null, timestamp?: number | null }> | null };
+export type ChoreListQuery = { __typename?: 'Query', chores?: Array<{ __typename?: 'Chore', id: string, name?: string | null, timestamp?: string | null }> | null };
 
 export type UserDataQueryVariables = Exact<{ [key: string]: never; }>;
 

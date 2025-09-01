@@ -7,11 +7,14 @@ import {
   ROUTE_MEAL_PAGE,
   ROUTE_PRODUCT_LIST_PAGE,
   ROUTE_CHORES_PAGE,
+  ROUTE_CHORE_CREATE_PAGE,
+  ROUTE_CHORE_EDIT_PAGE,
   ROUTE_ROOT,
 } from "./constants";
 import AuthRoute from "./AuthRoute";
 import { PublicRoute } from "./PublicRoute";
 import MealForm from "Views/MealView/MealForm";
+import ChoreForm from "Views/ChoresView/ChoreForm";
 
 const Login = lazy(() => import("Views/LoginView"));
 const Dashboard = lazy(() => import("Views/Dashboard"));
@@ -66,6 +69,22 @@ const App = () => (
       element={
         <AuthRoute>
           <ProductList />
+        </AuthRoute>
+      }
+    />
+    <Route
+      path={ROUTE_CHORE_EDIT_PAGE}
+      element={
+        <AuthRoute>
+          <ChoreForm />
+        </AuthRoute>
+      }
+    />
+    <Route
+      path={ROUTE_CHORE_CREATE_PAGE}
+      element={
+        <AuthRoute>
+          <ChoreForm />
         </AuthRoute>
       }
     />
