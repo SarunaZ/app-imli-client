@@ -30,7 +30,6 @@ interface State {
 const ProductItem = ({
   id,
   name,
-  index,
   onCompleted,
   onDelete,
   isCompleted,

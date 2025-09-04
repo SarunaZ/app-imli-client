@@ -19,6 +19,7 @@ import "../public/sw";
 const httpLink = createHttpLink({
   uri: process.env.CLIENT_GRAPHQL_LINK,
 });
+
 const authLink = setContext((_, { headers }) => {
   const token = getCookieData("auth");
 
@@ -26,7 +27,7 @@ const authLink = setContext((_, { headers }) => {
     headers: {
       ...headers,
       "Cache-Control": "max-age=3600",
-      authorization: `${token}`,
+      Authorization: `Bearer ${token}`,
     },
   };
 });

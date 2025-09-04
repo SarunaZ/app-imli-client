@@ -1,8 +1,9 @@
-import { CSSProperties, ElementRef, forwardRef, ReactNode } from "react";
+import { CSSProperties, forwardRef, ReactNode, Ref } from "react";
 import Loader from "../Loader";
 import style from "./style.scss";
 import { useSortable } from "@dnd-kit/sortable";
 import { CSS } from "@dnd-kit/utilities";
+import classnames from "classnames";
 
 interface Props {
   id?: string;
@@ -14,22 +15,18 @@ interface Props {
   dropdownComponent?: ReactNode;
 }
 
-const Box = forwardRef<
-  ElementRef<"div"> | ElementRef<"p"> | ElementRef<"li">,
-  Props
->(
-  (
-    {
-      as: Component,
-      id,
-      title,
-      children,
-      isLoading = false,
-      isDraggable,
-      dropdownComponent,
-    },
-    ref: any,
-  ) => {
+type Elements = HTMLDivElement | HTMLParagraphElement | HTMLLIElement;
+
+const Box = forwardRef<Elements, Props>(
+  ({
+    as: Component,
+    id,
+    title,
+    children,
+    isLoading = false,
+    isDraggable,
+    dropdownComponent,
+  }) => {
     const {
       attributes,
       isDragging,
@@ -47,15 +44,14 @@ const Box = forwardRef<
 
     const boxContent = (
       <>
-        {title && dropdownComponent && (
-          <div className={style.boxHeader}>
-            <h2 className={style.boxTitle}>{title}</h2>
-            {dropdownComponent}
-          </div>
-        )}
-        {title && !dropdownComponent && (
-          <h2 className={style.boxTitle}>{title}</h2>
-        )}
+        <div
+          className={classnames(style.boxHeader, {
+            [style.right]: !title && dropdownComponent,
+          })}
+        >
+          {title && <h2 className={style.boxTitle}>{title}</h2>}
+          {dropdownComponent}
+        </div>
         {children}
       </>
     );
@@ -79,7 +75,7 @@ const Box = forwardRef<
     }
 
     return (
-      <Component ref={ref} className={style.box}>
+      <Component ref={setNodeRef} className={style.box}>
         {isLoading && <Loader />}
         {!isLoading && boxContent}
       </Component>
