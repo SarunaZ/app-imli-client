@@ -3,6 +3,7 @@ import Loader from "../Loader";
 import style from "./style.scss";
 import { useSortable } from "@dnd-kit/sortable";
 import { CSS } from "@dnd-kit/utilities";
+import classnames from "classnames";
 
 interface Props {
   id?: string;
@@ -43,15 +44,14 @@ const Box = forwardRef<Elements, Props>(
 
     const boxContent = (
       <>
-        {title && dropdownComponent && (
-          <div className={style.boxHeader}>
-            <h2 className={style.boxTitle}>{title}</h2>
-            {dropdownComponent}
-          </div>
-        )}
-        {title && !dropdownComponent && (
-          <h2 className={style.boxTitle}>{title}</h2>
-        )}
+        <div
+          className={classnames(style.boxHeader, {
+            [style.right]: !title && dropdownComponent,
+          })}
+        >
+          {title && <h2 className={style.boxTitle}>{title}</h2>}
+          {dropdownComponent}
+        </div>
         {children}
       </>
     );

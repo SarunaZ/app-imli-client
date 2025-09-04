@@ -5,14 +5,27 @@ import Loader from "Components/Loader";
 import ErrorHandler from "Components/ErrorHandler";
 import useQuery from "Hooks/useQuery";
 import Add from "Images/icons/add.svg";
+import Dice from "Images/icons/dice.svg";
 import { useLocation, useNavigate } from "react-router-dom";
 import ChoreListItem from "Views/ChoresView/ChoreListItem";
+import useState from "Hooks/useState";
+import PickChoreModal from "Views/ChoresView/PickChoreModal";
+import { useLazyQuery } from "@apollo/client";
 
 const ChoresListView = () => {
   const location = useLocation();
   const navigate = useNavigate();
 
+  const [state, setState] = useState<{ isPickOpen: boolean }>({
+    isPickOpen: false,
+  });
+
   const { loading, error, data, refetch } = useQuery(CHORE_LIST_DATA, {
+    fetchPolicy: "network-only",
+    notifyOnNetworkStatusChange: true,
+  });
+
+  const [fetchPickChores, pickQuery] = useLazyQuery(CHORE_LIST_DATA, {
     fetchPolicy: "network-only",
     notifyOnNetworkStatusChange: true,
   });
@@ -26,6 +39,18 @@ const ChoresListView = () => {
 
   const handleOnEdit = (choreId: string) => {
     navigate(`/chores/edit/${choreId}`);
+  };
+
+  const handleOpenPick = async () => {
+    // Fetch chores for picking with cooldown filter without affecting the main list
+    await fetchPickChores({ variables: { days: 5 } });
+    setState({ isPickOpen: true });
+  };
+  const handleClosePick = () => setState({ isPickOpen: false });
+  const handleTaken = () => {
+    handleClosePick();
+    // Return to the default unfiltered list
+    refetch();
   };
 
   return (
@@ -48,10 +73,29 @@ const ChoresListView = () => {
             />
           ))}
         </ul>
-        <button className={style.choresListAddButton} onClick={handleAddChore}>
-          <Add className={style.choresListAddIcon} />
-        </button>
+        <div className={style.choresActions}>
+          <button
+            className={style.choresListAddButton}
+            onClick={handleAddChore}
+          >
+            <Add className={style.choresListAddIcon} />
+          </button>
+          <button
+            className={style.pickChoreButton}
+            onClick={handleOpenPick}
+            aria-label="Pick random chore"
+          >
+            <Dice className={style.pickChoreIcon} />
+          </button>
+        </div>
       </section>
+      <PickChoreModal
+        isOpen={state.isPickOpen}
+        onClose={handleClosePick}
+        title="Is this your chore?"
+        chores={pickQuery.data?.chores || []}
+        onTaken={handleTaken}
+      />
     </>
   );
 };

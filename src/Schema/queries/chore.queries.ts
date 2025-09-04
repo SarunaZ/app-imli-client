@@ -6,8 +6,8 @@ export const CHORE_LIST_DATA: QueryDocument<
   ChoreListQuery,
   ChoreListQueryVariables
 > = gql`
-  query choreList {
-    chores {
+  query choreList($days: Int) {
+    chores(days: $days) {
       id
       name
       timestamp

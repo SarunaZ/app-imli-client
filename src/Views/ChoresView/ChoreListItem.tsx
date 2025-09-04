@@ -49,7 +49,6 @@ const ChoreListItem = ({ data, onDelete, onEdit }: Props) => {
         <div className={style.choreListItemButton}>
           <Box
             as="div"
-            title={data?.name}
             dropdownComponent={
               <Dropdown>
                 <Button
@@ -72,10 +71,7 @@ const ChoreListItem = ({ data, onDelete, onEdit }: Props) => {
             }
           >
             <div className={style.choreListItemContent}>
-              <h3 className={style.choreListItemName}>{data?.name}</h3>
-              <p className={style.choreListItemTimestamp}>
-                Created: {formatTimestamp(data?.timestamp)}
-              </p>
+              <p>{data.name}</p>
             </div>
           </Box>
         </div>
