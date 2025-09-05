@@ -9,6 +9,7 @@ import { DeepExtractTypeSkipArrays } from "Declarations/typeExtract";
 import Dropdown from "Components/Dropdown";
 import Button from "Components/Button";
 import { SyntheticEvent } from "react";
+import { toSentenceCase } from "Utilities/sentenceCase";
 
 interface Props {
   onEdit: (id: string) => void;
@@ -71,7 +72,7 @@ const ChoreListItem = ({ data, onDelete, onEdit }: Props) => {
             }
           >
             <div className={style.choreListItemContent}>
-              <p>{data.name}</p>
+              <p>{toSentenceCase(data.name)}</p>
             </div>
           </Box>
         </div>

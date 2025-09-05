@@ -5,6 +5,7 @@ import useState from "Hooks/useState";
 import { useEffect, useMemo } from "react";
 import useMutation from "Hooks/useMutation";
 import { CHORE_TAKE_MUTATION } from "Schema/mutations/chore.mutations";
+import { toSentenceCase } from "Utilities/sentenceCase";
 
 interface ChoreItem {
   id: string;
@@ -70,7 +71,7 @@ const PickChoreModal = ({ chores, onTaken }: Props) => {
   return (
     <div className={style.pickChoreModalContent}>
       <p className={style.pickChoreTitle}>
-        {state.selectedChore?.name || "No chores available"}
+        {toSentenceCase(state.selectedChore?.name) || "No chores available"}
       </p>
       <div className={style.pickChoreModalButtons}>
         <Button
