@@ -21,7 +21,7 @@ const Dashboard = lazy(() => import("Views/Dashboard"));
 const MealList = lazy(() => import("Views/MealView"));
 const ProductList = lazy(() => import("Views/ProductListView"));
 const ChoresView = lazy(() => import("Views/ChoresView"));
-
+// test
 const App = () => (
   <Routes>
     <Route
