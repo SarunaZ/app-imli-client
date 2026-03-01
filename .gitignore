@@ -3,4 +3,6 @@ dist
 .env
 .vercel
 .vscode
-.yarn
+.yarn/cache
+.yarn/install-state.gz
+.yarn/unplugged
