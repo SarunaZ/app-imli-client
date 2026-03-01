@@ -4,7 +4,7 @@ import "dotenv/config";
 const config: CodegenConfig = {
   schema: [
     {
-      [process.env.CLIENT_GRAPHQL_SCHEMA_LINK]: {
+      [process.env.VITE_CLIENT_GRAPHQL_SCHEMA_LINK]: {
         headers: {
           "codegen-request": "true",
         },

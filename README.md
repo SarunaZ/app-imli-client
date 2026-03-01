@@ -3,8 +3,8 @@
 This project was made with:
 
 * [React](https://react.dev/)
-* [Webpack](https://webpack.js.org/)
-* [TypesScript](https://github.com/microsoft/TypeScript)
+* [Vite](https://vite.dev/)
+* [Typescript](https://github.com/microsoft/TypeScript)
 * [Apollo/Graphql](https://www.apollographql.com/)
 
 Client and api has to be in the same directory with its default forlder name: `app-imli-client` and `app-imli-server`
@@ -21,3 +21,4 @@ The project should be up and running momenterally
 ## Dev account
 When accessing `localhost:3000` you will be greated with the loggin screen for the first time.
 For development use there will be a `Register` button visible for you to create a new local dev account
+----

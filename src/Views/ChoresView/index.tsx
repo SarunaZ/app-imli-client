@@ -1,5 +1,5 @@
 import { Helmet } from "react-helmet-async";
-import style from "./style.scss";
+import style from "./style.module.scss";
 import { CHORE_LIST_DATA } from "Schema/queries/chore.queries";
 import Loader from "Components/Loader";
 import ErrorHandler from "Components/ErrorHandler";

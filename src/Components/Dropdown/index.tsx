@@ -1,5 +1,5 @@
 import React, { ElementRef, SyntheticEvent, useRef } from "react";
-import style from "./style.scss";
+import style from "./style.module.scss";
 import MoreDots from "Images/icons/3-vertical-dots-icon.svg";
 import classnames from "classnames";
 import DropdownList from "./DropdownList";

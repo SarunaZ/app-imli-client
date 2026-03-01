@@ -2,7 +2,7 @@ import React from "react";
 import classnames from "classnames";
 import { useState } from "react";
 import { NavLink } from "react-router-dom";
-import style from "./style.scss";
+import style from "./style.module.scss";
 import { Routes } from "./types";
 import { getSanitizedPathname, isSamePathNameInRoutes } from "./utils";
 import { useNavigate } from "react-router-dom";

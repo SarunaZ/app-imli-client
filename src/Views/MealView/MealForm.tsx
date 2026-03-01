@@ -1,6 +1,6 @@
 import { DeepExtractTypeSkipArrays } from "Declarations/typeExtract";
 import { MealListQuery } from "Schema/types";
-import style from "./style.scss";
+import style from "./style.module.scss";
 import Input from "Components/Input";
 import { SyntheticEvent, useRef } from "react";
 import { Editor } from "@tinymce/tinymce-react";
@@ -119,7 +119,7 @@ const MealForm = () => {
           <Editor
             initialValue={state.mealData?.instructions}
             init={editorConfig}
-            apiKey={process.env.CLIENT_TINY_MCE_EDITOR_KEY}
+            apiKey={import.meta.env.VITE_CLIENT_TINY_MCE_EDITOR_KEY}
             onEditorChange={onEditorChange}
             onInit={() => {
               setState({ isLoaded: true });

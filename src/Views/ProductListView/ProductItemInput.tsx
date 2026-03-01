@@ -1,5 +1,5 @@
 import { ElementRef, SyntheticEvent, useRef } from "react";
-import style from "./style.scss";
+import style from "./style.module.scss";
 import CurvedArrow from "Images/icons/curved-arrow-right.svg";
 import CheckMark from "Images/icons/checkmark.svg";
 import Button from "Components/Button";

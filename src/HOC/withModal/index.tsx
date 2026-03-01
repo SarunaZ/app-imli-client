@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import Modal from "./Modal";
-import style from "./style.scss";
+import style from "./style.module.scss";
 import Close from "Images/icons/close.svg";
 import { Helmet } from "react-helmet-async";
 

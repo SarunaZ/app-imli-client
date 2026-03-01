@@ -1,4 +1,4 @@
-import style from "./style.scss";
+import style from "./style.module.scss";
 import { DASHBOARD_DATA } from "Schema/queries/dashboard.queries";
 import Loader from "Components/Loader";
 import ErrorHandler from "Components/ErrorHandler";

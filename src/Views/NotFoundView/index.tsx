@@ -1,5 +1,5 @@
 import { Helmet } from "react-helmet-async";
-import style from "./style.scss";
+import style from "./style.module.scss";
 
 const NotFoundView = () => (
   <>

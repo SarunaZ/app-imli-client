@@ -1,6 +1,6 @@
 import { useEffect } from "react";
 import IngredientInput from "./IngredientInput";
-import style from "./style.scss";
+import style from "./style.module.scss";
 import Button from "Components/Button";
 import ErrorHandler from "Components/ErrorHandler";
 import { ApolloError } from "@apollo/client";

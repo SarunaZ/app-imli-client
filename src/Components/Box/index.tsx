@@ -1,6 +1,6 @@
 import { CSSProperties, forwardRef, ReactNode, Ref } from "react";
 import Loader from "../Loader";
-import style from "./style.scss";
+import style from "./style.module.scss";
 import { useSortable } from "@dnd-kit/sortable";
 import { CSS } from "@dnd-kit/utilities";
 import classnames from "classnames";

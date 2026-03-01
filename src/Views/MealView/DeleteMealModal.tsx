@@ -1,7 +1,7 @@
 import withModal, { ModalProps } from "HOC/withModal";
 import { MEAL_DELETE } from "Schema/mutations/meal.mutations";
 import Button from "Components/Button";
-import style from "./style.scss";
+import style from "./style.module.scss";
 import useMutation from "Hooks/useMutation";
 
 interface Props extends ModalProps {

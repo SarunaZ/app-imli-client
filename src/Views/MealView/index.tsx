@@ -1,5 +1,5 @@
 import { Helmet } from "react-helmet-async";
-import style from "./style.scss";
+import style from "./style.module.scss";
 import { MEAL_LIST_DATA } from "Schema/queries/meal.queries";
 import Loader from "Components/Loader";
 import ErrorHandler from "Components/ErrorHandler";

@@ -1,6 +1,6 @@
 import React from "react";
 import Loader from "Components/Loader";
-import style from "./style.scss";
+import style from "./style.module.scss";
 import classnames from "classnames";
 
 interface Props {

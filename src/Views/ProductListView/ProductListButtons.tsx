@@ -1,6 +1,6 @@
 import MealAddIcon from "Images/icons/meal.svg";
 import Cancel from "Images/icons/cancel.svg";
-import style from "./style.scss";
+import style from "./style.module.scss";
 import MealDropdown from "./MealDropdown";
 import ProductCancelModal from "./ProductCancelModal";
 import useState from "Hooks/useState";

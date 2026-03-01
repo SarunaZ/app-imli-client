@@ -4,7 +4,7 @@ import {
   ROUTE_PRODUCT_LIST_PAGE,
   ROUTE_CHORES_PAGE,
 } from "App/constants";
-import style from "./style.scss";
+import style from "./style.module.scss";
 import Kitchen from "Images/icons/kitchen.svg";
 import SidebarItem from "./SidebarItem";
 

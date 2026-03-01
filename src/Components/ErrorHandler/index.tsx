@@ -1,5 +1,5 @@
 import { useEffect } from "react";
-import style from "./style.scss";
+import style from "./style.module.scss";
 import Info from "Images/icons/info.svg";
 import { ApolloError } from "@apollo/client";
 import useState from "Hooks/useState";
