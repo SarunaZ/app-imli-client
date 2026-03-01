@@ -1,5 +1,5 @@
 import React, { ElementRef } from "react";
-import style from "./style.scss";
+import style from "./style.module.scss";
 import { SyntheticEvent, useRef } from "react";
 import ErrorHandler from "Components/ErrorHandler";
 import { PRODUCT_NAME_MUTATION } from "Schema/mutations/product.mutations";

@@ -8,7 +8,7 @@ import useQuery from "Hooks/useQuery";
 import ProductList from "./ProductList";
 import ErrorHandler from "Components/ErrorHandler";
 import { Helmet } from "react-helmet-async";
-import style from "Views/ProductListView/style.scss";
+import style from "Views/ProductListView/style.module.scss";
 
 interface State {
   listData?: ProductListData;

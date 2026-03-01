@@ -1,5 +1,5 @@
 import Box from "Components/Box";
-import style from "./style.scss";
+import style from "./style.module.scss";
 
 import classnames from "classnames";
 import ProductDropdown from "./ProductDropdown";

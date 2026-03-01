@@ -14,10 +14,17 @@ import { getCookieData } from "Utilities/cookieParser";
 import { Helmet, HelmetProvider } from "react-helmet-async";
 import Authentication from "Providers/Authentication";
 import ThemeSwitcher from "Providers/ThemeProvider";
-import "../public/sw";
+
+if ("serviceWorker" in navigator) {
+  window.addEventListener("load", () => {
+    navigator.serviceWorker
+      .register("/sw.js")
+      .catch((error) => console.log("Service worker registration failed:", error));
+  });
+}
 
 const httpLink = createHttpLink({
-  uri: process.env.CLIENT_GRAPHQL_LINK,
+  uri: import.meta.env.VITE_CLIENT_GRAPHQL_LINK,
 });
 
 const authLink = setContext((_, { headers }) => {

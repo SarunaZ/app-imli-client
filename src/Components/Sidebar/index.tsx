@@ -1,4 +1,4 @@
-import style from "./style.scss";
+import style from "./style.module.scss";
 import SidebarContent from "./SidebarContent";
 import SidebarFooter from "./SidebarFooter";
 import classnames from "classnames";

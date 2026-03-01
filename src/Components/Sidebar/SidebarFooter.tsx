@@ -1,4 +1,4 @@
-import style from "./style.scss";
+import style from "./style.module.scss";
 import Logout from "Components/Sidebar/Logout";
 import { useTheme } from "Providers/ThemeProvider";
 import { Theme } from "Providers/ThemeProvider/types";

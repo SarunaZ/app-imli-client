@@ -3,7 +3,7 @@ import Dropdown from "Components/Dropdown";
 import Delete from "Images/icons/delete.svg";
 import Edit from "Images/icons/edit.svg";
 import IconButton from "Components/IconButton";
-import style from "./style.scss";
+import style from "./style.module.scss";
 import { PRODUCT_DELETE } from "Schema/mutations/product.mutations";
 import useMutation from "Hooks/useMutation";
 import { ProductError } from "./types";

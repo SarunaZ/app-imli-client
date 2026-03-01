@@ -1,4 +1,4 @@
-import style from "./style.scss";
+import style from "./style.module.scss";
 import { PRODUCTS_LIST_CANCEL_MUTATION } from "Schema/mutations/product.mutations";
 import withModal from "HOC/withModal";
 import Button from "Components/Button";

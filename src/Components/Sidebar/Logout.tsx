@@ -1,6 +1,6 @@
 import { AuthenticationProvider } from "Providers/Authentication/Authentication";
 import { useContext } from "react";
-import style from "./style.scss";
+import style from "./style.module.scss";
 
 const Logout = () => {
   const { logout } = useContext(AuthenticationProvider);

@@ -1,7 +1,7 @@
 import React from "react";
 import classnames from "classnames";
 import Loader from "Components/Loader";
-import style from "./style.scss";
+import style from "./style.module.scss";
 
 interface Props extends React.HTMLProps<HTMLButtonElement> {
   className?: string;

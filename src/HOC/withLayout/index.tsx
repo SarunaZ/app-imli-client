@@ -3,7 +3,7 @@ import ErrorBoundary from "Components/ErrorHandler/ErrorBoundary";
 import Loader from "Components/Loader";
 import Sidebar from "Components/Sidebar";
 import { Suspense } from "react";
-import style from "./style.scss";
+import style from "./style.module.scss";
 
 interface Props {
   children: ReactNode;

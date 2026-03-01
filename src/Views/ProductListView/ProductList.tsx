@@ -1,6 +1,6 @@
 import Loader from "Components/Loader";
 import ProductItem from "./ProductItem";
-import style from "./style.scss";
+import style from "./style.module.scss";
 import { ComponentProps, useEffect, useRef } from "react";
 import ErrorHandler from "Components/ErrorHandler";
 import {

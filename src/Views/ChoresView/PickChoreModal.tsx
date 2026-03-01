@@ -1,6 +1,6 @@
 import withModal, { ModalProps } from "HOC/withModal";
 import Button from "Components/Button";
-import style from "./style.scss";
+import style from "./style.module.scss";
 import useState from "Hooks/useState";
 import { useEffect, useMemo } from "react";
 import useMutation from "Hooks/useMutation";

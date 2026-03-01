@@ -1,5 +1,5 @@
 import withModal, { ModalProps } from "HOC/withModal";
-import style from "./style.scss";
+import style from "./style.module.scss";
 import { DeepExtractTypeSkipArrays } from "Declarations/typeExtract";
 import { MealListQuery } from "Schema/types";
 import { useState } from "react";

@@ -25,11 +25,11 @@ const Authentication = ({ children }: Props) => {
     auth: Auth,
   });
   const [submitLoginFetch, submitLoginFetchData] = useFetch(
-    process.env.CLIENT_LOGIN_LINK,
+    import.meta.env.VITE_CLIENT_LOGIN_LINK,
   );
 
   const [submitRegisterFetch, submitRegisterFetchData] = useFetch(
-    process.env.CLIENT_REGISTER_LINK,
+    import.meta.env.VITE_CLIENT_REGISTER_LINK,
   );
 
   const login = ({ username, password }: UserLoginData) => {

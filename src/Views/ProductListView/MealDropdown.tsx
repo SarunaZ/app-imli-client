@@ -1,6 +1,6 @@
 import { SyntheticEvent } from "react";
 import Loader from "Components/Loader";
-import style from "./style.scss";
+import style from "./style.module.scss";
 import { MEAL_ATTACH_TO_PRODUCT_MUTATION } from "Schema/mutations/product.mutations";
 import withModal from "HOC/withModal";
 import { MEAL_LIST_DATA } from "Schema/queries/product.queries";

@@ -4,7 +4,7 @@ import { AuthenticationProvider } from "Providers/Authentication/Authentication"
 import Button from "Components/Button";
 import Input from "Components/Input";
 import ErrorHandler from "Components/ErrorHandler";
-import style from "./style.scss";
+import style from "./style.module.scss";
 import useState from "Hooks/useState";
 
 interface State {
@@ -70,7 +70,7 @@ const LoginView = () => {
             <div className={style.error}>
               <ErrorHandler error={error} />
             </div>
-            {process.env.NODE_ENV === "development" && (
+            {import.meta.env.DEV && (
               <Button
                 className={style.registerButton}
                 buttonStyle="none"

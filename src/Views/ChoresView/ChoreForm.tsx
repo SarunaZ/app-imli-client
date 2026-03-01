@@ -12,7 +12,7 @@ import {
 import { CHORE_LIST_DATA } from "Schema/queries/chore.queries";
 import Loader from "Components/Loader";
 import ErrorHandler from "Components/ErrorHandler";
-import style from "./style.scss";
+import style from "./style.module.scss";
 
 const ChoreForm = () => {
   const { id } = useParams();

@@ -1,5 +1,5 @@
 import Box from "Components/Box";
-import style from "./style.scss";
+import style from "./style.module.scss";
 import DeleteMealModal from "./DeleteMealModal";
 import Delete from "Images/icons/delete.svg";
 import Edit from "Images/icons/edit.svg";

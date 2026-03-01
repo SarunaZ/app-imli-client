@@ -1,4 +1,4 @@
-import style from "./style.scss";
+import style from "./style.module.scss";
 
 const Loader = () => <div className={style.loadingSpinner} />;
 
