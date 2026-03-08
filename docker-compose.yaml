@@ -25,7 +25,6 @@ services:
     volumes:
       - .:/app-imli-client
       - ./.yarn/cache:/app-imli-client/.yarn/cache
-    entrypoint: sh -c "yarn && yarn start"
   imli-db:
     image: mongo:latest
     volumes:

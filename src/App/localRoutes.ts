@@ -4,7 +4,7 @@
  */
 
 import { lazy, ReactNode } from "react";
-import { RouteProps } from "react-router";
+import { RouteProps } from "react-router-dom";
 
 export const localRouteMap: RouteProps[] = [
   {
