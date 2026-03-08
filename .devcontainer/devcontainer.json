@@ -1,0 +1,35 @@
+{
+  "name": "app-imli-client",
+  "dockerFile": "../Dockerfile",
+  "workspaceFolder": "/app-imli-client",
+  "overrideCommand": true,
+  "mounts": [
+    "source=${localEnv:HOME}${localEnv:USERPROFILE}/.ssh,target=/root/.ssh,readonly,type=bind"
+  ],
+  "remoteEnv": {
+    "SSH_AUTH_SOCK": "/ssh-agent"
+  },
+  "postCreateCommand": "bash .devcontainer/setup.sh",
+  "remoteUser": "root",
+  "customizations": {
+    "vscode": {
+      "extensions": [
+        "biomejs.biome",
+        "arcanis.vscode-zipfs"
+      ],
+      "settings": {
+        "search.exclude": {
+          "**/.yarn": true,
+          "**/.pnp.*": true
+        },
+        "terminal.integrated.defaultProfile.linux": "bash",
+        "typescript.tsdk": ".yarn/sdks/typescript/lib",
+        "typescript.enablePromptUseWorkspaceTsdk": true,
+        "editor.formatOnSave": true,
+        "editor.codeActionsOnSave": {
+          "source.organizeImports.biome": "explicit"
+        },
+      }
+    }
+  }
+}

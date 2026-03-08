@@ -12,8 +12,7 @@
     "allowJs": true,
     "esModuleInterop": true,
     "allowSyntheticDefaultImports": true,
-    "moduleResolution": "bundler",
-    "types": ["vite/client", "vite-plugin-svgr/client"],
+    "moduleResolution": "node",
     "noEmit": true
   },
   "include": ["src/**/*.ts", "src/**/*.tsx", "src/*.tsx", "vite.config.ts"],
