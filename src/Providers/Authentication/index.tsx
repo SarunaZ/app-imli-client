@@ -10,6 +10,7 @@ import useState from "Hooks/useState";
 
 interface Props {
   children?: React.ReactNode;
+  isLoggedIn?: boolean;
 }
 
 interface State {
@@ -18,11 +19,11 @@ interface State {
 
 const AUTH_COOKIE = "auth";
 
-const Authentication = ({ children }: Props) => {
+const Authentication = ({ children, isLoggedIn }: Props) => {
   const Auth = !!getCookieData(AUTH_COOKIE) || undefined;
 
   const [state, setState] = useState<State>({
-    auth: Auth,
+    auth: Auth || isLoggedIn,
   });
   const [submitLoginFetch, submitLoginFetchData] = useFetch(
     import.meta.env.VITE_CLIENT_LOGIN_LINK,

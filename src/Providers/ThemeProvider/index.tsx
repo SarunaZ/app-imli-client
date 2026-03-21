@@ -1,7 +1,7 @@
 import useState from "Hooks/useState";
 import { createContext, ReactNode, useContext, useEffect } from "react";
 import { Theme } from "./types";
-import { storedTheme } from "./utility";
+import { getStoredTheme } from "./utility";
 
 interface State {
   currentTheme: Theme;
@@ -25,7 +25,7 @@ export const ThemeProvider = createContext(defaultState);
 
 const ThemeSwitcher = ({ children }: Props) => {
   const [state, setState] = useState<State>({
-    currentTheme: storedTheme,
+    currentTheme: getStoredTheme(),
   });
 
   const setTheme = (theme: Theme) => {

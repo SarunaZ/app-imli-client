@@ -1,6 +1,7 @@
 {
   "name": "app-imli-client",
   "dockerFile": "../Dockerfile",
+  "workspaceMount": "source=${localWorkspaceFolder},target=/app-imli-client,type=bind,consistency=cached",
   "workspaceFolder": "/app-imli-client",
   "overrideCommand": true,
   "mounts": [

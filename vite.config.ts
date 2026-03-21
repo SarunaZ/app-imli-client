@@ -5,6 +5,10 @@ import tsconfigPaths from "vite-tsconfig-paths";
 import tailwindcss from "@tailwindcss/vite";
 
 export default defineConfig({
+  cacheDir: "/tmp/vite-cache",
+  ssr: {
+    noExternal: ['react-helmet-async', '@apollo/client'],
+  },
   plugins: [
     tailwindcss(),
     react(),
