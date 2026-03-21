@@ -12,7 +12,6 @@ const SidebarFooter = () => {
   const handleSetTheme = () => {
     const currentThemeValue =
       currentTheme === Theme.Light ? Theme.Dark : Theme.Light;
-    console.log(currentThemeValue, "currentThemeValue");
 
     setCurrentTheme(currentThemeValue);
   };

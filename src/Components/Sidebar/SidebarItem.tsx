@@ -1,7 +1,7 @@
 import React from "react";
 import classnames from "classnames";
 import { useState } from "react";
-import { NavLink } from "react-router-dom";
+import { NavLink, useLocation } from "react-router-dom";
 import style from "./style.module.scss";
 import { Routes } from "./types";
 import { getSanitizedPathname, isSamePathNameInRoutes } from "./utils";
@@ -29,8 +29,9 @@ const SidebarItem = ({
   const navigate = useNavigate();
   const isSameRoute = isSamePathNameInRoutes(
     routes,
-    getSanitizedPathname(location.pathname),
+    getSanitizedPathname(useLocation().pathname),
   );
+
   const [state, setState] = useState<State>({ isShowItems: isSameRoute });
 
   const handleToggle = () => {

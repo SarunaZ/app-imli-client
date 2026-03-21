@@ -1,7 +1,15 @@
 /// <reference types="vite/client" />
 /// <reference types="vite-plugin-svgr/client" />
 
+export {};
+
 declare module "*.scss" {
-  const classes: { [key: string]: string };
-  export default classes;
+  interface classes { [key: string]: string }
+}
+
+
+declare global {
+  interface Window {
+    __APOLLO_STATE__?: Record<string, unknown>;
+  }
 }

@@ -20,11 +20,11 @@ const Index = () => {
     listData: undefined,
   });
 
-  const { loading, error, refetch } = useQuery(PRODUCT_LIST_DATA, {
+  const { loading, error, data, refetch } = useQuery(PRODUCT_LIST_DATA, {
     fetchPolicy: "network-only",
     onCompleted: (res) => {
       setState({
-        listData: res.products?.map((item: Product) => ({
+        listData: res.products?.map((item) => ({
           id: item.id,
           name: item.name,
           isDone: item.isDone,
@@ -32,6 +32,12 @@ const Index = () => {
       });
     },
   });
+
+  const resolvedList = state.listData ?? data?.products?.map((item) => ({
+    id: item.id,
+    name: item.name,
+    isDone: item.isDone,
+  })) ?? []
 
   const saveOnChange = (newList: ProductListData) => {
     setState({ listData: [...newList] });
@@ -87,7 +93,7 @@ const Index = () => {
         <ProductList
           loading={loading}
           onChange={saveOnChange}
-          listData={state.listData}
+          listData={resolvedList}
           onDelete={handleDeleteItem}
           onRename={handleProductRename}
           onCompleted={handleProductComplete}

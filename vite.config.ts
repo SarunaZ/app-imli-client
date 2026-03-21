@@ -5,6 +5,10 @@ import tsconfigPaths from "vite-tsconfig-paths";
 import path from "path";
 
 export default defineConfig({
+  cacheDir: "/tmp/vite-cache",
+  ssr: {
+    noExternal: ['react-helmet-async', '@apollo/client'],
+  },
   plugins: [
     react(),
     svgr({
@@ -23,7 +27,6 @@ export default defineConfig({
   server: {
     port: 3000,
     host: true,
-    historyApiFallback: true,
   },
   build: {
     outDir: "dist",

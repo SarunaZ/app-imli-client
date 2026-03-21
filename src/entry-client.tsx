@@ -1,6 +1,6 @@
 import "./index.scss";
 import React from "react";
-import { createRoot } from "react-dom/client";
+import { createRoot, hydrateRoot } from "react-dom/client";
 import { setContext } from "@apollo/client/link/context";
 import { BrowserRouter } from "react-router-dom";
 import App from "./App";
@@ -9,6 +9,7 @@ import {
   InMemoryCache,
   ApolloProvider,
   createHttpLink,
+  NormalizedCacheObject,
 } from "@apollo/client";
 import { getCookieData } from "Utilities/cookieParser";
 import { Helmet, HelmetProvider } from "react-helmet-async";
@@ -41,12 +42,10 @@ const authLink = setContext((_, { headers }) => {
 
 const client = new ApolloClient({
   link: authLink.concat(httpLink),
-  cache: new InMemoryCache(),
+  cache: new InMemoryCache().restore(window.__APOLLO_STATE__ as NormalizedCacheObject),
 });
 
-const container = createRoot(document.getElementById("app"));
-
-container.render(
+hydrateRoot(document.getElementById("app") as HTMLElement,
   <React.StrictMode>
     <ApolloProvider client={client}>
       <HelmetProvider>
@@ -60,5 +59,5 @@ container.render(
         </BrowserRouter>
       </HelmetProvider>
     </ApolloProvider>
-  </React.StrictMode>,
+  </React.StrictMode>
 );
