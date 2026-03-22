@@ -25,8 +25,19 @@ export default defineConfig({
     },
   },
   server: {
+    host: true,          // 0.0.0.0
     port: 3000,
-    host: true,
+    strictPort: true,
+    hmr: {
+      protocol: "ws",
+      host: "localhost", // what browser uses
+      port: 3000,
+      clientPort: 3000
+    },
+    watch: {
+      usePolling: true,
+      interval: 100
+    }
   },
   build: {
     outDir: "dist",
