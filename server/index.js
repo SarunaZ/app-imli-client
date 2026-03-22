@@ -5,21 +5,37 @@ import express from 'express'
 import { createServer as createViteServer } from 'vite'
 import { getRouteAccess } from './routesMeta.js'
 import { ROUTE_LOGIN_PAGE } from '../src/App/constants.ts'
+import http from 'node:http';
+import dotenv from 'dotenv';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url))
+
+dotenv.config({ path: path.resolve(__dirname, '../.env') })
+dotenv.config({ path: path.resolve(__dirname, '../.env.local'), override: true })
+
 const PORT = process.env.PORT || 3000;
+const isSsrEnabled = String(process.env.VITE_SSR_ON).toLowerCase() === 'true';
 
 async function createServer() {
   const app = express()
 
+  const server = http.createServer(app);
   // Create Vite server in middleware mode and configure the app type as
   // 'custom', disabling Vite's own HTML serving logic so parent server
   // can take control
   const vite = await createViteServer({
     configFile: path.resolve(__dirname, '../vite.config.ts'),
     server: {
-      port: 3000,
       host: true,
+      port: 3000,
+      strictPort: true,
+      hmr: {
+        server,
+        protocol: "ws",
+        host: "localhost",
+        port: 3000,
+        clientPort: 3000
+      },
       watch: {
         usePolling: true,
         interval: 100
@@ -72,12 +88,17 @@ async function createServer() {
         `)
         .replace("<!--ssr-outlet-->", appHtml);
       // 6. Send the rendered HTML back.
+      if (!isSsrEnabled) {
+
+        res.status(200).set({ 'Content-Type': 'text/html' }).end(template)
+        return;
+      }
 
       if (getRouteAccess(url) === "private" && !cookieHeader.includes("auth")) {
         res.redirect(ROUTE_LOGIN_PAGE);
         return;
       }
-      console.log(appHtml, 'appHtml');
+      console.log('appHtml');
       res.status(200).set({ 'Content-Type': 'text/html' }).end(html)
     } catch (e) {
       // If an error is caught, let Vite fix the stack trace so it maps back
@@ -87,7 +108,7 @@ async function createServer() {
     }
   })
 
-  app.listen(3000)
+  server.listen(PORT)
 }
 
 createServer()
