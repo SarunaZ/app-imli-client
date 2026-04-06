@@ -1,0 +1,6 @@
+{
+  "watch": ["server", ".env", ".env.local"],
+  "ext": "js,env",
+  "ignore": ["*.test.js", "**/fixtures/**"],
+  "exec": "node server/index.js"
+}
