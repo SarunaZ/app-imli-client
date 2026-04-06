@@ -1,7 +1,5 @@
 import React, { ElementRef, SyntheticEvent, useRef } from "react";
-import style from "./style.module.scss";
 import MoreDots from "Images/icons/3-vertical-dots-icon.svg";
-import classnames from "classnames";
 import DropdownList from "./DropdownList";
 import useState from "Hooks/useState";
 
@@ -15,33 +13,28 @@ interface State {
 }
 
 const Dropdown = ({ isDisabled, children }: Props) => {
-  const [state, setState] = useState<State>({
-    isOpen: false,
-  });
+  const [state, setState] = useState<State>({ isOpen: false });
   const dropdownRef = useRef<ElementRef<"div">>(null);
-  const parentRef = dropdownRef.current;
 
-  const handleDropdownToggle = (e?: SyntheticEvent<HTMLButtonElement>) => {
+  const handleToggle = (e?: SyntheticEvent<HTMLButtonElement>) => {
     if (!isDisabled) {
       setState({ isOpen: !state.isOpen });
     }
-
-    e.stopPropagation();
+    e?.stopPropagation();
   };
 
-  const dropdownButtonStyles = classnames(style.dropdownMoreButton, {
-    [style.disabled]: isDisabled,
-  });
-
   return (
-    <div className={style.dropdownWrapper} ref={dropdownRef}>
-      <button onClick={handleDropdownToggle} className={dropdownButtonStyles}>
-        <MoreDots className={style.dropdownMoreIcon} height="14px" />
+    <div className="text-center" ref={dropdownRef}>
+      <button
+        onClick={handleToggle}
+        className={`relative z-[2] bg-transparent p-1 ${isDisabled ? "pointer-events-none opacity-50" : ""}`}
+      >
+        <MoreDots className="h-3.5 text-text" />
       </button>
       {state.isOpen && (
         <DropdownList
-          onDropdownToggle={handleDropdownToggle}
-          parentRef={parentRef}
+          onDropdownToggle={handleToggle}
+          parentRef={dropdownRef.current}
         >
           {children}
         </DropdownList>

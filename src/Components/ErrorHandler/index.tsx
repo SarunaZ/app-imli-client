@@ -1,40 +1,28 @@
-import { useEffect } from "react";
-import style from "./style.module.scss";
 import Info from "Images/icons/info.svg";
 import { ApolloError } from "@apollo/client";
-import useState from "Hooks/useState";
 
 interface Props {
   error?: { [variables: string]: any } | string | Error | null | ApolloError[];
 }
 
-interface State {
-  errorMessage: string | null;
-}
-
 const ErrorHandler = ({ error }: Props) => {
-  const [state, setState] = useState<State>({
-    errorMessage: null,
-  });
+  let errorMessage = null;
 
-  useEffect(() => {
-    if (typeof error === "string") {
-      setState({ errorMessage: error });
-    }
+  if (typeof error === "string") {
+    errorMessage = error;
+  }
 
-    if (typeof error === "object") {
-      const errorObjMessage = (error as ApolloError)?.message;
-      setState({ errorMessage: errorObjMessage });
-    }
-  }, [state.errorMessage, error]);
+  if (typeof error === "object") {
+    errorMessage = (error as ApolloError)?.message;
+  }
 
-  if (state.errorMessage) {
+  if (errorMessage) {
     return (
-      <div className={style.errorWrapper}>
-        <div className={style.errorIcon}>
-          <Info height="18px" />
+      <div className="flex items-center gap-3 rounded-lg bg-danger px-4 py-3 text-sm font-semibold text-danger-strong">
+        <div className="flex shrink-0 items-center">
+          <Info />
         </div>
-        <span className={style.errorMessage}>{state.errorMessage}</span>
+        <span>{errorMessage}</span>
       </div>
     );
   }

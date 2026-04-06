@@ -1,6 +1,5 @@
 import { DeepExtractTypeSkipArrays } from "Declarations/typeExtract";
 import { MealListQuery } from "Schema/types";
-import style from "./style.module.scss";
 import Input from "Components/Input";
 import { SyntheticEvent, useRef } from "react";
 import { Editor } from "@tinymce/tinymce-react";
@@ -67,9 +66,7 @@ const MealForm = () => {
           name: mealInputRef.current.value,
           ingredients:
             ingredientInputRef.current ||
-            state.mealData.ingredients.map((item) => ({
-              name: item.name,
-            })),
+            state.mealData.ingredients.map((item) => ({ name: item.name })),
           instructions:
             mealInstructionsRef.current || state.mealData.instructions,
         },
@@ -78,7 +75,6 @@ const MealForm = () => {
           navigate(ROUTE_MEAL_PAGE);
         },
       });
-
       return;
     }
 
@@ -103,9 +99,9 @@ const MealForm = () => {
   if (error) return <ErrorHandler error={error} />;
 
   return (
-    <div className={style.mealFormContainer}>
-      <h1 className={style.mealFormTitle}>Add your meal</h1>
-      <form ref={formRef} onSubmit={submitProduct} className={style.mealForm}>
+    <div className="mx-auto max-w-3xl px-4 md:px-0">
+      <h1 className="mb-6 text-2xl font-bold text-text">Add your meal</h1>
+      <form ref={formRef} onSubmit={submitProduct} className="grid gap-5">
         <Input
           required
           label="Meal name"
@@ -113,17 +109,14 @@ const MealForm = () => {
           ref={mealInputRef}
           defaultValue={state.mealData?.name}
         />
-        <div className={style.mealEditor}>
-          {/*Todo: consider using Tiptap*/}
+        <div className="min-h-[500px]">
           {!state.isLoaded && <Loader />}
           <Editor
             initialValue={state.mealData?.instructions}
             init={editorConfig}
             apiKey={import.meta.env.VITE_CLIENT_TINY_MCE_EDITOR_KEY}
             onEditorChange={onEditorChange}
-            onInit={() => {
-              setState({ isLoaded: true });
-            }}
+            onInit={() => setState({ isLoaded: true })}
           />
         </div>
         <IngredientContainer
@@ -133,7 +126,7 @@ const MealForm = () => {
           isLoading={addMealData.loading || editMealData.loading}
         />
         {state.addSuccessful && (
-          <span className={style.addSuccessful}>
+          <span className="text-sm text-success">
             Meal has been successfully added!
           </span>
         )}

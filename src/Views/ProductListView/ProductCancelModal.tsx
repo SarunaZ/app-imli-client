@@ -1,4 +1,3 @@
-import style from "./style.module.scss";
 import { PRODUCTS_LIST_CANCEL_MUTATION } from "Schema/mutations/product.mutations";
 import withModal from "HOC/withModal";
 import Button from "Components/Button";
@@ -15,15 +14,13 @@ const ProductCancelModal = ({ onChange }: Props) => {
   );
 
   const handleOnChange = () => {
-    cancelProductList({
-      update: () => onChange(),
-    });
+    cancelProductList({ update: () => onChange() });
   };
 
   return (
-    <div className={style.productListCompleteModal}>
+    <div className="space-y-4">
       <ErrorHandler error={error} />
-      <Button isLoading={loading} onClick={handleOnChange}>
+      <Button isLoading={loading} onClick={handleOnChange} className="w-full">
         Confirm
       </Button>
     </div>

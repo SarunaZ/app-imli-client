@@ -1,63 +1,61 @@
-import React from "react";
-import classnames from "classnames";
 import { useState } from "react";
-import { NavLink } from "react-router-dom";
-import style from "./style.module.scss";
+import { NavLink, useLocation, useNavigate } from "react-router-dom";
 import { Routes } from "./types";
 import { getSanitizedPathname, isSamePathNameInRoutes } from "./utils";
-import { useNavigate } from "react-router-dom";
 
 interface Props {
   title: string;
-  icon: React.ReactNode;
   routes: Routes[];
   defaultPath: string;
   onSelect: () => void;
 }
 
-interface State {
-  isShowItems: boolean;
-}
-
-const SidebarItem = ({
-  icon,
-  title,
-  routes = [],
-  defaultPath,
-  onSelect,
-}: Props) => {
+const SidebarItem = ({ title, routes = [], defaultPath, onSelect }: Props) => {
   const navigate = useNavigate();
   const isSameRoute = isSamePathNameInRoutes(
     routes,
-    getSanitizedPathname(location.pathname),
+    getSanitizedPathname(useLocation().pathname),
   );
-  const [state, setState] = useState<State>({ isShowItems: isSameRoute });
+  const [isExpanded, setIsExpanded] = useState(isSameRoute);
 
   const handleToggle = () => {
     navigate(defaultPath);
-    setState({ isShowItems: !state.isShowItems });
+    setIsExpanded((prev) => !prev);
     onSelect();
   };
 
   return (
-    <div className={style.sidebarItem}>
-      <div className={style.sidebarItemTitle}>
-        <h3>{title}</h3>
-        <button onClick={handleToggle} className={style.sidebarItemToggle}>
-          {icon}
-        </button>
-      </div>
-      {state.isShowItems && isSamePathNameInRoutes && (
-        <div className={style.sidebarLinkList}>
+    <div className="mb-1">
+      <button
+        onClick={handleToggle}
+        className="flex w-full items-center justify-between rounded-lg px-3 py-2.5 text-sm font-semibold text-white transition-colors hover:bg-primary-light"
+      >
+        <span>{title}</span>
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          className={`h-4 w-4 transition-transform ${isExpanded ? "rotate-180" : ""}`}
+          fill="none"
+          viewBox="0 0 24 24"
+          stroke="currentColor"
+          strokeWidth={2}
+        >
+          <path strokeLinecap="round" strokeLinejoin="round" d="M19 9l-7 7-7-7" />
+        </svg>
+      </button>
+
+      {isExpanded && (
+        <div className="mt-0.5 space-y-0.5 pl-3">
           {routes.map((route) => (
             <NavLink
               key={route.name}
-              onClick={onSelect}
               to={route.pathname}
+              onClick={onSelect}
               className={({ isActive }) =>
-                classnames(style.sidebarLink, {
-                  [style.activeLink]: isActive,
-                })
+                `block rounded-lg px-3 py-2 text-sm transition-colors ${
+                  isActive
+                    ? "bg-primary-light font-semibold text-white"
+                    : "text-white/70 hover:bg-primary-light hover:text-white"
+                }`
               }
             >
               {route.name}

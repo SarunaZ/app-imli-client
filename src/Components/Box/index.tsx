@@ -1,9 +1,7 @@
-import { CSSProperties, forwardRef, ReactNode, Ref } from "react";
+import { CSSProperties, forwardRef, ReactNode } from "react";
 import Loader from "../Loader";
-import style from "./style.module.scss";
 import { useSortable } from "@dnd-kit/sortable";
 import { CSS } from "@dnd-kit/utilities";
-import classnames from "classnames";
 
 interface Props {
   id?: string;
@@ -36,7 +34,7 @@ const Box = forwardRef<Elements, Props>(
       transition,
     } = useSortable({ id });
 
-    const dragableStyle: CSSProperties = {
+    const dragStyle: CSSProperties = {
       opacity: isDragging ? 0.4 : undefined,
       transform: CSS.Translate.toString(transform),
       transition,
@@ -44,40 +42,35 @@ const Box = forwardRef<Elements, Props>(
 
     const boxContent = (
       <>
-        <div
-          className={classnames(style.boxHeader, {
-            [style.right]: !title && dropdownComponent,
-          })}
-        >
-          {title && <h2 className={style.boxTitle}>{title}</h2>}
+        <div className={`flex w-full items-center ${title ? "justify-between" : "justify-end"}`}>
+          {title && <h2 className="m-0 text-lg font-semibold text-text">{title}</h2>}
           {dropdownComponent}
         </div>
         {children}
       </>
     );
 
+    const renderedContent = isLoading ? <Loader /> : boxContent;
+    const baseClasses = "rounded-xl bg-surface-alt p-4 shadow-sm transition-shadow hover:shadow-md";
+
     if (isDraggable) {
       return (
         <Component
-          className={style.box}
-          style={dragableStyle}
+          className={baseClasses}
+          style={dragStyle}
           data-style-sort
           ref={setNodeRef}
           {...attributes}
           {...listeners}
         >
-          <>
-            {isLoading && <Loader />}
-            {!isLoading && boxContent}
-          </>
+          {renderedContent}
         </Component>
       );
     }
 
     return (
-      <Component ref={setNodeRef} className={style.box}>
-        {isLoading && <Loader />}
-        {!isLoading && boxContent}
+      <Component ref={setNodeRef} className={baseClasses}>
+        {renderedContent}
       </Component>
     );
   },

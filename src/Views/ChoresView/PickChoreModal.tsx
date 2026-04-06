@@ -1,6 +1,5 @@
 import withModal, { ModalProps } from "HOC/withModal";
 import Button from "Components/Button";
-import style from "./style.module.scss";
 import useState from "Hooks/useState";
 import { useEffect, useMemo } from "react";
 import useMutation from "Hooks/useMutation";
@@ -21,20 +20,16 @@ interface State {
   selectedChore?: ChoreItem | null;
 }
 
-const getRandomIndex = (max: number) => {
-  return Math.floor(Math.random() * max);
-};
+const getRandomIndex = (max: number) => Math.floor(Math.random() * max);
 
 const PickChoreModal = ({ chores, onTaken }: Props) => {
   const [state, setState] = useState<State>({ selectedChore: null });
   const [takeChore, takeChoreData] = useMutation(CHORE_TAKE_MUTATION);
-
   const availableChores = useMemo(() => chores || [], [chores]);
 
   useEffect(() => {
     if (availableChores.length) {
-      const idx = getRandomIndex(availableChores.length);
-      setState({ selectedChore: availableChores[idx] });
+      setState({ selectedChore: availableChores[getRandomIndex(availableChores.length)] });
     } else {
       setState({ selectedChore: null });
     }
@@ -49,10 +44,7 @@ const PickChoreModal = ({ chores, onTaken }: Props) => {
 
     let nextIndex = getRandomIndex(availableChores.length);
     if (state.selectedChore) {
-      // avoid repeating the same selection if possible
-      const currentIndex = availableChores.findIndex(
-        (c) => c.id === state.selectedChore?.id,
-      );
+      const currentIndex = availableChores.findIndex((c) => c.id === state.selectedChore?.id);
       if (currentIndex !== -1 && nextIndex === currentIndex) {
         nextIndex = (nextIndex + 1) % availableChores.length;
       }
@@ -69,23 +61,15 @@ const PickChoreModal = ({ chores, onTaken }: Props) => {
   };
 
   return (
-    <div className={style.pickChoreModalContent}>
-      <p className={style.pickChoreTitle}>
+    <div className="flex min-h-[35dvh] w-full max-w-lg flex-col justify-evenly gap-5 p-5 sm:w-[550px]">
+      <p className="mt-auto text-center text-4xl font-bold leading-tight text-text">
         {toSentenceCase(state.selectedChore?.name) || "No chores available"}
       </p>
-      <div className={style.pickChoreModalButtons}>
-        <Button
-          buttonStyle="hollow"
-          onClick={handlePass}
-          className={style.pickChoreModalButton}
-        >
+      <div className="mt-auto flex justify-center gap-3">
+        <Button buttonStyle="hollow" onClick={handlePass} className="min-w-[80px] flex-1">
           Pass
         </Button>
-        <Button
-          onClick={handleTake}
-          isLoading={takeChoreData.loading}
-          className={style.pickChoreModalButton}
-        >
+        <Button onClick={handleTake} isLoading={takeChoreData.loading} className="min-w-[80px] flex-1">
           Take
         </Button>
       </div>

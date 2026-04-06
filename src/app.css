@@ -1,0 +1,81 @@
+@import "tailwindcss";
+
+@theme {
+  --font-sans: "Montserrat", sans-serif;
+
+  --breakpoint-sm: 600px;
+  --breakpoint-md: 931px;
+
+  --color-primary: var(--theme-primary);
+  --color-primary-light: var(--theme-primary-light);
+  --color-secondary: var(--theme-secondary);
+  --color-accent: var(--theme-accent);
+  --color-accent-hover: var(--theme-accent-hover);
+  --color-danger: var(--theme-danger);
+  --color-danger-strong: var(--theme-danger-strong);
+  --color-success: var(--theme-success);
+  --color-surface: var(--theme-surface);
+  --color-surface-alt: var(--theme-surface-alt);
+  --color-text: var(--theme-text);
+  --color-text-inv: var(--theme-text-inv);
+  --color-text-muted: var(--theme-text-muted);
+  --color-border: var(--theme-border);
+  --color-overlay: var(--theme-overlay);
+  --color-dropdown-bg: var(--theme-dropdown-bg);
+  --color-violet: var(--theme-violet);
+}
+
+:root {
+  --theme-primary: #4e1d4e;
+  --theme-primary-light: #6b2d6b;
+  --theme-secondary: #7e2b46;
+  --theme-accent: #f05a22;
+  --theme-accent-hover: #ff6f1b;
+  --theme-danger: #fef2f2;
+  --theme-danger-strong: #dc2626;
+  --theme-success: #22c55e;
+  --theme-surface: #f8f8f8;
+  --theme-surface-alt: #f0f0f0;
+  --theme-text: #1a1a1a;
+  --theme-text-inv: #ffffff;
+  --theme-text-muted: #6b7280;
+  --theme-border: #e5e7eb;
+  --theme-overlay: rgba(0, 0, 0, 0.5);
+  --theme-dropdown-bg: #ffffff;
+  --theme-violet: #b39ddb;
+}
+
+[data-theme="dark"] {
+  --theme-primary: #1e1e2e;
+  --theme-primary-light: #2a2a3e;
+  --theme-secondary: #6887a5;
+  --theme-accent: #5b8def;
+  --theme-accent-hover: #7ba4ff;
+  --theme-danger: #3b1c1c;
+  --theme-danger-strong: #f87171;
+  --theme-success: #4ade80;
+  --theme-surface: #2a2a2a;
+  --theme-surface-alt: #3c3c3c;
+  --theme-text: #f0f0f0;
+  --theme-text-inv: #1a1a1a;
+  --theme-text-muted: #9ca3af;
+  --theme-border: #404040;
+  --theme-overlay: rgba(0, 0, 0, 0.7);
+  --theme-dropdown-bg: #1e1e1e;
+  --theme-violet: #b39ddb;
+}
+
+@layer base {
+  html {
+    font-size: 16px;
+  }
+
+  body {
+    @apply bg-surface font-sans text-text antialiased;
+    margin: 0;
+  }
+
+  #root {
+    min-height: 100dvh;
+  }
+}

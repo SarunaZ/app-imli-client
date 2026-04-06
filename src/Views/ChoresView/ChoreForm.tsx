@@ -12,7 +12,6 @@ import {
 import { CHORE_LIST_DATA } from "Schema/queries/chore.queries";
 import Loader from "Components/Loader";
 import ErrorHandler from "Components/ErrorHandler";
-import style from "./style.module.scss";
 
 const ChoreForm = () => {
   const { id } = useParams();
@@ -21,22 +20,16 @@ const ChoreForm = () => {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSuccess, setIsSuccess] = useState(false);
 
-  const [createChore, createChoreData] = useMutation(CHORE_CREATE_MUTATION);
-  const [saveChore, saveChoreData] = useMutation(CHORE_SAVE_MUTATION);
+  const [createChore] = useMutation(CHORE_CREATE_MUTATION);
+  const [saveChore] = useMutation(CHORE_SAVE_MUTATION);
 
-  const { loading, error, data } = useQuery(CHORE_LIST_DATA, {
-    skip: !id, // Only fetch if we're in edit mode
-  });
-
+  const { loading, error, data } = useQuery(CHORE_LIST_DATA, { skip: !id });
   const isEdit = !!id;
 
-  // Prefill chore name when in edit mode
   useEffect(() => {
     if (isEdit && data?.chores) {
       const chore = data.chores.find((c) => c.id === id);
-      if (chore?.name) {
-        setChoreName(chore.name);
-      }
+      if (chore?.name) setChoreName(chore.name);
     }
   }, [isEdit, data, id]);
 
@@ -46,38 +39,19 @@ const ChoreForm = () => {
 
     setIsSubmitting(true);
 
-    if (isEdit) {
-      await saveChore({
-        variables: {
-          id,
-          name: choreName.trim(),
-        },
-        update: () => {
-          setIsSubmitting(false);
-          setIsSuccess(true);
-          setTimeout(() => {
-            navigate("/chores");
-          }, 1500);
-        },
-      });
-    } else {
-      await createChore({
-        variables: {
-          name: choreName.trim(),
-        },
-        update: () => {
-          setIsSubmitting(false);
-          setIsSuccess(true);
-          setTimeout(() => {
-            navigate("/chores");
-          }, 1500);
-        },
-      });
-    }
-  };
+    const mutation = isEdit ? saveChore : createChore;
+    const variables = isEdit
+      ? { id, name: choreName.trim() }
+      : { name: choreName.trim() };
 
-  const handleCancel = () => {
-    navigate("/chores");
+    await mutation({
+      variables,
+      update: () => {
+        setIsSubmitting(false);
+        setIsSuccess(true);
+        setTimeout(() => navigate("/chores"), 1500);
+      },
+    });
   };
 
   if (isEdit && loading) return <Loader />;
@@ -86,14 +60,16 @@ const ChoreForm = () => {
   return (
     <>
       <Helmet title={`${isEdit ? "Edit" : "Create"} Chore | Imli`} />
-      <div className={style.choreFormContainer}>
-        <div className={style.choreFormWrapper}>
-          <h2 className={style.choreFormTitle}>
+      <div className="mx-auto max-w-xl px-5">
+        <div className="flex flex-col gap-6">
+          <h2 className="text-center text-2xl font-bold text-text">
             {isEdit ? "Edit Chore" : "Create New Chore"}
           </h2>
-          <form onSubmit={handleSubmit} className={style.choreForm}>
-            <div className={style.choreFormField}>
-              <label htmlFor="choreName">Chore Name</label>
+          <form onSubmit={handleSubmit} className="flex flex-col gap-5">
+            <div className="flex flex-col gap-2">
+              <label htmlFor="choreName" className="text-sm font-medium text-text">
+                Chore Name
+              </label>
               <Input
                 id="choreName"
                 type="text"
@@ -104,17 +80,15 @@ const ChoreForm = () => {
               />
             </div>
             {isSuccess && (
-              <p className={style.addSuccessful}>
-                {isEdit
-                  ? "Chore updated successfully!"
-                  : "Chore created successfully!"}
+              <p className="text-center text-sm text-success">
+                {isEdit ? "Chore updated successfully!" : "Chore created successfully!"}
               </p>
             )}
-            <div className={style.choreFormButtons}>
+            <div className="flex justify-end gap-4">
               <Button
                 type="button"
                 buttonStyle="hollow"
-                onClick={handleCancel}
+                onClick={() => navigate("/chores")}
                 isDisabled={isSubmitting}
               >
                 Cancel
@@ -124,11 +98,7 @@ const ChoreForm = () => {
                 buttonStyle="prime"
                 isDisabled={isSubmitting || !choreName.trim()}
               >
-                {isSubmitting
-                  ? "Saving..."
-                  : isEdit
-                  ? "Update Chore"
-                  : "Create Chore"}
+                {isSubmitting ? "Saving..." : isEdit ? "Update Chore" : "Create Chore"}
               </Button>
             </div>
           </form>
