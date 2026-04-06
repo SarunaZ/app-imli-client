@@ -1,5 +1,4 @@
 import { ElementRef, SyntheticEvent, useRef } from "react";
-import style from "./style.module.scss";
 import CurvedArrow from "Images/icons/curved-arrow-right.svg";
 import CheckMark from "Images/icons/checkmark.svg";
 import Button from "Components/Button";
@@ -25,25 +24,22 @@ const ProductItemInput = ({
 
   const submitName = (e: SyntheticEvent<HTMLFormElement>) => {
     e.preventDefault();
-
-    onEdit(inputRef.current.value);
-  };
-
-  const handleOnEdit = () => {
     onEdit(inputRef.current.value);
   };
 
   return (
     <>
       {!isEdit && (
-        <span className={style.productListItemTitle}>{productName}</span>
+        <span className="mr-auto text-base capitalize text-text md:text-lg">
+          {productName}
+        </span>
       )}
       {isEdit && (
-        <form onSubmit={submitName} className={style.productListItemForm}>
+        <form onSubmit={submitName} className="w-full">
           <input
             autoFocus
             ref={inputRef}
-            className={style.productListItemInput}
+            className="relative z-[2] h-8 w-full rounded border border-border bg-surface px-2.5 text-sm text-text md:text-base"
             defaultValue={productName}
           />
         </form>
@@ -52,10 +48,10 @@ const ProductItemInput = ({
         <Button
           type="button"
           buttonStyle="none"
-          onClick={handleOnEdit}
-          className={style.productListItemButtons}
+          onClick={() => onEdit(inputRef.current.value)}
+          className="relative z-[2] text-secondary"
         >
-          <CheckMark height="25px" />
+          <CheckMark className="h-6 w-6" />
         </Button>
       )}
       {!isEdit && (
@@ -63,13 +59,13 @@ const ProductItemInput = ({
           type="button"
           buttonStyle="none"
           isLoading={isLoading}
-          className={style.productListItemButtons}
           onClick={onCompleteProduct(!isCompleted)}
+          className="relative z-[2] text-secondary"
         >
           {!isCompleted ? (
-            <CheckMark height="30px" />
+            <CheckMark className="h-7 w-7" />
           ) : (
-            <CurvedArrow height="30px" className={style.returnIcon} />
+            <CurvedArrow className="h-7 w-7 -scale-x-100" />
           )}
         </Button>
       )}

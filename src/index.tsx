@@ -1,4 +1,4 @@
-import "./index.scss";
+import "./app.css";
 import React from "react";
 import { createRoot } from "react-dom/client";
 import { setContext } from "@apollo/client/link/context";

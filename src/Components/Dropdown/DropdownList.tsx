@@ -5,7 +5,6 @@ import React, {
   useLayoutEffect,
   useRef,
 } from "react";
-import style from "./style.module.scss";
 import { createPortal } from "react-dom";
 
 interface Props {
@@ -26,7 +25,7 @@ const DropdownList = ({ onDropdownToggle, children, parentRef }: Props) => {
     }
   };
 
-  const handleDropdownToggle = (e: SyntheticEvent<HTMLLIElement>) => {
+  const handleItemClick = (e: SyntheticEvent<HTMLLIElement>) => {
     e.stopPropagation();
     onDropdownToggle();
   };
@@ -35,9 +34,7 @@ const DropdownList = ({ onDropdownToggle, children, parentRef }: Props) => {
     const { x, y } = parentRef.getBoundingClientRect();
     const clientWidth = document.documentElement.clientWidth;
     const listSize = listRef.current.getBoundingClientRect().width;
-
-    const xOffset =
-      clientWidth < listSize + x ? x - listSize + ALIGNMENT_SIZE : x;
+    const xOffset = clientWidth < listSize + x ? x - listSize + ALIGNMENT_SIZE : x;
 
     listRef.current?.style.setProperty("left", `${xOffset}px`);
     listRef.current?.style?.setProperty("top", `${y + TOP_GAP_SIZE}px`);
@@ -58,9 +55,15 @@ const DropdownList = ({ onDropdownToggle, children, parentRef }: Props) => {
   }, []);
 
   const template = (
-    <ul ref={listRef} className={style.dropdownList}>
+    <ul
+      ref={listRef}
+      className="fixed z-[3] w-full max-w-[120px] rounded-lg border border-border bg-dropdown-bg p-2 shadow-lg"
+    >
       {React.Children.map(children, (child) => (
-        <li onClick={handleDropdownToggle} className={style.dropdownItem}>
+        <li
+          onClick={handleItemClick}
+          className="cursor-pointer rounded-md px-2 py-1.5 transition-colors hover:bg-surface-alt"
+        >
           {child}
         </li>
       ))}

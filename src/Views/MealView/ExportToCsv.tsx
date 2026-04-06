@@ -12,18 +12,15 @@ const ExportToCsv = ({ mealData }: Props) => {
   const onExport = () => {
     const formatedData = mealData.map((meal) => ({
       name: meal.name,
-      ingredients: meal.ingredients
-        .map((ingredient) => ingredient.name)
-        .join(","),
+      ingredients: meal.ingredients.map((i) => i.name).join(","),
       instructions: meal.instructions,
     }));
-
     downloadCsv(formatedData);
   };
 
   return (
-    <Button onClick={onExport} buttonStyle="none">
-      <Download height={25} />
+    <Button onClick={onExport} buttonStyle="none" className="text-text hover:text-accent">
+      <Download className="h-6 w-6" />
     </Button>
   );
 };

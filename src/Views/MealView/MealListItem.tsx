@@ -1,5 +1,4 @@
 import Box from "Components/Box";
-import style from "./style.module.scss";
 import DeleteMealModal from "./DeleteMealModal";
 import Delete from "Images/icons/delete.svg";
 import Edit from "Images/icons/edit.svg";
@@ -20,20 +19,16 @@ interface Props {
 interface State {
   isPreviewOpen: boolean;
   isDeleteModalOpen: boolean;
-  isEditModalOpen: boolean;
 }
 
 const MealListItem = ({ data, onDelete, onEdit }: Props) => {
   const [state, setState] = useState<State>({
     isPreviewOpen: false,
     isDeleteModalOpen: false,
-    isEditModalOpen: false,
   });
 
   const toggleDeleteModal = () => {
-    setState({
-      isDeleteModalOpen: !state.isDeleteModalOpen,
-    });
+    setState({ isDeleteModalOpen: !state.isDeleteModalOpen });
   };
 
   const handleOnEdit = (e: SyntheticEvent<HTMLButtonElement>) => {
@@ -43,17 +38,13 @@ const MealListItem = ({ data, onDelete, onEdit }: Props) => {
 
   const handlePreviewClick = (e?: SyntheticEvent<HTMLDivElement>) => {
     e?.stopPropagation();
-    setState((prevState) => ({ isPreviewOpen: !prevState.isPreviewOpen }));
+    setState((prev) => ({ isPreviewOpen: !prev.isPreviewOpen }));
   };
 
   return (
     <>
-      <li className={style.mealListItem}>
-        <div
-          role="button"
-          onClick={handlePreviewClick}
-          className={style.mealListItemButton}
-        >
+      <li className="min-h-[200px] cursor-pointer">
+        <div role="button" onClick={handlePreviewClick} className="h-full w-full">
           <Box
             as="div"
             title={data?.name}
@@ -62,33 +53,26 @@ const MealListItem = ({ data, onDelete, onEdit }: Props) => {
                 <Button
                   buttonStyle="none"
                   onMouseDown={handleOnEdit}
-                  className={style.mealListItemOption}
+                  className="flex w-full items-center justify-between text-text"
                 >
-                  {"Edit"}
-                  <Edit height="16px" />
+                  Edit
+                  <Edit className="h-4 w-4" />
                 </Button>
                 <Button
                   buttonStyle="none"
                   onClick={toggleDeleteModal}
-                  className={style.mealListItemOption}
+                  className="flex w-full items-center justify-between text-text"
                 >
-                  {"Delete"}
-                  <Delete height="16px" />
+                  Delete
+                  <Delete className="h-4 w-4" />
                 </Button>
               </Dropdown>
             }
           >
-            <ol className={style.mealListItemIngredients}>
-              {data?.ingredients?.map((ingredient, index) => {
-                return (
-                  <li
-                    key={`${ingredient.name}--${index}`}
-                    className={style.mealListItemIngredientsItem}
-                  >
-                    {ingredient.name}
-                  </li>
-                );
-              })}
+            <ol className="mt-3 list-decimal space-y-1 pl-6 text-sm capitalize text-text">
+              {data?.ingredients?.map((ingredient, index) => (
+                <li key={`${ingredient.name}--${index}`}>{ingredient.name}</li>
+              ))}
             </ol>
           </Box>
         </div>
@@ -102,7 +86,7 @@ const MealListItem = ({ data, onDelete, onEdit }: Props) => {
       <MealPreviewModal
         title={data.name}
         mealData={data}
-        modalWrapperClassName={style.mealPreviewModal}
+        modalWrapperClassName="max-sm:items-stretch"
         onClose={handlePreviewClick}
         isOpen={state.isPreviewOpen}
       />

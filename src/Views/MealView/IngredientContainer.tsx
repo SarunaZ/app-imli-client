@@ -1,6 +1,5 @@
 import { useEffect } from "react";
 import IngredientInput from "./IngredientInput";
-import style from "./style.module.scss";
 import Button from "Components/Button";
 import ErrorHandler from "Components/ErrorHandler";
 import { ApolloError } from "@apollo/client";
@@ -14,9 +13,7 @@ interface Props {
   onInput: (data: IngredientsInput[]) => void;
 }
 
-const defaultInputValue = {
-  name: "",
-};
+const defaultInputValue = { name: "" };
 
 interface State {
   inputState?: IngredientsInput[];
@@ -29,9 +26,7 @@ const IngredientContainer = ({ data, error, isLoading, onInput }: Props) => {
 
   useEffect(() => {
     setState({
-      inputState: data?.map((item) => ({
-        name: item.name,
-      })) || [defaultInputValue],
+      inputState: data?.map((item) => ({ name: item.name })) || [defaultInputValue],
     });
   }, [data]);
 
@@ -42,29 +37,24 @@ const IngredientContainer = ({ data, error, isLoading, onInput }: Props) => {
   };
 
   const handleRemoveInput = (index: number) => {
-    if (state.inputState.length === 1) {
-      return;
-    }
+    if (state.inputState.length === 1) return;
 
-    const newInputState = state.inputState.filter((value, arrIndex) => {
-      return index !== arrIndex;
-    });
-
+    const newInputState = state.inputState.filter((_, i) => index !== i);
     setState({ inputState: newInputState });
     onInput(newInputState);
   };
 
   const handleInputChange = (inputValue: string) => (index: number) => {
-    const shallowCopyOfState = [...state.inputState];
-    shallowCopyOfState[index] = { name: inputValue };
-    setState({ inputState: shallowCopyOfState });
-    onInput(shallowCopyOfState);
+    const copy = [...state.inputState];
+    copy[index] = { name: inputValue };
+    setState({ inputState: copy });
+    onInput(copy);
   };
 
   return (
     <>
-      <label className={style.ingredientFieldLabel}>Ingredients</label>
-      <div className={style.ingredientFieldsWrapper}>
+      <label className="text-base font-semibold text-text">Ingredients</label>
+      <div className="max-h-[calc(100vh-390px)] space-y-2 overflow-auto md:max-h-[450px]">
         {state.inputState?.map((input, index) => (
           <IngredientInput
             key={index}
@@ -76,19 +66,15 @@ const IngredientContainer = ({ data, error, isLoading, onInput }: Props) => {
         ))}
       </div>
       <ErrorHandler error={error} />
-      <div className={style.ingredientFieldButtonSubmit}>
-        <Button
-          type="submit"
-          isLoading={isLoading}
-          className={style.ingredientFieldButtonSubmit}
-        >
+      <div className="flex gap-4">
+        <Button type="submit" isLoading={isLoading} className="flex-1">
           Submit
         </Button>
         <Button
           type="button"
           buttonStyle="hollow"
           onClick={handleAddInput}
-          className={style.ingredientFieldAddButton}
+          className="h-14 w-14"
         >
           +
         </Button>

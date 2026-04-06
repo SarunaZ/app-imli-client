@@ -8,7 +8,6 @@ import useQuery from "Hooks/useQuery";
 import ProductList from "./ProductList";
 import ErrorHandler from "Components/ErrorHandler";
 import { Helmet } from "react-helmet-async";
-import style from "Views/ProductListView/style.module.scss";
 
 interface State {
   listData?: ProductListData;
@@ -16,9 +15,7 @@ interface State {
 
 const Index = () => {
   const deleteRef = useRef<boolean>(false);
-  const [state, setState] = useState<State>({
-    listData: undefined,
-  });
+  const [state, setState] = useState<State>({ listData: undefined });
 
   const { loading, error, refetch } = useQuery(PRODUCT_LIST_DATA, {
     fetchPolicy: "network-only",
@@ -39,8 +36,8 @@ const Index = () => {
 
   const updateList = (newList?: Product) => {
     if (newList) {
-      setState((prevState) => ({
-        listData: [...prevState.listData, newList],
+      setState((prev) => ({
+        listData: [...prev.listData, newList],
       }));
     }
   };
@@ -48,42 +45,30 @@ const Index = () => {
   const handleDeleteItem = (id: string) => {
     const newList = state.listData?.filter((item) => item.id !== id);
     setState({ listData: [...newList] });
-
     deleteRef.current = true;
   };
 
-  // This is perfectly fine even if the solution repeats itself with different variables
-  // This is more maintainable and readable than having multiple if statements for different use cases
-  // Not everything has to be strictly according to DRY
   const handleProductRename = (id: string, value: string) => {
     const newList = state.listData?.map((item) => {
-      if (item.id === id) {
-        item.name = value;
-      }
-
+      if (item.id === id) item.name = value;
       return item;
     });
-
     setState({ listData: [...newList] });
   };
 
   const handleProductComplete = (id: string, value: boolean) => {
     const newList = state.listData?.map((item) => {
-      if (item.id === id) {
-        item.isDone = value;
-      }
-
+      if (item.id === id) item.isDone = value;
       return item;
     });
-
     setState({ listData: [...newList] });
   };
 
   return (
     <>
       <Helmet title={"Product list | Imli"} />
-      <section className={style.productListWrapper}>
-        <h2 className={style.productListTitle}>Product list</h2>
+      <section className="mx-auto flex h-[calc(100dvh-80px)] max-w-lg flex-col text-text md:h-[calc(100dvh-40px)]">
+        <h2 className="mb-4 text-2xl font-bold text-text">Product list</h2>
         <ProductList
           loading={loading}
           onChange={saveOnChange}

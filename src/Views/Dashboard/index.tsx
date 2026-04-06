@@ -1,4 +1,3 @@
-import style from "./style.module.scss";
 import { DASHBOARD_DATA } from "Schema/queries/dashboard.queries";
 import Loader from "Components/Loader";
 import ErrorHandler from "Components/ErrorHandler";
@@ -11,11 +10,11 @@ const Dashboard = () => {
   if (error) return <ErrorHandler error={error} />;
 
   return (
-    <>
-      <h1 className={style.dashboardTitle}>
+    <div className="flex items-center justify-center py-16">
+      <h1 className="text-3xl font-bold text-text">
         Hello, {data.userDashboard?.username}
       </h1>
-    </>
+    </div>
   );
 };
 

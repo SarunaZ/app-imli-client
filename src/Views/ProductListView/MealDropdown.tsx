@@ -1,6 +1,5 @@
 import { SyntheticEvent } from "react";
 import Loader from "Components/Loader";
-import style from "./style.module.scss";
 import { MEAL_ATTACH_TO_PRODUCT_MUTATION } from "Schema/mutations/product.mutations";
 import withModal from "HOC/withModal";
 import { MEAL_LIST_DATA } from "Schema/queries/product.queries";
@@ -16,45 +15,30 @@ const MealDropdown = ({ onUpdate }: Props) => {
   const { loading, error, data } = useQuery(MEAL_LIST_DATA);
   const [attachMealToProductM] = useMutation(MEAL_ATTACH_TO_PRODUCT_MUTATION);
 
-  if (loading) {
-    return <Loader />;
-  }
-
+  if (loading) return <Loader />;
   if (error) return <ErrorHandler error={error} />;
-
-  if (!loading && !data.meals?.length) {
-    return <p>No meals found</p>;
-  }
+  if (!loading && !data.meals?.length) return <p className="text-text-muted">No meals found</p>;
 
   const mealData = data.meals;
 
   const handleOnChange = (event: SyntheticEvent<HTMLSelectElement>) => {
     const mealId = event.currentTarget.value;
-    const ingredientList = mealData?.find((meal) => meal.id === mealId)
-      ?.ingredients;
-    const normalizeData = ingredientList?.map((item) => {
-      return {
-        name: item?.name,
-      };
-    });
+    const ingredientList = mealData?.find((meal) => meal.id === mealId)?.ingredients;
+    const normalizeData = ingredientList?.map((item) => ({ name: item?.name }));
 
     attachMealToProductM({
-      variables: {
-        ingredients: normalizeData,
-      },
-      update: () => {
-        onUpdate();
-      },
+      variables: { ingredients: normalizeData },
+      update: () => onUpdate(),
     });
   };
 
   return (
     <select
-      className={style.productListDropdown}
+      className="block h-16 w-full rounded-lg border border-border bg-surface px-4 text-base text-text"
       onChange={handleOnChange}
-      defaultValue={null}
+      defaultValue=""
     >
-      <option value={null} disabled selected>
+      <option value="" disabled>
         Choose your meal
       </option>
       {mealData?.map((meal) => (

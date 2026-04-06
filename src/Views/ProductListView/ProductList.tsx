@@ -1,6 +1,5 @@
 import Loader from "Components/Loader";
 import ProductItem from "./ProductItem";
-import style from "./style.module.scss";
 import { ComponentProps, useEffect, useRef } from "react";
 import ErrorHandler from "Components/ErrorHandler";
 import {
@@ -47,10 +46,7 @@ const ProductList = ({
   onRename,
   onCompleted,
 }: Props) => {
-  const [state, setState] = useState<State>({
-    error: undefined,
-  });
-
+  const [state, setState] = useState<State>({ error: undefined });
   const deleteRef = useRef<boolean>(false);
   const listRef = useRef<HTMLUListElement>(null);
 
@@ -69,55 +65,36 @@ const ProductList = ({
 
   useEffect(() => {
     scrollToListBottom();
-
     deleteRef.current = false;
   }, [listData?.length]);
 
   const saveOnChange = (newList: ProductListData) => {
     onChange(newList);
-
     const filteredList = [...newList].map((item) => ({
       id: item.id,
       name: item.name,
       isDone: item.isDone,
     }));
-
-    updateProductListM({
-      variables: { newList: structuredClone(filteredList) },
-    });
+    updateProductListM({ variables: { newList: structuredClone(filteredList) } });
   };
 
   const sensors = useSensors(
-    useSensor(MouseSensor, {
-      activationConstraint: {
-        distance: 10,
-      },
-    }),
-    useSensor(TouchSensor, {
-      activationConstraint: {
-        delay: 153,
-        tolerance: 13,
-      },
-    }),
+    useSensor(MouseSensor, { activationConstraint: { distance: 10 } }),
+    useSensor(TouchSensor, { activationConstraint: { delay: 153, tolerance: 13 } }),
   );
 
-  const onDragEd = (event: DragEndEvent) => {
+  const onDragEnd = (event: DragEndEvent) => {
     const { active, over } = event;
+    const oldIndex = listData.findIndex((o) => o.id === active.id);
+    const newIndex = listData.findIndex((o) => o.id === over.id);
 
-    const oldIndex = listData.findIndex((object) => object.id === active.id);
-    const newIndex = listData.findIndex((object) => object.id === over.id);
+    const normalizedList = listData.map((item) => ({
+      id: item.id,
+      name: item.name,
+      isDone: item.isDone,
+    }));
 
-    const normalizedList = () => {
-      return listData.map((item) => ({
-        id: item.id,
-        name: item.name,
-        isDone: item.isDone,
-      }));
-    };
-
-    const newList = arrayMove(normalizedList(), oldIndex, newIndex);
-
-    saveOnChange(newList);
+    saveOnChange(arrayMove(normalizedList, oldIndex, newIndex));
   };
 
   const handleOnError = (error: ProductError) => {
@@ -125,21 +102,21 @@ const ProductList = ({
   };
 
   if (loading) return <Loader />;
-  if (!listData?.length) return <p>No data found</p>;
+  if (!listData?.length) return <p className="text-text-muted">No data found</p>;
 
   return (
     <>
-      <ul ref={listRef} className={style.productList}>
+      <ul
+        ref={listRef}
+        className="mb-5 flex min-h-0 flex-1 list-none flex-col gap-3 overflow-y-auto overflow-x-hidden p-0"
+      >
         <DndContext
           modifiers={[restrictToVerticalAxis, restrictToParentElement]}
           sensors={sensors}
           collisionDetection={closestCenter}
-          onDragEnd={onDragEd}
+          onDragEnd={onDragEnd}
         >
-          <SortableContext
-            items={listData}
-            strategy={verticalListSortingStrategy}
-          >
+          <SortableContext items={listData} strategy={verticalListSortingStrategy}>
             {listData?.map(({ id, name, isDone }, index) => (
               <ProductItem
                 key={id}

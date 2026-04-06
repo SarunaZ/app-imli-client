@@ -1,12 +1,14 @@
 import { AuthenticationProvider } from "Providers/Authentication/Authentication";
 import { useContext } from "react";
-import style from "./style.module.scss";
 
 const Logout = () => {
   const { logout } = useContext(AuthenticationProvider);
 
   return (
-    <button className={style.logout} onClick={logout}>
+    <button
+      onClick={logout}
+      className="rounded-lg px-3 py-2 text-sm font-semibold text-white/70 transition-colors hover:bg-primary-light hover:text-white"
+    >
       Logout
     </button>
   );

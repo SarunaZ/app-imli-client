@@ -1,6 +1,5 @@
 import MealAddIcon from "Images/icons/meal.svg";
 import Cancel from "Images/icons/cancel.svg";
-import style from "./style.module.scss";
 import MealDropdown from "./MealDropdown";
 import ProductCancelModal from "./ProductCancelModal";
 import useState from "Hooks/useState";
@@ -21,15 +20,11 @@ const ProductListButtons = ({ onChange }: Props) => {
   });
 
   const handleModalToggle = () => {
-    setState({
-      toggleMealModal: !state.toggleMealModal,
-    });
+    setState({ toggleMealModal: !state.toggleMealModal });
   };
 
   const handleCancelList = () => {
-    setState({
-      openCancelModal: !state.openCancelModal,
-    });
+    setState({ openCancelModal: !state.openCancelModal });
   };
 
   const handleOnChangeCancel = () => {
@@ -39,25 +34,22 @@ const ProductListButtons = ({ onChange }: Props) => {
 
   return (
     <>
-      <div className={style.productListButtons}>
-        <button
-          className={style.mealDropdownAddButton}
-          onClick={handleModalToggle}
-        >
-          <MealAddIcon className={style.mealListAddIcon} />
+      <div className="fixed bottom-5 right-5 flex w-[50px] flex-col gap-3 md:bottom-12 md:right-12">
+        <button onClick={handleModalToggle}>
+          <MealAddIcon className="h-[50px] w-[50px] rounded-full bg-text-inv shadow-lg [&_path]:fill-secondary" />
         </button>
-        <button className={style.cancelList} onClick={handleCancelList}>
-          <Cancel width="50px" height="50px" className={style.cancelListIcon} />
+        <button onClick={handleCancelList}>
+          <Cancel className="h-[50px] w-[50px] rounded-full bg-text-inv shadow-lg [&_path]:fill-secondary" />
         </button>
       </div>
       <MealDropdown
         onUpdate={onChange}
-        title={"Please select meal"}
+        title="Please select meal"
         isOpen={state.toggleMealModal}
         onClose={handleModalToggle}
       />
       <ProductCancelModal
-        title={"Complete product list?"}
+        title="Complete product list?"
         isOpen={state.openCancelModal}
         onClose={handleCancelList}
         onChange={handleOnChangeCancel}

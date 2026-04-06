@@ -8,6 +8,10 @@ RUN corepack enable
 RUN yarn install
 RUN yarn dlx @yarnpkg/sdks vscode
 
+COPY docker-entrypoint.sh /usr/local/bin/
+RUN chmod +x /usr/local/bin/docker-entrypoint.sh
+
 EXPOSE 3000
 
+ENTRYPOINT ["docker-entrypoint.sh"]
 CMD ["yarn", "start"]

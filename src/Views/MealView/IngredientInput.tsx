@@ -1,7 +1,6 @@
 import Button from "Components/Button";
 import Input from "Components/Input";
 import { SyntheticEvent } from "react";
-import style from "./style.module.scss";
 
 interface Props {
   index: number;
@@ -9,18 +8,16 @@ interface Props {
   onDelete: (index: number) => void;
   onChange: (inputValue: string) => (index: number) => void;
 }
+
 const IngredientInput = ({ index, onDelete, onChange, inputValue }: Props) => {
-  const handleButtonAdd = (e: SyntheticEvent<HTMLInputElement>) => {
+  const handleChange = (e: SyntheticEvent<HTMLInputElement>) => {
     onChange(e.currentTarget.value)(index);
   };
 
   return (
-    <div className={style.ingredientFormInputWrapper}>
-      <Input value={inputValue} onChange={handleButtonAdd} />
-      <Button
-        className={style.ingredientFormButton}
-        onClick={() => onDelete(index)}
-      >
+    <div className="flex items-center gap-4">
+      <Input value={inputValue} onChange={handleChange} className="flex-1" />
+      <Button className="h-14 w-14 shrink-0" onClick={() => onDelete(index)}>
         -
       </Button>
     </div>

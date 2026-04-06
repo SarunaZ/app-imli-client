@@ -1,7 +1,6 @@
 import withModal, { ModalProps } from "HOC/withModal";
 import { MEAL_DELETE } from "Schema/mutations/meal.mutations";
 import Button from "Components/Button";
-import style from "./style.module.scss";
 import useMutation from "Hooks/useMutation";
 
 interface Props extends ModalProps {
@@ -10,28 +9,26 @@ interface Props extends ModalProps {
 }
 
 const DeleteMealModal = ({ id, onChange }: Props) => {
-  const [deleteProductM, deleteProductMData] = useMutation(MEAL_DELETE);
+  const [deleteMeal, deleteMealData] = useMutation(MEAL_DELETE);
 
-  const deleteProduct = () => {
+  const handleDelete = () => {
     if (id) {
-      deleteProductM({
-        variables: {
-          id,
-        },
+      deleteMeal({
+        variables: { id },
         update: () => onChange(),
       });
     }
   };
 
   return (
-    <div>
-      <h3 className={style.deleteModalTitle}>
+    <div className="space-y-5">
+      <h3 className="text-lg font-semibold text-text">
         Do you want to delete this meal?
       </h3>
       <Button
-        className={style.deleteModalButton}
-        onClick={deleteProduct}
-        isLoading={deleteProductMData.loading}
+        className="w-full"
+        onClick={handleDelete}
+        isLoading={deleteMealData.loading}
       >
         Delete
       </Button>

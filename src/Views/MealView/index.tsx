@@ -1,5 +1,4 @@
 import { Helmet } from "react-helmet-async";
-import style from "./style.module.scss";
 import { MEAL_LIST_DATA } from "Schema/queries/meal.queries";
 import Loader from "Components/Loader";
 import ErrorHandler from "Components/ErrorHandler";
@@ -21,44 +20,41 @@ const MealListView = () => {
 
   const isMealCreate = location.pathname.includes("/meal/create");
   const isMealEdit = location.pathname.includes("meal/edit");
+  const isMealForm = isMealCreate || isMealEdit;
 
   if (loading) return <Loader />;
   if (error) return <ErrorHandler error={error} />;
-
-  const handleAddMeal = () => {
-    navigate(ROUTE_MEAL_CREATE_PAGE);
-  };
-
-  const handleOnEdit = (mealId: string) => {
-    navigate(`edit/${mealId}`);
-  };
-
-  const isMealForm = isMealCreate || isMealEdit;
 
   return (
     <>
       <Helmet title={"Meal list | Imli"} />
       {!isMealForm && (
-        <section className={style.mealListWrapper}>
-          <div className={style.mealListHeader}>
-            <h2 className={style.mealListTitle}>Meal list</h2>
+        <section className="mx-auto max-w-6xl text-text">
+          <div className="mb-6 flex items-center gap-4">
+            <h2 className="text-2xl font-bold text-text">Meal list</h2>
             <ExportToCsv mealData={data?.meals} />
           </div>
+
           {!loading && (!data?.meals || !data?.meals?.length) && (
-            <p>No data found</p>
+            <p className="text-text-muted">No data found</p>
           )}
-          <ul className={style.mealList}>
+
+          <ul className="grid list-none gap-4 p-0 sm:grid-cols-2 md:grid-cols-3">
             {data.meals?.map((meal) => (
               <MealListItem
                 data={meal}
                 key={meal.id}
                 onDelete={refetch}
-                onEdit={handleOnEdit}
+                onEdit={(mealId) => navigate(`edit/${mealId}`)}
               />
             ))}
           </ul>
-          <button className={style.mealListAddButton} onClick={handleAddMeal}>
-            <Add className={style.mealListAddIcon} />
+
+          <button
+            className="fixed bottom-5 right-5 flex h-14 w-14 items-center justify-center rounded-full bg-secondary shadow-lg transition-transform hover:scale-110 md:bottom-12 md:right-12"
+            onClick={() => navigate(ROUTE_MEAL_CREATE_PAGE)}
+          >
+            <Add className="h-7 w-7 text-text-inv" />
           </button>
         </section>
       )}

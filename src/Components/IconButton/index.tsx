@@ -1,7 +1,5 @@
 import React from "react";
 import Loader from "Components/Loader";
-import style from "./style.module.scss";
-import classnames from "classnames";
 
 interface Props {
   className?: string;
@@ -10,15 +8,15 @@ interface Props {
   children: React.ReactNode;
 }
 
-const IconButton = ({ onClick, isLoading, className, children }: Props) => {
-  const iconButtonClasses = classnames(className, style.iconButton);
-
-  if (isLoading) {
-    return <Loader />;
-  }
+const IconButton = ({ onClick, isLoading, className = "", children }: Props) => {
+  if (isLoading) return <Loader />;
 
   return (
-    <button type="button" onClick={onClick} className={iconButtonClasses}>
+    <button
+      type="button"
+      onClick={onClick}
+      className={`w-full rounded-lg p-1 transition-colors hover:bg-surface-alt ${className}`}
+    >
       {children}
     </button>
   );

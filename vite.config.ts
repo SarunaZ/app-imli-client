@@ -2,10 +2,11 @@ import { defineConfig } from "vite";
 import react from "@vitejs/plugin-react";
 import svgr from "vite-plugin-svgr";
 import tsconfigPaths from "vite-tsconfig-paths";
-import path from "path";
+import tailwindcss from "@tailwindcss/vite";
 
 export default defineConfig({
   plugins: [
+    tailwindcss(),
     react(),
     svgr({
       svgrOptions: { exportType: "default" },
@@ -13,17 +14,14 @@ export default defineConfig({
     }),
     tsconfigPaths(),
   ],
-  css: {
-    preprocessorOptions: {
-      scss: {
-        additionalData: `@use "${path.resolve(__dirname, "src/Styles/variables.scss").replace(/\\/g, "/")}" as *;\n`,
-      },
-    },
-  },
   server: {
     port: 3000,
     host: true,
     historyApiFallback: true,
+    watch: {
+      usePolling: true,
+      interval: 100,
+    },
   },
   build: {
     outDir: "dist",

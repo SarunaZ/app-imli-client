@@ -1,5 +1,4 @@
 import Box from "Components/Box";
-import style from "./style.module.scss";
 import DeleteChoreModal from "Views/ChoresView/DeleteChoreModal";
 import Delete from "Images/icons/delete.svg";
 import Edit from "Images/icons/edit.svg";
@@ -22,14 +21,10 @@ interface State {
 }
 
 const ChoreListItem = ({ data, onDelete, onEdit }: Props) => {
-  const [state, setState] = useState<State>({
-    isDeleteModalOpen: false,
-  });
+  const [state, setState] = useState<State>({ isDeleteModalOpen: false });
 
   const toggleDeleteModal = () => {
-    setState({
-      isDeleteModalOpen: !state.isDeleteModalOpen,
-    });
+    setState({ isDeleteModalOpen: !state.isDeleteModalOpen });
   };
 
   const handleOnEdit = (e: SyntheticEvent<HTMLButtonElement>) => {
@@ -37,17 +32,10 @@ const ChoreListItem = ({ data, onDelete, onEdit }: Props) => {
     onEdit(data.id);
   };
 
-  const formatTimestamp = (timestamp?: string | null) => {
-    if (!timestamp) return "No timestamp";
-    const timestampNum = parseInt(timestamp, 10);
-    if (isNaN(timestampNum)) return "Invalid timestamp";
-    return new Date(timestampNum).toLocaleDateString();
-  };
-
   return (
     <>
-      <li className={style.choreListItem}>
-        <div className={style.choreListItemButton}>
+      <li className="min-h-[150px]">
+        <div className="h-full w-full">
           <Box
             as="div"
             dropdownComponent={
@@ -55,24 +43,26 @@ const ChoreListItem = ({ data, onDelete, onEdit }: Props) => {
                 <Button
                   buttonStyle="none"
                   onMouseDown={handleOnEdit}
-                  className={style.choreListItemOption}
+                  className="flex w-full items-center justify-between text-text"
                 >
-                  {"Edit"}
-                  <Edit height="16px" />
+                  Edit
+                  <Edit className="h-4 w-4" />
                 </Button>
                 <Button
                   buttonStyle="none"
                   onClick={toggleDeleteModal}
-                  className={style.choreListItemOption}
+                  className="flex w-full items-center justify-between text-text"
                 >
-                  {"Delete"}
-                  <Delete height="16px" />
+                  Delete
+                  <Delete className="h-4 w-4" />
                 </Button>
               </Dropdown>
             }
           >
-            <div className={style.choreListItemContent}>
-              <p>{toSentenceCase(data.name)}</p>
+            <div className="flex w-full flex-col gap-2.5">
+              <p className="text-center text-xl text-text">
+                {toSentenceCase(data.name)}
+              </p>
             </div>
           </Box>
         </div>

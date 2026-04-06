@@ -1,6 +1,5 @@
 import React, { useEffect } from "react";
 import Modal from "./Modal";
-import style from "./style.module.scss";
 import Close from "Images/icons/close.svg";
 import { Helmet } from "react-helmet-async";
 
@@ -17,10 +16,6 @@ export default function withModal<P>(
   return (props: P & ModalProps) => {
     const { isOpen, onClose, title, modalWrapperClassName } = props;
 
-    const onModalClose = () => {
-      onClose();
-    };
-
     const handleKeyDown = (event: KeyboardEvent) => {
       if (event.key === "Escape") {
         onClose();
@@ -29,31 +24,27 @@ export default function withModal<P>(
 
     useEffect(() => {
       if (!isOpen) {
-        return () => {
-          document.removeEventListener("keydown", handleKeyDown);
-        };
+        return () => document.removeEventListener("keydown", handleKeyDown);
       }
 
       document.addEventListener("keydown", handleKeyDown);
-
-      return () => {
-        document.removeEventListener("keydown", handleKeyDown);
-      };
+      return () => document.removeEventListener("keydown", handleKeyDown);
     }, [isOpen]);
 
-    if (!isOpen) {
-      return null;
-    }
+    if (!isOpen) return null;
 
     return (
       <>
         <Helmet>
-          <body className={style.noScroll} />
+          <body className="overflow-hidden" />
         </Helmet>
         <Modal modalWrapperClassName={modalWrapperClassName}>
-          <div className={style.modalContent}>
-            <h3 className={style.modalTitle}>{title}</h3>
-            <button className={style.modalCloseButton} onClick={onModalClose}>
+          <div className="relative rounded-xl bg-surface-alt p-6 shadow-2xl">
+            <h3 className="mb-5 text-2xl font-bold text-text">{title}</h3>
+            <button
+              className="absolute right-3 top-3 p-1 text-text-muted transition-colors hover:text-text"
+              onClick={onClose}
+            >
               <Close />
             </button>
             <Component {...props} />
