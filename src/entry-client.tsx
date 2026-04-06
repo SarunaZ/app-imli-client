@@ -46,7 +46,8 @@ const client = new ApolloClient({
   cache: new InMemoryCache().restore(window.__APOLLO_STATE__ as NormalizedCacheObject),
 });
 
-hydrateRoot(document.getElementById("app") as HTMLElement,
+
+const AppClient = () => (
   <React.StrictMode>
     <ApolloProvider client={client}>
       <HelmetProvider>
@@ -63,4 +64,10 @@ hydrateRoot(document.getElementById("app") as HTMLElement,
       </HelmetProvider>
     </ApolloProvider>
   </React.StrictMode>
-);
+)
+
+if (import.meta.env.VITE_SSR_ON === 'true') {
+  hydrateRoot(document.getElementById("app") as HTMLElement, <AppClient />);
+} else {
+  createRoot(document.getElementById("app") as HTMLElement).render(<AppClient />);
+} 

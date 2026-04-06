@@ -1,4 +1,4 @@
-import { lazy, Suspense } from "react";
+import { ComponentType, createElement, lazy, LazyExoticComponent, ReactNode, Suspense } from "react";
 import { Route, Routes } from "react-router-dom";
 import {
   ROUTE_LOGIN_PAGE,
@@ -11,107 +11,109 @@ import {
   ROUTE_CHORE_EDIT_PAGE,
   ROUTE_ROOT,
 } from "./constants";
+import PublicRoute from "./PublicRoute";
 import AuthRoute from "./AuthRoute";
-import { PublicRoute } from "./PublicRoute";
-import MealForm from "Views/MealView/MealForm";
-import ChoreForm from "Views/ChoresView/ChoreForm";
-import LoginView from "Views/LoginView";
-import DashboardView from "Views/Dashboard";
-import MealListView from "Views/MealView";
-import ProductListView from "Views/ProductListView";
-import ChoresView from "Views/ChoresView";
+import Loader from "Components/Loader";
+
+const withSuspense = <P extends object>(
+  LazyView: LazyExoticComponent<ComponentType<P>>,
+) => {
+  return function Wrapped(props: P) {
+    return (
+      <Suspense fallback={<Loader />}>
+        <LazyView {...props} />
+      </Suspense>
+    );
+  };
+};
+
+const MealForm = withSuspense(lazy(() => import("Views/MealView/MealForm")));
+const ChoreForm = withSuspense(lazy(() => import("Views/ChoresView/ChoreForm")));
+const LoginView = withSuspense(lazy(() => import("Views/LoginView")));
+const DashboardView = withSuspense(lazy(() => import("Views/Dashboard")));
+const MealListView = withSuspense(lazy(() => import("Views/MealView")));
+const ProductListView = withSuspense(lazy(() => import("Views/ProductListView")));
+const ChoresView = withSuspense(lazy(() => import("Views/ChoresView")));
+const NotFoundView = withSuspense(lazy(() => import("Views/NotFoundView")));
 
 const App = () => (
   <Routes>
     <Route
       path={ROUTE_LOGIN_PAGE}
       element={
-        <Suspense fallback={<div>Loading...</div>}>
-          <PublicRoute>
-            <LoginView />
-          </PublicRoute>
-        </Suspense>
-
+        <PublicRoute>
+          <LoginView />
+        </PublicRoute>
       }
     />
     <Route
       path={ROUTE_ROOT}
       element={
-        <Suspense fallback={<div>Loading...</div>}>
-          <AuthRoute>
-            <DashboardView />
-          </AuthRoute>
-        </Suspense>
+        <AuthRoute>
+          <DashboardView />
+        </AuthRoute>
       }
     />
     <Route
       path={ROUTE_MEAL_EDIT_PAGE}
       element={
-        <Suspense fallback={<div>Loading...</div>}>
-          <AuthRoute>
-            <MealListView />
-          </AuthRoute>
-        </Suspense>
+        <AuthRoute>
+          <MealListView />
+        </AuthRoute>
       }
     />
     <Route
       path={ROUTE_MEAL_CREATE_PAGE}
       element={
-        <Suspense fallback={<div>Loading...</div>}>
-          <AuthRoute>
-            <MealForm />
-          </AuthRoute>
-        </Suspense>
+        <AuthRoute>
+          <MealForm />
+        </AuthRoute>
       }
     />
     <Route
       path={ROUTE_MEAL_PAGE}
       element={
-        <Suspense fallback={<div>Loading...</div>}>
-          <AuthRoute>
-            <MealListView />
-          </AuthRoute>
-        </Suspense>
+        <AuthRoute>
+          <MealListView />
+        </AuthRoute>
       }
     />
     <Route
       path={ROUTE_PRODUCT_LIST_PAGE}
       element={
-        <Suspense fallback={<div>Loading...</div>}>
-          <AuthRoute>
-            <ProductListView />
-          </AuthRoute>
-        </Suspense>
+        <AuthRoute>
+          <ProductListView />
+        </AuthRoute>
       }
     />
     <Route
       path={ROUTE_CHORE_EDIT_PAGE}
       element={
-        <Suspense fallback={<div>Loading...</div>}>
-          <AuthRoute>
-            <ChoreForm />
-          </AuthRoute>
-        </Suspense>
+        <AuthRoute>
+          <ChoreForm />
+        </AuthRoute>
       }
     />
     <Route
       path={ROUTE_CHORE_CREATE_PAGE}
       element={
-        <Suspense fallback={<div>Loading...</div>}>
-          <AuthRoute>
-            <ChoreForm />
-          </AuthRoute>
-        </Suspense>
+        <AuthRoute>
+          <ChoreForm />
+        </AuthRoute>
       }
     />
     <Route
       path={ROUTE_CHORES_PAGE}
       element={
-        <Suspense fallback={<div>Loading...</div>}>
-          <AuthRoute>
-            <ChoresView />
-          </AuthRoute>
-        </Suspense>
+        <AuthRoute>
+          <ChoresView />
+        </AuthRoute>
+      }
+    />
+    <Route
+      path="*"
+      element={
+        <NotFoundView />
       }
     />
   </Routes>

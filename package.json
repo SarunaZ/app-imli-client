@@ -7,14 +7,14 @@
   "scripts": {
     "generate-types": "graphql-codegen --config src/codegen.ts",
     "dev": "vite",
-    "dev:server": "nodemon --watch server --ext js --exec \"node server/index.js\"",
+    "dev:server": "nodemon",
     "start": "yarn generate-types && yarn dev:server",
-    "build": "vite build",
+    "build": "yarn build:client && yarn build:server",
     "preview": "vite preview",
     "eslint": "eslint .",
     "eslint:fix": "eslint --fix .",
-    "build:client": "vite build --outDir dist/client",
-    "build:server": "vite build --outDir dist/server --ssr src/entry-server.tsx",
+    "build:client": "vite build --outDir dist-client",
+    "build:server": "vite build --outDir dist-server --ssr src/entry-server.tsx",
     "setup:sdks": "yarn dlx @yarnpkg/sdks vscode"
   },
   "dependencies": {

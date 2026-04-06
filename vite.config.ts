@@ -29,6 +29,9 @@ export default defineConfig({
       port: 3000,
       clientPort: 3000,
     },
+    fs: {
+      allow: ["/tmp/vite-cache"],
+    },
     watch: {
       usePolling: true,
       interval: 100,
@@ -36,5 +39,20 @@ export default defineConfig({
   },
   build: {
     outDir: "dist",
+    rollupOptions: {
+      output: {
+        manualChunks(id) {
+          if (!id.includes("/node_modules/")) return;
+          // Keep React ecosystem together to avoid cross-chunk cycles.
+          if (id.includes("/node_modules/@dnd-kit/") || id.includes("/node_modules/dnd-kit/")) {
+            return "vendor-dnd-kit";
+          }
+          if (id.includes("/node_modules/@tinymce/") || id.includes("/node_modules/tinymce/")) {
+            return "vendor-tinymce";
+          }
+          return "vendor";
+        },
+      },
+    },
   },
 });
