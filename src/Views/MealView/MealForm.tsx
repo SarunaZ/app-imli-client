@@ -12,28 +12,29 @@ import {
   MEAL_NAME_MUTATION,
 } from "Schema/mutations/meal.mutations";
 import Loader from "Components/Loader";
+import Skeleton from "Components/Skeleton";
 import { editorConfig } from "Views/MealView/constants";
 import useQuery from "Hooks/useQuery";
 import { MEAL_LIST_DATA } from "Schema/queries/meal.queries";
 import { useNavigate, useParams } from "react-router-dom";
 import ErrorHandler from "Components/ErrorHandler";
 import { ROUTE_MEAL_PAGE } from "App/constants";
+import { useToast } from "Providers/ToastProvider";
 
 interface State {
   mealData?: DeepExtractTypeSkipArrays<MealListQuery, ["meals"]>;
   isLoaded: boolean;
-  addSuccessful: boolean;
 }
 
 const MealForm = () => {
   const [state, setState] = useState<State>({
     isLoaded: false,
-    addSuccessful: false,
     mealData: undefined,
   });
 
   const { id } = useParams();
   const navigate = useNavigate();
+  const toast = useToast();
 
   const { loading, error } = useQuery(MEAL_LIST_DATA, {
     skip: !id,
@@ -71,8 +72,8 @@ const MealForm = () => {
             mealInstructionsRef.current || state.mealData.instructions,
         },
         update: () => {
-          setState({ addSuccessful: true });
           navigate(ROUTE_MEAL_PAGE);
+          toast.success("Meal updated successfully");
         },
       });
       return;
@@ -85,8 +86,9 @@ const MealForm = () => {
         instructions: mealInstructionsRef.current,
       },
       update: () => {
-        formRef.current.reset();
-        setState({ addSuccessful: true });
+        formRef.current?.reset();
+        navigate(ROUTE_MEAL_PAGE);
+        toast.success("Meal added successfully");
       },
     });
   };
@@ -109,15 +111,19 @@ const MealForm = () => {
           ref={mealInputRef}
           defaultValue={state.mealData?.name}
         />
-        <div className="min-h-[500px]">
-          {!state.isLoaded && <Loader />}
-          <Editor
-            initialValue={state.mealData?.instructions}
-            init={editorConfig}
-            apiKey={import.meta.env.VITE_CLIENT_TINY_MCE_EDITOR_KEY}
-            onEditorChange={onEditorChange}
-            onInit={() => setState({ isLoaded: true })}
-          />
+        <div className="relative min-h-[500px]">
+          {!state.isLoaded && (
+            <Skeleton className="absolute inset-0 h-[500px] w-full" />
+          )}
+          <div className={!state.isLoaded ? "invisible" : undefined}>
+            <Editor
+              initialValue={state.mealData?.instructions}
+              init={editorConfig}
+              apiKey={import.meta.env.VITE_CLIENT_TINY_MCE_EDITOR_KEY}
+              onEditorChange={onEditorChange}
+              onInit={() => setState({ isLoaded: true })}
+            />
+          </div>
         </div>
         <IngredientContainer
           onInput={setInputData}
@@ -125,11 +131,6 @@ const MealForm = () => {
           error={addMealData?.error || editMealData.error}
           isLoading={addMealData.loading || editMealData.loading}
         />
-        {state.addSuccessful && (
-          <span className="text-sm text-success">
-            Meal has been successfully added!
-          </span>
-        )}
       </form>
     </div>
   );

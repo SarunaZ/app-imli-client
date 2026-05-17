@@ -69,14 +69,16 @@ const Index = () => {
       <Helmet title={"Product list | Imli"} />
       <section className="mx-auto flex h-[calc(100dvh-80px)] max-w-lg flex-col text-text md:h-[calc(100dvh-40px)]">
         <h2 className="mb-4 text-2xl font-bold text-text">Product list</h2>
-        <ProductList
-          loading={loading}
-          onChange={saveOnChange}
-          listData={state.listData}
-          onDelete={handleDeleteItem}
-          onRename={handleProductRename}
-          onCompleted={handleProductComplete}
-        />
+        <div className="flex min-h-0 flex-1 flex-col">
+          <ProductList
+            loading={loading}
+            onChange={saveOnChange}
+            listData={state.listData}
+            onDelete={handleDeleteItem}
+            onRename={handleProductRename}
+            onCompleted={handleProductComplete}
+          />
+        </div>
         <ErrorHandler error={error} />
         <ProductAddForm onChange={updateList} />
         <ProductListButtons onChange={refetch} />

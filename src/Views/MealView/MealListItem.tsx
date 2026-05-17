@@ -43,10 +43,11 @@ const MealListItem = ({ data, onDelete, onEdit }: Props) => {
 
   return (
     <>
-      <li className="min-h-[200px] cursor-pointer">
+      <li className="h-full min-h-[200px] cursor-pointer">
         <div role="button" onClick={handlePreviewClick} className="h-full w-full">
           <Box
             as="div"
+            className="h-full"
             title={data?.name}
             dropdownComponent={
               <Dropdown>
