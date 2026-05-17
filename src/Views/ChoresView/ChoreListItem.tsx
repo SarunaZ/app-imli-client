@@ -34,10 +34,11 @@ const ChoreListItem = ({ data, onDelete, onEdit }: Props) => {
 
   return (
     <>
-      <li className="min-h-[150px]">
+      <li className="h-full min-h-[150px]">
         <div className="h-full w-full">
           <Box
             as="div"
+            className="h-full"
             dropdownComponent={
               <Dropdown>
                 <Button

@@ -14,6 +14,7 @@ import { getCookieData } from "Utilities/cookieParser";
 import { Helmet, HelmetProvider } from "react-helmet-async";
 import Authentication from "Providers/Authentication";
 import ThemeSwitcher from "Providers/ThemeProvider";
+import ToastProvider from "Providers/ToastProvider";
 
 if ("serviceWorker" in navigator) {
   window.addEventListener("load", () => {
@@ -54,7 +55,9 @@ container.render(
           <Helmet title="Imli Home Utility System" />
           <Authentication>
             <ThemeSwitcher>
-              <App />
+              <ToastProvider>
+                <App />
+              </ToastProvider>
             </ThemeSwitcher>
           </Authentication>
         </BrowserRouter>

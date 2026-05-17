@@ -11,6 +11,7 @@ interface Props {
   isLoading?: boolean;
   children: ReactNode | ReactNode[];
   dropdownComponent?: ReactNode;
+  className?: string;
 }
 
 type Elements = HTMLDivElement | HTMLParagraphElement | HTMLLIElement;
@@ -24,6 +25,7 @@ const Box = forwardRef<Elements, Props>(
     isLoading = false,
     isDraggable,
     dropdownComponent,
+    className = "",
   }) => {
     const {
       attributes,
@@ -51,7 +53,7 @@ const Box = forwardRef<Elements, Props>(
     );
 
     const renderedContent = isLoading ? <Loader /> : boxContent;
-    const baseClasses = "rounded-xl bg-surface-alt p-4 shadow-sm transition-shadow hover:shadow-md";
+    const baseClasses = `rounded-xl bg-surface-alt p-4 shadow-sm transition-shadow hover:shadow-md ${className}`;
 
     if (isDraggable) {
       return (
