@@ -7,7 +7,6 @@ import App from "./App";
 import {
   ApolloClient,
   InMemoryCache,
-  ApolloProvider,
   createHttpLink,
   NormalizedCacheObject,
 } from "@apollo/client";
@@ -16,12 +15,15 @@ import { Helmet, HelmetProvider } from "react-helmet-async";
 import Authentication from "Providers/Authentication";
 import ThemeSwitcher from "Providers/ThemeProvider";
 import ToastProvider from "Providers/ToastProvider";
+import { ApolloProvider } from "@apollo/client/react";
 
 if ("serviceWorker" in navigator) {
   window.addEventListener("load", () => {
     navigator.serviceWorker
       .register("/sw.js")
-      .catch((error) => console.log("Service worker registration failed:", error));
+      .catch((error) =>
+        console.log("Service worker registration failed:", error),
+      );
   });
 }
 
@@ -43,9 +45,10 @@ const authLink = setContext((_, { headers }) => {
 
 const client = new ApolloClient({
   link: authLink.concat(httpLink),
-  cache: new InMemoryCache().restore(window.__APOLLO_STATE__ as NormalizedCacheObject),
+  cache: new InMemoryCache().restore(
+    window.__APOLLO_STATE__ as NormalizedCacheObject,
+  ),
 });
-
 
 const AppClient = () => (
   <React.StrictMode>
@@ -64,10 +67,12 @@ const AppClient = () => (
       </HelmetProvider>
     </ApolloProvider>
   </React.StrictMode>
-)
+);
 
-if (import.meta.env.VITE_SSR_ON === 'true') {
+if (import.meta.env.VITE_SSR_ON === "true") {
   hydrateRoot(document.getElementById("app") as HTMLElement, <AppClient />);
 } else {
-  createRoot(document.getElementById("app") as HTMLElement).render(<AppClient />);
-} 
+  createRoot(document.getElementById("app") as HTMLElement).render(
+    <AppClient />,
+  );
+}

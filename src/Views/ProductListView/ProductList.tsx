@@ -75,12 +75,16 @@ const ProductList = ({
       name: item.name,
       isDone: item.isDone,
     }));
-    updateProductListM({ variables: { newList: structuredClone(filteredList) } });
+    updateProductListM({
+      variables: { newList: structuredClone(filteredList) },
+    });
   };
 
   const sensors = useSensors(
     useSensor(MouseSensor, { activationConstraint: { distance: 10 } }),
-    useSensor(TouchSensor, { activationConstraint: { delay: 153, tolerance: 13 } }),
+    useSensor(TouchSensor, {
+      activationConstraint: { delay: 153, tolerance: 13 },
+    }),
   );
 
   const onDragEnd = (event: DragEndEvent) => {
@@ -102,7 +106,8 @@ const ProductList = ({
   };
 
   if (loading) return <Loader />;
-  if (!listData?.length) return <p className="text-text-muted">No data found</p>;
+  if (!listData?.length)
+    return <p className="text-text-muted">No data found</p>;
 
   return (
     <>
@@ -116,7 +121,10 @@ const ProductList = ({
           collisionDetection={closestCenter}
           onDragEnd={onDragEnd}
         >
-          <SortableContext items={listData} strategy={verticalListSortingStrategy}>
+          <SortableContext
+            items={listData}
+            strategy={verticalListSortingStrategy}
+          >
             {listData?.map(({ id, name, isDone }, index) => (
               <ProductItem
                 key={id}

@@ -5,9 +5,21 @@ import tsconfigPaths from "vite-tsconfig-paths";
 import tailwindcss from "@tailwindcss/vite";
 
 export default defineConfig({
+  resolve: {
+    // Keep a single React instance across the app, Apollo, and react-dom.
+    dedupe: ["react", "react-dom"],
+  },
   cacheDir: "/tmp/vite-cache",
   ssr: {
-    noExternal: ['react-helmet-async', '@apollo/client'],
+    // Bundle React-context libraries so they share the app's single React
+    // instance. If left external they load their own React copy, producing
+    // a null dispatcher ("Cannot read properties of null (reading 'useContext')").
+    noExternal: [
+      "react-helmet-async",
+      "@apollo/client",
+      "react-router",
+      "react-router-dom",
+    ],
   },
   plugins: [
     tailwindcss(),
@@ -19,10 +31,9 @@ export default defineConfig({
     tsconfigPaths(),
   ],
   server: {
-    host: true,          // 0.0.0.0
+    host: true,
     port: 3000,
     strictPort: true,
-    historyApiFallback: true,
     hmr: {
       protocol: "ws",
       host: "localhost", // what browser uses
@@ -30,7 +41,7 @@ export default defineConfig({
       clientPort: 3000,
     },
     fs: {
-      allow: ["/tmp/vite-cache"],
+      allow: [".", "/tmp/vite-cache"],
     },
     watch: {
       usePolling: true,

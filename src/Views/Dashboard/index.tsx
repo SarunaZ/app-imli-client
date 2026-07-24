@@ -1,10 +1,10 @@
 import { DASHBOARD_DATA } from "Schema/queries/dashboard.queries";
 import Loader from "Components/Loader";
 import ErrorHandler from "Components/ErrorHandler";
-import { useQuery } from "@apollo/client/react/hooks/useQuery";
+import useQuery from "Hooks/useQuery";
 
 const Dashboard = () => {
-  const { loading, error, data = {} } = useQuery(DASHBOARD_DATA);
+  const { loading, error, data } = useQuery(DASHBOARD_DATA);
 
   if (loading) return <Loader />;
   if (error) return <ErrorHandler error={error} />;

@@ -9,11 +9,13 @@ import { useNavigate } from "react-router-dom";
 import ChoreListItem from "Views/ChoresView/ChoreListItem";
 import useState from "Hooks/useState";
 import PickChoreModal from "Views/ChoresView/PickChoreModal";
-import { useLazyQuery } from "@apollo/client";
+import { useLazyQuery } from "@apollo/client/react";
 
 const ChoresListView = () => {
   const navigate = useNavigate();
-  const [state, setState] = useState<{ isPickOpen: boolean }>({ isPickOpen: false });
+  const [state, setState] = useState<{ isPickOpen: boolean }>({
+    isPickOpen: false,
+  });
 
   const { loading, error, data, refetch } = useQuery(CHORE_LIST_DATA, {
     fetchPolicy: "network-only",

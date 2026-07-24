@@ -1,13 +1,13 @@
 import ProductAddForm from "./ProductAddForm";
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { PRODUCT_LIST_DATA } from "Schema/queries/product.queries";
 import ProductListButtons from "./ProductListButtons";
 import { ProductListData } from "./types";
 import { Product } from "Schema/types";
-import useQuery from "Hooks/useQuery";
 import ProductList from "./ProductList";
 import ErrorHandler from "Components/ErrorHandler";
 import { Helmet } from "react-helmet-async";
+import { useQuery } from "@apollo/client/react";
 
 interface State {
   listData?: ProductListData;
@@ -18,23 +18,34 @@ const Index = () => {
   const [state, setState] = useState<State>({ listData: undefined });
 
   const { loading, error, data, refetch } = useQuery(PRODUCT_LIST_DATA, {
-    fetchPolicy: "network-only",
-    onCompleted: (res) => {
+    // cache-first so the client's first render reads the SSR-restored cache
+    // (matches the server output). `network-only` would refetch on mount and
+    // break hydration. Freshness still comes via the refetch button.
+    fetchPolicy: "cache-first",
+  });
+  useEffect(() => {
+    if (data?.products) {
       setState({
-        listData: res.products?.map((item) => ({
+        listData: data.products.map((item) => ({
           id: item.id,
           name: item.name,
           isDone: item.isDone,
         })),
       });
-    },
-  });
+    }
+  }, [data]);
 
-  const resolvedList = state.listData ?? data?.products?.map((item) => ({
-    id: item.id,
-    name: item.name,
-    isDone: item.isDone,
-  })) ?? []
+  // Render from local (drag-reorderable) state once it's seeded, otherwise fall
+  // back to the query data. The fallback is what lets the products appear in the
+  // SSR HTML (and the first client render), since `useEffect` doesn't run on the
+  // server. After hydration the effect seeds `state.listData` for local edits.
+  const resolvedList =
+    state.listData ??
+    data?.products?.map((item) => ({
+      id: item.id,
+      name: item.name,
+      isDone: item.isDone,
+    }));
 
   const saveOnChange = (newList: ProductListData) => {
     setState({ listData: [...newList] });
@@ -79,7 +90,7 @@ const Index = () => {
           <ProductList
             loading={loading}
             onChange={saveOnChange}
-            listData={state.listData}
+            listData={resolvedList}
             onDelete={handleDeleteItem}
             onRename={handleProductRename}
             onCompleted={handleProductComplete}

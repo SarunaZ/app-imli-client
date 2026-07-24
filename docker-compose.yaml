@@ -17,12 +17,15 @@ services:
       retries: 35
   imli-client:
     build: ./
+    command: ["yarn", "serve"]
     depends_on:
       imli-api:
         condition: service_healthy
     ports:
       - "3000:3000"
+      - "5000:5000"
     environment:
+      NODE_ENV: production          # <-- the critical addition
       CHOKIDAR_USEPOLLING: "true"
       CHOKIDAR_INTERVAL: "100"
     volumes:
