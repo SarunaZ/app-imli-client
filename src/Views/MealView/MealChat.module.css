@@ -1,0 +1,38 @@
+/*
+ * Auto-growing textarea, CSS-only (no JS height math, no DOM writes).
+ * The wrapper is a grid that stacks the textarea over an invisible replica
+ * (::after) whose content mirrors the textarea value via data-value. The
+ * replica sizes the grid cell to the content; the textarea fills it. Capped
+ * at max-height, after which the textarea scrolls — so the scrollbar only
+ * appears once the content actually overflows.
+ */
+.grow {
+  display: grid;
+}
+
+.grow::after {
+  content: attr(data-value) " ";
+  visibility: hidden;
+  overflow: hidden;
+}
+
+.grow > .textarea,
+.grow::after {
+  grid-area: 1 / 1 / 2 / 2;
+  max-height: 140px;
+  padding: 0.75rem 1rem;
+  font: inherit;
+  line-height: inherit;
+  white-space: pre-wrap;
+  word-break: break-word;
+}
+
+.textarea {
+  margin: 0;
+  border: 0;
+  resize: none;
+  background: transparent;
+  color: inherit;
+  outline: none;
+  overflow-y: auto;
+}
