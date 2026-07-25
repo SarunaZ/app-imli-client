@@ -8,6 +8,7 @@ import Add from "Images/icons/add.svg";
 import { useLocation, useNavigate } from "react-router-dom";
 import { ROUTE_MEAL_CREATE_PAGE } from "App/constants";
 import MealListItem from "Views/MealView/MealListItem";
+import MealChat from "Views/MealView/MealChat";
 
 const MealListView = () => {
   const location = useLocation();
@@ -56,6 +57,8 @@ const MealListView = () => {
           >
             <Add className="h-7 w-7 text-text-inv" />
           </button>
+
+          <MealChat onMutation={refetch} />
         </section>
       )}
     </>
